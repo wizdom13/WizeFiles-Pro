@@ -6,7 +6,7 @@ only when runtime tests cover the resolved behavior.
 
 ## P0 — no open entries
 
-Distributable release and beta workflows enforce the unresolved entries through
+Distributable release workflows enforce the unresolved entries through
 `scripts/verify-release-risk-gates.sh` and `config/p0-release-gates.txt`. A gate may
 be removed only in the same change that adds the outcome-based regression tests
 required below. Debug builds and pull-request tests remain available so fixes can

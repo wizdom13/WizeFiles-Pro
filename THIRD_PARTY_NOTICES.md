@@ -1,5 +1,13 @@
 # Third-party notices
 
+WizeFiles project-owned source is licensed under GPL-3.0. Third-party components remain under their
+respective upstream licenses; the project license does not replace those terms. Additional license
+texts are stored under `app/src/main/licenses/`, and native components are inventoried in
+`app/src/main/cpp/native-dependencies.json`.
+
+The bundled 7-Zip source includes upstream RAR decompression files licensed under LGPL-2.1-or-later
+with the upstream unRAR restriction. That restriction remains applicable to those files.
+
 ## rclone
 
 WizeFiles includes rclone, Copyright (C) 2012 Nick Craig-Wood.

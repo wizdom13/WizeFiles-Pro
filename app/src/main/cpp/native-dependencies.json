@@ -37,7 +37,7 @@
       "version": "repository",
       "source": "app/src/main/jni",
       "sha256": null,
-      "license": "WizeFiles project license",
+      "license": "GPL-3.0-only",
       "licenseFile": "LICENSE",
       "linkedTargets": [
         "hiddenapi",
@@ -63,7 +63,7 @@
       "version": "repository",
       "source": "app/src/main/cpp/sevenzip_jni",
       "sha256": null,
-      "license": "WizeFiles project license",
+      "license": "GPL-3.0-only",
       "licenseFile": "LICENSE",
       "linkedTargets": [
         "sevenzip-jni"
@@ -86,7 +86,7 @@
       "version": "repository",
       "source": "app/src/main/cpp/mobi_jni",
       "sha256": null,
-      "license": "WizeFiles project license",
+      "license": "GPL-3.0-only",
       "licenseFile": "LICENSE",
       "linkedTargets": [
         "mobi-jni"

@@ -554,12 +554,6 @@
             android:launchMode="singleTop"
             android:theme="@style/Theme.WizeFiles" />
 
-        <activity
-            android:name="com.wisso.wizefiles.feature.pro.ProPurchaseActivity"
-            android:exported="false"
-            android:label="@string/pro_purchase_title"
-            android:launchMode="singleTop"
-            android:theme="@style/Theme.WizeFiles" />
 
         <activity
             android:name="com.wisso.wizefiles.feature.about.AboutActivity"

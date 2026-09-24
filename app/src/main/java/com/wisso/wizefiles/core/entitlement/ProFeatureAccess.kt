@@ -1,22 +1,12 @@
 package com.wisso.wizefiles.core.entitlement
 
 /**
- * Process-wide enforcement point for Pro-only capabilities.
+ * Compatibility shim for call sites that used to enforce WizeFiles Pro.
  *
- * UI entry points should use this before navigation. Service, worker, and repository boundaries
- * must call [require] before creating or resuming a Pro operation.
+ * Since 1.0.0 every implemented feature is included. New code should not add commercial feature
+ * gates; existing callers may keep using this object until they are naturally refactored.
  */
 object ProFeatureAccess {
-    fun isAllowed(feature: ProFeature): Boolean =
-        AppEntitlements.repository.check(feature) is ProFeatureGateResult.Allowed
-
-    fun require(feature: ProFeature) {
-        if (!isAllowed(feature)) {
-            throw ProFeatureRequiredException(feature)
-        }
-    }
+    fun isAllowed(@Suppress("UNUSED_PARAMETER") feature: ProFeature): Boolean = true
+    fun require(@Suppress("UNUSED_PARAMETER") feature: ProFeature) = Unit
 }
-
-class ProFeatureRequiredException(
-    val feature: ProFeature,
-) : IllegalStateException("WizeFiles Pro is required for ${feature.name}")

@@ -4,49 +4,8 @@ apply plugin: 'jacoco'
 
 apply from: '../signing.gradle'
 
-def appVersionCode = 700
-def appVersionName = '0.7.0'
-def betaValidityMillis = 30L * 24L * 60L * 60L * 1000L
-def explicitBetaEpochMillis = System.getenv('BETA_BUILD_EPOCH_MILLIS')
-def sourceDateEpochSeconds = System.getenv('SOURCE_DATE_EPOCH')
-def gitCommitEpochSeconds = providers.exec {
-    commandLine 'git', 'log', '-1', '--format=%ct'
-}.standardOutput.asText.get().trim()
-def betaBuildEpochMillis = explicitBetaEpochMillis != null \
-    ? explicitBetaEpochMillis.toLong() \
-    : (sourceDateEpochSeconds ?: gitCommitEpochSeconds).toLong() * 1000L
-if (betaBuildEpochMillis < 0) {
-    throw new GradleException('The beta build epoch must not be negative')
-}
-def betaExpiryEpochMillis = betaBuildEpochMillis + betaValidityMillis
-def licenseKeyId = System.getenv('WIZEFILES_LICENSE_KEY_ID') ?: ''
-def licensePublicKeyX509Base64 = System.getenv('WIZEFILES_LICENSE_PUBLIC_KEY_X509_BASE64') ?: ''
-if (licenseKeyId.isEmpty() != licensePublicKeyX509Base64.isEmpty()) {
-    throw new GradleException('Both WIZEFILES_LICENSE_KEY_ID and WIZEFILES_LICENSE_PUBLIC_KEY_X509_BASE64 must be set')
-}
-if (licenseKeyId && !(licenseKeyId ==~ /[A-Za-z0-9._-]{1,64}/)) {
-    throw new GradleException('WIZEFILES_LICENSE_KEY_ID contains unsupported characters')
-}
-if (licensePublicKeyX509Base64 && !(licensePublicKeyX509Base64 ==~ /[A-Za-z0-9+\/=]+/)) {
-    throw new GradleException('WIZEFILES_LICENSE_PUBLIC_KEY_X509_BASE64 is not standard Base64')
-}
-def licenseApiBaseUrl = System.getenv('WIZEFILES_LICENSE_API_BASE_URL') ?: ''
-if (licenseApiBaseUrl) {
-    def licenseApiUri = new URI(licenseApiBaseUrl)
-    if (licenseApiUri.scheme != 'https' || !licenseApiUri.host || licenseApiUri.userInfo ||
-        licenseApiUri.query || licenseApiUri.fragment) {
-        throw new GradleException(
-            'WIZEFILES_LICENSE_API_BASE_URL must be an HTTPS URL without credentials, query, or fragment'
-        )
-    }
-    licenseApiBaseUrl = licenseApiBaseUrl.replaceAll('/+$', '')
-}
-if (licenseApiBaseUrl.isEmpty() != licenseKeyId.isEmpty()) {
-    throw new GradleException(
-        'WIZEFILES_LICENSE_API_BASE_URL and the license verification public key must be configured together'
-    )
-}
-
+def appVersionCode = 1000
+def appVersionName = '1.0.0'
 android {
     namespace = 'com.wisso.wizefiles'
     buildToolsVersion = '36.0.0'
@@ -128,18 +87,7 @@ android {
             shrinkResources = false
             buildConfigField 'boolean', 'ENABLE_HIDDEN_API_BYPASS', 'false' 
             buildConfigField 'boolean', 'ENABLE_ROOT_VERBOSE_LOGGING', 'false'           
-            buildConfigField 'String', 'LICENSE_KEY_ID', '"' + licenseKeyId + '"'
-            buildConfigField 'String', 'LICENSE_PUBLIC_KEY_X509_BASE64', '"' + licensePublicKeyX509Base64 + '"'
-            buildConfigField 'String', 'LICENSE_API_BASE_URL', groovy.json.JsonOutput.toJson(licenseApiBaseUrl)
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        beta {
-            initWith release
-            applicationIdSuffix = ".beta"
-            signingConfig = signingConfigs.release
-            resValue 'string', 'app_name', 'WizeFiles Beta'
-            buildConfigField 'long', 'BETA_EXPIRY_EPOCH_MILLIS', "${betaExpiryEpochMillis}L"
-            matchingFallbacks = ['release']
         }
     }
     packagingOptions {
@@ -187,7 +135,7 @@ dependencyCheck {
     skipTestGroups = true
     // Audit only dependency graphs that can ship to users. Build, lint, test, UTP,
     // and compiler tooling remain covered by their own update/CI maintenance path.
-    scanConfigurations = ['releaseRuntimeClasspath', 'betaRuntimeClasspath']
+    scanConfigurations = ['releaseRuntimeClasspath']
     suppressionFile = "${rootProject.projectDir}/config/dependency-check-suppressions.xml"
     analyzers {
         assemblyEnabled = false
@@ -221,9 +169,6 @@ dependencies {
     def kotlinx_coroutines_version = '1.10.2'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
-
-    // Play-distributed release builds only; beta/debug never launch real sales.
-    releaseImplementation 'com.android.billingclient:billing:9.1.0'
 
     implementation 'androidx.activity:activity-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.7.1'

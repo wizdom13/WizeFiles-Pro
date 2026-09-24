@@ -27,10 +27,6 @@ jobs:
     permissions:
       contents: write
 
-    env:
-      WIZEFILES_LICENSE_API_BASE_URL: ${{ vars.WIZEFILES_LICENSE_API_BASE_URL }}
-      WIZEFILES_LICENSE_KEY_ID: ${{ vars.WIZEFILES_LICENSE_KEY_ID }}
-      WIZEFILES_LICENSE_PUBLIC_KEY_X509_BASE64: ${{ vars.WIZEFILES_LICENSE_PUBLIC_KEY_X509_BASE64 }}
 
     steps:
       - name: Check out repository
@@ -83,34 +79,6 @@ jobs:
       - name: Enforce P0 correctness release gates
         run: scripts/verify-release-risk-gates.sh
 
-      - name: Validate production license configuration
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          expected_url="https://wizefiles-license-api-uckg2rb5pq-ew.a.run.app"
-          expected_key_id="wizefiles-prod-2026-01"
-          expected_key_sha256="595f2fea65882e8d253133f28b83c5afabcddd392846a8640f8a3cf045dcf8e0"
-
-          [[ "$WIZEFILES_LICENSE_API_BASE_URL" == "$expected_url" ]] || {
-            echo "WIZEFILES_LICENSE_API_BASE_URL is missing or does not match production" >&2
-            exit 1
-          }
-          [[ "$WIZEFILES_LICENSE_KEY_ID" == "$expected_key_id" ]] || {
-            echo "WIZEFILES_LICENSE_KEY_ID is missing or does not match production" >&2
-            exit 1
-          }
-
-          actual_key_sha256="$(
-            printf '%s' "$WIZEFILES_LICENSE_PUBLIC_KEY_X509_BASE64" |
-              base64 --decode |
-              sha256sum |
-              cut -d ' ' -f 1
-          )"
-          [[ "$actual_key_sha256" == "$expected_key_sha256" ]] || {
-            echo "WIZEFILES_LICENSE_PUBLIC_KEY_X509_BASE64 is missing or has the wrong fingerprint" >&2
-            exit 1
-          }
 
       - name: Build Release APK
         run: ./gradlew assembleRelease --warning-mode all

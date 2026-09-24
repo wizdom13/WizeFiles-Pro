@@ -46,7 +46,6 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferencesFix(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.settings)
-        DebugEntitlementSettings.install(requireContext(), preferenceScreen)
 
         localePreference = preferenceScreen.findPreference(getString(R.string.pref_key_locale))!!
         recycleBinPreference = preferenceScreen.findPreference(getString(R.string.pref_key_recycle_bin))!!
