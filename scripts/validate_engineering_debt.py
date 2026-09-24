@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+# SPDX-License-Identifier: GPL-3.0-only
 """Ensure every production TODO/FIXME/HACK is classified and debt cannot grow silently."""
 
 from __future__ import annotations

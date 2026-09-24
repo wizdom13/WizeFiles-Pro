@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+# SPDX-License-Identifier: GPL-3.0-only
 set -euo pipefail
 
 readonly MAX_SOURCE_TEST_FILES=90

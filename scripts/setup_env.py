@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+# SPDX-License-Identifier: GPL-3.0-only
 import os
 import re
 import shutil

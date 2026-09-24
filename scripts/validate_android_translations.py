@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+# SPDX-License-Identifier: GPL-3.0-only
 """Audit Android string-resource coverage and formatting safety."""
 
 from __future__ import annotations

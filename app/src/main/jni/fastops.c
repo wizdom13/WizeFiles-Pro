@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
 #define _POSIX_C_SOURCE 200809L
 
 #include <jni.h>

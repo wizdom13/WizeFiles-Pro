@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
 JNIEXPORT jboolean JNICALL
 Java_com_wisso_wizefiles_provider_os_syscall_Syscall_access(
         JNIEnv *env, jclass clazz, jobject javaPath, jint javaMode) {

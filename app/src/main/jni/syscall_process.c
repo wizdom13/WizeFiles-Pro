@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
 JNIEXPORT void JNICALL
 Java_com_wisso_wizefiles_provider_os_syscall_Syscall_endgrent(JNIEnv *env, jclass clazz) {
     TEMP_FAILURE_RETRY_V(endgrent());

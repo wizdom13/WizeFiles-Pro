@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
 static jobject newStructTimespec(JNIEnv *env, const struct timespec *timespec) {
     jclass structTimespecClass = getStructTimespecClass(env);
     if (!structTimespecClass) {

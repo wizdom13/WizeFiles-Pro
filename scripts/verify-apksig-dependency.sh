@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+# SPDX-License-Identifier: GPL-3.0-only
 set -euo pipefail
 
 EXPECTED_SHA256=948321f77e13368aa0c5f4defe73971578a5f18fdf1b49c11756ef6a15c95586

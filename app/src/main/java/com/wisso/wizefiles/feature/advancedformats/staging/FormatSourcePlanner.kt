@@ -1,3 +1,6 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
 package com.wisso.wizefiles.feature.advancedformats.staging
 
 /** Decides whether a future viewer can use a descriptor directly or must stage a source. */
