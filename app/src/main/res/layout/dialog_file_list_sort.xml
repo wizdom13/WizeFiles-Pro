@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:paddingStart="@dimen/dialog_padding"
+    android:paddingEnd="@dimen/dialog_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/file_list_action_view"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:id="@+id/view_type_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/view_type_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="@string/file_list_action_view_list" />
+
+                <RadioButton
+                    android:id="@+id/view_type_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:paddingEnd="104dp"
+                    android:text="@string/file_list_action_view_grid" />
+            </RadioGroup>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/grid_columns_button"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="88dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:contentDescription="@string/file_list_action_view_grid"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/file_list_grid_columns_auto"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/sort_by_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/file_list_action_sort_by"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+
+        <RadioGroup
+            android:id="@+id/sort_by_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/sort_by_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/file_list_action_sort_by_name" />
+
+            <RadioButton
+                android:id="@+id/sort_by_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/file_list_action_sort_by_type" />
+
+            <RadioButton
+                android:id="@+id/sort_by_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/file_list_action_sort_by_size" />
+
+            <RadioButton
+                android:id="@+id/sort_by_last_modified"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/file_list_action_sort_by_last_modified" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/sort_direction_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/file_list_action_sort_direction"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+
+        <RadioGroup
+            android:id="@+id/sort_direction_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/sort_direction_ascending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/file_list_action_sort_order_ascending" />
+
+            <RadioButton
+                android:id="@+id/sort_direction_descending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/file_list_action_sort_order_descending" />
+        </RadioGroup>
+
+        <CheckBox
+            android:id="@+id/show_folders_first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:minHeight="48dp"
+            android:text="@string/file_list_action_sort_directories_first" />
+
+        <CheckBox
+            android:id="@+id/only_for_this_folder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:minHeight="48dp"
+            android:text="@string/file_list_action_view_sort_path_specific" />
+    </LinearLayout>
+</ScrollView>

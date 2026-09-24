@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_app_search"
+        android:icon="@drawable/ic_search_control_normal_24dp"
+        android:title="@string/search"
+        app:actionViewClass="com.wisso.wizefiles.ui.FixQueryChangeSearchView"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        app:showAsAction="always|collapseActionView" />
+
+    <item
+        android:id="@+id/action_app_sort"
+        android:icon="@drawable/ic_sort_control_normal_24dp"
+        android:title="@string/app_manager_sort_title"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_app_sort_direction"
+        android:title="@string/app_manager_sort_descending"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_app_backup"
+        android:icon="@drawable/ic_save_control_normal_24dp"
+        android:title="@string/app_manager_backup_selected"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        app:showAsAction="never" />
+</menu>

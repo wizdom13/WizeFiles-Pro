@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">Установить как мелодию звонка</string>
+    <string name="audio_player_ringtone_set">Мелодия звонка успешно установлена</string>
+    <string name="audio_player_ringtone_failed">Не удалось установить мелодию звонка</string>
+    <string name="audio_player_ringtone_permission_required">Разрешите WizeFiles изменять системные настройки, чтобы установить мелодию звонка</string>
+</resources>

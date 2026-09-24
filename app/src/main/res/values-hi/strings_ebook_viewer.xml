@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="ebook_viewer_title">ईबुक रीडर</string>
+    <string name="ebook_viewer_loading">ईबुक खोलना</string>
+    <string name="ebook_viewer_failed">यह ईबुक नहीं खोला जा सकता है।</string>
+    <string name="ebook_viewer_unsafe">यह ईबुक क्षतिग्रस्त है या सुरक्षित कंटेनर सीमा से अधिक है।</string>
+    <string name="ebook_viewer_encrypted">एन्क्रिप्टेड या DRMसंरक्षित Kindle किताबें समर्थित नहीं हैं।</string>
+    <string name="ebook_viewer_print_replica">AZW4 प्रिंट प्रतिकृति किताबें आंतरिक रीडर द्वारा समर्थित नहीं हैं।</string>
+    <string name="ebook_viewer_too_large">यह ईबुक आंतरिक रीडर सुरक्षा सीमा से अधिक है।</string>
+    <string name="ebook_viewer_unavailable">आंतरिक ईबुक रीडर इस फाइल के लिए अनुपलब्ध है।</string>
+    <string name="ebook_viewer_open_with">साथ में खोलें</string>
+    <string name="ebook_viewer_open_link">ओपन ईबुक लिंक</string>
+    <string name="ebook_viewer_link_blocked">इस ईबुक लिंक को अवरुद्ध कर दिया गया था।</string>
+    <string name="ebook_viewer_resource_failed">प्रकाशन संसाधन लोड नहीं किया जा सकता है।</string>
+    <string name="ebook_viewer_toc">सामग्री</string>
+    <string name="ebook_viewer_no_toc">इस ebook की कोई सारणी नहीं है।</string>
+    <string name="ebook_viewer_smaller">लघु पाठ</string>
+    <string name="ebook_viewer_larger">बड़ा पाठ</string>
+    <string name="ebook_viewer_theme">थीम बदलें</string>
+    <string name="ebook_viewer_share">शेयर ईबुक</string>
+</resources>

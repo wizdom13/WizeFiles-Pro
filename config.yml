@@ -1,0 +1,19 @@
+# Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+# SPDX-License-Identifier: GPL-3.0-only
+repo_name: "WizeFiles Repository"
+repo_icon: "icon.png"
+repo_description: "Custom F-Droid repository for WizeFiles Android builds."
+
+archive_name: "WizeFiles Archive"
+archive_icon: "icon.png"
+archive_description: "Archived WizeFiles Android builds."
+
+serverwebroot: "repo"
+
+keystore: "keystore.p12"
+repo_keyalias: "REPLACE_AT_CI"
+keystorepass: "REPLACE_AT_CI"
+keypass: "REPLACE_AT_CI"
+
+accepted_formats:
+  - apk

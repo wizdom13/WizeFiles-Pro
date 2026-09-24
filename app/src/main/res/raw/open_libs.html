@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open Source Licenses</title>
+<style>
+:root {
+ color-scheme: light dark;
+ --bg:#f7f2fa; --surface:#fffbfe; --surface2:#ece6f0; --outline:#cac4d0;
+ --text:#1d1b20; --muted:#49454f; --chip-bg:rgba(103,80,164,.12); --chip-text:#6750a4; --link:#6750a4;
+}
+@media (prefers-color-scheme: dark) {
+:root { --bg:#141218; --surface:#1d1b20; --surface2:#2b2930; --outline:#49454f; --text:#e6e1e5; --muted:#cac4d0; --chip-bg:rgba(208,188,255,.16); --chip-text:#d0bcff; --link:#d0bcff; }
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Roboto, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+main { width: min(1120px, 100%); margin: 0 auto; padding: 24px 16px 56px; }
+h1 { margin: 0 0 8px; font-size: 2rem; }
+.intro { margin: 0 0 12px; color: var(--muted); line-height: 1.6; }
+.small { font-size: .95rem; color: var(--muted); }
+
+.card { margin: 18px 0; padding: 20px; border-radius: 24px; border: 1px solid var(--outline); background: var(--surface); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.card h2 { margin: 0 0 10px; font-size: 1.15rem; }
+
+table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-top: 1px solid var(--outline); }
+th:first-child, td:first-child { padding-left: 0; } 
+th:last-child, td:last-child { padding-right: 0; }
+thead th { border-top: none; color: var(--muted); font-weight: 600; }
+
+td a { word-break: break-word; overflow-wrap: anywhere; }
+
+code { font-family: "Roboto Mono", "SFMono-Regular", monospace; font-size: .9em; word-break: break-word; }
+pre { margin: 0; padding: 16px; border-radius: 16px; background: var(--surface2); white-space: pre-wrap; overflow-wrap: anywhere; font: 0.92rem/1.55 "Roboto Mono", "SFMono-Regular", monospace; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; }
+.chip { display: inline-block; padding: 6px 10px; border-radius: 999px; background: var(--chip-bg); color: var(--chip-text); font-size: .8rem; font-weight: 600; }
+
+ul { margin: 10px 0 0 18px; padding: 0; } 
+li { margin: 6px 0; word-break: break-word; }
+a { color: var(--link); }
+
+/* Mobile Specific Adjustments: Vertical Stacked Table */
+@media (max-width: 600px) {
+  main { padding: 16px 12px 32px; }
+  h1 { font-size: 1.75rem; }
+  .card { padding: 16px; margin: 12px 0; border-radius: 16px; }
+  
+  /* Force table to not behave like a table anymore */
+  table, thead, tbody, th, td, tr { display: block; }
+  
+  /* Hide table headers (but keep them accessible to screen readers) */
+  thead tr { position: absolute; top: -9999px; left: -9999px; }
+  
+  /* Turn each row into a distinct block */
+  tr { 
+    margin-bottom: 20px; 
+    padding-bottom: 16px; 
+    border-bottom: 2px dashed var(--outline); 
+  }
+  tr:last-child { 
+    margin-bottom: 0; 
+    padding-bottom: 0; 
+    border-bottom: none; 
+  }
+  
+  /* Format cells to stack vertically with their pseudo-header */
+  td { 
+    border: none; 
+    padding: 6px 0; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 4px; 
+  }
+  
+  /* Inject the column headers via CSS */
+  td::before { 
+    font-weight: 600; 
+    color: var(--muted); 
+    font-size: 0.85rem; 
+  }
+  td:nth-child(1)::before { content: "Component"; }
+  td:nth-child(2)::before { content: "License"; }
+  td:nth-child(3)::before { content: "Reference"; }
+}
+</style>
+</head>
+<body>
+<main>
+  <h1>Open Source Licenses</h1>
+  <p class="intro">This software uses the following open-source packages</p>
+  
+  <div class="chips">
+    <span class="chip">Apache License 2.0 (52)</span>
+    <span class="chip">BSD 3-Clause License (2)</span>
+    <span class="chip">Bouncy Castle Licence (2)</span>
+    <span class="chip">GNU General Public License v2 with Classpath Exception (1)</span>
+    <span class="chip">GNU Lesser General Public License 2.1 (2)</span>
+    <span class="chip">GNU Lesser General Public License 3.0 (1)</span>
+    <span class="chip">MIT License (4)</span>
+    <span class="chip">ISC License (1)</span>
+  </div>
+
+  <section class="card">
+    <h2>Dependency inventory</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>License</th>
+          <th>Reference</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>androidx.activity:activity-ktx:1.10.1</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.appcompat:appcompat:1.7.1</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.biometric:biometric:1.1.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.core:core-ktx:1.16.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.drawerlayout:drawerlayout:1.2.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.exifinterface:exifinterface:1.4.1</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.fragment:fragment-ktx:1.8.8</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.lifecycle:lifecycle-common-java8:2.9.2</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.lifecycle:lifecycle-livedata-ktx:2.9.2</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.lifecycle:lifecycle-process:2.9.2</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.lifecycle:lifecycle-runtime-ktx:2.9.2</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.pdf:pdf-viewer-fragment:1.0.0-alpha19</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.media3:media3-common:1.5.1</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.media3:media3-exoplayer:1.5.1</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.media3:media3-session:1.5.1</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.media3:media3-ui:1.5.1</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.preference:preference-ktx:1.2.1</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.recyclerview:recyclerview:1.4.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.security:security-crypto:1.1.0-alpha06</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>androidx.swiperefreshlayout:swiperefreshlayout:1.1.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>com.github.MuntashirAkon:apksig-android:4.4.0</code></td><td>Apache License 2.0</td><td>app/src/main/licenses/apksig-android-apache-2.0.txt</td></tr>
+        <tr><td><code>com.android.tools:desugar_jdk_libs:2.1.5</code></td><td>GNU General Public License v2 with Classpath Exception</td><td><a href="https://github.com/google/desugar_jdk_libs/blob/master/LICENSE">https://github.com/google/desugar_jdk_libs/blob/master/LICENSE</a></td></tr>
+        <tr><td><code>com.caverock:androidsvg-aar:1.4</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>com.drakeet.drawer:drawer:1.0.3</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>com.github.chrisbanes:PhotoView:2.3.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>com.github.topjohnwu.libsu:service:5.2.2</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>com.google.android.material:material:1.12.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>com.google.guava:guava:33.4.8-android</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:1.0.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:1.0.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>com.hierynomus:smbj:0.11.5</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>com.hierynomus:sshj:0.40.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>com.leinardi.android:speed-dial:3.3.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>org.connectbot:jbcrypt:1.0.2</code></td><td>ISC License</td><td><a href="https://opensource.org/license/isc-license-txt">https://opensource.org/license/isc-license-txt</a></td></tr>
+        <tr><td><code>com.rapid7.client:dcerpc:0.12.13</code></td><td>BSD 3-Clause License</td><td><a href="https://opensource.org/license/bsd-3-clause">https://opensource.org/license/bsd-3-clause</a></td></tr>
+        <tr><td><code>com.takisoft.preferencex:preferencex:1.1.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>commons-net:commons-net:3.12.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>dev.chrisbanes:insetter-ktx:0.3.1</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>dev.rikka.rikkax.preference:simplemenu-preference:1.0.3</code></td><td>MIT License</td><td><a href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a></td></tr>
+        <tr><td><code>dev.rikka.shizuku:api:13.1.5</code></td><td>MIT License</td><td><a href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a></td></tr>
+        <tr><td><code>eu.agno3.jcifs:jcifs-ng:2.1.10</code></td><td>GNU Lesser General Public License 2.1</td><td><a href="https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt">https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt</a></td></tr>
+        <tr><td><code>io.coil-kt:coil-gif:2.7.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>io.coil-kt:coil-svg:2.7.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>io.coil-kt:coil-video:2.7.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>io.coil-kt:coil:2.7.0</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>org.bouncycastle:bcpkix-jdk15to18:1.81</code></td><td>Bouncy Castle Licence</td><td><a href="https://www.bouncycastle.org/licence.html">https://www.bouncycastle.org/licence.html</a></td></tr>
+        <tr><td><code>org.bouncycastle:bcprov-jdk15to18:1.81</code></td><td>Bouncy Castle Licence</td><td><a href="https://www.bouncycastle.org/licence.html">https://www.bouncycastle.org/licence.html</a></td></tr>
+        <tr><td><code>org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2</code></td><td>Apache License 2.0</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0.txt">https://www.apache.org/licenses/LICENSE-2.0.txt</a></td></tr>
+        <tr><td><code>org.slf4j:slf4j-android:1.7.36</code></td><td>MIT License</td><td><a href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a></td></tr>
+        <tr><td><code>vendored:android-libarchive-wrapper:local</code></td><td>Apache License 2.0</td><td>app/src/main/licenses/android-libarchive-wrapper-apache-2.0.txt</td></tr>
+        <tr><td><code>vendored:libarchive:3.8.9</code></td><td>New BSD License</td><td>app/src/main/licenses/libarchive-new-bsd-license.txt</td></tr>
+        <tr><td><code>vendored:7-Zip:26.02</code></td><td>LGPL 2.1 or later, bundled BSD code, unRAR restriction</td><td>app/src/main/licenses/7zip-license.txt</td></tr>
+        <tr><td><code>org.readium.kotlin-toolkit:readium-shared:3.1.2</code></td><td>BSD 3-Clause License</td><td>app/src/main/licenses/readium-bsd-3-clause.txt</td></tr>
+        <tr><td><code>org.readium.kotlin-toolkit:readium-streamer:3.1.2</code></td><td>BSD 3-Clause License</td><td>app/src/main/licenses/readium-bsd-3-clause.txt</td></tr>
+        <tr><td><code>org.readium.kotlin-toolkit:readium-navigator:3.1.2</code></td><td>BSD 3-Clause License</td><td>app/src/main/licenses/readium-bsd-3-clause.txt</td></tr>
+        <tr><td><code>vendored:libmobi:0.12</code></td><td>LGPL 3.0 or later</td><td>app/src/main/licenses/libmobi-lgpl-3.0.txt</td></tr>
+        <tr><td><code>org.videolan.android:libvlc-all:3.7.5</code></td><td>LGPL 2.1 or later</td><td>app/src/main/licenses/libvlc-lgpl-2.1.txt</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card"><h2>Apache License 2.0 components</h2><ul><li><code>com.github.MuntashirAkon:apksig-android:4.4.0</code></li><li><code>androidx.activity:activity-ktx:1.10.1</code></li><li><code>androidx.appcompat:appcompat:1.7.1</code></li><li><code>androidx.biometric:biometric:1.1.0</code></li><li><code>androidx.core:core-ktx:1.16.0</code></li><li><code>androidx.drawerlayout:drawerlayout:1.2.0</code></li><li><code>androidx.exifinterface:exifinterface:1.4.1</code></li><li><code>androidx.fragment:fragment-ktx:1.8.8</code></li><li><code>androidx.lifecycle:lifecycle-common-java8:2.9.2</code></li><li><code>androidx.lifecycle:lifecycle-livedata-ktx:2.9.2</code></li><li><code>androidx.lifecycle:lifecycle-process:2.9.2</code></li><li><code>androidx.lifecycle:lifecycle-runtime-ktx:2.9.2</code></li><li><code>androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2</code></li><li><code>androidx.pdf:pdf-viewer-fragment:1.0.0-alpha19</code></li><li><code>androidx.media3:media3-common:1.5.1</code></li><li><code>androidx.media3:media3-exoplayer:1.5.1</code></li><li><code>androidx.media3:media3-session:1.5.1</code></li><li><code>androidx.media3:media3-ui:1.5.1</code></li><li><code>androidx.preference:preference-ktx:1.2.1</code></li><li><code>androidx.recyclerview:recyclerview:1.4.0</code></li><li><code>androidx.security:security-crypto:1.1.0-alpha06</code></li><li><code>androidx.swiperefreshlayout:swiperefreshlayout:1.1.0</code></li><li><code>com.caverock:androidsvg-aar:1.4</code></li><li><code>com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0</code></li><li><code>com.drakeet.drawer:drawer:1.0.3</code></li><li><code>com.github.chrisbanes:PhotoView:2.3.0</code></li><li><code>com.github.topjohnwu.libsu:service:5.2.2</code></li><li><code>com.google.android.material:material:1.12.0</code></li><li><code>com.google.guava:guava:33.4.8-android</code></li><li><code>com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava</code></li><li><code>com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:1.0.0</code></li><li><code>com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:1.0.0</code></li><li><code>com.hierynomus:smbj:0.11.5</code></li><li><code>com.hierynomus:sshj:0.40.0</code></li><li><code>com.leinardi.android:speed-dial:3.3.0</code></li><li><code>com.takisoft.preferencex:preferencex:1.1.0</code></li><li><code>commons-net:commons-net:3.12.0</code></li><li><code>dev.chrisbanes:insetter-ktx:0.3.1</code></li><li><code>io.coil-kt:coil-gif:2.7.0</code></li><li><code>io.coil-kt:coil-svg:2.7.0</code></li><li><code>io.coil-kt:coil-video:2.7.0</code></li><li><code>io.coil-kt:coil:2.7.0</code></li><li><code>org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2</code></li><li><code>org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2</code></li><li><code>vendored:android-libarchive-wrapper:local</code></li></ul><pre>Apache License
+Version 2.0, January 2004
+https://www.apache.org/licenses/
+
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+1. Definitions.
+
+"License" shall mean the terms and conditions for use, reproduction,
+and distribution as defined by Sections 1 through 9 of this document.
+
+"Licensor" shall mean the copyright owner or entity authorized by
+the copyright owner that is granting the License.
+
+"Legal Entity" shall mean the union of the acting entity and all
+other entities that control, are controlled by, or are under common
+control with that entity. For the purposes of this definition,
+"control" means (i) the power, direct or indirect, to cause the
+direction or management of such entity, whether by contract or
+otherwise, or (ii) ownership of fifty percent (50%) or more of the
+outstanding shares, or (iii) beneficial ownership of such entity.
+
+"You" (or "Your") shall mean an individual or Legal Entity
+exercising permissions granted by this License.
+
+"Source" form shall mean the preferred form for making modifications,
+including but not limited to software source code, documentation
+source, and configuration files.
+
+"Object" form shall mean any form resulting from mechanical
+transformation or translation of a Source form, including but
+not limited to compiled object code, generated documentation,
+and conversions to other media types.
+
+"Work" shall mean the work of authorship, whether in Source or
+Object form, made available under the License, as indicated by a
+copyright notice that is included in or attached to the work
+(an example is provided in the Appendix below).
+
+"Derivative Works" shall mean any work, whether in Source or Object
+form, that is based on (or derived from) the Work and for which the
+editorial revisions, annotations, elaborations, or other modifications
+represent, as a whole, an original work of authorship. For the purposes
+of this License, Derivative Works shall not include works that remain
+separable from, or merely link (or bind by name) to the interfaces of,
+the Work and Derivative Works thereof.
+
+"Contribution" shall mean any work of authorship, including
+the original version of the Work and any modifications or additions
+to that Work or Derivative Works thereof, that is intentionally
+submitted to Licensor for inclusion in the Work by the copyright owner
+or by an individual or Legal Entity authorized to submit on behalf of
+the copyright owner. For the purposes of this definition, "submitted"
+means any form of electronic, verbal, or written communication sent
+to the Licensor or its representatives, including but not limited to
+communication on electronic mailing lists, source code control systems,
+and issue tracking systems that are managed by, or on behalf of, the
+Licensor for the purpose of discussing and improving the Work, but
+excluding communication that is conspicuously marked or otherwise
+designated in writing by the copyright owner as "Not a Contribution."
+
+"Contributor" shall mean Licensor and any individual or Legal Entity
+on behalf of whom a Contribution has been received by Licensor and
+subsequently incorporated within the Work.
+
+2. Grant of Copyright License. Subject to the terms and conditions of
+this License, each Contributor hereby grants to You a perpetual,
+worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+copyright license to reproduce, prepare Derivative Works of,
+publicly display, publicly perform, sublicense, and distribute the
+Work and such Derivative Works in Source or Object form.
+
+3. Grant of Patent License. Subject to the terms and conditions of
+this License, each Contributor hereby grants to You a perpetual,
+worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+(except as stated in this section) patent license to make, have made,
+use, offer to sell, sell, import, and otherwise transfer the Work,
+where such license applies only to those patent claims licensable
+by such Contributor that are necessarily infringed by their
+Contribution(s) alone or by combination of their Contribution(s)
+with the Work to which such Contribution(s) was submitted. If You
+institute patent litigation against any entity (including a
+cross-claim or counterclaim in a lawsuit) alleging that the Work
+or a Contribution incorporated within the Work constitutes direct
+or contributory patent infringement, then any patent licenses
+granted to You under this License for that Work shall terminate
+as of the date such litigation is filed.
+
+4. Redistribution. You may reproduce and distribute copies of the
+Work or Derivative Works thereof in any medium, with or without
+modifications, and in Source or Object form, provided that You
+meet the following conditions:
+
+(a) You must give any other recipients of the Work or
+Derivative Works a copy of this License; and
+
+(b) You must cause any modified files to carry prominent notices
+stating that You changed the files; and
+
+(c) You must retain, in the Source form of any Derivative Works
+that You distribute, all copyright, patent, trademark, and
+attribution notices from the Source form of the Work,
+excluding those notices that do not pertain to any part of
+the Derivative Works; and
+
+(d) If the Work includes a "NOTICE" text file as part of its
+distribution, then any Derivative Works that You distribute must
+include a readable copy of the attribution notices contained
+within such NOTICE file, excluding those notices that do not
+pertain to any part of the Derivative Works, in at least one
+of the following places: within a NOTICE text file distributed
+as part of the Derivative Works; within the Source form or
+documentation, if provided along with the Derivative Works; or,
+within a display generated by the Derivative Works, if and
+wherever such third-party notices normally appear. The contents
+of the NOTICE file are for informational purposes only and
+do not modify the License. You may add Your own attribution
+notices within Derivative Works that You distribute, alongside
+or as an addendum to the NOTICE text from the Work, provided
+that such additional attribution notices cannot be construed
+as modifying the License.
+
+You may add Your own copyright statement to Your modifications and
+may provide additional or different license terms and conditions
+for use, reproduction, or distribution of Your modifications, or
+for any such Derivative Works as a whole, provided Your use,
+reproduction, and distribution of the Work otherwise complies with
+the conditions stated in this License.
+
+5. Submission of Contributions. Unless You explicitly state otherwise,
+any Contribution intentionally submitted for inclusion in the Work
+by You to the Licensor shall be under the terms and conditions of
+this License, without any additional terms or conditions.
+Notwithstanding the above, nothing herein shall supersede or modify
+the terms of any separate license agreement you may have executed
+with Licensor regarding such Contributions.
+
+6. Trademarks. This License does not grant permission to use the trade
+names, trademarks, service marks, or product names of the Licensor,
+except as required for reasonable and customary use in describing the
+origin of the Work and reproducing the content of the NOTICE file.
+
+7. Disclaimer of Warranty. Unless required by applicable law or
+agreed to in writing, Licensor provides the Work (and each
+Contributor provides its Contributions) on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied, including, without limitation, any warranties or conditions
+of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+PARTICULAR PURPOSE. You are solely responsible for determining the
+appropriateness of using or redistributing the Work and assume any
+risks associated with Your exercise of permissions under this License.
+
+8. Limitation of Liability. In no event and under no legal theory,
+whether in tort (including negligence), contract, or otherwise,
+unless required by applicable law (such as deliberate and grossly
+negligent acts) or agreed to in writing, shall any Contributor be
+liable to You for damages, including any direct, indirect, special,
+incidental, or consequential damages of any character arising as a
+result of this License or out of the use or inability to use the
+Work (including but not limited to damages for loss of goodwill,
+work stoppage, computer failure or malfunction, or any and all
+other commercial damages or losses), even if such Contributor
+has been advised of the possibility of such damages.
+
+9. Accepting Warranty or Additional Liability. While redistributing
+the Work or Derivative Works thereof, You may choose to offer,
+and charge a fee for, acceptance of support, warranty, indemnity,
+or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only
+on Your own behalf and on Your sole responsibility, not on behalf
+of any other Contributor, and only if You agree to indemnify,
+defend, and hold each Contributor harmless for any liability
+incurred by, or claims asserted against, such Contributor by reason
+of your accepting any such warranty or additional liability.
+
+END OF TERMS AND CONDITIONS
+</pre></section><section class="card"><h2>MIT License components</h2><ul><li><code>dev.rikka.rikkax.preference:simplemenu-preference:1.0.3</code></li><li><code>dev.rikka.shizuku:api:13.1.5</code></li><li><code>org.slf4j:slf4j-android:1.7.36</code></li></ul><pre>MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY.</pre></section>
+<section class="card"><h2>ISC License components</h2><ul><li><code>org.connectbot:jbcrypt:1.0.2</code></li></ul><pre>ISC License
+
+Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</pre></section>
+<section class="card"><h2>BSD 3-Clause components</h2><ul><li><code>com.rapid7.client:dcerpc:0.12.13</code></li></ul><pre>BSD 3-Clause License
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES ARE DISCLAIMED.</pre></section><section class="card"><h2>Bouncy Castle components</h2><ul><li><code>org.bouncycastle:bcpkix-jdk15to18:1.81</code></li><li><code>org.bouncycastle:bcprov-jdk15to18:1.81</code></li></ul><pre>Bouncy Castle Licence
+
+The Bouncy Castle components are distributed under the Bouncy Castle Licence.
+The official licence text is available at:
+https://www.bouncycastle.org/licence.html</pre></section><section class="card"><h2>LGPL 2.1 components</h2><ul><li><code>eu.agno3.jcifs:jcifs-ng:2.1.10</code></li><li><code>org.videolan.android:libvlc-all:3.7.5</code></li><li><code>vendored:7-Zip:26.02</code> (with bundled BSD code and the upstream unRAR restriction; see the component license file)</li></ul><pre>GNU LESSER GENERAL PUBLIC LICENSE
+Version 2.1, February 1999
+
+This component is distributed under the GNU LGPL v2.1.
+The full license text is available at:
+https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt</pre></section><section class="card"><h2>GPL v2 with Classpath Exception components</h2><ul><li><code>com.android.tools:desugar_jdk_libs:2.1.5</code></li></ul><pre>GNU General Public License, version 2, with the Classpath Exception
+
+This component is distributed under the GNU GPL v2 together with the Classpath Exception.
+The full text used by the upstream project is available at:
+https://github.com/google/desugar_jdk_libs/blob/master/LICENSE</pre></section><section class="card"><h2>New BSD License components</h2><ul><li><code>vendored:libarchive:local</code></li></ul><pre>libarchive is distributed under the terms of the New BSD License (BSD-3-Clause).
+
+The vendored libarchive copyright file is not present in this repository snapshot,
+so this entry intentionally avoids adding a specific copyright notice.
+</pre></section>
+<section class="card"><h2>Readium Kotlin Toolkit 3.1.2</h2><p>BSD 3-Clause License. Copyright (c) 2017, Readium. The bundled license text is preserved in <code>app/src/main/licenses/readium-bsd-3-clause.txt</code>.</p></section>
+<section class="card"><h2>libmobi 0.12</h2><p>GNU Lesser General Public License version 3 or later. The app links libmobi as a replaceable shared library and preserves the upstream license text in <code>app/src/main/licenses/libmobi-lgpl-3.0.txt</code>.</p></section>
+</main>
+</body>
+</html>
+

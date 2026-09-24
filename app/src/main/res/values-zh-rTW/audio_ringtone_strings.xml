@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">設為鈴聲</string>
+    <string name="audio_player_ringtone_set">已成功設定鈴聲</string>
+    <string name="audio_player_ringtone_failed">無法設定鈴聲</string>
+    <string name="audio_player_ringtone_permission_required">允許 WizeFiles 修改系統設定以設定鈴聲</string>
+</resources>

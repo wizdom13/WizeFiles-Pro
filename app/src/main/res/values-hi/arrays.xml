@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string-array name="settings_night_mode_entries">
+        <item>सिस्टम सेटिंग के अनुसार</item>
+        <item>लाइट मोड</item>
+        <item>डार्क मोड</item>
+        <item>स्वचालित (समय के आधार पर)</item>
+        <item>स्वचालित (बैटरी के आधार पर)</item>
+    </string-array>
+    <string-array name="settings_file_name_ellipsize_entries">
+        <item>शुरुआत काटें (…name.txt)</item>
+        <item>बीच काटें (file…name.txt)</item>
+        <item>अंत काटें (filename…)</item>
+        <item>स्क्रोल टेक्स्ट (मार्की)</item>
+    </string-array>
+    <string-array name="settings_root_strategy_entries">
+        <item>मानक उपयोगकर्ता पहुँच (रूट नहीं)</item>
+        <item>स्मार्ट स्वचालित मोड</item>
+        <item>रूट एक्सेस को बाध्य करें</item>
+    </string-array>
+    <string-array name="settings_open_apk_default_action_entries">
+        <item>इंस्टॉल करने का प्रयास करें</item>
+        <item>अंदर की फ़ाइलें देखें</item>
+        <item>हमेशा मुझसे पूछें</item>
+    </string-array>
+    <string-array name="settings_security_relock_entries">
+        <item>तुरंत</item>
+        <item>30 सेकंड</item>
+        <item>1 मिनट</item>
+        <item>5 मिनट</item>
+        <item>10 मिनट</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_file">
+        <item>पढ़िए</item>
+        <item>लिखना</item>
+        <item>निष्पादन</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_directory">
+        <item>पढ़िए</item>
+        <item>लिखना</item>
+        <item>खोज</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_special_mode_bits">
+        <item>UID</item>
+        <item>GID सेट</item>
+        <item>स्टिकी बिट</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_authentication_type_entries">
+        <item>यूज़रनेम और पासवर्ड</item>
+        <item>अनाम लॉग इन</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_mode_entries">
+        <item>सक्रिय मोड</item>
+        <item>निष्क्रिय मोड (अनुशंसित)</item>
+    </string-array>
+    <string-array name="storage_edit_sftp_server_authentication_type_entries">
+        <item>यूज़रनेम और पासवर्ड</item>
+        <item>SSH सार्वजनिक कुंजी</item>
+    </string-array>
+    <string-array name="storage_edit_smb_server_authentication_type_entries">
+        <item>यूज़रनेम और पासवर्ड</item>
+        <item>गेस्ट एक्सेस</item>
+        <item>अनाम पहुँच</item>
+    </string-array>
+</resources>

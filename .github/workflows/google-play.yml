@@ -1,0 +1,158 @@
+name: Google Play Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      track:
+        description: "Google Play track"
+        required: true
+        default: "internal"
+        type: choice
+        options:
+          - internal
+          - alpha
+          - beta
+          - production
+      upload_to_play:
+        description: "Upload to Play (disable for the first manual package upload)"
+        required: true
+        default: true
+        type: boolean
+      status:
+        description: "Release status"
+        required: true
+        default: "completed"
+        type: choice
+        options:
+          - completed
+          - draft
+      release_name:
+        description: "Optional Play release name (leave blank to let Play decide)"
+        required: false
+        default: ""
+        type: string
+      changes_not_sent_for_review:
+        description: "Keep changes in Play Console pending manual review submission"
+        required: true
+        default: true
+        type: boolean
+      in_app_update_priority:
+        description: "In-app update priority (0-5)"
+        required: true
+        default: "0"
+        type: choice
+        options:
+          - "0"
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
+
+concurrency:
+  group: google-play-production
+  cancel-in-progress: false
+
+jobs:
+  publish-google-play:
+    runs-on: ubuntu-latest
+    environment: google-play-production
+    permissions:
+      contents: read
+      id-token: write
+
+    env:
+      PACKAGE_NAME: com.wisso.wizefiles
+      GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+      GOOGLE_PLAY_PUBLISHER_SERVICE_ACCOUNT: ${{ vars.GOOGLE_PLAY_PUBLISHER_SERVICE_ACCOUNT }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Gradle cache
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
+
+
+      - name: Validate Google Play upload configuration
+        if: ${{ inputs.upload_to_play }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          expected_publisher="wizefiles-play-publisher@wize-soft-production.iam.gserviceaccount.com"
+          expected_provider="projects/532189954619/locations/global/workloadIdentityPools/github-actions/providers/wizefiles"
+
+          [[ "$GITHUB_REF" == "refs/heads/main" ]] || {
+            echo "Automated Google Play uploads are allowed only from main" >&2
+            exit 1
+          }
+          [[ "$GOOGLE_PLAY_PUBLISHER_SERVICE_ACCOUNT" == "$expected_publisher" ]] || {
+            echo "GOOGLE_PLAY_PUBLISHER_SERVICE_ACCOUNT is missing or incorrect" >&2
+            exit 1
+          }
+          [[ "$GCP_WORKLOAD_IDENTITY_PROVIDER" == "$expected_provider" ]] || {
+            echo "GCP_WORKLOAD_IDENTITY_PROVIDER is missing or incorrect" >&2
+            exit 1
+          }
+
+      - name: Build release AAB
+        run: ./gradlew bundleRelease --warning-mode all
+
+      - name: Sign release AAB
+        uses: r0adkll/sign-android-release@v1
+        id: sign_aab
+        env:
+          BUILD_TOOLS_VERSION: "36.0.0"
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.APP_KEYSTORE_GOOGLE }}
+          alias: ${{ secrets.KEY_ALIAS_GOOGLE }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Upload signed AAB artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: app-release-signed-aab
+          path: ${{ steps.sign_aab.outputs.signedReleaseFile }}
+          retention-days: 30
+
+      - name: Authenticate to Google Cloud
+        if: ${{ inputs.upload_to_play }}
+        id: google_auth
+        uses: google-github-actions/auth@v3
+        with:
+          project_id: wize-soft-production
+          workload_identity_provider: ${{ env.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.GOOGLE_PLAY_PUBLISHER_SERVICE_ACCOUNT }}
+
+      - name: Upload to Google Play
+        if: ${{ inputs.upload_to_play }}
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJson: ${{ steps.google_auth.outputs.credentials_file_path }}
+          packageName: ${{ env.PACKAGE_NAME }}
+          releaseFiles: ${{ steps.sign_aab.outputs.signedReleaseFile }}
+          tracks: ${{ inputs.track }}
+          status: ${{ inputs.status }}
+          releaseName: ${{ inputs.release_name }}
+          inAppUpdatePriority: ${{ inputs.in_app_update_priority }}
+          changesNotSentForReview: ${{ inputs.changes_not_sent_for_review }}
+          mappingFile: app/build/outputs/mapping/release/mapping.txt
+          # Optional: add localized release notes files named like:
+          # distribution/whatsnew/whatsnew-en-US
+          # distribution/whatsnew/whatsnew-ar
+          # whatsNewDirectory: distribution/whatsnew

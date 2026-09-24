@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="AlwaysShowAction">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/search"
+        app:actionViewClass="com.wisso.wizefiles.ui.FixQueryChangeSearchView"
+        app:showAsAction="always|collapseActionView" />
+
+    <item
+        android:id="@+id/action_view_sort"
+        android:icon="@drawable/ic_sort_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_view_sort"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_new_task"
+        android:icon="@drawable/ic_add_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_new_task"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_new_tab"
+        android:icon="@drawable/ic_add_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_new_tab"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_dual_pane"
+        android:checkable="true"
+        android:icon="@drawable/ic_view_column_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_dual_pane"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_navigate_up"
+        android:icon="@drawable/ic_bs_chevron_up_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_navigate_up"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_navigate_to"
+        android:alphabeticShortcut="l"
+        android:icon="@drawable/ic_open_as"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_navigate_to"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_refresh"
+        android:alphabeticShortcut="r"
+        android:icon="@drawable/ic_refresh_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/refresh"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_paste"
+        android:alphabeticShortcut="v"
+        android:icon="@drawable/ic_paste_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/paste"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_restore_all"
+        android:icon="@drawable/ic_restore_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_restore_all"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_delete_all"
+        android:icon="@drawable/ic_delete_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_delete_all"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_select_all"
+        android:alphabeticShortcut="a"
+        android:icon="@drawable/ic_check_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/select_all"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_show_hidden_files"
+        android:alphabeticShortcut="h"
+        android:checkable="true"
+        android:icon="@drawable/ic_visibility_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_show_hidden_files"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/share"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_copy_path"
+        android:icon="@drawable/ic_copy_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_copy_path"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_open_in_terminal"
+        android:icon="@drawable/ic_terminal_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_open_in_terminal"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_add_bookmark"
+        android:icon="@drawable/ic_pin_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_add_bookmark"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sync_panes"
+        android:icon="@drawable/ic_sync_add_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="101"
+        android:title="@string/sync_panes"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_create_shortcut"
+        android:icon="@drawable/ic_open_as"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_create_shortcut"
+        app:showAsAction="never" />
+</menu>

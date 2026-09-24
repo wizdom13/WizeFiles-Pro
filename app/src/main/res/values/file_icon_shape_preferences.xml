@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_key_file_icon_shape" translatable="false">file_icon_shape</string>
+    <string name="pref_default_value_file_icon_shape" translatable="false">squircle</string>
+
+    <string-array name="settings_icon_shape_entries" translatable="false">
+        <item>@string/settings_icon_shape_squircle</item>
+        <item>@string/settings_icon_shape_rounded_square</item>
+        <item>@string/settings_icon_shape_flower</item>
+        <item>@string/settings_icon_shape_square</item>
+        <item>@string/settings_icon_shape_teardrop</item>
+        <item>@string/settings_icon_shape_pebble</item>
+        <item>@string/settings_icon_shape_vessel</item>
+        <item>@string/settings_icon_shape_pentagon</item>
+        <item>@string/settings_icon_shape_hexagon_1</item>
+        <item>@string/settings_icon_shape_hexagon_2</item>
+        <item>@string/settings_icon_shape_heptagon</item>
+        <item>@string/settings_icon_shape_octagon</item>
+    </string-array>
+
+    <string-array name="pref_entry_values_file_icon_shape" translatable="false">
+        <item>squircle</item>
+        <item>rounded_square</item>
+        <item>flower</item>
+        <item>square</item>
+        <item>teardrop</item>
+        <item>pebble</item>
+        <item>vessel</item>
+        <item>pentagon</item>
+        <item>hexagon_1</item>
+        <item>hexagon_2</item>
+        <item>heptagon</item>
+        <item>octagon</item>
+    </string-array>
+</resources>

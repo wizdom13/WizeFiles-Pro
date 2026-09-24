@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ebook_viewer_title">Leitor de e-books</string>
+    <string name="ebook_viewer_loading">Abrindo e-book</string>
+    <string name="ebook_viewer_failed">Não foi possível abrir este e-book.</string>
+    <string name="ebook_viewer_unsafe">Este e-book está danificado ou excede os limites seguros do contêiner.</string>
+    <string name="ebook_viewer_encrypted">Livros Kindle criptografados ou protegidos por DRM não são compatíveis.</string>
+    <string name="ebook_viewer_print_replica">Livros AZW4 Print Replica não são compatíveis com o leitor interno.</string>
+    <string name="ebook_viewer_too_large">Este e-book excede o limite de segurança do leitor interno.</string>
+    <string name="ebook_viewer_unavailable">O leitor de e-books interno não está disponível para este arquivo.</string>
+    <string name="ebook_viewer_open_with">Abrir com</string>
+    <string name="ebook_viewer_open_link">Abrir link do e-book</string>
+    <string name="ebook_viewer_link_blocked">Este link do e-book foi bloqueado.</string>
+    <string name="ebook_viewer_resource_failed">Não foi possível carregar um recurso da publicação.</string>
+    <string name="ebook_viewer_toc">Sumário</string>
+    <string name="ebook_viewer_no_toc">Este e-book não tem sumário.</string>
+    <string name="ebook_viewer_smaller">Texto menor</string>
+    <string name="ebook_viewer_larger">Texto maior</string>
+    <string name="ebook_viewer_theme">Alterar tema</string>
+    <string name="ebook_viewer_share">Compartilhar e-book</string>
+</resources>
+

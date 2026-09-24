@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string-array name="settings_night_mode_entries">
+        <item>Следовать системной настройке</item>
+        <item>Светлая тема</item>
+        <item>Тёмная тема</item>
+        <item>Автоматически (по времени)</item>
+        <item>Автоматически (по батарее)</item>
+    </string-array>
+    <string-array name="settings_file_name_ellipsize_entries">
+        <item>Обрезать начало (…name.txt)</item>
+        <item>Обрезать середину (file…name.txt)</item>
+        <item>Обрезать конец (filename…)</item>
+        <item>Прокручивать текст (marquee)</item>
+    </string-array>
+    <string-array name="settings_root_strategy_entries">
+        <item>Стандартный пользовательский доступ (без root)</item>
+        <item>Умный автоматический режим</item>
+        <item>Принудительный root-доступ</item>
+    </string-array>
+    <string-array name="settings_open_apk_default_action_entries">
+        <item>Попытаться установить</item>
+        <item>Просмотреть файлы внутри</item>
+        <item>Всегда спрашивать</item>
+    </string-array>
+    <string-array name="settings_security_relock_entries">
+        <item>Сразу</item>
+        <item>30 секунд</item>
+        <item>1 минута</item>
+        <item>5 минут</item>
+        <item>10 минут</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_file">
+        <item>Читать далее</item>
+        <item>Писать</item>
+        <item>казнить</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_directory">
+        <item>Читать далее</item>
+        <item>Писать</item>
+        <item>Поиск</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_special_mode_bits">
+        <item>Установите UID</item>
+        <item>Установить GID</item>
+        <item>Липкий кусочек</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_authentication_type_entries">
+        <item>Имя пользователя и пароль</item>
+        <item>Анонимный вход</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_mode_entries">
+        <item>Активный режим</item>
+        <item>Пассивный режим (рекомендуется)</item>
+    </string-array>
+    <string-array name="storage_edit_sftp_server_authentication_type_entries">
+        <item>Имя пользователя и пароль</item>
+        <item>Открытый ключ SSH</item>
+    </string-array>
+    <string-array name="storage_edit_smb_server_authentication_type_entries">
+        <item>Имя пользователя и пароль</item>
+        <item>Гостевой доступ</item>
+        <item>Анонимный доступ</item>
+    </string-array>
+</resources>

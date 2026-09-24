@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_icon_shape_title">Icon shape</string>
+    <string name="settings_icon_shape_squircle">Squircle</string>
+    <string name="settings_icon_shape_rounded_square">Rounded square</string>
+    <string name="settings_icon_shape_flower">Flower</string>
+    <string name="settings_icon_shape_square">Square</string>
+    <string name="settings_icon_shape_teardrop">Teardrop</string>
+    <string name="settings_icon_shape_pebble">Pebble</string>
+    <string name="settings_icon_shape_vessel">Vessel</string>
+    <string name="settings_icon_shape_pentagon">Pentagon</string>
+    <string name="settings_icon_shape_hexagon_1">Hexagon variant 1</string>
+    <string name="settings_icon_shape_hexagon_2">Hexagon variant 2</string>
+    <string name="settings_icon_shape_heptagon">Heptagon</string>
+    <string name="settings_icon_shape_octagon">Octagon</string>
+</resources>

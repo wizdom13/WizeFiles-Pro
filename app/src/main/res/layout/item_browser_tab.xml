@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/tab_layout_height"
+    android:gravity="center_vertical"
+    android:minWidth="112dp"
+    android:orientation="horizontal"
+    android:paddingStart="16dp">
+
+    <TextView
+        android:id="@+id/browserTabTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxWidth="160dp"
+        android:maxLines="1"
+        android:textAppearance="?attr/textAppearanceLabelLarge" />
+
+    <FrameLayout
+        android:layout_width="@dimen/touch_target_size"
+        android:layout_height="@dimen/touch_target_size"
+        android:layout_marginStart="4dp">
+
+        <ImageButton
+            android:id="@+id/browserTabClose"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_browser_tab_close"
+            android:contentDescription="@string/file_list_tab_close"
+            android:padding="15dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_close_control_normal_24dp"
+            android:tint="?attr/colorOnSecondaryContainer" />
+
+        <ProgressBar
+            android:id="@+id/browserTabHoverProgress"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
+</LinearLayout>

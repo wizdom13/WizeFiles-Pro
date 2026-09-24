@@ -1,0 +1,88 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
+package com.wisso.wizefiles.feature.filebrowser
+
+import android.os.Parcelable
+import java.nio.file.Path
+import com.wisso.wizefiles.provider.archive.archiveFile
+import com.wisso.wizefiles.provider.archive.isArchivePath
+import com.wisso.wizefiles.storage.path.toLegacyPathOrNull
+
+class TrailData private constructor(
+    val trail: List<Path>,
+    private val states: MutableList<Parcelable?>,
+    val currentIndex: Int
+) {
+    fun navigateTo(lastState: Parcelable, path: Path): TrailData {
+        val newTrail = createTrail(path)
+        val newStates = mutableListOf<Parcelable?>()
+        val newIndex = newTrail.size - 1
+        val isExitingArchive = currentPath.isArchivePath && !path.isArchivePath
+        var isPrefix = true
+        for (index in newTrail.indices) {
+            if (isPrefix && index < trail.size) {
+                if (newTrail[index] == trail[index]) {
+                    newStates.add(if (index != currentIndex) states[index] else lastState)
+                } else {
+                    isPrefix = false
+                    newStates.add(null)
+                }
+            } else {
+                newStates.add(null)
+            }
+        }
+        if (isPrefix && !isExitingArchive) {
+            for (index in newTrail.size..<trail.size) {
+                newTrail.add(trail[index])
+                newStates.add(if (index != currentIndex) states[index] else lastState)
+            }
+        }
+        return TrailData(newTrail, newStates, newIndex)
+    }
+
+    fun navigateUp(): TrailData? {
+        if (currentIndex == 0) {
+            return null
+        }
+        val newIndex = currentIndex - 1
+        return TrailData(
+            trail = trail.subList(0, newIndex + 1).toList(),
+            states = states.subList(0, newIndex + 1).toMutableList(),
+            currentIndex = newIndex
+        )
+    }
+
+    val pendingState: Parcelable?
+        get() = states.set(currentIndex, null)
+
+    val currentPath: Path
+        get() = trail[currentIndex]
+
+    companion object {
+        fun of(path: Path): TrailData {
+            val trail: List<Path> = createTrail(path)
+            val states = MutableList<Parcelable?>(trail.size) { null }
+            val index = trail.size - 1
+            return TrailData(trail, states, index)
+        }
+
+        private fun createTrail(path: Path): MutableList<Path> {
+            var path = path
+            val trail = mutableListOf<Path>()
+            val archiveFile = if (path.isArchivePath) path.archiveFile.toLegacyPathOrNull() else null
+            while (true) {
+                trail.add(path)
+                path = path.parent ?: break
+            }
+            trail.reverse()
+            if (archiveFile != null) {
+                val archiveFileParent = archiveFile.parent
+                if (archiveFileParent != null) {
+                    trail.addAll(0, createTrail(archiveFileParent))
+                }
+            }
+            return trail
+        }
+    }
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_icon_shape_title">Bentuk ikon</string>
+    <string name="settings_icon_shape_squircle">Squircle</string>
+    <string name="settings_icon_shape_rounded_square">Persegi bersudut bulat</string>
+    <string name="settings_icon_shape_flower">Bunga</string>
+    <string name="settings_icon_shape_square">Persegi</string>
+    <string name="settings_icon_shape_teardrop">Tetes air</string>
+    <string name="settings_icon_shape_pebble">Kerikil</string>
+    <string name="settings_icon_shape_vessel">Wadah</string>
+    <string name="settings_icon_shape_pentagon">Pentagon</string>
+    <string name="settings_icon_shape_hexagon_1">Heksagon varian 1</string>
+    <string name="settings_icon_shape_hexagon_2">Heksagon varian 2</string>
+    <string name="settings_icon_shape_heptagon">Heptagon</string>
+    <string name="settings_icon_shape_octagon">Oktagon</string>
+</resources>

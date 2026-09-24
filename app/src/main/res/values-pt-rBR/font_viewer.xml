@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="font_viewer_error_too_large">Esta fonte é grande demais para uma visualização segura.</string>
+    <string name="font_viewer_error_invalid">Este arquivo de fonte é inválido ou não é compatível.</string>
+    <string name="font_viewer_error_open_failed">O WizeFiles não conseguiu abrir esta fonte. Verifique se o arquivo ainda existe e se você tem acesso.</string>
+    <string name="font_viewer_collection_faces">%1$d faces</string>
+</resources>

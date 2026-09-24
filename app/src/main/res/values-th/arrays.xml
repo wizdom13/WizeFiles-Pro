@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string-array name="settings_night_mode_entries">
+        <item>ใช้ตามการตั้งค่าระบบ</item>
+        <item>โหมดสว่าง</item>
+        <item>โหมดมืด</item>
+        <item>อัตโนมัติ (ตามเวลา)</item>
+        <item>อัตโนมัติ (ตามแบตเตอรี่)</item>
+    </string-array>
+    <string-array name="settings_file_name_ellipsize_entries">
+        <item>ตัดด้านหน้าออก (…name.txt)</item>
+        <item>ตัดตรงกลางออก (file…name.txt)</item>
+        <item>ตัดด้านท้ายออก (filename…)</item>
+        <item>เลื่อนข้อความ (Marquee)</item>
+    </string-array>
+    <string-array name="settings_root_strategy_entries">
+        <item>การเข้าถึงผู้ใช้มาตรฐาน (ไม่ใช้รูท)</item>
+        <item>โหมดอัตโนมัติอัจฉริยะ</item>
+        <item>บังคับใช้การเข้าถึงรูท</item>
+    </string-array>
+    <string-array name="settings_open_apk_default_action_entries">
+        <item>พยายามติดตั้ง</item>
+        <item>ดูไฟล์ภายใน</item>
+        <item>ถามฉันเสมอ</item>
+    </string-array>
+    <string-array name="settings_security_relock_entries">
+        <item>ทันที</item>
+        <item>30 วินาที</item>
+        <item>1 นาที</item>
+        <item>5 นาที</item>
+        <item>10 นาที</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_file">
+        <item>อ่าน</item>
+        <item>เขียน</item>
+        <item>ประมวลผล</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_directory">
+        <item>อ่าน</item>
+        <item>เขียน</item>
+        <item>ค้นหา</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_special_mode_bits">
+        <item>ตั้งหมายเลขผู้ใช้</item>
+        <item>ตั้งค่าหมายเลข GID</item>
+        <item>บิตปักหมุด</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_authentication_type_entries">
+        <item>รหัสผ่านของชื่อผู้ใช้</item>
+        <item>ปูมบันทึกนิรนาม</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_mode_entries">
+        <item>โหมดที่ใช้อยู่</item>
+        <item>โหมดผ่าน (แนะนําให้ใช้)</item>
+    </string-array>
+    <string-array name="storage_edit_sftp_server_authentication_type_entries">
+        <item>รหัสผ่านของชื่อผู้ใช้</item>
+        <item>กุญแจสาธารณะ SSH</item>
+    </string-array>
+    <string-array name="storage_edit_smb_server_authentication_type_entries">
+        <item>รหัสผ่านของชื่อผู้ใช้</item>
+        <item>การเข้าใช้งานแขก</item>
+        <item>การเข้าใช้งานแบบไม่มีชื่อ</item>
+    </string-array>
+</resources>

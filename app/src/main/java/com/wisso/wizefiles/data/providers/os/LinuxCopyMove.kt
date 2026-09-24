@@ -1,0 +1,302 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
+package com.wisso.wizefiles.provider.os
+
+import android.system.OsConstants
+import java.nio.file.FileAlreadyExistsException
+import java.nio.file.FileSystemException
+import java.nio.file.StandardCopyOption
+import com.wisso.wizefiles.provider.common.ByteString
+import com.wisso.wizefiles.provider.common.CopyOptions
+import com.wisso.wizefiles.provider.common.toByteString
+import com.wisso.wizefiles.provider.os.syscall.LinuxSyscallConstants
+import com.wisso.wizefiles.provider.os.syscall.StructTimespec
+import com.wisso.wizefiles.provider.os.syscall.Syscall
+import com.wisso.wizefiles.provider.os.syscall.SyscallException
+import java.io.IOException
+import java.io.InterruptedIOException
+
+internal object LinuxCopyMove {
+    private const val SEND_FILE_COUNT = 8 * 1024
+
+    private val XATTR_NAME_PREFIX_USER = "user.".toByteString()
+
+    @Throws(IOException::class)
+    fun copy(source: ByteString, target: ByteString, copyOptions: CopyOptions) {
+        if (copyOptions.atomicMove) {
+            throw UnsupportedOperationException(StandardCopyOption.ATOMIC_MOVE.toString())
+        }
+        val sourceStat = try {
+            if (copyOptions.noFollowLinks) Syscall.lstat(source) else Syscall.stat(source)
+        } catch (e: SyscallException) {
+            throw e.toFileSystemException(source.toString())
+        }
+        val targetStat = try {
+            Syscall.lstat(target)
+        } catch (e: SyscallException) {
+            if (e.errno != OsConstants.ENOENT) {
+                throw e.toFileSystemException(target.toString())
+            }
+            // Ignored.
+            null
+        }
+        if (targetStat != null) {
+            if (sourceStat.st_dev == targetStat.st_dev && sourceStat.st_ino == targetStat.st_ino) {
+                copyOptions.progressListener?.invoke(sourceStat.st_size)
+                return
+            }
+            if (!copyOptions.replaceExisting) {
+                throw FileAlreadyExistsException(source.toString(), target.toString(), null)
+            }
+            // Symbolic links may not be supported so we cannot simply remove the target here.
+        }
+        if (OsConstants.S_ISREG(sourceStat.st_mode)) {
+            if (targetStat != null) {
+                try {
+                    Syscall.remove(target)
+                } catch (e: SyscallException) {
+                    if (e.errno != OsConstants.ENOENT) {
+                        throw e.toFileSystemException(target.toString())
+                    }
+                }
+            }
+            val sourceFd = try {
+                Syscall.open(source, OsConstants.O_RDONLY, 0)
+            } catch (e: SyscallException) {
+                throw e.toFileSystemException(source.toString())
+            }
+            try {
+                var targetFlags = (OsConstants.O_WRONLY or OsConstants.O_TRUNC
+                    or OsConstants.O_CREAT)
+                if (!copyOptions.replaceExisting) {
+                    targetFlags = targetFlags or OsConstants.O_EXCL
+                }
+                val targetFd = try {
+                    Syscall.open(target, targetFlags, sourceStat.st_mode)
+                } catch (e: SyscallException) {
+                    e.maybeThrowInvalidFileNameException(target.toString())
+                    throw e.toFileSystemException(target.toString())
+                }
+                var successful = false
+                try {
+                    val progressIntervalMillis = copyOptions.progressIntervalMillis
+                    val progressListener = copyOptions.progressListener
+                    var lastProgressMillis = System.currentTimeMillis()
+                    var copiedSize = 0L
+                    while (true) {
+                        val sentSize = try {
+                            Syscall.sendfile(targetFd, sourceFd, null, SEND_FILE_COUNT.toLong())
+                        } catch (e: SyscallException) {
+                            throw e.toFileSystemException(source.toString(), target.toString())
+                        }
+                        if (sentSize == 0L) {
+                            break
+                        }
+                        copiedSize += sentSize
+                        throwIfInterrupted()
+                        val currentTimeMillis = System.currentTimeMillis()
+                        if (progressListener != null
+                            && currentTimeMillis >= lastProgressMillis + progressIntervalMillis) {
+                            progressListener(copiedSize)
+                            lastProgressMillis = currentTimeMillis
+                            copiedSize = 0
+                        }
+                    }
+                    progressListener?.invoke(copiedSize)
+                    successful = true
+                } finally {
+                    try {
+                        Syscall.close(targetFd)
+                    } catch (e: SyscallException) {
+                        throw e.toFileSystemException(target.toString())
+                    } finally {
+                        if (!successful) {
+                            try {
+                                Syscall.remove(target)
+                            } catch (e: SyscallException) {
+                                com.wisso.wizefiles.util.AppLog.e("Error", "Unexpected failure", e)
+                            }
+                        }
+                    }
+                }
+            } finally {
+                try {
+                    Syscall.close(sourceFd)
+                } catch (e: SyscallException) {
+                    throw e.toFileSystemException(source.toString())
+                }
+            }
+        } else if (OsConstants.S_ISDIR(sourceStat.st_mode)) {
+            if (targetStat != null) {
+                try {
+                    Syscall.remove(target)
+                } catch (e: SyscallException) {
+                    if (e.errno != OsConstants.ENOENT) {
+                        throw e.toFileSystemException(target.toString())
+                    }
+                }
+            }
+            try {
+                Syscall.mkdir(target, sourceStat.st_mode)
+            } catch (e: SyscallException) {
+                e.maybeThrowInvalidFileNameException(target.toString())
+                throw e.toFileSystemException(target.toString())
+            }
+            copyOptions.progressListener?.invoke(sourceStat.st_size)
+        } else if (OsConstants.S_ISLNK(sourceStat.st_mode)) {
+            val sourceTarget = try {
+                Syscall.readlink(source)
+            } catch (e: SyscallException) {
+                throw e.toFileSystemException(source.toString())
+            }
+            try {
+                Syscall.symlink(sourceTarget, target)
+            } catch (e: SyscallException) {
+                if (e.errno == OsConstants.EEXIST && copyOptions.replaceExisting) {
+                    try {
+                        Syscall.remove(target)
+                    } catch (e2: SyscallException) {
+                        if (e2.errno != OsConstants.ENOENT) {
+                            e2.addSuppressed(e.toFileSystemException(target.toString()))
+                            throw e2.toFileSystemException(target.toString())
+                        }
+                    }
+                    try {
+                        Syscall.symlink(sourceTarget, target)
+                    } catch (e2: SyscallException) {
+                        e2.addSuppressed(e.toFileSystemException(target.toString()))
+                        throw e2.toFileSystemException(target.toString())
+                    }
+                }
+                e.maybeThrowInvalidFileNameException(target.toString())
+                throw e.toFileSystemException(target.toString())
+            }
+            copyOptions.progressListener?.invoke(sourceStat.st_size)
+        } else {
+            throw FileSystemException(source.toString(), null, "st_mode ${sourceStat.st_mode}")
+        }
+        // We don't take error when copying attribute fatal, so errors will only be logged from now
+        // on.
+        // Ownership should be copied before permissions so that special permission bits like
+        // setuid work properly.
+        try {
+            if (copyOptions.copyAttributes) {
+                Syscall.lchown(target, sourceStat.st_uid, sourceStat.st_gid)
+            }
+        } catch (e: SyscallException) {
+            com.wisso.wizefiles.util.AppLog.e("Error", "Unexpected failure", e)
+        }
+        try {
+            if (!OsConstants.S_ISLNK(sourceStat.st_mode)) {
+                Syscall.chmod(target, sourceStat.st_mode)
+            }
+        } catch (e: SyscallException) {
+            com.wisso.wizefiles.util.AppLog.e("Error", "Unexpected failure", e)
+        }
+        // TODO: Change modified time last?
+        try {
+            val times = arrayOf(
+                if (copyOptions.copyAttributes) {
+                    sourceStat.st_atim
+                } else {
+                    StructTimespec(0, LinuxSyscallConstants.UTIME_OMIT)
+                }, sourceStat.st_mtim
+            )
+            Syscall.lutimens(target, times)
+        } catch (e: SyscallException) {
+            com.wisso.wizefiles.util.AppLog.e("Error", "Unexpected failure", e)
+        }
+        try {
+            // TODO: Allow u+rw temporarily if we are to copy xattrs.
+            val xattrNames = Syscall.llistxattr(source)
+            for (xattrName in xattrNames) {
+                if (!(copyOptions.copyAttributes || xattrName.startsWith(XATTR_NAME_PREFIX_USER))) {
+                    continue
+                }
+                val xattrValue = Syscall.lgetxattr(target, xattrName)
+                Syscall.lsetxattr(target, xattrName, xattrValue, 0)
+            }
+        } catch (e: SyscallException) {
+            com.wisso.wizefiles.util.AppLog.e("Error", "Unexpected failure", e)
+        }
+    }
+
+    @Throws(InterruptedIOException::class)
+    private fun throwIfInterrupted() {
+        if (Thread.interrupted()) {
+            throw InterruptedIOException()
+        }
+    }
+
+    @Throws(IOException::class)
+    fun move(source: ByteString, target: ByteString, copyOptions: CopyOptions) {
+        val sourceStat = try {
+            Syscall.lstat(source)
+        } catch (e: SyscallException) {
+            throw e.toFileSystemException(source.toString())
+        }
+        val targetStat = try {
+            Syscall.lstat(target)
+        } catch (e: SyscallException) {
+            if (e.errno != OsConstants.ENOENT) {
+                throw e.toFileSystemException(target.toString())
+            }
+            // Ignored.
+            null
+        }
+        if (targetStat != null) {
+            if (sourceStat.st_dev == targetStat.st_dev && sourceStat.st_ino == targetStat.st_ino) {
+                copyOptions.progressListener?.invoke(sourceStat.st_size)
+                return
+            }
+            if (!copyOptions.replaceExisting) {
+                throw FileAlreadyExistsException(source.toString(), target.toString(), null)
+            }
+            try {
+                Syscall.remove(target)
+            } catch (e: SyscallException) {
+                throw e.toFileSystemException(target.toString())
+            }
+        }
+        var renameSuccessful = false
+        try {
+            Syscall.rename(source, target)
+            renameSuccessful = true
+        } catch (e: SyscallException) {
+            if (copyOptions.atomicMove) {
+                e.maybeThrowAtomicMoveNotSupportedException(source.toString(), target.toString())
+                e.maybeThrowInvalidFileNameException(target.toString())
+                throw e.toFileSystemException(source.toString(), target.toString())
+            }
+            // Ignored.
+        }
+        if (renameSuccessful) {
+            copyOptions.progressListener?.invoke(sourceStat.st_size)
+            return
+        }
+        if (copyOptions.atomicMove) {
+            throw AssertionError()
+        }
+        var copyOptions = copyOptions
+        if (!copyOptions.copyAttributes || !copyOptions.noFollowLinks) {
+            copyOptions = CopyOptions(
+                copyOptions.replaceExisting, true, false, true, copyOptions.progressIntervalMillis,
+                copyOptions.progressListener
+            )
+        }
+        copy(source, target, copyOptions)
+        try {
+            Syscall.remove(source)
+        } catch (e: SyscallException) {
+            if (e.errno != OsConstants.ENOENT) {
+                try {
+                    Syscall.remove(target)
+                } catch (e2: SyscallException) {
+                    e.addSuppressed(e2.toFileSystemException(target.toString()))
+                }
+            }
+            throw e.toFileSystemException(source.toString())
+        }
+    }
+}

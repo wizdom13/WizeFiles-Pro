@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ebook_viewer_title">Lector de libros electrónicos</string>
+    <string name="ebook_viewer_loading">Abriendo el libro electrónico</string>
+    <string name="ebook_viewer_failed">No se pudo abrir este libro electrónico.</string>
+    <string name="ebook_viewer_unsafe">Este libro electrónico está dañado o supera los límites seguros del contenedor.</string>
+    <string name="ebook_viewer_encrypted">No se admiten libros Kindle cifrados o protegidos con DRM.</string>
+    <string name="ebook_viewer_print_replica">El lector interno no admite libros AZW4 Print Replica.</string>
+    <string name="ebook_viewer_too_large">Este libro electrónico supera el límite de seguridad del lector interno.</string>
+    <string name="ebook_viewer_unavailable">El lector interno de libros electrónicos no está disponible para este archivo.</string>
+    <string name="ebook_viewer_open_with">Abrir con</string>
+    <string name="ebook_viewer_open_link">Abrir enlace del libro</string>
+    <string name="ebook_viewer_link_blocked">Se bloqueó este enlace del libro electrónico.</string>
+    <string name="ebook_viewer_resource_failed">No se pudo cargar un recurso de la publicación.</string>
+    <string name="ebook_viewer_toc">Contenido</string>
+    <string name="ebook_viewer_no_toc">Este libro electrónico no tiene tabla de contenido.</string>
+    <string name="ebook_viewer_smaller">Texto más pequeño</string>
+    <string name="ebook_viewer_larger">Texto más grande</string>
+    <string name="ebook_viewer_theme">Cambiar tema</string>
+    <string name="ebook_viewer_share">Compartir libro electrónico</string>
+</resources>

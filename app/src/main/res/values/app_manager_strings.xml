@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="navigation_app_manager">App Manager</string>
+    <string name="app_manager_title">App Manager</string>
+    <string name="app_manager_search_hint">Search apps</string>
+    <string name="app_manager_filter_all">All</string>
+    <string name="app_manager_filter_user">User</string>
+    <string name="app_manager_filter_system">System</string>
+    <string name="app_manager_filter_disabled">Disabled</string>
+    <string name="app_manager_summary">%1$d apps • %2$s</string>
+    <string name="app_manager_empty">No apps match the current search and filter.</string>
+    <string name="app_manager_load_error">Couldn’t load installed apps.</string>
+    <string name="app_manager_version_code">Version code %1$d</string>
+    <string name="app_manager_version_size">%1$s • %2$s</string>
+    <string name="app_manager_dates">Installed %1$s • Updated %2$s</string>
+    <string name="app_manager_badge_split">Split</string>
+    <string name="app_manager_badge_system">System</string>
+    <string name="app_manager_badge_disabled">Disabled</string>
+    <string name="app_manager_selected_count">%1$d selected</string>
+    <string name="app_manager_selected">Selected</string>
+    <string name="app_manager_uninstall">Uninstall</string>
+    <string name="app_manager_uninstall_multiple_title">Uninstall selected apps?</string>
+    <string name="app_manager_uninstall_multiple_message">Android will ask you to confirm each of the %1$d selected apps.</string>
+    <string name="app_manager_uninstall_finished">Uninstall requests completed.</string>
+    <string name="app_manager_uninstall_unavailable">No system uninstaller is available.</string>
+    <string name="app_manager_info">Info</string>
+    <string name="app_manager_info_unavailable">App info isn’t available for this package.</string>
+    <string name="app_manager_open">Open</string>
+    <string name="app_manager_open_unavailable">This app doesn’t have a launchable activity.</string>
+    <string name="app_manager_deselect_all">Deselect all</string>
+    <string name="app_manager_sort_title">Sort apps</string>
+    <string name="app_manager_sort_name">Name</string>
+    <string name="app_manager_sort_size">APK size</string>
+    <string name="app_manager_sort_installed">Installed date</string>
+    <string name="app_manager_sort_updated">Updated date</string>
+    <string name="app_manager_sort_package">Package name</string>
+    <string name="app_manager_sort_ascending">Sort ascending</string>
+    <string name="app_manager_sort_descending">Sort descending</string>
+    <string name="app_manager_backup_selected">Back up selected to…</string>
+    <string name="app_manager_backup_destination_error">The selected destination isn’t available.</string>
+    <string name="app_manager_backup_queued">Backup added to Transfer Center.</string>
+    <string name="app_manager_share_chooser">Share APK backup</string>
+    <string name="app_manager_share_unavailable">No app is available to share this backup.</string>
+    <string name="app_manager_export_failed">Couldn’t export the selected apps.</string>
+    <string name="app_manager_export_cancelled">APK export cancelled.</string>
+    <string name="app_manager_enable">Enable</string>
+    <string name="app_manager_disable">Disable</string>
+</resources>

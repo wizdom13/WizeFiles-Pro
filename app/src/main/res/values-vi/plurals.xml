@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <plurals name="size_in_bytes_format">
+        <item quantity="other">%1$,d byte</item>
+    </plurals>
+    <plurals name="file_job_delete_notification_title_multiple_format">
+        <item quantity="other">Đang xoá %1$,d tệp</item>
+    </plurals>
+    <plurals name="file_job_restore_selinux_context_notification_title_multiple_format">
+        <item quantity="other">Đang khôi phục hoàn cảnh SELinux cho %1$,d tệp</item>
+    </plurals>
+    <plurals name="file_list_subtitle_directory_count_format">
+        <item quantity="other">%1$,d thư mục</item>
+    </plurals>
+    <plurals name="file_list_subtitle_file_count_format">
+        <item quantity="other">%1$,d tệp</item>
+    </plurals>
+    <plurals name="file_item_directory_count">
+        <item quantity="one">%1$,d mục</item>
+        <item quantity="other">%1$,d mục</item>
+    </plurals>
+    <plurals name="storage_cleaner_section_item_count">
+        <item quantity="one">%1$,d mục</item>
+        <item quantity="other">%1$,d mục</item>
+    </plurals>
+    <plurals name="file_job_archive_scan_notification_title_format">
+        <item quantity="one">Chuẩn bị nén tệp %1$,d (%2$s)</item>
+        <item quantity="other">Chuẩn bị nén tệp %1$,d (%2$s)</item>
+    </plurals>
+    <plurals name="file_job_archive_notification_title_multiple_format">
+        <item quantity="one">Đóng gói tập tin %1$,d vào “%2$s”</item>
+        <item quantity="other">Đóng gói các tập tin %1$,d vào “%2$s”</item>
+    </plurals>
+    <plurals name="file_job_copy_scan_notification_title_format">
+        <item quantity="one">Chuẩn bị sao chép tệp %1$,d (%2$s)</item>
+        <item quantity="other">Chuẩn bị sao chép tệp %1$,d (%2$s)</item>
+    </plurals>
+    <plurals name="file_job_copy_notification_title_multiple_format">
+        <item quantity="one">Đang sao chép tệp %1$,d vào “%2$s”</item>
+        <item quantity="other">Đang sao chép tệp %1$,d vào “%2$s”</item>
+    </plurals>
+    <plurals name="file_job_extract_scan_notification_title_format">
+        <item quantity="one">Chuẩn bị giải nén tệp %1$,d (%2$s)</item>
+        <item quantity="other">Sẵn sàng giải nén các tập tin %1$,d (%2$s)</item>
+    </plurals>
+    <plurals name="file_job_extract_notification_title_multiple_format">
+        <item quantity="one">Đang trích xuất tệp %1$,d thành “%2$s”</item>
+        <item quantity="other">Đang trích xuất tệp %1$,d thành “%2$s”</item>
+    </plurals>
+    <plurals name="file_job_move_scan_notification_title_format">
+        <item quantity="one">Chuẩn bị di chuyển tệp %1$,d (%2$s)</item>
+        <item quantity="other">Chuẩn bị di chuyển các tập tin %1$,d (%2$s)</item>
+    </plurals>
+    <plurals name="file_job_move_notification_title_multiple_format">
+        <item quantity="one">Di chuyển tệp %1$,d sang “%2$s”</item>
+        <item quantity="other">Di chuyển tệp %1$,d sang “%2$s”</item>
+    </plurals>
+    <plurals name="file_job_delete_scan_notification_title_format">
+        <item quantity="one">Chuẩn bị xóa tệp %1$,d</item>
+        <item quantity="other">Sẵn sàng xóa các tập tin %1$,d</item>
+    </plurals>
+    <plurals name="file_job_set_owner_scan_notification_title_format">
+        <item quantity="one">Chuẩn bị đổi chủ cho file %1$,d</item>
+        <item quantity="other">Chuẩn bị thay đổi chủ sở hữu cho file %1$,d</item>
+    </plurals>
+    <plurals name="file_job_set_owner_notification_title_multiple_format">
+        <item quantity="one">Cập nhật chủ sở hữu cho tệp %1$,d</item>
+        <item quantity="other">Cập nhật chủ sở hữu cho tệp %1$,d</item>
+    </plurals>
+    <plurals name="file_job_set_group_scan_notification_title_format">
+        <item quantity="one">Chuẩn bị thay đổi nhóm cho file %1$,d</item>
+        <item quantity="other">Sẵn sàng thay đổi nhóm cho các tệp %1$,d</item>
+    </plurals>
+    <plurals name="file_job_set_group_notification_title_multiple_format">
+        <item quantity="one">Đang cập nhật nhóm cho tệp %1$,d</item>
+        <item quantity="other">Cập nhật nhóm cho tệp %1$,d</item>
+    </plurals>
+    <plurals name="file_job_set_mode_scan_notification_title_format">
+        <item quantity="one">Sẵn sàng thay đổi quyền cho tệp %1$,d</item>
+        <item quantity="other">Sẵn sàng thay đổi quyền cho các tệp %1$,d</item>
+    </plurals>
+    <plurals name="file_job_set_mode_notification_title_multiple_format">
+        <item quantity="one">Cập nhật quyền cho tệp %1$,d</item>
+        <item quantity="other">Cập nhật quyền cho tệp %1$,d</item>
+    </plurals>
+    <plurals name="file_job_set_selinux_context_scan_notification_title_format">
+        <item quantity="one">Sẵn sàng thay đổi ngữ cảnh SELinux cho tệp %1$,d</item>
+        <item quantity="other">Sẵn sàng thay đổi ngữ cảnh SELinux cho các tệp %1$,d</item>
+    </plurals>
+    <plurals name="file_job_set_selinux_context_notification_title_multiple_format">
+        <item quantity="one">Đang cập nhật ngữ cảnh SELinux cho tệp %1$,d</item>
+        <item quantity="other">Đang cập nhật ngữ cảnh SELinux cho các tệp %1$,d</item>
+    </plurals>
+    <plurals name="file_job_restore_selinux_context_scan_notification_title_format">
+        <item quantity="one">Sẵn sàng khôi phục ngữ cảnh SELinux cho tệp %1$,d</item>
+        <item quantity="other">Sẵn sàng khôi phục ngữ cảnh SELinux cho các tệp %1$,d</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_files_format">
+        <item quantity="one">Bạn có chắc chắn muốn xóa tệp %1$,d không?</item>
+        <item quantity="other">Bạn có chắc chắn muốn xóa tệp %1$,d không?</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_directories_format">
+        <item quantity="one">Bạn có chắc chắn muốn xóa thư mục %1$,d và nội dung của nó không?</item>
+        <item quantity="other">Bạn có chắc chắn muốn xóa thư mục %1$,d và nội dung của chúng không?</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_mixed_format">
+        <item quantity="one">Bạn có chắc chắn muốn xóa mục %1$,d không?</item>
+        <item quantity="other">Bạn có chắc chắn muốn xóa các mục %1$,d không?</item>
+    </plurals>
+    <plurals name="file_list_title_open_file">
+        <item quantity="one">Chọn tệp</item>
+        <item quantity="other">Chọn tệp</item>
+    </plurals>
+    <plurals name="file_list_title_open_directory">
+        <item quantity="one">Chọn thư mục</item>
+        <item quantity="other">Chọn thư mục</item>
+    </plurals>
+    <plurals name="file_properties_basic_contents_format">
+        <item quantity="one">%1$,d mục, chiếm %2$s</item>
+        <item quantity="other">%1$,d vật phẩm, chiếm %2$s</item>
+    </plurals>
+    <plurals name="file_properties_apk_requested_permissions_positive_format">
+        <item quantity="one">%1$,d cần có sự cho phép</item>
+        <item quantity="other">%1$,d cần có quyền</item>
+    </plurals>
+    <plurals name="settings_root_strategy_message_format">
+        <item quantity="one">Bạn hiện đang chạy tác vụ tệp %1$,d. Việc thay đổi quyền root bây giờ có thể gây ra lỗi. Bạn vẫn muốn thay đổi nó?</item>
+        <item quantity="other">Bạn hiện có các tác vụ tệp %1$,d đang chạy. Việc thay đổi quyền root bây giờ có thể gây ra lỗi. Bạn vẫn muốn thay đổi nó?</item>
+    </plurals>
+</resources>

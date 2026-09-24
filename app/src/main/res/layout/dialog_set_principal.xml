@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/abc_dialog_title_divider_material">
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.WizeFiles.FileProperties.CompactTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?dialogPreferredPadding"
+        android:layout_marginEnd="?dialogPreferredPadding"
+        android:hint="@string/file_properties_permission_set_principal_filter_hint"
+        app:startIconDrawable="@drawable/ic_filter_control_normal_24dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/filterEdit"
+            style="@style/Widget.WizeFiles.FileProperties.CompactTextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:minHeight="?listPreferredItemHeight">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/errorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:textAppearance="?textAppearanceListItem"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/emptyView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:text="@string/empty"
+            android:textAppearance="?textAppearanceListItem"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:scrollIndicators="top|bottom"
+            android:scrollbars="vertical" />
+    </FrameLayout>
+
+    <CheckBox
+        android:id="@+id/recursiveCheck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dialog_padding_minus_4dp"
+        android:minHeight="?listPreferredItemHeightSmall"
+        android:paddingStart="@dimen/dialog_padding_minus_4dp"
+        android:paddingEnd="?dialogPreferredPadding"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/file_properties_permission_recursive"
+        android:textAppearance="?textAppearanceListItem" />
+</LinearLayout>

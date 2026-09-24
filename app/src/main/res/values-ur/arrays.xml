@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string-array name="settings_night_mode_entries">
+        <item>سسٹم سیٹنگ کے مطابق</item>
+        <item>لائٹ موڈ</item>
+        <item>ڈارک موڈ</item>
+        <item>خودکار (وقت کے مطابق)</item>
+        <item>خودکار (بیٹری کے مطابق)</item>
+    </string-array>
+    <string-array name="settings_file_name_ellipsize_entries">
+        <item>ابتدا کاٹیں (…name.txt)</item>
+        <item>درمیان کاٹیں (file…name.txt)</item>
+        <item>آخر کاٹیں (filename…)</item>
+        <item>سکرول متن (مارکی)</item>
+    </string-array>
+    <string-array name="settings_root_strategy_entries">
+        <item>معیاری صارف رسائی (روٹ نہیں)</item>
+        <item>سمارٹ خودکار موڈ</item>
+        <item>روٹ رسائی مجبور کریں</item>
+    </string-array>
+    <string-array name="settings_open_apk_default_action_entries">
+        <item>انسٹال کرنے کی کوشش کریں</item>
+        <item>اندر کی فائلیں دیکھیں</item>
+        <item>ہمیشہ مجھ سے پوچھیں</item>
+    </string-array>
+    <string-array name="settings_security_relock_entries">
+        <item>فوراً</item>
+        <item>30 سیکنڈ</item>
+        <item>1 منٹ</item>
+        <item>5 منٹ</item>
+        <item>10 منٹ</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_file">
+        <item>پڑھئے</item>
+        <item>لکھیں</item>
+        <item>صارف کا نام</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_directory">
+        <item>پڑھئے</item>
+        <item>لکھیں</item>
+        <item>تلاش</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_special_mode_bits">
+        <item>ایڈز قائم کریں</item>
+        <item>وائیرڈ سیٹ قائم کریں</item>
+        <item>بِت</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_authentication_type_entries">
+        <item>خفیہ لفظ پاس ورڈ</item>
+        <item>لاگ ان</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_mode_entries">
+        <item>عمل</item>
+        <item>عبوری طریقہ (Recomed)۔</item>
+    </string-array>
+    <string-array name="storage_edit_sftp_server_authentication_type_entries">
+        <item>خفیہ لفظ پاس ورڈ</item>
+        <item>ایس‌ایس‌ایم‌ایس‌ایس‌ایس</item>
+    </string-array>
+    <string-array name="storage_edit_smb_server_authentication_type_entries">
+        <item>خفیہ لفظ پاس ورڈ</item>
+        <item>مہمان رسائی</item>
+        <item>غیر متصل</item>
+    </string-array>
+</resources>

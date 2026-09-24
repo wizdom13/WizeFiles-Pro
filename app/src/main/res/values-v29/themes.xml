@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="Platform.V29.Theme.WizeFiles" parent="Platform.V27.Theme.WizeFiles">
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+    </style>
+    <style name="Platform.Theme.WizeFiles" parent="Platform.V29.Theme.WizeFiles" />
+
+    <style name="Platform.V29.Theme.WizeFiles.Immersive" parent="Platform.V27.Theme.WizeFiles.Immersive">
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+    </style>
+    <style name="Platform.Theme.WizeFiles.Immersive" parent="Platform.V29.Theme.WizeFiles.Immersive" />
+</resources>

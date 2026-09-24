@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="font_viewer_error_too_large">Cette police est trop volumineuse pour être prévisualisée en toute sécurité.</string>
+    <string name="font_viewer_error_invalid">Ce fichier de police est invalide ou non pris en charge.</string>
+    <string name="font_viewer_error_open_failed">WizeFiles n’a pas pu ouvrir cette police. Vérifiez que le fichier existe toujours et que vous y avez accès.</string>
+    <string name="font_viewer_collection_faces">%1$d variantes</string>
+</resources>

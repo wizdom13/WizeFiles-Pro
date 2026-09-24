@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ebook_viewer_title">قارئ الكتب الإلكترونية</string>
+    <string name="ebook_viewer_loading">جارٍ فتح الكتاب الإلكتروني</string>
+    <string name="ebook_viewer_failed">تعذّر فتح هذا الكتاب الإلكتروني.</string>
+    <string name="ebook_viewer_unsafe">هذا الكتاب الإلكتروني تالف أو يتجاوز حدود الحاوية الآمنة.</string>
+    <string name="ebook_viewer_encrypted">كتب Kindle المشفّرة أو المحمية بنظام DRM غير مدعومة.</string>
+    <string name="ebook_viewer_print_replica">كتب AZW4 Print Replica غير مدعومة في القارئ الداخلي.</string>
+    <string name="ebook_viewer_too_large">يتجاوز هذا الكتاب الإلكتروني حد الأمان للقارئ الداخلي.</string>
+    <string name="ebook_viewer_unavailable">القارئ الداخلي للكتب الإلكترونية غير متاح لهذا الملف.</string>
+    <string name="ebook_viewer_open_with">فتح باستخدام</string>
+    <string name="ebook_viewer_open_link">فتح رابط الكتاب الإلكتروني</string>
+    <string name="ebook_viewer_link_blocked">تم حظر رابط الكتاب الإلكتروني هذا.</string>
+    <string name="ebook_viewer_resource_failed">تعذّر تحميل أحد موارد المنشور.</string>
+    <string name="ebook_viewer_toc">المحتويات</string>
+    <string name="ebook_viewer_no_toc">لا يحتوي هذا الكتاب الإلكتروني على جدول محتويات.</string>
+    <string name="ebook_viewer_smaller">نص أصغر</string>
+    <string name="ebook_viewer_larger">نص أكبر</string>
+    <string name="ebook_viewer_theme">تغيير السمة</string>
+    <string name="ebook_viewer_share">مشاركة الكتاب الإلكتروني</string>
+</resources>

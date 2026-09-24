@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="web_document_viewer_title">Kayıtlı belge görüntüleyici</string>
+    <string name="web_document_viewer_loading">Kaydedilen belgeyi açma</string>
+    <string name="web_document_viewer_failed">Kaydedilen bu belge açılamadı.</string>
+    <string name="web_document_viewer_unsafe">Kaydedilen bu belge hasarlı veya güvenli kaynak sınırlarını aşıyor.</string>
+    <string name="web_document_viewer_unavailable">Dahili kayıtlı belge görüntüleyici bu dosya için kullanılamaz.</string>
+    <string name="web_document_viewer_renderer_failed">Bu belgeyi görüntülerken sistemin web oluşturucusu durduruldu.</string>
+    <string name="web_document_viewer_open_with">Şununla aç:</string>
+    <string name="web_document_viewer_open_link">Belge bağlantısını aç</string>
+    <string name="web_document_viewer_link_blocked">Bu belge bağlantısı engellendi.</string>
+    <string name="web_document_viewer_reload">Yeniden Yükle</string>
+    <string name="web_document_viewer_share">Kaydedilen belgeyi paylaş</string>
+</resources>

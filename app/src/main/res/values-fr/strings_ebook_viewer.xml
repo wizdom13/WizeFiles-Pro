@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ebook_viewer_title">Lecteur de livres numériques</string>
+    <string name="ebook_viewer_loading">Ouverture du livre numérique</string>
+    <string name="ebook_viewer_failed">Impossible d’ouvrir ce livre numérique.</string>
+    <string name="ebook_viewer_unsafe">Ce livre numérique est endommagé ou dépasse les limites de sécurité du conteneur.</string>
+    <string name="ebook_viewer_encrypted">Les livres Kindle chiffrés ou protégés par DRM ne sont pas pris en charge.</string>
+    <string name="ebook_viewer_print_replica">Les livres AZW4 Print Replica ne sont pas pris en charge par le lecteur interne.</string>
+    <string name="ebook_viewer_too_large">Ce livre numérique dépasse la limite de sécurité du lecteur interne.</string>
+    <string name="ebook_viewer_unavailable">Le lecteur interne de livres numériques n’est pas disponible pour ce fichier.</string>
+    <string name="ebook_viewer_open_with">Ouvrir avec</string>
+    <string name="ebook_viewer_open_link">Ouvrir le lien du livre</string>
+    <string name="ebook_viewer_link_blocked">Ce lien du livre numérique a été bloqué.</string>
+    <string name="ebook_viewer_resource_failed">Impossible de charger une ressource de la publication.</string>
+    <string name="ebook_viewer_toc">Sommaire</string>
+    <string name="ebook_viewer_no_toc">Ce livre numérique ne possède pas de sommaire.</string>
+    <string name="ebook_viewer_smaller">Texte plus petit</string>
+    <string name="ebook_viewer_larger">Texte plus grand</string>
+    <string name="ebook_viewer_theme">Changer de thème</string>
+    <string name="ebook_viewer_share">Partager le livre numérique</string>
+</resources>

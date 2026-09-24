@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_copy_path"
+        android:icon="@drawable/ic_copy_control_normal_24dp"
+        android:title="@string/file_list_breadcrumb_action_copy_path" />
+
+    <item
+        android:id="@+id/action_open_in_new_tab"
+        android:icon="@drawable/ic_add_control_normal_24dp"
+        android:title="@string/file_list_breadcrumb_action_open_in_new_tab" />
+
+    <item
+        android:id="@+id/action_open_in_new_task"
+        android:icon="@drawable/ic_open_as"
+        android:title="@string/file_list_breadcrumb_action_open_in_new_task" />
+</menu>

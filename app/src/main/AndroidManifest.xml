@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <uses-feature android:name="android.hardware.wifi" android:required="false" />
+    <uses-feature android:name="android.software.leanback" android:required="false" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="31" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" android:minSdkVersion="31" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" android:minSdkVersion="31" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:minSdkVersion="31" android:usesPermissionFlags="neverForLocation" />
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" android:minSdkVersion="32" android:usesPermissionFlags="neverForLocation" />
+    <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" android:minSdkVersion="37" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+
+    <!-- Shizuku requires API 23. -->
+    <uses-sdk tools:overrideLibrary="rikka.shizuku.aidl,rikka.shizuku.api,rikka.shizuku.shared" />
+
+    <application
+        android:name=".WizeFilesApplication"
+        android:allowBackup="false"
+        android:enableOnBackInvokedCallback="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:requestRawExternalStorageAccess="true"
+        android:resizeableActivity="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.WizeFiles"
+        android:usesCleartextTraffic="false"
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
+
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="barcode_ui" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.crashreport.CrashReportActivity"
+            android:exported="false"
+            android:label="@string/crash_report_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.appmanager.AppManagerActivity"
+            android:exported="false"
+            android:label="@string/app_manager_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.fontviewer.FontViewerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.packageinstaller.PackageInstallerActivity"
+            android:exported="false"
+            android:label="@string/package_installer_title"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.filebrowser.FileListActivity"
+            android:exported="true"
+            android:visibleToInstantApps="true"
+            tools:ignore="UnusedAttribute">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.wisso.wizefiles.intent.action.VIEW_DOWNLOADS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.filebrowser.ExternalViewRouterActivity"
+            android:autoRemoveFromRecents="true"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:noHistory="true"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity-alias
+            android:name="com.wisso.wizefiles.feature.filebrowser.ExternalAudioPlayer"
+            android:exported="true"
+            android:label="@string/external_audio_player_label"
+            android:targetActivity="com.wisso.wizefiles.feature.filebrowser.ExternalViewRouterActivity">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:mimeType="audio/*" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.wisso.wizefiles.feature.filebrowser.ExternalVideoPlayer"
+            android:exported="true"
+            android:label="@string/external_video_player_label"
+            android:targetActivity="com.wisso.wizefiles.feature.filebrowser.ExternalViewRouterActivity">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:mimeType="video/*" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.wisso.wizefiles.feature.filebrowser.ExternalTextEditor"
+            android:exported="true"
+            android:label="@string/external_text_editor_label"
+            android:targetActivity="com.wisso.wizefiles.feature.filebrowser.ExternalViewRouterActivity">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:mimeType="application/ecmascript" />
+                <data android:mimeType="application/javascript" />
+                <data android:mimeType="application/json" />
+                <data android:mimeType="application/typescript" />
+                <data android:mimeType="application/x-sh" />
+                <data android:mimeType="application/x-shellscript" />
+                <data android:mimeType="application/xml" />
+                <data android:mimeType="application/yaml" />
+                <data android:mimeType="text/*" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.wisso.wizefiles.feature.filebrowser.ExternalPackageInstaller"
+            android:exported="true"
+            android:label="@string/external_package_installer_label"
+            android:targetActivity="com.wisso.wizefiles.feature.filebrowser.ExternalViewRouterActivity">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:mimeType="application/vnd.android.package-archive" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.wisso.wizefiles.feature.filebrowser.ExternalArchiveBrowser"
+            android:exported="true"
+            android:label="@string/external_archive_browser_label"
+            android:targetActivity="com.wisso.wizefiles.feature.filebrowser.ExternalViewRouterActivity">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:mimeType="application/gzip" />
+                <data android:mimeType="application/java-archive" />
+                <data android:mimeType="application/rar" />
+                <data android:mimeType="application/vnd.debian.binary-package" />
+                <data android:mimeType="application/vnd.ms-cab-compressed" />
+                <data android:mimeType="application/vnd.rar" />
+                <data android:mimeType="application/x-7z-compressed" />
+                <data android:mimeType="application/x-bzip2" />
+                <data android:mimeType="application/x-cab" />
+                <data android:mimeType="application/x-compress" />
+                <data android:mimeType="application/x-cpio" />
+                <data android:mimeType="application/x-deb" />
+                <data android:mimeType="application/x-debian-package" />
+                <data android:mimeType="application/x-gzip" />
+                <data android:mimeType="application/x-gtar" />
+                <data android:mimeType="application/x-gtar-compressed" />
+                <data android:mimeType="application/x-iso9660-image" />
+                <data android:mimeType="application/x-java-archive" />
+                <data android:mimeType="application/x-lha" />
+                <data android:mimeType="application/x-lzma" />
+                <data android:mimeType="application/x-rar-compressed" />
+                <data android:mimeType="application/x-redhat-package-manager" />
+                <data android:mimeType="application/x-tar" />
+                <data android:mimeType="application/x-ustar" />
+                <data android:mimeType="application/x-xz" />
+                <data android:mimeType="application/x-zip-compressed" />
+                <data android:mimeType="application/x-zstd" />
+                <data android:mimeType="application/zip" />
+                <data android:mimeType="application/zstd" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.wisso.wizefiles.feature.filebrowser.ExternalFolderBrowser"
+            android:exported="true"
+            android:label="@string/external_folder_browser_label"
+            android:targetActivity="com.wisso.wizefiles.feature.filebrowser.ExternalViewRouterActivity">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:mimeType="inode/directory" />
+                <data android:mimeType="resource/folder" />
+                <data android:mimeType="vnd.android.document/directory" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.wisso.wizefiles.feature.filebrowser.ExternalBackupRestore"
+            android:exported="true"
+            android:label="@string/external_backup_restore_label"
+            android:targetActivity="com.wisso.wizefiles.feature.filebrowser.ExternalViewRouterActivity">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:mimeType="application/x-wizefiles-backup" />
+            </intent-filter>
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:scheme="content"
+                    android:host="*"
+                    android:pathPattern=".*\.wzf"
+                    android:mimeType="*/*" />
+                <data
+                    android:scheme="file"
+                    android:pathPattern=".*\.wzf"
+                    android:mimeType="*/*" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.wisso.wizefiles.feature.filebrowser.ExternalFileBrowser"
+            android:exported="true"
+            android:label="@string/external_file_browser_label"
+            android:targetActivity="com.wisso.wizefiles.feature.filebrowser.ExternalViewRouterActivity">
+            <!-- Some document providers expose supported files as application/octet-stream. -->
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:host="*" />
+                <data android:mimeType="application/octet-stream" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.mediapreview.MediaPreviewActivity"
+            android:exported="false"
+            android:label="@string/media_preview_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.pdfviewer.PdfViewerActivity"
+            android:exported="false"
+            android:label="@string/pdf_viewer_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.ebook.EbookViewerActivity"
+            android:exported="false"
+            android:label="@string/ebook_viewer_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.webdocument.WebDocumentViewerActivity"
+            android:exported="false"
+            android:label="@string/web_document_viewer_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.audioplayer.AudioPlayerActivity"
+            android:exported="false"
+            android:label="@string/audio_player_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.audioplayer.SetRingtoneActivity"
+            android:exported="false"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <service
+            android:name="com.wisso.wizefiles.feature.audioplayer.AudioPlaybackService"
+            android:exported="true"
+            android:foregroundServiceType="mediaPlayback">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaSessionService" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.filebrowser.OpenFileActivity"
+            android:documentLaunchMode="always"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@style/Theme.WizeFiles.Translucent">
+            <intent-filter>
+                <action android:name="com.wisso.wizefiles.intent.action.OPEN_FILE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.wisso.wizefiles.batchrename.BatchRenameActivity"
+            android:exported="false"
+            android:label="@string/batch_rename_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.filebrowser.EditFileActivity"
+            android:autoRemoveFromRecents="true"
+            android:icon="@drawable/ic_edit"
+            android:label="@string/file_edit_title"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.filebrowser.OpenFileAsDialogActivity"
+            android:autoRemoveFromRecents="true"
+            android:icon="@drawable/ic_open_as"
+            android:label="@string/file_open_as_title"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storage.AddStorageDialogActivity"
+            android:label="@string/storage_add_storage_title"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storage.EditDeviceStorageDialogActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/storage_edit_device_storage_title"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storage.AddExternalStorageShortcutActivity"
+            android:label="@string/storage_add_external_storage_shortcut_title"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storage.EditExternalStorageShortcutDialogActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/storage_edit_external_storage_shortcut_title"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storage.AddDocumentTreeActivity"
+            android:label="@string/storage_add_document_tree_title"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storage.EditRcloneStorageActivity"
+            android:label="@string/rclone_add_cloud_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storage.AddSafProviderDialogActivity"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storage.EditDocumentTreeDialogActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/storage_edit_document_tree_title"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storage.EditFtpServerSettingsActivity"
+            android:label="@string/storage_edit_ftp_server_title_edit"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storage.EditSftpServerActivity"
+            android:label="@string/storage_edit_sftp_server_title_edit"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storage.AddLanSmbServerActivity"
+            android:label="@string/storage_add_lan_smb_server_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storage.EditSmbServerActivity"
+            android:label="@string/storage_edit_smb_server_title_edit"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.vault.AddVaultDialogActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/navigation_add_vault"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.vault.VaultActivity"
+            android:label="@string/vault_default_name"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.vault.VaultInfoActivity"
+            android:label="@string/vault_default_name"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.navigation.EditBookmarkDirectoryDialogActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/navigation_edit_bookmark_directory_title"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.settings.SettingsActivity"
+            android:exported="true"
+            android:label="@string/settings_title"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.WizeFiles">
+            <intent-filter>
+                <action android:name="android.intent.action.APPLICATION_PREFERENCES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name="com.wisso.wizefiles.storagecleaner.StorageCleanerActivity"
+            android:label="@string/storage_cleaner_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.apksigning.ApkSignVerifyActivity"
+            android:exported="false"
+            android:label="@string/apk_signing_sign_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.apksigning.AabSignVerifyActivity"
+            android:exported="false"
+            android:label="@string/aab_signing_sign_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.apksigning.ApksSignVerifyActivity"
+            android:exported="false"
+            android:label="@string/apks_signing_sign_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.apksigning.XapkSignVerifyActivity"
+            android:exported="false"
+            android:label="@string/xapk_signing_sign_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.apksigning.ApkmImportActivity"
+            android:exported="false"
+            android:label="@string/apkm_import_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.transfer.TransferCenterActivity"
+            android:exported="false"
+            android:label="@string/transfer_center_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.transfer.TransferDetailActivity"
+            android:exported="false"
+            android:label="@string/transfer_details"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.sync.SyncProfilesActivity"
+            android:exported="false"
+            android:label="@string/sync_profiles_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.sync.SyncPreviewActivity"
+            android:exported="false"
+            android:label="@string/sync_preview_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.share.LocalShareActivity"
+            android:exported="false"
+            android:label="@string/local_share_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.nearby.NearbyTransferActivity"
+            android:exported="false"
+            android:label="@string/nearby_transfer_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storagecleaner.StorageDiskMapActivity"
+            android:exported="false"
+            android:label="@string/storage_disk_map_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.storage.StorageListActivity"
+            android:label="@string/storage_list_title"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.settings.StandardDirectoryListActivity"
+            android:label="@string/settings_standard_directory_list_title"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.settings.BookmarkDirectoryListActivity"
+            android:label="@string/settings_bookmark_directory_list_title"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.WizeFiles" />
+
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.about.AboutActivity"
+            android:label="@string/about_title"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.about.OpenSourceLicensesActivity"
+            android:label="@string/about_licenses_title"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.about.FaqActivity"
+            android:label="@string/faq_title"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.fileactions.ArchivePasswordDialogActivity"
+            android:autoRemoveFromRecents="true"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.filejobs.FileOperationErrorDialogHostActivity"
+            android:autoRemoveFromRecents="true"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.filejobs.FileOperationConflictDialogHostActivity"
+            android:autoRemoveFromRecents="true"
+            android:theme="@style/Theme.WizeFiles.Translucent" />
+
+        <activity
+            android:name="com.wisso.wizefiles.viewer.saveas.SaveAsActivity"
+            android:autoRemoveFromRecents="true"
+            android:exported="true"
+            android:label="@string/save_as_title"
+            android:theme="@style/Theme.WizeFiles.Translucent">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.wisso.wizefiles.viewer.text.TextEditorActivity"
+            android:exported="false"
+            android:label="@string/text_editor_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <service
+            android:name="com.wisso.wizefiles.feature.advancedformats.sandbox.FormatSandboxService"
+            android:exported="false"
+            android:isolatedProcess="true"
+            android:process=":format_sandbox"
+            android:stopWithTask="true" />
+
+        <service
+            android:name="com.wisso.wizefiles.feature.filejobs.FileOperationService"
+            android:foregroundServiceType="dataSync" />
+
+        <service
+            android:name="com.wisso.wizefiles.feature.share.LocalShareService"
+            android:exported="false"
+            android:stopWithTask="true"
+            android:foregroundServiceType="connectedDevice" />
+
+        <service
+            android:name="com.wisso.wizefiles.feature.nearby.NearbyTransferService"
+            android:exported="false"
+            android:stopWithTask="false"
+            android:foregroundServiceType="connectedDevice" />
+
+        <service
+            android:name="com.wisso.wizefiles.storage.RcloneAuthorizationService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
+
+        <service
+            android:name="androidx.work.impl.foreground.SystemForegroundService"
+            android:foregroundServiceType="dataSync"
+            tools:node="merge" />
+
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
+
+        <provider
+            android:name="com.wisso.wizefiles.core.app.ApplicationInitializerProvider"
+            android:authorities="${applicationId}.app_provider"
+            android:exported="false" />
+
+        <provider
+            android:name="com.wisso.wizefiles.core.files.provider.FileProvider"
+            android:authorities="${applicationId}.file_provider"
+            android:exported="false"
+            android:grantUriPermissions="true" />
+
+        <receiver android:name="com.wisso.wizefiles.feature.filejobs.FileOperationReceiver" />
+
+        <receiver
+            android:name="com.wisso.wizefiles.feature.transfer.TransferBootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.wisso.wizefiles.feature.sync.SyncScheduleReconciliationReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+</manifest>

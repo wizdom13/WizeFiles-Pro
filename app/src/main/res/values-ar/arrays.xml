@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_file">
+            <item>قراءة</item>
+            <item>كتابة</item>
+            <item>تنفيذ</item>
+        </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_directory">
+            <item>قراءة</item>
+            <item>كتابة</item>
+            <item>بحث</item>
+        </string-array>
+    <string-array name="file_properties_permission_set_mode_special_mode_bits">
+            <item>تعيين UID</item>
+            <item>تعيين GID</item>
+            <item>البت اللاصق</item>
+        </string-array>
+    <string-array name="storage_edit_ftp_server_authentication_type_entries">
+            <item>اسم المستخدم وكلمة المرور</item>
+            <item>تسجيل دخول مجهول</item>
+        </string-array>
+    <string-array name="storage_edit_ftp_server_mode_entries">
+            <item>الوضع النشط</item>
+            <item>الوضع السلبي (موصى به)</item>
+        </string-array>
+    <string-array name="storage_edit_sftp_server_authentication_type_entries">
+            <item>اسم المستخدم وكلمة المرور</item>
+            <item>مفتاح SSH عام</item>
+        </string-array>
+    <string-array name="storage_edit_smb_server_authentication_type_entries">
+            <item>اسم المستخدم وكلمة المرور</item>
+            <item>وصول الضيف</item>
+            <item>وصول مجهول</item>
+        </string-array>
+    <string-array name="settings_night_mode_entries">
+            <item>مطابقة إعداد النظام</item><item>الوضع الفاتح</item><item>الوضع الداكن</item><item>تلقائي (حسب الوقت)</item><item>تلقائي (حسب البطارية)</item>
+        </string-array>
+    <string-array name="settings_file_name_ellipsize_entries">
+            <item>قص من البداية (…name.txt)</item>
+            <item>قص من الوسط (file…name.txt)</item>
+            <item>قص من النهاية (filename…)</item>
+            <item>تمرير النص (شريط متحرك)</item>
+        </string-array>
+    <string-array name="settings_root_strategy_entries">
+            <item>وصول مستخدم عادي (بدون جذر)</item>
+            <item>الوضع الذكي التلقائي</item>
+            <item>فرض الوصول للجذر</item>
+        </string-array>
+    <string-array name="settings_open_apk_default_action_entries">
+            <item>محاولة التثبيت</item>
+            <item>عرض الملفات بالداخل</item>
+            <item>اسألني دائمًا</item>
+        </string-array>
+    <string-array name="settings_security_relock_entries">
+            <item>فورًا</item><item>30 ثانية</item><item>دقيقة واحدة</item><item>5 دقائق</item><item>10 دقائق</item>
+        </string-array>
+</resources>

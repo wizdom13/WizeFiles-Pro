@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.wisso.wizefiles.ui.BottomBarLayout
+        android:id="@+id/bottomBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/file_list_operation_bar_horizontal_margin"
+        android:layout_marginEnd="@dimen/file_list_operation_bar_horizontal_margin"
+        android:layout_marginBottom="@dimen/file_list_operation_bar_bottom_gap"
+        android:background="?colorSecondaryContainer"
+        android:clipToOutline="true"
+        android:elevation="@dimen/design_appbar_elevation"
+        android:fitsSystemWindows="true"
+        android:theme="?actionBarTheme"
+        app:barCornerRadius="@dimen/file_list_operation_bar_corner_radius"
+        app:bottomInsetAsMargin="true">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/bottomToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/file_list_operation_bar_height"
+            android:paddingStart="@dimen/file_list_toolbar_padding_start"
+            android:paddingEnd="@dimen/file_list_toolbar_padding_end_no_overflow"
+            app:navigationIcon="@drawable/ic_close_control_normal_24dp"
+            app:navigationContentDescription="@string/close"
+            app:popupTheme="?actionBarPopupTheme">
+
+            <EditText
+                android:id="@+id/bottomCreateFileNameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/file_list_create_file_name_hint"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:maxLines="1" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:id="@+id/selectionActionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/file_list_selection_action_bar_height"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/file_list_selection_action_bar_padding"
+            android:paddingEnd="@dimen/file_list_selection_action_bar_padding"
+            android:visibility="gone">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/selectionPrimaryAction1"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:minHeight="@dimen/file_list_selection_action_bar_height"
+                android:minWidth="0dp"
+                android:paddingStart="@dimen/file_list_selection_action_padding"
+                android:paddingEnd="@dimen/file_list_selection_action_padding"
+                android:textAllCaps="false"
+                android:textColor="@color/file_list_selection_action_tint"
+                android:textSize="@dimen/file_list_selection_action_text_size"
+                app:backgroundTint="@android:color/transparent"
+                app:iconGravity="top"
+                app:iconPadding="@dimen/file_list_selection_action_icon_padding"
+                app:iconSize="@dimen/file_list_selection_action_icon_size"
+                app:iconTint="@color/file_list_selection_action_tint" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/selectionPrimaryAction2"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:minHeight="@dimen/file_list_selection_action_bar_height"
+                android:minWidth="0dp"
+                android:paddingStart="@dimen/file_list_selection_action_padding"
+                android:paddingEnd="@dimen/file_list_selection_action_padding"
+                android:textAllCaps="false"
+                android:textColor="@color/file_list_selection_action_tint"
+                android:textSize="@dimen/file_list_selection_action_text_size"
+                app:backgroundTint="@android:color/transparent"
+                app:iconGravity="top"
+                app:iconPadding="@dimen/file_list_selection_action_icon_padding"
+                app:iconSize="@dimen/file_list_selection_action_icon_size"
+                app:iconTint="@color/file_list_selection_action_tint" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/selectionPrimaryAction3"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:minHeight="@dimen/file_list_selection_action_bar_height"
+                android:minWidth="0dp"
+                android:paddingStart="@dimen/file_list_selection_action_padding"
+                android:paddingEnd="@dimen/file_list_selection_action_padding"
+                android:textAllCaps="false"
+                android:textColor="@color/file_list_selection_action_tint"
+                android:textSize="@dimen/file_list_selection_action_text_size"
+                app:backgroundTint="@android:color/transparent"
+                app:iconGravity="top"
+                app:iconPadding="@dimen/file_list_selection_action_icon_padding"
+                app:iconSize="@dimen/file_list_selection_action_icon_size"
+                app:iconTint="@color/file_list_selection_action_tint" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/selectionPrimaryAction4"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="2"
+                android:minHeight="@dimen/file_list_selection_action_bar_height"
+                android:minWidth="0dp"
+                android:paddingStart="@dimen/file_list_selection_action_padding"
+                android:paddingEnd="@dimen/file_list_selection_action_padding"
+                android:textAllCaps="false"
+                android:textColor="@color/file_list_selection_action_tint"
+                android:textSize="@dimen/file_list_selection_action_text_size"
+                app:backgroundTint="@android:color/transparent"
+                app:iconGravity="top"
+                app:iconPadding="@dimen/file_list_selection_action_icon_padding"
+                app:iconSize="@dimen/file_list_selection_action_icon_size"
+                app:iconTint="@color/file_list_selection_action_tint" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/selectionMoreAction"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:minHeight="@dimen/file_list_selection_action_bar_height"
+                android:minWidth="0dp"
+                android:paddingStart="@dimen/file_list_selection_action_padding"
+                android:paddingEnd="@dimen/file_list_selection_action_padding"
+                android:text="@string/file_list_selection_action_more"
+                android:textAllCaps="false"
+                android:textColor="@color/file_list_selection_action_tint"
+                android:textSize="@dimen/file_list_selection_action_text_size"
+                app:backgroundTint="@android:color/transparent"
+                app:icon="@drawable/ic_more_horizontal_white_24dp"
+                app:iconGravity="top"
+                app:iconPadding="@dimen/file_list_selection_action_icon_padding"
+                app:iconSize="@dimen/file_list_selection_action_icon_size"
+                app:iconTint="@color/file_list_selection_action_tint" />
+        </LinearLayout>
+    </com.wisso.wizefiles.ui.BottomBarLayout>
+</merge>

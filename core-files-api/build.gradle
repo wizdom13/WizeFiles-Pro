@@ -1,0 +1,40 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
+apply plugin: 'org.jetbrains.kotlin.jvm'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    testRuntimeOnly 'com.code-intelligence:jazzer:0.24.0'
+}
+
+['VaultFrameFuzzTarget', 'ArchivePathFuzzTarget'].each { target ->
+    tasks.register("fuzz${target - 'FuzzTarget'}", JavaExec) {
+        group = 'verification'
+        dependsOn testClasses
+        classpath = sourceSets.test.runtimeClasspath
+        mainClass = 'com.code_intelligence.jazzer.Jazzer'
+        args '--target_class=com.wisso.wizefiles.storage.' + target,
+            '-max_total_time=' + (findProperty('fuzzSeconds') ?: '30'),
+            '-rss_limit_mb=2048'
+    }
+}
+
+dependencies {
+    testImplementation project(':feature-transfer-domain')
+    testImplementation project(':feature-vault-domain')
+}

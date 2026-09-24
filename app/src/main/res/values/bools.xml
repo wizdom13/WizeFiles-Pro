@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="pref_default_value_indexed_search">true</bool>
+    <bool name="pref_default_value_file_list_persistent_drawer_open">true</bool>
+    <bool name="pref_default_value_file_list_show_hidden_files">false</bool>
+    <bool name="pref_default_value_black_night_mode">false</bool>
+    <bool name="pref_default_value_file_list_animation">true</bool>
+    <bool name="pref_default_value_recycle_bin">true</bool>
+    <bool name="pref_default_value_show_pdf_thumbnail_pre_28">false</bool>
+    <bool name="pref_visible_show_pdf_thumbnail_pre_28">true</bool>
+    <bool name="pref_default_value_read_remote_files_for_thumbnail">true</bool>
+    <bool name="pref_default_value_protect_browser">false</bool>
+    <bool name="pref_default_value_enable_biometric">false</bool>
+    <bool name="pref_default_value_file_list_view_sort_path_specific">false</bool>
+</resources>

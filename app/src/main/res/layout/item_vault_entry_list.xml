@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.wisso.wizefiles.ui.CheckableForegroundLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemLayout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/two_line_list_item_height"
+    android:foreground="?selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@+id/iconLayout"
+        android:layout_width="@dimen/touch_target_size"
+        android:layout_height="@dimen/touch_target_size"
+        android:layout_marginStart="@dimen/screen_edge_margin_minus_4dp"
+        android:layout_marginEnd="@dimen/content_start_from_screen_edge_margin_minus_44dp"
+        android:clipToPadding="false"
+        android:duplicateParentState="true"
+        android:padding="@dimen/touch_target_large_icon_padding">
+
+        <com.wisso.wizefiles.ui.FileIconShapeView
+            android:id="@+id/iconImage"
+            android:layout_width="@dimen/large_icon_size"
+            android:layout_height="@dimen/large_icon_size"
+            android:layout_gravity="center"
+            android:duplicateParentState="true"
+            android:scaleType="fitCenter"
+            app:fileIconVisualStyle="builtInIcon" />
+
+        <com.wisso.wizefiles.ui.DisabledAlphaImageView
+            android:layout_width="@dimen/badge_size"
+            android:layout_height="@dimen/badge_size"
+            android:layout_gravity="end|bottom"
+            android:duplicateParentState="true"
+            android:src="@drawable/bg_badge_checkable_18dp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginEnd="@dimen/screen_edge_margin"
+        android:duplicateParentState="true"
+        android:orientation="vertical">
+
+        <!-- Lint says android:ellipsize="middle" and android:maxLines="1" crashes. -->
+        <TextView
+            android:id="@+id/nameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:textAppearance="?textAppearanceListItem" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true"
+            android:orientation="horizontal">
+
+            <com.wisso.wizefiles.ui.AutoGoneTextView
+                android:id="@+id/descriptionText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:duplicateParentState="true"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="1"
+                android:textAppearance="?textAppearanceListItemSecondary"
+                android:textColor="?android:textColorSecondary" />
+
+            <com.wisso.wizefiles.ui.AutoGoneTextView
+                android:id="@+id/dateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:duplicateParentState="true"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:maxLines="1"
+                android:textAppearance="?textAppearanceListItemSecondary"
+                android:textColor="?android:textColorSecondary" />
+        </LinearLayout>
+    </LinearLayout>
+
+</com.wisso.wizefiles.ui.CheckableForegroundLinearLayout>

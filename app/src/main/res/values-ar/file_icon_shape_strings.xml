@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_icon_shape_title">شكل الرمز</string>
+    <string name="settings_icon_shape_squircle">مربع دائري</string>
+    <string name="settings_icon_shape_rounded_square">مربع بحواف مستديرة</string>
+    <string name="settings_icon_shape_flower">زهرة</string>
+    <string name="settings_icon_shape_square">مربع</string>
+    <string name="settings_icon_shape_teardrop">قطرة</string>
+    <string name="settings_icon_shape_pebble">حصاة</string>
+    <string name="settings_icon_shape_vessel">وعاء</string>
+    <string name="settings_icon_shape_pentagon">خماسي الأضلاع</string>
+    <string name="settings_icon_shape_hexagon_1">سداسي الأضلاع، النمط 1</string>
+    <string name="settings_icon_shape_hexagon_2">سداسي الأضلاع، النمط 2</string>
+    <string name="settings_icon_shape_heptagon">سباعي الأضلاع</string>
+    <string name="settings_icon_shape_octagon">ثماني الأضلاع</string>
+</resources>

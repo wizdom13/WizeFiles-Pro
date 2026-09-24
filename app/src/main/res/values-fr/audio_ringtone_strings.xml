@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">Définir comme sonnerie</string>
+    <string name="audio_player_ringtone_set">Sonnerie définie avec succès</string>
+    <string name="audio_player_ringtone_failed">Impossible de définir la sonnerie</string>
+    <string name="audio_player_ringtone_permission_required">Autorisez WizeFiles à modifier les paramètres système pour définir la sonnerie</string>
+</resources>

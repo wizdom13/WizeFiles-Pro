@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">Setel sebagai nada dering</string>
+    <string name="audio_player_ringtone_set">Nada dering berhasil disetel</string>
+    <string name="audio_player_ringtone_failed">Tidak dapat menyetel nada dering</string>
+    <string name="audio_player_ringtone_permission_required">Izinkan WizeFiles mengubah setelan sistem untuk menyetel nada dering</string>
+</resources>

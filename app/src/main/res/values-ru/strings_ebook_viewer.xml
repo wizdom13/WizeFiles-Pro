@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="ebook_viewer_title">Читатель книг</string>
+    <string name="ebook_viewer_loading">Открытие электронной книги</string>
+    <string name="ebook_viewer_failed">Эту электронную книгу открыть не удалось.</string>
+    <string name="ebook_viewer_unsafe">Эта электронная книга повреждена или превышает безопасные пределы контейнера.</string>
+    <string name="ebook_viewer_encrypted">Зашифрованный или DRM-защищенный Kindle Книги не поддерживаются.</string>
+    <string name="ebook_viewer_print_replica">AZW4 Печатные копии книг не поддерживаются внутренним читателем.</string>
+    <string name="ebook_viewer_too_large">Эта электронная книга превышает внутренний предел безопасности читателя.</string>
+    <string name="ebook_viewer_unavailable">Внутренний считыватель электронных книг недоступен для этого файла.</string>
+    <string name="ebook_viewer_open_with">Открыть с открытым</string>
+    <string name="ebook_viewer_open_link">Открытая ссылка на книгу</string>
+    <string name="ebook_viewer_link_blocked">Эта ссылка на электронную книгу была заблокирована.</string>
+    <string name="ebook_viewer_resource_failed">Ресурс публикации не может быть загружен.</string>
+    <string name="ebook_viewer_toc">Содержимое</string>
+    <string name="ebook_viewer_no_toc">В этой книге нет таблицы содержимого.</string>
+    <string name="ebook_viewer_smaller">Меньший текст</string>
+    <string name="ebook_viewer_larger">Большой текст</string>
+    <string name="ebook_viewer_theme">Тема изменения</string>
+    <string name="ebook_viewer_share">Поделиться книгой</string>
+</resources>

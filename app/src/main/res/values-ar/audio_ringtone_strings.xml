@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">تعيين كنغمة رنين</string>
+    <string name="audio_player_ringtone_set">تم تعيين نغمة الرنين بنجاح</string>
+    <string name="audio_player_ringtone_failed">تعذر تعيين نغمة الرنين</string>
+    <string name="audio_player_ringtone_permission_required">اسمح لـ WizeFiles بتعديل إعدادات النظام لتعيين نغمة الرنين</string>
+</resources>

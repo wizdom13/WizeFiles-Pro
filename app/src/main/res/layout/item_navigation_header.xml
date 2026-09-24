@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/navigation_header_height"
+    android:layout_marginBottom="@dimen/screen_edge_margin_minus_8dp"
+    app:cardBackgroundColor="?attr/colorPrimaryContainer"
+    app:cardElevation="0dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="false"
+    app:shapeAppearance="@style/ShapeAppearance.WizeFiles.NavigationHeader"
+    app:strokeWidth="0dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="192dp"
+            android:layout_height="192dp"
+            android:layout_gravity="top|start"
+            android:alpha="0.16"
+            android:background="@drawable/bg_navigation_header_orb"
+            android:importantForAccessibility="no"
+            android:translationX="-72dp"
+            android:translationY="-90dp" />
+
+        <View
+            android:layout_width="220dp"
+            android:layout_height="116dp"
+            android:layout_gravity="top|end"
+            android:alpha="0.10"
+            android:background="@drawable/bg_navigation_header_tertiary_shape"
+            android:importantForAccessibility="no"
+            android:translationX="70dp"
+            android:translationY="-24dp" />
+
+        <View
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="104dp"
+            android:alpha="0.14"
+            android:background="@drawable/bg_navigation_header_secondary_shape"
+            android:importantForAccessibility="no"
+            android:translationY="28dp" />
+
+        <View
+            android:layout_width="124dp"
+            android:layout_height="124dp"
+            android:layout_gravity="bottom|end"
+            android:alpha="0.22"
+            android:background="@drawable/bg_navigation_header_orb"
+            android:importantForAccessibility="no"
+            android:translationX="12dp"
+            android:translationY="12dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_header_height"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="112dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/navigation_drawer_header_title"
+                android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                android:textColor="?attr/colorOnPrimaryContainer" />
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="16dp"
+                android:alpha="0.78"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_wizefiles_mark" />
+        </FrameLayout>
+    </FrameLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="web_document_viewer_title">Сохранившийся просмотрщик документов</string>
+    <string name="web_document_viewer_loading">Открытие сохраненного документа</string>
+    <string name="web_document_viewer_failed">Этот сохраненный документ открыть не удалось.</string>
+    <string name="web_document_viewer_unsafe">Этот сохраненный документ поврежден или превышает безопасные пределы ресурса.</string>
+    <string name="web_document_viewer_unavailable">Внутренний сохраненный просмотрщик документа недоступен для этого файла.</string>
+    <string name="web_document_viewer_renderer_failed">Системный веб-рендерер остановился при отображении этого документа.</string>
+    <string name="web_document_viewer_open_with">Открыть с открытым</string>
+    <string name="web_document_viewer_open_link">Открытая ссылка на документ</string>
+    <string name="web_document_viewer_link_blocked">Эта ссылка на документ была заблокирована.</string>
+    <string name="web_document_viewer_reload">Перезагрузить</string>
+    <string name="web_document_viewer_share">Сохраненный документ</string>
+</resources>

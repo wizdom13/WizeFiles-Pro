@@ -1,0 +1,43 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
+package com.wisso.wizefiles.provider.ftp
+
+import android.os.Parcelable
+import java.time.Instant
+import java.nio.file.attribute.FileTime
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.WriteWith
+import com.wisso.wizefiles.provider.common.AbstractBasicFileAttributes
+import com.wisso.wizefiles.provider.common.BasicFileType
+import com.wisso.wizefiles.provider.common.FileTimeParceler
+import org.apache.commons.net.ftp.FTPFile
+
+@Parcelize
+internal data class FtpFileAttributes(
+    override val lastModifiedTime: @WriteWith<FileTimeParceler> FileTime,
+    override val lastAccessTime: @WriteWith<FileTimeParceler> FileTime,
+    override val creationTime: @WriteWith<FileTimeParceler> FileTime,
+    override val type: BasicFileType,
+    override val size: Long,
+    override val fileKey: Parcelable,
+) : AbstractBasicFileAttributes() {
+    companion object {
+        fun from(file: FTPFile, path: FtpPath): FtpFileAttributes {
+            val lastModifiedTime = FileTime.from(file.timestamp?.toInstant() ?: Instant.EPOCH)
+            val lastAccessTime = lastModifiedTime
+            val creationTime = lastModifiedTime
+            val type = when {
+                file.isDirectory -> BasicFileType.DIRECTORY
+                file.isFile -> BasicFileType.REGULAR_FILE
+                file.isSymbolicLink -> BasicFileType.SYMBOLIC_LINK
+                else -> BasicFileType.OTHER
+            }
+            val size = file.size.let { if (it != -1L) it else 0 }
+            val fileKey = path
+            return FtpFileAttributes(
+                lastModifiedTime, lastAccessTime, creationTime, type, size, fileKey
+            )
+        }
+    }
+}

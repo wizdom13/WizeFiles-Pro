@@ -1,0 +1,57 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
+package com.wisso.wizefiles.provider.common
+
+import java.nio.file.DirectoryIteratorException
+import java.nio.file.DirectoryStream
+import java.nio.file.Path
+import java.io.Closeable
+import java.io.IOException
+
+open class PathIteratorDirectoryStream(
+    private val iterator: Iterator<Path>,
+    private val closeable: Closeable?,
+    private val filter: DirectoryStream.Filter<in Path>
+) : DirectoryStream<Path> {
+    private var isClosed = false
+
+    private var isIteratorReturned = false
+
+    private val lock = Any()
+
+    // TODO: Should return Iterator<Path>
+    override fun iterator(): MutableIterator<Path> {
+        synchronized(lock) {
+            check(!isClosed) { "This directory stream is closed" }
+            check(!isIteratorReturned) { "The iterator has already been returned" }
+            val filteredIterator = iterator.asSequence().filter {
+                !isClosed && try {
+                    filter.accept(it)
+                } catch (e: IOException) {
+                    throw DirectoryIteratorException(e)
+                }
+            }.iterator()
+            return object : MutableIterator<Path> {
+                override fun hasNext(): Boolean = synchronized(lock) { filteredIterator.hasNext() }
+
+                override fun next(): Path = synchronized(lock) { filteredIterator.next() }
+
+                override fun remove() {
+                    throw UnsupportedOperationException()
+                }
+            }
+        }
+    }
+
+    @Throws(IOException::class)
+    override fun close() {
+        synchronized(lock) {
+            if (isClosed) {
+                return
+            }
+            closeable?.close()
+            isClosed = true
+        }
+    }
+}

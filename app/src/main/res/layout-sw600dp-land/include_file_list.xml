@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.wisso.wizefiles.ui.PersistentBarLayout
+        android:id="@+id/persistentBarLayout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical">
+
+            <include layout="@layout/include_file_list_app_bar" />
+
+            <com.wisso.wizefiles.ui.PersistentDrawerLayout
+                android:id="@+id/persistentDrawerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <com.wisso.wizefiles.ui.NavigationFrameLayout
+                    android:id="@+id/navigationFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:background="?colorSurface" />
+
+                <include layout="@layout/include_file_list_content" />
+            </com.wisso.wizefiles.ui.PersistentDrawerLayout>
+        </LinearLayout>
+
+        <include layout="@layout/include_file_list_bottom_bar" />
+
+        <include layout="@layout/include_file_list_speed_dial" />
+    </com.wisso.wizefiles.ui.PersistentBarLayout>
+</merge>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ebook_viewer_title">E-Book-Reader</string>
+    <string name="ebook_viewer_loading">E-Book wird geöffnet</string>
+    <string name="ebook_viewer_failed">Dieses E-Book konnte nicht geöffnet werden.</string>
+    <string name="ebook_viewer_unsafe">Dieses E-Book ist beschädigt oder überschreitet sichere Containergrenzen.</string>
+    <string name="ebook_viewer_encrypted">Verschlüsselte oder DRM-geschützte Kindle-Bücher werden nicht unterstützt.</string>
+    <string name="ebook_viewer_print_replica">AZW4-Print-Replica-Bücher werden vom internen Reader nicht unterstützt.</string>
+    <string name="ebook_viewer_too_large">Dieses E-Book überschreitet die Sicherheitsgrenze des internen Readers.</string>
+    <string name="ebook_viewer_unavailable">Der interne E-Book-Reader ist für diese Datei nicht verfügbar.</string>
+    <string name="ebook_viewer_open_with">Öffnen mit</string>
+    <string name="ebook_viewer_open_link">E-Book-Link öffnen</string>
+    <string name="ebook_viewer_link_blocked">Dieser E-Book-Link wurde blockiert.</string>
+    <string name="ebook_viewer_resource_failed">Eine Ressource der Publikation konnte nicht geladen werden.</string>
+    <string name="ebook_viewer_toc">Inhalt</string>
+    <string name="ebook_viewer_no_toc">Dieses E-Book hat kein Inhaltsverzeichnis.</string>
+    <string name="ebook_viewer_smaller">Kleinerer Text</string>
+    <string name="ebook_viewer_larger">Größerer Text</string>
+    <string name="ebook_viewer_theme">Design ändern</string>
+    <string name="ebook_viewer_share">E-Book teilen</string>
+</resources>

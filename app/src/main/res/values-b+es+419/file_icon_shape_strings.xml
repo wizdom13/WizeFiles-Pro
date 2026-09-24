@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_icon_shape_title">Forma del ícono</string>
+    <string name="settings_icon_shape_squircle">Squircle</string>
+    <string name="settings_icon_shape_rounded_square">Cuadrado redondeado</string>
+    <string name="settings_icon_shape_flower">Flor</string>
+    <string name="settings_icon_shape_square">Cuadrado</string>
+    <string name="settings_icon_shape_teardrop">Gota</string>
+    <string name="settings_icon_shape_pebble">Guijarro</string>
+    <string name="settings_icon_shape_vessel">Recipiente</string>
+    <string name="settings_icon_shape_pentagon">Pentágono</string>
+    <string name="settings_icon_shape_hexagon_1">Hexágono, variante 1</string>
+    <string name="settings_icon_shape_hexagon_2">Hexágono, variante 2</string>
+    <string name="settings_icon_shape_heptagon">Heptágono</string>
+    <string name="settings_icon_shape_octagon">Octágono</string>
+</resources>
