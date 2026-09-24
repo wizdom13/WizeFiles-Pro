@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <suppress>
+        <notes><![CDATA[
+        AndroidX Browser is a support library, not the legacy Android platform browser affected by CVE-2008-7298.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/androidx\.browser/browser@.*$</packageUrl>
+        <cpe>cpe:/a:android:android_browser</cpe>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        AndroidX SQLite uses its own library release version. Dependency-Check must not interpret that
+        AndroidX version as the embedded SQLite engine version when matching sqlite:sqlite CPEs.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/androidx\.sqlite/(sqlite|sqlite-android|sqlite-framework|sqlite-framework-android|sqlite-bundled|sqlite-bundled-android)@.*$</packageUrl>
+        <cpe>cpe:/a:sqlite:sqlite</cpe>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        libvlc-all is VideoLAN LibVLC, not the Drupal Video module represented by video_project:video.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.videolan\.android/libvlc-all@.*$</packageUrl>
+        <cpe>cpe:/a:video_project:video</cpe>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        Coil's Android video extension is not the Drupal Video module represented by video_project:video.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.coil-kt/coil-video@.*$</packageUrl>
+        <cpe>cpe:/a:video_project:video</cpe>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        These Maven artifacts are not GitHub Enterprise; their group names merely contain "github".
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/(com\.github\.MuntashirAkon/apksig-android|com\.github\.topjohnwu\.libsu/(core|service))@.*$</packageUrl>
+        <cpe>cpe:/a:github:github</cpe>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        libsu-service is not the unrelated generic service_project:service product.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/com\.github\.topjohnwu\.libsu/service@.*$</packageUrl>
+        <cpe>cpe:/a:service_project:service</cpe>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        eu.agno3.jcifs:jcifs-ng is a Java SMB/CIFS library. CVE-2026-35002 applies to the unrelated
+        Python Agno AI framework (agno-agi/agno), not jcifs-ng.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/eu\.agno3\.jcifs/jcifs-ng@.*$</packageUrl>
+        <cpe>cpe:/a:agno:agno</cpe>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        CVE-2026-53914 concerns unsafe deserialization in Kotlin build-cache metadata. These artifacts
+        are shipped Kotlin runtime libraries and do not implement that build-cache path.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.jetbrains\.kotlin/(kotlin-stdlib(-common|-jdk7|-jdk8)?|kotlin-reflect|kotlin-parcelize-runtime|kotlin-android-extensions-runtime)@.*$</packageUrl>
+        <cve>CVE-2026-53914</cve>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        CVE-2020-29582 was fixed in Kotlin 1.4.21. NVD's current broad Kotlin CPE range overmatches
+        the 1.8.22 JDK compatibility artifacts that are present on the Android runtime classpath.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.jetbrains\.kotlin/kotlin-stdlib-jdk(7|8)@1\.8\.22$</packageUrl>
+        <cve>CVE-2020-29582</cve>
+    </suppress>
+</suppressions>

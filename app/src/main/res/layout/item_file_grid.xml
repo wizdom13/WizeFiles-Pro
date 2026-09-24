@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.wisso.wizefiles.ui.CheckableForegroundLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <com.wisso.wizefiles.ui.AspectRatioFrameLayout
+        android:id="@+id/iconLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/screen_edge_margin_minus_8dp"
+        android:layout_marginTop="@dimen/screen_edge_margin"
+        android:layout_marginEnd="@dimen/screen_edge_margin_minus_8dp"
+        android:duplicateParentState="true"
+        app:aspectRatio="1.0"
+        app:aspectRatioMaxWidth="@dimen/file_grid_icon_max_size">
+
+        <com.wisso.wizefiles.ui.FileIconShapeView
+            android:id="@+id/directoryThumbnailImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:duplicateParentState="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_file_type_directory_thumbnail"
+            app:fileIconVisualStyle="builtInIcon" />
+
+        <com.wisso.wizefiles.ui.FileIconShapeView
+            android:id="@+id/thumbnailIconImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:duplicateParentState="true"
+            android:scaleType="fitCenter"
+            app:fileIconVisualStyle="builtInIcon" />
+
+        <!-- ShapeableImageView stroke support cannot be used because of material-components issue 1329. -->
+        <com.wisso.wizefiles.ui.FileIconShapeView
+            android:id="@+id/thumbnailImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:duplicateParentState="true"
+            android:scaleType="centerCrop"
+            app:fileIconVisualStyle="thumbnail" />
+
+        <com.wisso.wizefiles.ui.FileIconShapeView
+            android:id="@+id/thumbnailOutlineView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:duplicateParentState="true"
+            app:fileIconVisualStyle="outline" />
+
+        <com.wisso.wizefiles.ui.DisabledAlphaImageView
+            android:id="@+id/appIconBadgeImage"
+            android:layout_width="@dimen/badge_size_plus_1dp"
+            android:layout_height="@dimen/badge_size_plus_1dp"
+            android:layout_gravity="end|bottom"
+            android:layout_marginStart="-0.5dp"
+            android:layout_marginTop="-0.5dp"
+            android:layout_marginEnd="-0.5dp"
+            android:layout_marginBottom="-0.5dp"
+            android:duplicateParentState="true" />
+
+        <com.wisso.wizefiles.ui.DisabledAlphaImageView
+            android:id="@+id/badgeImage"
+            android:layout_width="@dimen/badge_size"
+            android:layout_height="@dimen/badge_size"
+            android:layout_gravity="end|bottom"
+            android:background="@drawable/bg_badge_18dp"
+            android:duplicateParentState="true" />
+
+        <com.wisso.wizefiles.ui.DisabledAlphaImageView
+            android:layout_width="@dimen/badge_size"
+            android:layout_height="@dimen/badge_size"
+            android:layout_gravity="end|bottom"
+            android:duplicateParentState="true"
+            android:src="@drawable/bg_badge_checkable_18dp" />
+    </com.wisso.wizefiles.ui.AspectRatioFrameLayout>
+
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/single_line_list_item_height"
+        android:layout_marginStart="@dimen/screen_edge_margin_minus_8dp"
+        android:layout_marginEnd="@dimen/screen_edge_margin_minus_8dp"
+        android:layout_marginBottom="@dimen/screen_edge_margin_minus_8dp"
+        android:duplicateParentState="true"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textAppearance="?textAppearanceListItemSecondary" />
+</com.wisso.wizefiles.ui.CheckableForegroundLinearLayout>

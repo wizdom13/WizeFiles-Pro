@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="font_viewer_error_too_large">Этот шрифт слишком велик для безопасного предварительного просмотра.</string>
+    <string name="font_viewer_error_invalid">Этот файл шрифта повреждён или не поддерживается.</string>
+    <string name="font_viewer_error_open_failed">WizeFiles не удалось открыть этот шрифт. Убедитесь, что файл существует и у вас есть к нему доступ.</string>
+    <string name="font_viewer_collection_faces">%1$d начертаний</string>
+</resources>

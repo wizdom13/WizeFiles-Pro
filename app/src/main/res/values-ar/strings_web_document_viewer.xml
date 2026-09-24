@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="web_document_viewer_title">عارض المستندات المحفوظة</string>
+    <string name="web_document_viewer_loading">جارٍ فتح المستند المحفوظ</string>
+    <string name="web_document_viewer_failed">تعذّر فتح هذا المستند المحفوظ.</string>
+    <string name="web_document_viewer_unsafe">هذا المستند المحفوظ تالف أو يتجاوز حدود الموارد الآمنة.</string>
+    <string name="web_document_viewer_unavailable">العارض الداخلي للمستندات المحفوظة غير متاح لهذا الملف.</string>
+    <string name="web_document_viewer_renderer_failed">توقف عارض الويب في النظام أثناء عرض هذا المستند.</string>
+    <string name="web_document_viewer_open_with">فتح باستخدام</string>
+    <string name="web_document_viewer_open_link">فتح رابط المستند</string>
+    <string name="web_document_viewer_link_blocked">تم حظر رابط المستند هذا.</string>
+    <string name="web_document_viewer_reload">إعادة التحميل</string>
+    <string name="web_document_viewer_share">مشاركة المستند المحفوظ</string>
+</resources>

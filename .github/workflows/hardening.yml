@@ -1,0 +1,47 @@
+name: Scheduled hardening
+
+on:
+  pull_request:
+    paths:
+      - 'core-files-api/**'
+      - 'fuzz-corpus/**'
+      - 'performance-baselines/**'
+      - 'scripts/replay-hostile-corpus.sh'
+      - 'scripts/collect-performance-baselines.sh'
+      - 'scripts/validate_engineering_debt.py'
+      - 'config/engineering-debt.tsv'
+      - '.github/workflows/hardening.yml'
+  schedule:
+    - cron: '23 3 * * 2'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  host-hardening:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: true
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Validate classified engineering debt
+        run: python3 scripts/validate_engineering_debt.py
+      - name: Replay Android-independent hostile corpus
+        run: timeout 10m ./gradlew -PcoreOnly :core-files-api:test --tests '*CheckedInHostileCorpusTest'
+      - name: Run coverage-guided parser fuzz targets
+        run: timeout 5m ./gradlew -PcoreOnly :core-files-api:fuzzVaultFrame :core-files-api:fuzzArchivePath -PfuzzSeconds=60
+      - name: Collect repeatable host performance baselines
+        run: scripts/collect-performance-baselines.sh performance-results
+      - name: Upload performance evidence
+        uses: actions/upload-artifact@v5
+        with:
+          name: host-performance-baselines
+          path: performance-results/**
+          retention-days: 30

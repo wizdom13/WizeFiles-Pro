@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="web_document_viewer_title">Bộ xem tài liệu đã lưu</string>
+    <string name="web_document_viewer_loading">Đang mở tài liệu đã lưu</string>
+    <string name="web_document_viewer_failed">Không thể mở tài liệu đã lưu này.</string>
+    <string name="web_document_viewer_unsafe">Tài liệu đã lưu bị hỏng hoặc vượt quá giới hạn tài nguyên an toàn.</string>
+    <string name="web_document_viewer_unavailable">Bộ xem tài liệu đã lưu nội bộ không sẵn sàng cho tập tin này.</string>
+    <string name="web_document_viewer_renderer_failed">Trình dịch web hệ thống dừng lại trong khi hiển thị tài liệu này.</string>
+    <string name="web_document_viewer_open_with">Mở bằng</string>
+    <string name="web_document_viewer_open_link">Mở liên kết tài liệu</string>
+    <string name="web_document_viewer_link_blocked">Tài liệu này bị chặn.</string>
+    <string name="web_document_viewer_reload">Nạp lại</string>
+    <string name="web_document_viewer_share">Chia sẻ tài liệu đã lưu</string>
+</resources>

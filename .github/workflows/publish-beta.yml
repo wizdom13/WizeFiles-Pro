@@ -1,0 +1,255 @@
+name: Publish WizeFiles Beta
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: App version name used for release naming (for example, 0.6.0)
+        required: true
+        default: 0.6.0
+        type: string
+      release_notes:
+        description: Public release notes and testing focus
+        required: false
+        type: string
+
+concurrency:
+  group: publish-wizefiles-beta
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Build, sign, and publish beta
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          submodules: true
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Go 1.26.5
+        uses: actions/setup-go@v6
+        with:
+          go-version: 1.26.5
+          cache: false
+
+      - name: Cache pinned rclone Android library
+        id: rclone-cache
+        uses: actions/cache@v4
+        with:
+          path: app/libs/rclone-gomobile.aar
+          key: ${{ runner.os }}-rclone-${{ hashFiles('scripts/build-rclone-aar.sh', 'rclone-mobile/**') }}
+
+      - name: Build pinned rclone Android library
+        if: steps.rclone-cache.outputs.cache-hit != 'true'
+        run: scripts/build-rclone-aar.sh
+
+      - name: Set up Gradle cache
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-cleanup: on-success
+
+      - name: Make build scripts executable
+        run: chmod +x ./gradlew scripts/build-rclone-aar.sh scripts/verify-release-risk-gates.sh
+
+      - name: Validate release inputs and secrets
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          APP_KEYSTORE: ${{ secrets.APP_KEYSTORE }}
+          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          if [[ ! "$RELEASE_TAG" =~ ^[0-9]+\.[0-9]+\.[0-9]+([._-][A-Za-z0-9.-]+)?$ ]]; then
+            echo "release_tag must contain a valid app version name without a v prefix" >&2
+            exit 1
+          fi
+
+          for secret_name in \
+            APP_KEYSTORE \
+            KEY_STORE_PASSWORD \
+            KEY_ALIAS \
+            KEY_PASSWORD \
+            GH_TOKEN; do
+            if [[ -z "${!secret_name:-}" ]]; then
+              echo "Required secret $secret_name is not configured" >&2
+              exit 1
+            fi
+          done
+
+      - name: Enforce P0 correctness release gates
+        run: scripts/verify-release-risk-gates.sh
+
+      - name: Read app version and prepare release names
+        id: metadata
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          set -euo pipefail
+
+          version_code=$(sed -n "s/^def appVersionCode = \([0-9][0-9]*\)$/\1/p" app/build.gradle)
+          version_name=$(sed -n "s/^def appVersionName = '\([^']*\)'$/\1/p" app/build.gradle)
+
+          if [[ ! "$version_code" =~ ^[1-9][0-9]*$ || -z "$version_name" ]]; then
+            echo "Could not read the hardcoded Android version from app/build.gradle" >&2
+            exit 1
+          fi
+
+          echo "version_name=$version_name" >> "$GITHUB_OUTPUT"
+          echo "version_code=$version_code" >> "$GITHUB_OUTPUT"
+          echo "source_date_epoch=$(git log -1 --format=%ct)" >> "$GITHUB_OUTPUT"
+          release_tag="v$RELEASE_TAG"
+          echo "tag=$release_tag" >> "$GITHUB_OUTPUT"
+          echo "apk_name=WizeFiles_${release_tag}_beta.apk" >> "$GITHUB_OUTPUT"
+          echo "artifact_name=WizeFiles_${release_tag}" >> "$GITHUB_OUTPUT"
+
+      - name: Restore signing key
+        shell: bash
+        env:
+          APP_KEYSTORE: ${{ secrets.APP_KEYSTORE }}
+          STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          set -euo pipefail
+
+          signing_dir="$RUNNER_TEMP/wizefiles-signing"
+          mkdir -p "$signing_dir"
+          printf '%s' "$APP_KEYSTORE" | base64 --decode > "$signing_dir/wizefiles.jks"
+          chmod 600 "$signing_dir/wizefiles.jks"
+          keytool -list \
+            -keystore "$signing_dir/wizefiles.jks" \
+            -storepass "$STORE_PASSWORD" \
+            -alias "$KEY_ALIAS" >/dev/null
+
+      - name: Build signed beta APK
+        timeout-minutes: 45
+        shell: bash
+        env:
+          SOURCE_DATE_EPOCH: ${{ steps.metadata.outputs.source_date_epoch }}
+          STORE_FILE: ${{ runner.temp }}/wizefiles-signing/wizefiles.jks
+          STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          ./gradlew \
+            :app:lintVitalBeta \
+            :app:assembleBeta \
+            --no-daemon \
+            --max-workers=2 \
+            -Dorg.gradle.jvmargs="-Xmx4g -Dfile.encoding=UTF-8" \
+            -Pkotlin.compiler.execution.strategy=in-process \
+            --stacktrace \
+            --console=plain \
+            --warning-mode all
+
+      - name: Verify and package APK
+        id: package
+        shell: bash
+        env:
+          APK_NAME: ${{ steps.metadata.outputs.apk_name }}
+          STORE_FILE: ${{ runner.temp }}/wizefiles-signing/wizefiles.jks
+          STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          set -euo pipefail
+
+          source_apk="app/build/outputs/apk/beta/app-beta.apk"
+          output_apk="$RUNNER_TEMP/$APK_NAME"
+          install -m 0644 "$source_apk" "$output_apk"
+
+          apksigner_path="$ANDROID_SDK_ROOT/build-tools/36.0.0/apksigner"
+          if [[ ! -x "$apksigner_path" ]]; then
+            echo "Android Build Tools 36.0.0 apksigner was not installed" >&2
+            exit 1
+          fi
+          "$apksigner_path" verify --verbose --print-certs "$output_apk"
+          keytool -list \
+            -keystore "$STORE_FILE" \
+            -storepass "$STORE_PASSWORD" \
+            -alias "$KEY_ALIAS" >/dev/null
+
+          (
+            cd "$RUNNER_TEMP"
+            sha256sum "$APK_NAME" > "$APK_NAME.sha256"
+          )
+
+          echo "apk_path=$output_apk" >> "$GITHUB_OUTPUT"
+          echo "checksum_path=$output_apk.sha256" >> "$GITHUB_OUTPUT"
+
+      - name: Upload private workflow artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: ${{ steps.metadata.outputs.artifact_name }}
+          path: |
+            ${{ steps.package.outputs.apk_path }}
+            ${{ steps.package.outputs.checksum_path }}
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Prepare public release notes
+        shell: bash
+        env:
+          VERSION_NAME: ${{ steps.metadata.outputs.version_name }}
+          VERSION_CODE: ${{ steps.metadata.outputs.version_code }}
+          RELEASE_NOTES: ${{ inputs.release_notes }}
+          APK_NAME: ${{ steps.metadata.outputs.apk_name }}
+        run: |
+          set -euo pipefail
+
+          notes_file="$RUNNER_TEMP/release-notes.md"
+          printf '# WizeFiles %s\n\n' "$VERSION_NAME" > "$notes_file"
+          printf '**Android build:** %s\n\n' "$VERSION_CODE" >> "$notes_file"
+          printf '> This is a prerelease build for testing. Back up important data before installation.\n\n' >> "$notes_file"
+
+          if [[ -n "$RELEASE_NOTES" ]]; then
+            printf '%s\n\n' "$RELEASE_NOTES" >> "$notes_file"
+          else
+            printf 'Please test this build and report reproducible problems through the WizeFiles Beta issue forms.\n\n' >> "$notes_file"
+          fi
+
+          printf '## Integrity\n\n```text\n' >> "$notes_file"
+          cat "$RUNNER_TEMP/$APK_NAME.sha256" >> "$notes_file"
+          printf '```\n' >> "$notes_file"
+
+      - name: Publish prerelease to WizeFiles-Beta
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          TAG: ${{ steps.metadata.outputs.tag }}
+          APK_PATH: ${{ steps.package.outputs.apk_path }}
+          CHECKSUM_PATH: ${{ steps.package.outputs.checksum_path }}
+        run: |
+          set -euo pipefail
+
+          if gh release view "$TAG" --repo wizdom13/WizeFiles-Beta >/dev/null 2>&1; then
+            echo "Release $TAG already exists in WizeFiles-Beta" >&2
+            exit 1
+          fi
+
+          gh release create "$TAG" \
+            "$APK_PATH#WizeFiles Beta APK" \
+            "$CHECKSUM_PATH#SHA-256 checksum" \
+            --repo wizdom13/WizeFiles-Beta \
+            --target main \
+            --title "WizeFiles $TAG Beta" \
+            --notes-file "$RUNNER_TEMP/release-notes.md" \
+            --prerelease
+
+      - name: Remove signing material
+        if: always()
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/wizefiles-signing/wizefiles.jks"

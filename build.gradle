@@ -1,0 +1,74 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext {
+        // AGP 9.1 embeds Kotlin 2.2.10; compiler plugins must use the same version.
+        kotlin_version = '2.2.10'
+        dependency_check_fail_cvss = '7.0'
+    }
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url = 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:9.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'org.owasp:dependency-check-gradle:12.2.2'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories.whenObjectAdded { repository ->
+        if (repository instanceof org.gradle.api.artifacts.repositories.MavenArtifactRepository &&
+            repository.url.host == 'jitpack.io') {
+            repository.content {
+                includeGroupByRegex 'com\\.github\\..*'
+            }
+        }
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencyLocking {
+        lockAllConfigurations()
+        lockMode = LockMode.STRICT
+    }
+    configurations.configureEach {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
+}
+
+def rcloneAar = file('app/libs/rclone-gomobile.aar')
+
+tasks.register('buildRcloneAar', Exec) {
+    group = 'build setup'
+    description = 'Builds the pinned rclone gomobile AAR when it is not cached locally.'
+    workingDir rootProject.projectDir
+    commandLine 'bash', "${rootProject.projectDir}/scripts/build-rclone-aar.sh",
+        rcloneAar.absolutePath
+    outputs.file rcloneAar
+    onlyIf { !rcloneAar.exists() }
+}
+
+if (findProject(':app') != null) project(':app') {
+    plugins.withId('com.android.application') {
+        android.defaultConfig.ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+        dependencies.add('implementation', files(rcloneAar))
+        tasks.matching { it.name == 'preBuild' }.configureEach {
+            dependsOn rootProject.tasks.named('buildRcloneAar')
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

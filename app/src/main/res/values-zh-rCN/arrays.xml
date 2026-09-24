@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string-array name="settings_night_mode_entries">
+        <item>跟随系统设置</item>
+        <item>浅色模式</item>
+        <item>深色模式</item>
+        <item>自动（根据时间）</item>
+        <item>自动（根据电池）</item>
+    </string-array>
+    <string-array name="settings_file_name_ellipsize_entries">
+        <item>截去开头（…name.txt）</item>
+        <item>截去中间（file…name.txt）</item>
+        <item>截去结尾（filename…）</item>
+        <item>滚动文本（跑马灯）</item>
+    </string-array>
+    <string-array name="settings_root_strategy_entries">
+        <item>标准用户访问（无 Root）</item>
+        <item>智能自动模式</item>
+        <item>强制 Root 访问</item>
+    </string-array>
+    <string-array name="settings_open_apk_default_action_entries">
+        <item>尝试安装</item>
+        <item>查看内部文件</item>
+        <item>总是询问我</item>
+    </string-array>
+    <string-array name="settings_security_relock_entries">
+        <item>立即</item>
+        <item>30 秒</item>
+        <item>1 分钟</item>
+        <item>5 分钟</item>
+        <item>10 分钟</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_file">
+        <item>读取</item>
+        <item>写入</item>
+        <item>执行</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_directory">
+        <item>读取</item>
+        <item>写入</item>
+        <item>搜索</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_special_mode_bits">
+        <item>设置 UID</item>
+        <item>设定 GID</item>
+        <item>粘性位点</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_authentication_type_entries">
+        <item>用户名密码( P)</item>
+        <item>匿名登录</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_mode_entries">
+        <item>活动模式</item>
+        <item>被动模式( 建议)</item>
+    </string-array>
+    <string-array name="storage_edit_sftp_server_authentication_type_entries">
+        <item>用户名密码( P)</item>
+        <item>SSH 公钥</item>
+    </string-array>
+    <string-array name="storage_edit_smb_server_authentication_type_entries">
+        <item>用户名密码( P)</item>
+        <item>来宾访问</item>
+        <item>匿名访问</item>
+    </string-array>
+</resources>

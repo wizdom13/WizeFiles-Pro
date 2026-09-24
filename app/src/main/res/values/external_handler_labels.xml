@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="external_audio_player_label" translatable="false">Audio Player</string>
+    <string name="external_video_player_label" translatable="false">Video Player</string>
+    <string name="external_text_editor_label" translatable="false">Text Editor</string>
+    <string name="external_package_installer_label" translatable="false">Package Installer</string>
+    <string name="external_archive_browser_label" translatable="false">Archive Browser</string>
+    <string name="external_folder_browser_label" translatable="false">Folder Browser</string>
+    <string name="external_backup_restore_label" translatable="false">Backup Restore</string>
+    <string name="external_file_browser_label" translatable="false">File Browser</string>
+</resources>

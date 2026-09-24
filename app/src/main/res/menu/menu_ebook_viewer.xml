@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_ebook_toc" android:title="@string/ebook_viewer_toc" app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_ebook_smaller" android:title="@string/ebook_viewer_smaller" app:showAsAction="never" />
+    <item android:id="@+id/action_ebook_larger" android:title="@string/ebook_viewer_larger" app:showAsAction="never" />
+    <item android:id="@+id/action_ebook_theme" android:title="@string/ebook_viewer_theme" app:showAsAction="never" />
+    <item android:id="@+id/action_ebook_share" android:title="@string/ebook_viewer_share" app:showAsAction="never" />
+    <item android:id="@+id/action_ebook_open_with" android:title="@string/ebook_viewer_open_with" app:showAsAction="never" />
+</menu>

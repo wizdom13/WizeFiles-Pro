@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pro_purchase_title">WizeFiles Pro</string>
+    <string name="pro_purchase_heading">Unlock WizeFiles Pro</string>
+    <string name="pro_purchase_intro">Get the advanced tools built for demanding file workflows while keeping core file management free.</string>
+    <string name="pro_purchase_benefits_title">Included with Pro</string>
+    <string name="pro_purchase_benefit_dual_pane">✓ Dual-pane workflows and cross-pane drag-and-drop</string>
+    <string name="pro_purchase_benefit_connections">✓ Unlimited cloud and network connections</string>
+    <string name="pro_purchase_benefit_sync">✓ Sync, backup profiles, and scheduled operations</string>
+    <string name="pro_purchase_benefit_power_tools">✓ Root, Shizuku, built-in servers, and advanced tools</string>
+    <string name="pro_purchase_benefit_signing">✓ APK, AAB, APKS, XAPK, and APKM signing workflows</string>
+    <string name="pro_purchase_benefit_support">✓ Ongoing Pro improvements and support for WizeFiles development</string>
+
+    <string name="pro_purchase_active_title">WizeFiles Pro is active</string>
+    <string name="pro_purchase_active_summary">All Pro capabilities are available on this installation.</string>
+    <string name="pro_purchase_active_status">Thank you for supporting WizeFiles.</string>
+
+    <string name="pro_purchase_plans_title">Choose your Pro plan</string>
+    <string name="pro_purchase_plans_summary">Lifetime and subscriptions unlock the same Pro capabilities. Prices are supplied by Google Play for your account and region.</string>
+    <string name="pro_purchase_lifetime_title">Lifetime Pro</string>
+    <string name="pro_purchase_yearly_title">Yearly Pro</string>
+    <string name="pro_purchase_monthly_title">Monthly Pro</string>
+    <string name="pro_purchase_lifetime_summary">One payment for permanent Pro access.</string>
+    <string name="pro_purchase_yearly_summary">Pro access billed once each year.</string>
+    <string name="pro_purchase_monthly_summary">Flexible Pro access billed each month.</string>
+    <string name="pro_purchase_recommended">Recommended</string>
+    <string name="pro_purchase_trial_available">Eligible free trial available</string>
+    <string name="pro_purchase_price_yearly">%1$s / year</string>
+    <string name="pro_purchase_price_monthly">%1$s / month</string>
+    <string name="pro_purchase_buy_lifetime">Buy lifetime for %1$s</string>
+    <string name="pro_purchase_subscribe_yearly">Subscribe yearly for %1$s</string>
+    <string name="pro_purchase_subscribe_monthly">Subscribe monthly for %1$s</string>
+
+    <string name="pro_purchase_choose_plan">Choose a plan to continue securely in Google Play.</string>
+    <string name="pro_purchase_connecting">Connecting to Google Play…</string>
+    <string name="pro_purchase_complete_in_play">Complete your purchase in Google Play.</string>
+    <string name="pro_purchase_pending">Your payment is pending. Pro will activate after Google Play confirms it.</string>
+    <string name="pro_purchase_activated">WizeFiles Pro is now active.</string>
+    <string name="pro_purchase_active_ack_pending">Pro is active. Google Play confirmation will retry automatically.</string>
+    <string name="pro_purchase_canceled">Purchase canceled. Nothing was charged.</string>
+    <string name="pro_purchase_restore">Restore purchases</string>
+    <string name="pro_purchase_restore_started">Checking Google Play for existing purchases…</string>
+    <string name="pro_purchase_manage">Manage subscription in Google Play</string>
+    <string name="pro_purchase_retry">Try again</string>
+
+    <string name="pro_purchase_unavailable">Purchases are unavailable in this build or on this device.</string>
+    <string name="pro_purchase_products_unavailable">No eligible Pro plans are available for this Google Play account.</string>
+    <string name="pro_purchase_network_error">Google Play could not be reached. Check your connection and try again.</string>
+    <string name="pro_purchase_backend_error">WizeFiles could not verify the purchase right now. Your payment remains with Google Play; use Restore purchases to retry.</string>
+    <string name="pro_purchase_verification_error">The purchase could not be securely verified. Pro was not activated.</string>
+    <string name="pro_purchase_acknowledgement_error">Pro is active, but Google Play confirmation is pending and will retry automatically.</string>
+    <string name="pro_purchase_internal_error">The purchase could not be started. Please try again.</string>
+    <string name="pro_purchase_manage_unavailable">Google Play subscription management could not be opened.</string>
+
+    <string name="pro_purchase_legal">Payment is processed by Google Play. Subscriptions renew automatically unless canceled in Google Play before renewal. Lifetime Pro is a one-time purchase. Existing files remain accessible if a subscription ends.</string>
+    <string name="about_pro_title">WizeFiles Pro</string>
+    <string name="about_pro_summary">View plans, restore purchases, or manage Pro</string>
+</resources>

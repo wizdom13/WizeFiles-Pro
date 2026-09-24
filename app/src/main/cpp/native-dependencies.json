@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "build": {
+    "ndkVersion": "29.0.14206865",
+    "minimumLoadAlignmentBytes": 16384,
+    "requiredAlignedAbis": [
+      "arm64-v8a",
+      "x86_64"
+    ]
+  },
+  "components": [
+    {
+      "name": "libarchive",
+      "version": "3.8.9",
+      "source": "https://github.com/libarchive/libarchive/releases/download/v3.8.9/libarchive-3.8.9.tar.gz",
+      "sha256": "f5a6539059cf5e597dbeda37bfa4874b1e8dea063c8d93bf85a2b44af90a5bd4",
+      "license": "BSD-2-Clause",
+      "licenseFile": "app/src/main/licenses/libarchive-new-bsd-license.txt",
+      "linkedTargets": [
+        "archive",
+        "archive-jni"
+      ]
+    },
+    {
+      "name": "android-libarchive-wrapper",
+      "version": "local",
+      "source": "app/src/main/cpp/libarchive_jni",
+      "sha256": null,
+      "license": "Apache-2.0",
+      "licenseFile": "app/src/main/licenses/android-libarchive-wrapper-apache-2.0.txt",
+      "linkedTargets": [
+        "archive-jni"
+      ]
+    },
+    {
+      "name": "WizeFiles native bridges",
+      "version": "repository",
+      "source": "app/src/main/jni",
+      "sha256": null,
+      "license": "WizeFiles project license",
+      "licenseFile": "LICENSE",
+      "linkedTargets": [
+        "hiddenapi",
+        "selinuxbridge",
+        "syscall",
+        "fastops"
+      ]
+    },
+    {
+      "name": "7-Zip",
+      "version": "26.02",
+      "source": "https://7-zip.org/a/7z2602-src.tar.xz",
+      "sha256": "cf967c98bca02a4b8b16375f441825a8e141362f14be1969bbec8e1ca0bff9dd",
+      "license": "LGPL-2.1-or-later with bundled BSD code and unRAR restriction",
+      "licenseFile": "app/src/main/licenses/7zip-license.txt",
+      "linkedTargets": [
+        "sevenzip-format",
+        "sevenzip-jni"
+      ]
+    },
+    {
+      "name": "WizeFiles 7-Zip JNI bridge",
+      "version": "repository",
+      "source": "app/src/main/cpp/sevenzip_jni",
+      "sha256": null,
+      "license": "WizeFiles project license",
+      "licenseFile": "LICENSE",
+      "linkedTargets": [
+        "sevenzip-jni"
+      ]
+    },
+    {
+      "name": "libmobi",
+      "version": "0.12",
+      "source": "https://github.com/bfabiszewski/libmobi/archive/refs/tags/v0.12.tar.gz",
+      "sha256": "78826d161c02ce93ff1cd62838b4d749df754f52185474b82e4093badf4689c1",
+      "license": "LGPL-3.0-or-later",
+      "licenseFile": "app/src/main/licenses/libmobi-lgpl-3.0.txt",
+      "linkedTargets": [
+        "mobi",
+        "mobi-jni"
+      ]
+    },
+    {
+      "name": "WizeFiles libmobi JNI bridge",
+      "version": "repository",
+      "source": "app/src/main/cpp/mobi_jni",
+      "sha256": null,
+      "license": "WizeFiles project license",
+      "licenseFile": "LICENSE",
+      "linkedTargets": [
+        "mobi-jni"
+      ]
+    },
+    {
+      "name": "LibVLC Android",
+      "version": "3.7.5",
+      "source": "https://repo1.maven.org/maven2/org/videolan/android/libvlc-all/3.7.5/libvlc-all-3.7.5.aar",
+      "sha256": "2c25507adb1260aa4d81aad8c2ce98765d98026b9381f49ea454d0b8092f21cb",
+      "license": "LGPL-2.1-or-later",
+      "licenseFile": "app/src/main/licenses/libvlc-lgpl-2.1.txt",
+      "linkedTargets": [
+        "libvlc",
+        "libvlcjni"
+      ]
+    }
+  ]
+}
+

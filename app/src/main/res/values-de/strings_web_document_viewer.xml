@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="web_document_viewer_title">Viewer für gespeicherte Dokumente</string>
+    <string name="web_document_viewer_loading">Gespeichertes Dokument wird geöffnet</string>
+    <string name="web_document_viewer_failed">Dieses gespeicherte Dokument konnte nicht geöffnet werden.</string>
+    <string name="web_document_viewer_unsafe">Dieses gespeicherte Dokument ist beschädigt oder überschreitet sichere Ressourcengrenzen.</string>
+    <string name="web_document_viewer_unavailable">Der interne Viewer für gespeicherte Dokumente ist für diese Datei nicht verfügbar.</string>
+    <string name="web_document_viewer_renderer_failed">Die Webdarstellung des Systems wurde beim Anzeigen dieses Dokuments beendet.</string>
+    <string name="web_document_viewer_open_with">Öffnen mit</string>
+    <string name="web_document_viewer_open_link">Dokumentlink öffnen</string>
+    <string name="web_document_viewer_link_blocked">Dieser Dokumentlink wurde blockiert.</string>
+    <string name="web_document_viewer_reload">Neu laden</string>
+    <string name="web_document_viewer_share">Gespeichertes Dokument teilen</string>
+</resources>

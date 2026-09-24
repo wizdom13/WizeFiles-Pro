@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="ebook_viewer_title">โปรแกรมอ่าน Ebook</string>
+    <string name="ebook_viewer_loading">การเปิดหนังสือ</string>
+    <string name="ebook_viewer_failed">ไม่สามารถเปิดแฟ้มนี้ได้</string>
+    <string name="ebook_viewer_unsafe">หนังสือ เล่ม นี้ ได้ รับ ความ เสีย หาย หรือ เกิน ขีด จํากัด ของ ภาชนะ บรรจุ ที่ ปลอด ภัย.</string>
+    <string name="ebook_viewer_encrypted">ถูกเข้ารหัสหรือ DRM- ป้องกัน Kindle ยังไม่รองรับหนังสือ</string>
+    <string name="ebook_viewer_print_replica">AZW4 ผู้อ่านภายในไม่รองรับหนังสือ Reglica</string>
+    <string name="ebook_viewer_too_large">หนังสือเล่มนี้มีความปลอดภัยมากกว่า ความปลอดภัยของผู้อ่านภายใน</string>
+    <string name="ebook_viewer_unavailable">โปรแกรมอ่าน ebook ภายในไม่สามารถใช้งานได้สําหรับแฟ้มนี้</string>
+    <string name="ebook_viewer_open_with">เปิดใช้ด้วย</string>
+    <string name="ebook_viewer_open_link">เปิดที่อยู่เชื่อมโยงแบบ ebook</string>
+    <string name="ebook_viewer_link_blocked">ลิงก์อีบุ๊คนี้ถูกปิดกั้น</string>
+    <string name="ebook_viewer_resource_failed">ไม่สามารถเรียกใช้ทรัพยากรของสิ่งพิมพ์ได้</string>
+    <string name="ebook_viewer_toc">เนื้อหา</string>
+    <string name="ebook_viewer_no_toc">หนังสือนี้ไม่มีตารางของเนื้อหา</string>
+    <string name="ebook_viewer_smaller">ข้อความเล็กกว่า</string>
+    <string name="ebook_viewer_larger">ข้อความใหญ่กว่า</string>
+    <string name="ebook_viewer_theme">เปลี่ยนชุดตกแต่ง</string>
+    <string name="ebook_viewer_share">การใช้ ebook</string>
+</resources>

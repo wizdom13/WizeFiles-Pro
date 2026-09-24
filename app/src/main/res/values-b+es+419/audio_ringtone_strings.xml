@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">Establecer como tono de llamada</string>
+    <string name="audio_player_ringtone_set">Tono de llamada establecido correctamente</string>
+    <string name="audio_player_ringtone_failed">No se pudo establecer el tono de llamada</string>
+    <string name="audio_player_ringtone_permission_required">Permite que WizeFiles modifique la configuración del sistema para establecer el tono de llamada</string>
+</resources>

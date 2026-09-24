@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="settings_icon_shape_title">جگہ</string>
+    <string name="settings_icon_shape_squircle">معطل</string>
+    <string name="settings_icon_shape_rounded_square">اطراف و جوانب</string>
+    <string name="settings_icon_shape_flower">پھول</string>
+    <string name="settings_icon_shape_square">مربع</string>
+    <string name="settings_icon_shape_teardrop">دوبارہ شروع</string>
+    <string name="settings_icon_shape_pebble">پَر</string>
+    <string name="settings_icon_shape_vessel">غیر متصل</string>
+    <string name="settings_icon_shape_pentagon">پینتیگون</string>
+    <string name="settings_icon_shape_hexagon_1">۱ کیا آپ کو معلوم ہے ؟</string>
+    <string name="settings_icon_shape_hexagon_2">۲ نفرت کا دَور</string>
+    <string name="settings_icon_shape_heptagon">ہیپاٹائٹس</string>
+    <string name="settings_icon_shape_octagon">کاٹن</string>
+</resources>

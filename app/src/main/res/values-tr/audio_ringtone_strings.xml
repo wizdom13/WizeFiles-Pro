@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">Zil sesi olarak ayarla</string>
+    <string name="audio_player_ringtone_set">Zil sesi başarıyla ayarlandı</string>
+    <string name="audio_player_ringtone_failed">Zil sesi ayarlanamadı</string>
+    <string name="audio_player_ringtone_permission_required">Zil sesini ayarlamak için WizeFiles\'ın sistem ayarlarını değiştirmesine izin verin</string>
+</resources>

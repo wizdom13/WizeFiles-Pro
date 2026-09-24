@@ -1,0 +1,3 @@
+loading=true;error=oversized;refresh=0
+loading=true;error=;refresh=2147483647
+loading=false;error=   ;refresh=-1

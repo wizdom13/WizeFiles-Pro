@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_view_sort"
+        android:icon="@drawable/ic_sort_control_normal_24dp"
+        android:title="@string/file_list_action_view_sort"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_backup_vault"
+        android:icon="@drawable/ic_save_control_normal_24dp"
+        android:title="@string/vault_backup"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_delete_vault"
+        android:icon="@drawable/ic_delete_control_normal_24dp"
+        android:title="@string/vault_delete"
+        app:showAsAction="never" />
+</menu>

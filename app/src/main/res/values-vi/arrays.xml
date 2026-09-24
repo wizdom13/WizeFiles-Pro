@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string-array name="settings_night_mode_entries">
+        <item>Theo cài đặt hệ thống</item>
+        <item>Chế độ sáng</item>
+        <item>Chế độ tối</item>
+        <item>Tự động (theo thời gian)</item>
+        <item>Tự động (theo pin)</item>
+    </string-array>
+    <string-array name="settings_file_name_ellipsize_entries">
+        <item>Cắt phần đầu (…name.txt)</item>
+        <item>Cắt phần giữa (file…name.txt)</item>
+        <item>Cắt phần cuối (filename…)</item>
+        <item>Cuộn văn bản (Marquee)</item>
+    </string-array>
+    <string-array name="settings_root_strategy_entries">
+        <item>Truy cập người dùng chuẩn (không root)</item>
+        <item>Chế độ tự động thông minh</item>
+        <item>Buộc truy cập root</item>
+    </string-array>
+    <string-array name="settings_open_apk_default_action_entries">
+        <item>Thử cài đặt</item>
+        <item>Xem tệp bên trong</item>
+        <item>Luôn hỏi tôi</item>
+    </string-array>
+    <string-array name="settings_security_relock_entries">
+        <item>Ngay lập tức</item>
+        <item>30 giây</item>
+        <item>1 phút</item>
+        <item>5 phút</item>
+        <item>10 phút</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_file">
+        <item>Đọc</item>
+        <item>Viết</item>
+        <item>Thực thi</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_directory">
+        <item>Đọc</item>
+        <item>Viết</item>
+        <item>Tìm kiếm</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_special_mode_bits">
+        <item>Đặt UID</item>
+        <item>Đặt GID</item>
+        <item>Bit dính</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_authentication_type_entries">
+        <item>Tên người dùng và mật khẩu</item>
+        <item>Ẩn danh Đăng nhập</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_mode_entries">
+        <item>Chế độ hoạt động</item>
+        <item>Chế độ thụ động (Được khuyến nghị)</item>
+    </string-array>
+    <string-array name="storage_edit_sftp_server_authentication_type_entries">
+        <item>Tên người dùng và mật khẩu</item>
+        <item>Khóa công khai SSH</item>
+    </string-array>
+    <string-array name="storage_edit_smb_server_authentication_type_entries">
+        <item>Tên người dùng và mật khẩu</item>
+        <item>Quyền truy cập của khách</item>
+        <item>Truy cập ẩn danh</item>
+    </string-array>
+</resources>

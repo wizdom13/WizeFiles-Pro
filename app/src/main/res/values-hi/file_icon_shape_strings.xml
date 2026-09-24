@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="settings_icon_shape_title">आइकन आकार</string>
+    <string name="settings_icon_shape_squircle">Squircle</string>
+    <string name="settings_icon_shape_rounded_square">गोल वर्ग</string>
+    <string name="settings_icon_shape_flower">फूल</string>
+    <string name="settings_icon_shape_square">स्क्वायर</string>
+    <string name="settings_icon_shape_teardrop">टियरड्रॉप</string>
+    <string name="settings_icon_shape_pebble">कंकड़</string>
+    <string name="settings_icon_shape_vessel">पोत</string>
+    <string name="settings_icon_shape_pentagon">पेंटागन</string>
+    <string name="settings_icon_shape_hexagon_1">हेक्सागोन संस्करण 1</string>
+    <string name="settings_icon_shape_hexagon_2">हेक्सागोन संस्करण 2</string>
+    <string name="settings_icon_shape_heptagon">हेप्टागन</string>
+    <string name="settings_icon_shape_octagon">ऑक्टागोन</string>
+</resources>

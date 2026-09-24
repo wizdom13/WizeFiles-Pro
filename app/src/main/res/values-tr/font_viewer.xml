@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="font_viewer_error_too_large">Bu yazı tipi güvenli bir şekilde önizlenemeyecek kadar büyük.</string>
+    <string name="font_viewer_error_invalid">Bu yazı tipi dosyası geçersiz veya desteklenmiyor.</string>
+    <string name="font_viewer_error_open_failed">WizeFiles bu yazı tipini açamadı. Dosyanın hâlâ mevcut ve erişilebilir olduğunu kontrol edin.</string>
+    <string name="font_viewer_collection_faces">%1$d yüz</string>
+</resources>

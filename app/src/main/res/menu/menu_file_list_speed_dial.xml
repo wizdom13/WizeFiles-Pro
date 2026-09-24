@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_connect_cloud_drive"
+        android:icon="@drawable/ic_cloud_white_24dp"
+        android:title="@string/storage_add_storage_rclone" />
+
+    <item
+        android:id="@+id/action_create_vault"
+        android:icon="@drawable/ic_lock_white_24dp"
+        android:title="@string/vault_create_folder" />
+
+    <item
+        android:id="@+id/action_create_directory"
+        android:icon="@drawable/ic_directory_white_24dp"
+        android:title="@string/file_list_action_create_directory" />
+
+    <item
+        android:id="@+id/action_create_file"
+        android:icon="@drawable/ic_file_white_24dp"
+        android:title="@string/file_list_action_create_file" />
+</menu>

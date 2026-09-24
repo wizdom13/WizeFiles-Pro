@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="settings_icon_shape_title">图标形状</string>
+    <string name="settings_icon_shape_squircle">细小的</string>
+    <string name="settings_icon_shape_rounded_square">圆形方形</string>
+    <string name="settings_icon_shape_flower">鲜花</string>
+    <string name="settings_icon_shape_square">平方边</string>
+    <string name="settings_icon_shape_teardrop">泪滴</string>
+    <string name="settings_icon_shape_pebble">宝宝</string>
+    <string name="settings_icon_shape_vessel">船舶</string>
+    <string name="settings_icon_shape_pentagon">五角大楼</string>
+    <string name="settings_icon_shape_hexagon_1">六边形变体1</string>
+    <string name="settings_icon_shape_hexagon_2">六边形变体2</string>
+    <string name="settings_icon_shape_heptagon">七边形</string>
+    <string name="settings_icon_shape_octagon">八边形</string>
+</resources>

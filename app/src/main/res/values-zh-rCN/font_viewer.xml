@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="font_viewer_error_too_large">此字体过大，无法安全预览。</string>
+    <string name="font_viewer_error_invalid">此字体文件无效或不受支持。</string>
+    <string name="font_viewer_error_open_failed">WizeFiles 无法打开此字体。请确认文件仍然存在且您有权访问。</string>
+    <string name="font_viewer_collection_faces">%1$d 个字型</string>
+</resources>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wizesoft.me/wizefiles/sitemap.xml

@@ -1,0 +1,36 @@
+def signingFile = rootProject.file('signing.properties')
+def localSigning = new Properties()
+if (signingFile.isFile()) {
+    signingFile.withInputStream { stream -> localSigning.load(stream) }
+}
+
+def signingValue = { String propertyName, String environmentName ->
+    if (localSigning.containsKey(propertyName)) {
+        return localSigning.getProperty(propertyName)
+    }
+    return System.getenv(environmentName)
+}
+
+def releaseSigning = [
+    storeFile: signingValue('storeFile', 'STORE_FILE'),
+    storePassword: signingValue('storePassword', 'STORE_PASSWORD'),
+    keyAlias: signingValue('keyAlias', 'KEY_ALIAS'),
+    keyPassword: signingValue('keyPassword', 'KEY_PASSWORD')
+]
+def suppliedSigningFields = releaseSigning.findAll { _, value -> value != null && !value.isEmpty() }
+if (!suppliedSigningFields.isEmpty() && suppliedSigningFields.size() != releaseSigning.size()) {
+    throw new GradleException('Release signing requires storeFile, storePassword, keyAlias, and keyPassword')
+}
+
+android {
+    signingConfigs {
+        release {
+            if (suppliedSigningFields.size() == releaseSigning.size()) {
+                storeFile = rootProject.file(releaseSigning.storeFile)
+                storePassword = releaseSigning.storePassword
+                keyAlias = releaseSigning.keyAlias
+                keyPassword = releaseSigning.keyPassword
+            }
+        }
+    }
+}

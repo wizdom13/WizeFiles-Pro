@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="font_viewer_error_too_large">هذا الخط كبير جدًا ولا يمكن معاينته بأمان.</string>
+    <string name="font_viewer_error_invalid">ملف الخط هذا غير صالح أو غير مدعوم.</string>
+    <string name="font_viewer_error_open_failed">تعذّر على WizeFiles فتح هذا الخط. تأكد من أن الملف لا يزال موجودًا وأن لديك صلاحية الوصول إليه.</string>
+    <string name="font_viewer_collection_faces">%1$d أوجه</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="web_document_viewer_title">Saved document viewer</string>
+    <string name="web_document_viewer_loading">Opening saved document</string>
+    <string name="web_document_viewer_failed">This saved document could not be opened.</string>
+    <string name="web_document_viewer_unsafe">This saved document is damaged or exceeds safe resource limits.</string>
+    <string name="web_document_viewer_unavailable">The internal saved document viewer is unavailable for this file.</string>
+    <string name="web_document_viewer_renderer_failed">The system web renderer stopped while displaying this document.</string>
+    <string name="web_document_viewer_open_with">Open with</string>
+    <string name="web_document_viewer_open_link">Open document link</string>
+    <string name="web_document_viewer_link_blocked">This document link was blocked.</string>
+    <string name="web_document_viewer_reload">Reload</string>
+    <string name="web_document_viewer_share">Share saved document</string>
+</resources>
+

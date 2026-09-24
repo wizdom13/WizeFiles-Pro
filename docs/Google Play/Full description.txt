@@ -1,0 +1,42 @@
+WizeFiles is a powerful, full-featured Android file manager built for both everyday organization and advanced storage work.
+
+Browse, search and manage files across internal storage, SD cards, USB drives, Android document folders, network servers and supported cloud services—all from one modern interface.
+
+File management that works your way
+
+• Copy, move, rename, share and delete files and folders
+• Recover deleted items through the Recycle Bin
+• Use tabs, bookmarks, list or grid view, sorting and filters
+• Work faster with dual-pane browsing, drag and drop, indexed search and advanced batch rename
+• Create, browse, extract and edit supported archives
+
+Local, network and cloud storage
+
+Connect to SMB, SFTP, FTP, WebDAV, S3 and supported cloud accounts. Saved storage locations appear alongside your device folders, making it easier to move files between local and remote destinations.
+
+Reliable transfers and automation
+
+The Transfer Center keeps long operations visible and manageable. Monitor progress, resolve conflicts, pause, resume or retry supported jobs, and review transfer history. Create folder sync and backup profiles, with scheduling and conditions such as Wi-Fi or charging.
+
+Built-in viewers and text editing
+
+Preview images and videos, play audio in the background, read PDFs and edit text files without leaving WizeFiles. You can still open files with another compatible Android app whenever you prefer.
+
+Privacy and protection
+
+• Protect the file browser with a password or biometric authentication
+• Store private content inside encrypted vaults
+• Encrypt and decrypt supported files
+• Inspect permissions, checksums, signatures and detailed metadata
+
+Useful tools in one place
+
+• Storage Cleaner for finding space you can reclaim
+• App Manager for inspecting apps, creating APK backups, sharing packages or uninstalling with Android confirmation
+• APK and package inspection tools
+• File properties with media details, hashes, ownership and permissions
+• Root and Shizuku support for experienced users on compatible devices
+
+Whether you need a dependable file explorer, secure vault, archive manager, cloud browser or advanced transfer tool, WizeFiles gives you practical control without getting in the way.
+
+Some features depend on your Android version, device capabilities, storage provider and granted permissions.

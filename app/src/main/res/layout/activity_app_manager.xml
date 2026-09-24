@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="?colorSurface"
+            app:title="@string/app_manager_title" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:scrollbars="none">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/filterChips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="4dp"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAll"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/app_manager_filter_all" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipUser"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:checked="true"
+                    android:text="@string/app_manager_filter_user" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSystem"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/app_manager_filter_system" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipDisabled"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/app_manager_filter_disabled" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/summaryText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="8dp"
+            android:textAppearance="?textAppearanceBodyMedium"
+            android:textColor="?android:textColorSecondary" />
+
+        <LinearLayout
+            android:id="@+id/operationProgressContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            android:paddingEnd="12dp"
+            android:visibility="gone">
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/operationProgress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:indeterminate="true" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancelOperationButton"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@android:string/cancel" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/appList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingTop="4dp"
+                android:paddingBottom="@dimen/app_manager_list_bottom_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <ProgressBar
+                android:id="@+id/loadingProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/emptyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="32dp"
+                android:text="@string/app_manager_empty"
+                android:textAppearance="?textAppearanceBodyLarge"
+                android:textColor="?android:textColorSecondary"
+                android:visibility="gone" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <com.wisso.wizefiles.ui.BottomBarLayout
+        android:id="@+id/selectionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/file_list_operation_bar_horizontal_margin"
+        android:layout_marginEnd="@dimen/file_list_operation_bar_horizontal_margin"
+        android:layout_marginBottom="@dimen/file_list_operation_bar_bottom_gap"
+        android:background="?colorSecondaryContainer"
+        android:clipToOutline="true"
+        android:elevation="@dimen/design_appbar_elevation"
+        android:theme="?actionBarTheme"
+        android:visibility="gone"
+        app:barCornerRadius="@dimen/file_list_operation_bar_corner_radius"
+        app:bottomInsetAsMargin="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/file_list_selection_action_bar_height"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/file_list_selection_action_bar_padding"
+            android:paddingEnd="@dimen/file_list_selection_action_bar_padding">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/uninstallAction"
+                style="@style/Widget.WizeFiles.AppManager.SelectionAction"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/app_manager_uninstall"
+                app:icon="@drawable/ic_delete_control_normal_24dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/enableDisableAction"
+                style="@style/Widget.WizeFiles.AppManager.SelectionAction"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/app_manager_disable"
+                app:icon="@drawable/ic_disable_control_normal_24dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/shareAction"
+                style="@style/Widget.WizeFiles.AppManager.SelectionAction"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/share"
+                app:icon="@drawable/ic_share_control_normal_24dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/infoAction"
+                style="@style/Widget.WizeFiles.AppManager.SelectionAction"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/app_manager_info"
+                app:icon="@drawable/ic_info_control_normal_24dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/openAction"
+                style="@style/Widget.WizeFiles.AppManager.SelectionAction"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/app_manager_open"
+                app:icon="@drawable/ic_open_as" />
+
+        </LinearLayout>
+    </com.wisso.wizefiles.ui.BottomBarLayout>
+</FrameLayout>

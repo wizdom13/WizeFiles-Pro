@@ -1,0 +1,3 @@
+# Each non-comment line is an unresolved risk that blocks distributable builds.
+# Delete a line only after outcome-based regression tests satisfy the exit criteria
+# in docs/TODO_RISK_REGISTER.md.

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">रिंगटोन के रूप में सेट करें</string>
+    <string name="audio_player_ringtone_set">रिंगटोन सफलतापूर्वक सेट की गई</string>
+    <string name="audio_player_ringtone_failed">रिंगटोन सेट नहीं की जा सकी</string>
+    <string name="audio_player_ringtone_permission_required">रिंगटोन सेट करने के लिए WizeFiles को सिस्टम सेटिंग बदलने की अनुमति दें</string>
+</resources>

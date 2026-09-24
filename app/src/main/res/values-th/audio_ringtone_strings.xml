@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">ตั้งเป็นเสียงเรียกเข้า</string>
+    <string name="audio_player_ringtone_set">ตั้งเสียงเรียกเข้าสำเร็จแล้ว</string>
+    <string name="audio_player_ringtone_failed">ไม่สามารถตั้งเสียงเรียกเข้าได้</string>
+    <string name="audio_player_ringtone_permission_required">อนุญาตให้ WizeFiles แก้ไขการตั้งค่าระบบเพื่อตั้งเสียงเรียกเข้า</string>
+</resources>

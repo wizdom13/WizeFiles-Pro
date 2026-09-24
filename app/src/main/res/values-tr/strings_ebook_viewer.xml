@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="ebook_viewer_title">E-kitap okuyucu</string>
+    <string name="ebook_viewer_loading">E-kitabı açma</string>
+    <string name="ebook_viewer_failed">Bu e-kitap açılamadı.</string>
+    <string name="ebook_viewer_unsafe">Bu e-kitap hasarlı veya güvenli saklama sınırlarını aşıyor.</string>
+    <string name="ebook_viewer_encrypted">Şifreli veya DRM korumalı Kindle kitaplar desteklenmez.</string>
+    <string name="ebook_viewer_print_replica">AZW4 Yazdır Çoğaltma kitapları dahili okuyucu tarafından desteklenmez.</string>
+    <string name="ebook_viewer_too_large">Bu e-kitap dahili okuyucu güvenlik sınırını aşıyor.</string>
+    <string name="ebook_viewer_unavailable">Bu dosya için dahili e-kitap okuyucu mevcut değil.</string>
+    <string name="ebook_viewer_open_with">Şununla aç:</string>
+    <string name="ebook_viewer_open_link">E-kitap bağlantısını aç</string>
+    <string name="ebook_viewer_link_blocked">Bu e-kitap bağlantısı engellendi.</string>
+    <string name="ebook_viewer_resource_failed">Bir yayın kaynağı yüklenemedi.</string>
+    <string name="ebook_viewer_toc">İçindekiler</string>
+    <string name="ebook_viewer_no_toc">Bu e-kitabın içindekiler tablosu yoktur.</string>
+    <string name="ebook_viewer_smaller">Daha küçük metin</string>
+    <string name="ebook_viewer_larger">Daha büyük metin</string>
+    <string name="ebook_viewer_theme">Temayı değiştir</string>
+    <string name="ebook_viewer_share">E-kitabı paylaş</string>
+</resources>

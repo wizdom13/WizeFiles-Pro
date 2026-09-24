@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="settings_night_mode_entries">
+            <item>Ikuti setelan sistem</item><item>Mode terang</item><item>Mode gelap</item><item>Otomatis (berdasarkan waktu)</item><item>Otomatis (berdasarkan baterai)</item>
+        </string-array>
+    <string-array name="settings_file_name_ellipsize_entries">
+            <item>Potong bagian awal (…name.txt)</item>
+            <item>Potong bagian tengah (file…name.txt)</item>
+            <item>Potong bagian akhir (filename…)</item>
+            <item>Gulirkan teks (marquee)</item>
+        </string-array>
+    <string-array name="settings_root_strategy_entries">
+            <item>Akses pengguna standar (tanpa root)</item>
+            <item>Mode otomatis pintar</item>
+            <item>Paksa akses root</item>
+        </string-array>
+    <string-array name="settings_open_apk_default_action_entries">
+            <item>Coba instal</item>
+            <item>Lihat file di dalam</item>
+            <item>Selalu tanyakan</item>
+        </string-array>
+    <string-array name="settings_security_relock_entries">
+            <item>Segera</item><item>30 detik</item><item>1 menit</item><item>5 menit</item><item>10 menit</item>
+        </string-array>
+
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_file">
+        <item>Baca</item>
+        <item>Tulis</item>
+        <item>Jalankan</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_directory">
+        <item>Baca</item>
+        <item>Tulis</item>
+        <item>Cari</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_special_mode_bits">
+        <item>Set UID</item>
+        <item>Set GID</item>
+        <item>Sticky Bit</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_authentication_type_entries">
+        <item>Nama pengguna &amp; Kata sandi</item>
+        <item>Masuk anonim</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_mode_entries">
+        <item>Mode aktif</item>
+        <item>Mode pasif (Disarankan)</item>
+    </string-array>
+    <string-array name="storage_edit_sftp_server_authentication_type_entries">
+        <item>Nama pengguna &amp; Kata sandi</item>
+        <item>Kunci publik SSH</item>
+    </string-array>
+    <string-array name="storage_edit_smb_server_authentication_type_entries">
+        <item>Nama pengguna &amp; Kata sandi</item>
+        <item>Akses tamu</item>
+        <item>Akses anonim</item>
+    </string-array>
+</resources>

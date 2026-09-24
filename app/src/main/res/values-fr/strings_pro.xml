@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pro_purchase_title">WizeFiles Pro</string>
+    <string name="pro_purchase_heading">Débloquer WizeFiles Pro</string>
+    <string name="pro_purchase_intro">Profitez des outils avancés conçus pour les flux de fichiers exigeants, tout en conservant gratuitement la gestion essentielle des fichiers.</string>
+    <string name="pro_purchase_benefits_title">Inclus avec Pro</string>
+    <string name="pro_purchase_benefit_dual_pane">✓ Flux à deux volets et glisser-déposer entre les volets</string>
+    <string name="pro_purchase_benefit_connections">✓ Connexions cloud et réseau illimitées</string>
+    <string name="pro_purchase_benefit_sync">✓ Synchronisation, profils de sauvegarde et opérations planifiées</string>
+    <string name="pro_purchase_benefit_power_tools">✓ Root, Shizuku, serveurs intégrés et outils avancés</string>
+    <string name="pro_purchase_benefit_signing">✓ Flux de signature APK, AAB, APKS, XAPK et APKM</string>
+    <string name="pro_purchase_benefit_support">✓ Améliorations Pro continues et soutien au développement de WizeFiles</string>
+
+    <string name="pro_purchase_active_title">WizeFiles Pro est actif</string>
+    <string name="pro_purchase_active_summary">Toutes les fonctionnalités Pro sont disponibles sur cette installation.</string>
+    <string name="pro_purchase_active_status">Merci de soutenir WizeFiles.</string>
+
+    <string name="pro_purchase_plans_title">Choisissez votre offre Pro</string>
+    <string name="pro_purchase_plans_summary">L’achat à vie et les abonnements débloquent les mêmes fonctionnalités Pro. Les prix sont fournis par Google Play selon votre compte et votre région.</string>
+    <string name="pro_purchase_lifetime_title">Pro à vie</string>
+    <string name="pro_purchase_yearly_title">Pro annuel</string>
+    <string name="pro_purchase_monthly_title">Pro mensuel</string>
+    <string name="pro_purchase_lifetime_summary">Un seul paiement pour un accès Pro permanent.</string>
+    <string name="pro_purchase_yearly_summary">Accès Pro facturé une fois par an.</string>
+    <string name="pro_purchase_monthly_summary">Accès Pro flexible facturé chaque mois.</string>
+    <string name="pro_purchase_recommended">Recommandé</string>
+    <string name="pro_purchase_trial_available">Essai gratuit disponible si vous êtes éligible</string>
+    <string name="pro_purchase_price_yearly">%1$s / an</string>
+    <string name="pro_purchase_price_monthly">%1$s / mois</string>
+    <string name="pro_purchase_buy_lifetime">Acheter l’accès à vie pour %1$s</string>
+    <string name="pro_purchase_subscribe_yearly">S’abonner à l’année pour %1$s</string>
+    <string name="pro_purchase_subscribe_monthly">S’abonner au mois pour %1$s</string>
+
+    <string name="pro_purchase_choose_plan">Choisissez une offre pour continuer en toute sécurité dans Google Play.</string>
+    <string name="pro_purchase_connecting">Connexion à Google Play…</string>
+    <string name="pro_purchase_complete_in_play">Terminez votre achat dans Google Play.</string>
+    <string name="pro_purchase_pending">Votre paiement est en attente. Pro sera activé après confirmation par Google Play.</string>
+    <string name="pro_purchase_activated">WizeFiles Pro est maintenant actif.</string>
+    <string name="pro_purchase_active_ack_pending">Pro est actif. La confirmation Google Play sera retentée automatiquement.</string>
+    <string name="pro_purchase_canceled">Achat annulé. Aucun montant n’a été débité.</string>
+    <string name="pro_purchase_restore">Restaurer les achats</string>
+    <string name="pro_purchase_restore_started">Recherche d’achats existants dans Google Play…</string>
+    <string name="pro_purchase_manage">Gérer l’abonnement dans Google Play</string>
+    <string name="pro_purchase_retry">Réessayer</string>
+
+    <string name="pro_purchase_unavailable">Les achats ne sont pas disponibles dans cette version ou sur cet appareil.</string>
+    <string name="pro_purchase_products_unavailable">Aucune offre Pro éligible n’est disponible pour ce compte Google Play.</string>
+    <string name="pro_purchase_network_error">Google Play est inaccessible. Vérifiez votre connexion et réessayez.</string>
+    <string name="pro_purchase_backend_error">WizeFiles ne peut pas vérifier l’achat pour le moment. Votre paiement reste auprès de Google Play ; utilisez « Restaurer les achats » pour réessayer.</string>
+    <string name="pro_purchase_verification_error">L’achat n’a pas pu être vérifié de manière sécurisée. Pro n’a pas été activé.</string>
+    <string name="pro_purchase_acknowledgement_error">Pro est actif, mais la confirmation Google Play est en attente et sera retentée automatiquement.</string>
+    <string name="pro_purchase_internal_error">L’achat n’a pas pu être démarré. Veuillez réessayer.</string>
+    <string name="pro_purchase_manage_unavailable">Impossible d’ouvrir la gestion des abonnements Google Play.</string>
+
+    <string name="pro_purchase_legal">Le paiement est traité par Google Play. Les abonnements se renouvellent automatiquement, sauf annulation dans Google Play avant le renouvellement. Pro à vie est un achat unique. Les fichiers existants restent accessibles si un abonnement prend fin.</string>
+    <string name="about_pro_title">WizeFiles Pro</string>
+    <string name="about_pro_summary">Voir les offres, restaurer les achats ou gérer Pro</string>
+</resources>

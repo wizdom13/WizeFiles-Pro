@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="AlwaysShowAction">
+
+    <item
+        android:id="@+id/action_cut"
+        android:alphabeticShortcut="x"
+        android:icon="@drawable/ic_cut_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/cut"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_copy"
+        android:alphabeticShortcut="c"
+        android:icon="@drawable/ic_copy_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/copy"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_copy_to_other_pane"
+        android:icon="@drawable/ic_copy_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_select_action_copy_to_other_pane"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_move_to_other_pane"
+        android:icon="@drawable/ic_cut_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_select_action_move_to_other_pane"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_delete"
+        android:icon="@drawable/ic_delete_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/delete"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_restore"
+        android:icon="@drawable/ic_restore_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_action_restore"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_open_with"
+        android:icon="@drawable/ic_open_as"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_item_action_open_with"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_set_ringtone"
+        android:orderInCategory="100"
+        android:title="@string/audio_player_set_ringtone"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@drawable/ic_edit_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/edit"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sign_apk"
+        android:icon="@drawable/ic_lock_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/apk_signing_sign_title"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_verify_apk"
+        android:icon="@drawable/ic_info_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/apk_signing_verify_title"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sign_aab"
+        android:icon="@drawable/ic_lock_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/aab_signing_sign_title"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_verify_aab"
+        android:icon="@drawable/ic_info_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/aab_signing_verify_title"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sign_apks"
+        android:icon="@drawable/ic_lock_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/apks_signing_sign_title"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_verify_apks"
+        android:icon="@drawable/ic_info_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/apks_signing_verify_title"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sign_xapk"
+        android:icon="@drawable/ic_lock_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/xapk_signing_sign_title"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_verify_xapk"
+        android:icon="@drawable/ic_info_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/xapk_signing_verify_title"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_import_apkm"
+        android:icon="@drawable/ic_info_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/apkm_import_title"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_rename"
+        android:icon="@drawable/ic_edit_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/rename"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_extract"
+        android:icon="@drawable/ic_extract_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_select_action_extract"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_archive"
+        android:icon="@drawable/ic_save_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_list_select_action_archive"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_encrypt"
+        android:icon="@drawable/ic_lock_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_crypto_encrypt"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_decrypt"
+        android:icon="@drawable/ic_unlock_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_crypto_decrypt"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/share"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_send_nearby"
+        android:icon="@drawable/ic_transfer_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/nearby_send_selected"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_batch_rename"
+        android:icon="@drawable/ic_batch_rename_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/batch_rename_title"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_copy_path"
+        android:icon="@drawable/ic_copy_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_item_action_copy_path"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_add_bookmark"
+        android:icon="@drawable/ic_pin_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_item_action_add_bookmark"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_create_shortcut"
+        android:icon="@drawable/ic_open_as"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_item_action_create_shortcut"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_properties"
+        android:icon="@drawable/ic_info_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/file_item_action_properties"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_select_all"
+        android:alphabeticShortcut="a"
+        android:icon="@drawable/ic_check_control_normal_24dp"
+        app:iconTint="@color/file_browser_menu_icon_tint"
+        android:orderInCategory="100"
+        android:title="@string/select_all"
+        app:showAsAction="never" />
+</menu>

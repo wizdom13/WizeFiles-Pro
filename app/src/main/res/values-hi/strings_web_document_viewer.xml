@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="web_document_viewer_title">सेव्ड डॉक्यूमेंट व्यूअर</string>
+    <string name="web_document_viewer_loading">सहेजे गए दस्तावेज़ खोलना</string>
+    <string name="web_document_viewer_failed">यह सहेजा गया दस्तावेज़ खोला नहीं जा सकता है।</string>
+    <string name="web_document_viewer_unsafe">यह सहेजा गया दस्तावेज़ क्षतिग्रस्त है या सुरक्षित संसाधन सीमा से अधिक है।</string>
+    <string name="web_document_viewer_unavailable">इस फ़ाइल के लिए आंतरिक सहेजे गए दस्तावेज़ दर्शक अनुपलब्ध हैं।</string>
+    <string name="web_document_viewer_renderer_failed">इस दस्तावेज़ को प्रदर्शित करते समय सिस्टम वेब रेंडर बंद कर दिया गया।</string>
+    <string name="web_document_viewer_open_with">साथ में खोलें</string>
+    <string name="web_document_viewer_open_link">ओपन डॉक्यूमेंट लिंक</string>
+    <string name="web_document_viewer_link_blocked">इस दस्तावेज़ लिंक को अवरुद्ध कर दिया गया था।</string>
+    <string name="web_document_viewer_reload">रीलोड</string>
+    <string name="web_document_viewer_share">शेयर सेव्ड डॉक्यूमेंट</string>
+</resources>

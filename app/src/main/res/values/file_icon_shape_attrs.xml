@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FileIconShapeView">
+        <attr name="fileIconVisualStyle" format="enum">
+            <enum name="plain" value="0" />
+            <enum name="builtInIcon" value="1" />
+            <enum name="thumbnail" value="2" />
+            <enum name="outline" value="3" />
+        </attr>
+        <attr name="fileIconShowPrimaryOutline" format="boolean" />
+    </declare-styleable>
+</resources>

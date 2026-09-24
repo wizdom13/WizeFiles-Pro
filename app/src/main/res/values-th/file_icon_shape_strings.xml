@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="settings_icon_shape_title">รูปทรงไอคอน</string>
+    <string name="settings_icon_shape_squircle">เส้นต่อเนื่อง</string>
+    <string name="settings_icon_shape_rounded_square">สี่เหลี่ยมด้านเท่า</string>
+    <string name="settings_icon_shape_flower">ดอกไม้</string>
+    <string name="settings_icon_shape_square">จัตุรัส</string>
+    <string name="settings_icon_shape_teardrop">หยดเลือด</string>
+    <string name="settings_icon_shape_pebble">วงกลม</string>
+    <string name="settings_icon_shape_vessel">เลเยอร์</string>
+    <string name="settings_icon_shape_pentagon">เพนตากอน</string>
+    <string name="settings_icon_shape_hexagon_1">อักขระเฮกกอน 1</string>
+    <string name="settings_icon_shape_hexagon_2">หกเหลี่ยมแบบที่ 2</string>
+    <string name="settings_icon_shape_heptagon">เฮพทากอน</string>
+    <string name="settings_icon_shape_octagon">หมึก</string>
+</resources>

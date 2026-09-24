@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/deleteMessageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+    <CheckBox
+        android:id="@+id/permanentDeleteCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/delete_option_permanent_delete" />
+
+    <CheckBox
+        android:id="@+id/skipConfirmationForSessionCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/delete_option_skip_confirmation_for_session" />
+
+    <CheckBox
+        android:id="@+id/secureShredCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/delete_option_secure_shred" />
+
+    <TextView
+        android:id="@+id/secureShredUnsupportedView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/delete_option_secure_shred_unsupported"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+        android:visibility="gone" />
+
+</LinearLayout>

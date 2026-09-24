@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <plurals name="size_in_bytes_format">
+        <item quantity="one">%1$,d bayt</item>
+        <item quantity="other">%1$,d bayt</item>
+    </plurals>
+    <plurals name="file_job_copy_notification_title_multiple_format">
+        <item quantity="one">%1$,d dosya “%2$s” klasörüne kopyalanıyor</item>
+        <item quantity="other">%1$,d dosya “%2$s” klasörüne kopyalanıyor</item>
+    </plurals>
+    <plurals name="file_job_extract_notification_title_multiple_format">
+        <item quantity="one">%1$,d dosya “%2$s” klasörüne çıkartılıyor</item>
+        <item quantity="other">%1$,d dosya “%2$s” klasörüne çıkartılıyor</item>
+    </plurals>
+    <plurals name="file_job_move_notification_title_multiple_format">
+        <item quantity="one">%1$,d dosya “%2$s” klasörüne taşınıyor</item>
+        <item quantity="other">%1$,d dosya “%2$s” klasörüne taşınıyor</item>
+    </plurals>
+    <plurals name="file_job_delete_notification_title_multiple_format">
+        <item quantity="one">%1$,d dosya siliniyor</item>
+        <item quantity="other">%1$,d dosya siliniyor</item>
+    </plurals>
+    <plurals name="file_job_restore_selinux_context_notification_title_multiple_format">
+        <item quantity="one">%1$,d dosya için SELinux durumu geri yükleniyor</item>
+        <item quantity="other">%1$,d dosya için SELinux durumu geri yükleniyor</item>
+    </plurals>
+    <plurals name="file_list_subtitle_directory_count_format">
+        <item quantity="one">%1$,d klasör</item>
+        <item quantity="other">%1$,d klasör</item>
+    </plurals>
+    <plurals name="file_list_subtitle_file_count_format">
+        <item quantity="one">%1$,d dosya</item>
+        <item quantity="other">%1$,d dosya</item>
+    </plurals>
+    <plurals name="file_job_archive_scan_notification_title_format">
+        <item quantity="one">%1$,d dosyasını (%2$s) sıkıştırmaya hazırlanıyor</item>
+        <item quantity="other">%1$,d dosyalarını (%2$s) sıkıştırmaya hazırlanıyor</item>
+    </plurals>
+    <plurals name="file_job_archive_notification_title_multiple_format">
+        <item quantity="one">%1$,d dosyasını “%2$s” içerisine paketleme</item>
+        <item quantity="other">%1$,d dosyalarını “%2$s” olarak paketleme</item>
+    </plurals>
+    <plurals name="file_job_copy_scan_notification_title_format">
+        <item quantity="one">%1$,d dosyasını (%2$s) kopyalamaya hazırlanıyor</item>
+        <item quantity="other">%1$,d dosyalarını (%2$s) kopyalamaya hazırlanıyor</item>
+    </plurals>
+    <plurals name="file_job_extract_scan_notification_title_format">
+        <item quantity="one">%1$,d dosyasını (%2$s) çıkarmaya hazırlanıyor</item>
+        <item quantity="other">%1$,d dosyalarını (%2$s) çıkarmaya hazırlanıyor</item>
+    </plurals>
+    <plurals name="file_job_move_scan_notification_title_format">
+        <item quantity="one">%1$,d dosyasını (%2$s) taşımaya hazırlanıyor</item>
+        <item quantity="other">%1$,d dosyalarını (%2$s) taşımaya hazırlanıyor</item>
+    </plurals>
+    <plurals name="file_job_delete_scan_notification_title_format">
+        <item quantity="one">%1$,d dosyasını silmeye hazırlanıyor</item>
+        <item quantity="other">%1$,d dosyalarını silmeye hazırlanıyor</item>
+    </plurals>
+    <plurals name="file_job_set_owner_scan_notification_title_format">
+        <item quantity="one">%1$,d dosyasının sahibini değiştirmeye hazırlanıyor</item>
+        <item quantity="other">%1$,d dosyalarının sahibini değiştirmeye hazırlanıyor</item>
+    </plurals>
+    <plurals name="file_job_set_owner_notification_title_multiple_format">
+        <item quantity="one">%1$,d dosyasının sahibi güncelleniyor</item>
+        <item quantity="other">%1$,d dosyalarının sahibi güncelleniyor</item>
+    </plurals>
+    <plurals name="file_job_set_group_scan_notification_title_format">
+        <item quantity="one">%1$,d dosyası için grubu değiştirmeye hazırlanıyor</item>
+        <item quantity="other">%1$,d dosyaları için grubu değiştirmeye hazırlanıyor</item>
+    </plurals>
+    <plurals name="file_job_set_group_notification_title_multiple_format">
+        <item quantity="one">%1$,d dosyası için grup güncelleniyor</item>
+        <item quantity="other">%1$,d dosyaları için grup güncelleniyor</item>
+    </plurals>
+    <plurals name="file_job_set_mode_scan_notification_title_format">
+        <item quantity="one">%1$,d dosyasının izinlerini değiştirmeye hazırlanıyor</item>
+        <item quantity="other">%1$,d dosyalarının izinlerini değiştirmeye hazırlanıyor</item>
+    </plurals>
+    <plurals name="file_job_set_mode_notification_title_multiple_format">
+        <item quantity="one">%1$,d dosyası için izinler güncelleniyor</item>
+        <item quantity="other">%1$,d dosyaları için izinler güncelleniyor</item>
+    </plurals>
+    <plurals name="file_job_set_selinux_context_scan_notification_title_format">
+        <item quantity="one">%1$,d dosyası için SELinux içeriğini değiştirmeye hazırlanıyor</item>
+        <item quantity="other">%1$,d dosyaları için SELinux içeriğini değiştirmeye hazırlanma</item>
+    </plurals>
+    <plurals name="file_job_set_selinux_context_notification_title_multiple_format">
+        <item quantity="one">%1$,d dosyası için SELinux içeriği güncelleniyor</item>
+        <item quantity="other">%1$,d dosyaları için SELinux içeriği güncelleniyor</item>
+    </plurals>
+    <plurals name="file_job_restore_selinux_context_scan_notification_title_format">
+        <item quantity="one">%1$,d dosyası için SELinux içeriğini geri yüklemeye hazırlanıyor</item>
+        <item quantity="other">%1$,d dosyaları için SELinux içeriğini geri yüklemeye hazırlanıyor</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_files_format">
+        <item quantity="one">%1$,d dosyasını silmek istediğinizden emin misiniz?</item>
+        <item quantity="other">%1$,d dosyalarını silmek istediğinizden emin misiniz?</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_directories_format">
+        <item quantity="one">%1$,d klasörünü ve içeriğini silmek istediğinizden emin misiniz?</item>
+        <item quantity="other">%1$,d klasörlerini ve içeriklerini silmek istediğinizden emin misiniz?</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_mixed_format">
+        <item quantity="one">%1$,d öğesini silmek istediğinizden emin misiniz?</item>
+        <item quantity="other">%1$,d öğelerini silmek istediğinizden emin misiniz?</item>
+    </plurals>
+    <plurals name="file_list_title_open_file">
+        <item quantity="one">Bir dosya seçin</item>
+        <item quantity="other">Dosyaları seç</item>
+    </plurals>
+    <plurals name="file_list_title_open_directory">
+        <item quantity="one">Bir klasör seçin</item>
+        <item quantity="other">Klasörleri seç</item>
+    </plurals>
+    <plurals name="file_properties_basic_contents_format">
+        <item quantity="one">%1$,d öğesi, %2$s\'i kapsıyor</item>
+        <item quantity="other">%1$,d öğeleri, %2$s\'i kapsıyor</item>
+    </plurals>
+    <plurals name="file_properties_apk_requested_permissions_positive_format">
+        <item quantity="one">%1$,d izin gerekli</item>
+        <item quantity="other">%1$,d izinler gerekli</item>
+    </plurals>
+    <plurals name="settings_root_strategy_message_format">
+        <item quantity="one">Şu anda çalışan %1$,d dosya göreviniz var. root izinlerini şimdi değiştirmek bir hataya neden olabilir. Hala değiştirmek istiyor musun?</item>
+        <item quantity="other">Şu anda çalışan %1$,d dosya görevleriniz var. root izinlerini şimdi değiştirmek bir hataya neden olabilir. Hala değiştirmek istiyor musun?</item>
+    </plurals>
+    <plurals name="file_item_directory_count">
+        <item quantity="one">%1$,d öğesi</item>
+        <item quantity="other">%1$,d öğeler</item>
+    </plurals>
+    <plurals name="storage_cleaner_section_item_count">
+        <item quantity="one">%1$,d öğesi</item>
+        <item quantity="other">%1$,d öğeler</item>
+    </plurals>
+</resources>

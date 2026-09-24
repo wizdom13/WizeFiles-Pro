@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">Set as ringtone</string>
+    <string name="audio_player_ringtone_set">Ringtone set successfully</string>
+    <string name="audio_player_ringtone_failed">Couldn’t set ringtone</string>
+    <string name="audio_player_ringtone_permission_required">Allow WizeFiles to modify system settings to set the ringtone</string>
+</resources>

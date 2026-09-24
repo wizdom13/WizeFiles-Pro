@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_pdf_search"
+        android:icon="@drawable/ic_search_control_normal_24dp"
+        android:title="@string/pdf_viewer_search"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_pdf_share"
+        android:icon="@drawable/ic_share_control_normal_24dp"
+        android:title="@string/pdf_viewer_share"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_pdf_fullscreen"
+        android:icon="@drawable/ic_pdf_fullscreen_24dp"
+        android:title="@string/pdf_viewer_fullscreen"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_pdf_properties"
+        android:icon="@drawable/ic_info_control_normal_24dp"
+        android:title="@string/pdf_viewer_properties"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_pdf_open_with"
+        android:icon="@drawable/ic_open_as"
+        android:title="@string/pdf_viewer_open_with"
+        app:showAsAction="never" />
+</menu>

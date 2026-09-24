@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="font_viewer_error_too_large">แบบอักษรนี้มีขนาดใหญ่เกินกว่าจะแสดงตัวอย่างได้อย่างปลอดภัย</string>
+    <string name="font_viewer_error_invalid">ไฟล์แบบอักษรนี้ไม่ถูกต้องหรือไม่รองรับ</string>
+    <string name="font_viewer_error_open_failed">WizeFiles ไม่สามารถเปิดแบบอักษรนี้ได้ โปรดตรวจสอบว่าไฟล์ยังคงอยู่และคุณมีสิทธิ์เข้าถึง</string>
+    <string name="font_viewer_collection_faces">%1$d แบบ</string>
+</resources>

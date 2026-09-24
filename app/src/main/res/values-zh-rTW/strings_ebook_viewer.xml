@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="ebook_viewer_title">電子書閱讀器</string>
+    <string name="ebook_viewer_loading">開啟電子書</string>
+    <string name="ebook_viewer_failed">此電子書無法開啟 。</string>
+    <string name="ebook_viewer_unsafe">本電子書損壞或超過安全集裝箱限值.</string>
+    <string name="ebook_viewer_encrypted">加密或 DRM- 保護 Kindle 書籍不支援。</string>
+    <string name="ebook_viewer_print_replica">AZW4 印刷複製品書籍不受內部讀者的支援.</string>
+    <string name="ebook_viewer_too_large">這本電子書超過了內部閱讀器的安全限制.</string>
+    <string name="ebook_viewer_unavailable">此檔案無法使用內部電子書閱讀器 。</string>
+    <string name="ebook_viewer_open_with">開啟</string>
+    <string name="ebook_viewer_open_link">開啟電子書連結</string>
+    <string name="ebook_viewer_link_blocked">這個電子書連結被遮蔽了 。</string>
+    <string name="ebook_viewer_resource_failed">無法裝入出版物資源 。</string>
+    <string name="ebook_viewer_toc">目錄</string>
+    <string name="ebook_viewer_no_toc">本電子書沒有目錄.</string>
+    <string name="ebook_viewer_smaller">較小的文字</string>
+    <string name="ebook_viewer_larger">較長的文字</string>
+    <string name="ebook_viewer_theme">更改主題</string>
+    <string name="ebook_viewer_share">共享電子書</string>
+</resources>

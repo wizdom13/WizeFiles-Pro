@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="web_document_viewer_title">บันทึกตัวแสดงเอกสาร</string>
+    <string name="web_document_viewer_loading">กําลังเปิดเอกสารที่ถูกบันทึก</string>
+    <string name="web_document_viewer_failed">ไม่สามารถเปิดเอกสารที่บันทึกไว้นี้ได้</string>
+    <string name="web_document_viewer_unsafe">เอกสารที่ถูกบันทึกนี้เสียหาย หรือเกินข้อจํากัดด้านทรัพยากร</string>
+    <string name="web_document_viewer_unavailable">ไม่พบตัวแสดงเอกสารที่ถูกบันทึกภายในสําหรับแฟ้มนี้</string>
+    <string name="web_document_viewer_renderer_failed">ตัวแสดงหน้าเว็บของระบบหยุดทํางานขณะที่แสดงเอกสารนี้</string>
+    <string name="web_document_viewer_open_with">เปิดใช้ด้วย</string>
+    <string name="web_document_viewer_open_link">เปิดที่อยู่เชื่อมโยงของเอกสาร</string>
+    <string name="web_document_viewer_link_blocked">เอกสารเชื่อมโยงนี้ถูกบล็อค</string>
+    <string name="web_document_viewer_reload">โหลดใหม่</string>
+    <string name="web_document_viewer_share">เอกสารที่ใช้ร่วมกันที่บันทึกไว้</string>
+</resources>

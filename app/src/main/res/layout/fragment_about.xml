@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.wisso.wizefiles.ui.CoordinatorAppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorAppBarSurface"
+        android:theme="?actionBarTheme"
+        app:liftOnScroll="true"
+        app:liftOnScrollTargetViewId="@id/scrollView">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:popupTheme="?actionBarPopupTheme" />
+    </com.wisso.wizefiles.ui.CoordinatorAppBarLayout>
+
+    <com.wisso.wizefiles.ui.CoordinatorScrollingFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:divider="@drawable/transparent_divider_vertical_16dp"
+                android:orientation="vertical"
+                android:padding="@dimen/screen_edge_margin"
+                android:showDividers="middle">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardPreventCornerOverlap="false">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:minHeight="88dp"
+                            android:orientation="horizontal"
+                            android:paddingStart="20dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="20dp"
+                            android:paddingBottom="16dp">
+
+                            <ImageView
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                android:contentDescription="@string/app_name"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@string/app_name"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@string/about_title"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textColor="?android:textColorSecondary" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <com.wisso.wizefiles.widget.ForegroundLinearLayout
+                            android:id="@+id/versionLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:minHeight="64dp"
+                            android:orientation="horizontal"
+                            android:paddingStart="20dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="20dp"
+                            android:paddingBottom="8dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_information_white_24dp"
+                                app:tint="?attr/colorPrimary" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@string/about_version_title"
+                                    android:textAppearance="?textAppearanceListItem" />
+
+                                <TextView
+                                    android:id="@+id/versionValueText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@string/app_version"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                                    android:textColor="?android:textColorSecondary" />
+                            </LinearLayout>
+                        </com.wisso.wizefiles.widget.ForegroundLinearLayout>
+
+                        <com.wisso.wizefiles.widget.ForegroundLinearLayout
+                            android:id="@+id/proLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:minHeight="64dp"
+                            android:orientation="horizontal"
+                            android:paddingStart="20dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="20dp"
+                            android:paddingBottom="8dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:contentDescription="@null"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_workspace_premium_24dp"
+                                app:tint="?attr/colorPrimary" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@string/about_pro_title"
+                                    android:textAppearance="?textAppearanceListItem" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:ellipsize="end"
+                                    android:maxLines="2"
+                                    android:text="@string/about_pro_summary"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                                    android:textColor="?android:textColorSecondary" />
+                            </LinearLayout>
+                        </com.wisso.wizefiles.widget.ForegroundLinearLayout>
+
+                        <com.wisso.wizefiles.widget.ForegroundLinearLayout
+                            android:id="@+id/licensesLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:foreground="?selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:minHeight="56dp"
+                            android:orientation="horizontal"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_text_file_white_24dp"
+                                app:tint="?attr/colorPrimary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="@string/about_licenses_title"
+                                android:textAppearance="?textAppearanceListItem" />
+                        </com.wisso.wizefiles.widget.ForegroundLinearLayout>
+
+                        <com.wisso.wizefiles.widget.ForegroundLinearLayout
+                            android:id="@+id/privacyPolicyLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:foreground="?selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:minHeight="56dp"
+                            android:orientation="horizontal"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_lock_white_24dp"
+                                app:tint="?attr/colorPrimary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="@string/about_privacy_policy_title"
+                                android:textAppearance="?textAppearanceListItem" />
+                        </com.wisso.wizefiles.widget.ForegroundLinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardPreventCornerOverlap="false">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="12dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="20dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="20dp"
+                            android:paddingBottom="8dp"
+                            android:text="@string/about_author_title"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="?android:textColorSecondary" />
+
+                        <com.wisso.wizefiles.widget.ForegroundLinearLayout
+                            android:id="@+id/authorNameLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:minHeight="56dp"
+                            android:orientation="horizontal"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_person_white_24dp"
+                                app:tint="?attr/colorPrimary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="@string/about_author_name_title"
+                                android:textAppearance="?textAppearanceListItem" />
+                        </com.wisso.wizefiles.widget.ForegroundLinearLayout>
+
+                        <com.wisso.wizefiles.widget.ForegroundLinearLayout
+                            android:id="@+id/authorEmailLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:minHeight="56dp"
+                            android:orientation="horizontal"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_text_file_white_24dp"
+                                app:tint="?attr/colorPrimary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="@string/about_author_email_title"
+                                android:textAppearance="?textAppearanceListItem" />
+                        </com.wisso.wizefiles.widget.ForegroundLinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardPreventCornerOverlap="false">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="12dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="20dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="20dp"
+                            android:paddingBottom="8dp"
+                            android:text="@string/about_other_title"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="?android:textColorSecondary" />
+
+                        <com.wisso.wizefiles.widget.ForegroundLinearLayout
+                            android:id="@+id/websiteLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:minHeight="56dp"
+                            android:orientation="horizontal"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_computer_white_24dp"
+                                app:tint="?attr/colorPrimary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="@string/about_website_title"
+                                android:textAppearance="?textAppearanceListItem" />
+                        </com.wisso.wizefiles.widget.ForegroundLinearLayout>
+
+                        <com.wisso.wizefiles.widget.ForegroundLinearLayout
+                            android:id="@+id/faqLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:minHeight="56dp"
+                            android:orientation="horizontal"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_information_white_24dp"
+                                app:tint="?attr/colorPrimary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="@string/about_faq_title"
+                                android:textAppearance="?textAppearanceListItem" />
+                        </com.wisso.wizefiles.widget.ForegroundLinearLayout>
+
+                        <com.wisso.wizefiles.widget.ForegroundLinearLayout
+                            android:id="@+id/rateUsLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:minHeight="56dp"
+                            android:orientation="horizontal"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_about_white_24dp"
+                                app:tint="?attr/colorPrimary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="@string/about_rate_us_title"
+                                android:textAppearance="?textAppearanceListItem" />
+                        </com.wisso.wizefiles.widget.ForegroundLinearLayout>
+
+                        <com.wisso.wizefiles.widget.ForegroundLinearLayout
+                            android:id="@+id/inviteFriendsLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:minHeight="56dp"
+                            android:orientation="horizontal"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_share_control_normal_24dp"
+                                app:tint="?attr/colorPrimary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="@string/about_invite_friends_title"
+                                android:textAppearance="?textAppearanceListItem" />
+                        </com.wisso.wizefiles.widget.ForegroundLinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.wisso.wizefiles.ui.CoordinatorScrollingFrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

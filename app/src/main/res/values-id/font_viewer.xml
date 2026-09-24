@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="font_viewer_error_too_large">Font ini terlalu besar untuk dipratinjau dengan aman.</string>
+    <string name="font_viewer_error_invalid">File font ini tidak valid atau tidak didukung.</string>
+    <string name="font_viewer_error_open_failed">WizeFiles tidak dapat membuka font ini. Pastikan file masih ada dan Anda memiliki akses.</string>
+    <string name="font_viewer_collection_faces">%1$d wajah</string>
+</resources>

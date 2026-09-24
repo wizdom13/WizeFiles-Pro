@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_default_value_empty" />
+    <string name="pref_key_storages">key_storages</string>
+    <string name="pref_key_file_list_default_directory">key_file_list_default_directory</string>
+    <string name="pref_key_file_list_persistent_drawer_open">key_file_list_persistent_drawer_open</string>
+    <string name="pref_key_file_list_show_hidden_files">key_file_list_show_hidden_files</string>
+    <string name="pref_key_file_list_view_type">key_file_list_view_type</string>
+    <string name="pref_key_file_list_grid_column_overrides">key_file_list_grid_column_overrides</string>
+    <string name="pref_default_value_file_list_view_type">0</string>
+    <string name="pref_key_file_list_sort_options">key_file_list_sort_options</string>
+    <string name="pref_key_file_list_view_sort_path_specific">key_file_list_view_sort_path_specific</string>
+    <string name="pref_key_create_archive_type">key_create_archive_type</string>
+    <string name="pref_key_locale">key_locale</string>
+    <string name="pref_key_night_mode">key_night_mode</string>
+    <string name="pref_default_value_night_mode">0</string>
+    <string name="pref_key_black_night_mode">key_black_night_mode</string>
+    <string name="pref_key_file_list_animation">key_file_list_animation</string>
+    <string name="pref_key_file_name_ellipsize">key_file_name_ellipsize</string>
+    <string name="pref_default_value_file_name_ellipsize">1</string>
+    <string name="pref_key_standard_directory_settings">key_standard_directories</string>
+    <string name="pref_key_bookmark_directories">key_bookmark_directories</string>
+    <string name="pref_key_recycle_bin">key_recycle_bin</string>
+    <string name="pref_key_root_strategy">key_root_strategy</string>
+    <string name="pref_default_value_root_strategy">1</string>
+    <string name="pref_key_archive_file_name_encoding">key_archive_file_name_encoding</string>
+    <string name="pref_default_value_archive_file_name_encoding">UTF-8</string>
+    <string name="pref_key_open_apk_default_action">key_open_apk_default_action</string>
+    <string name="pref_default_value_open_apk_default_action">2</string>
+    <string name="pref_key_show_pdf_thumbnail_pre_28">key_show_pdf_thumbnail_pre_28</string>
+    <string name="pref_key_read_remote_files_for_thumbnail">key_read_remote_files_for_thumbnail</string>
+
+    <string name="pref_key_security_password">key_security_password</string>
+    <string name="pref_key_protect_browser">key_protect_browser</string>
+    <string name="pref_key_enable_biometric">key_enable_biometric</string>
+    <string name="pref_key_time_to_relock">key_time_to_relock</string>
+    <string name="pref_key_sftp_pinned_host_keys">key_sftp_pinned_host_keys</string>
+    <string name="pref_default_value_time_to_relock">0</string>
+
+    <string name="pref_key_backup_settings">key_backup_settings</string>
+    <string name="pref_key_restore_settings">key_restore_settings</string>
+
+    <string name="pref_default_value_sftp_pinned_host_keys">{}</string>
+</resources>

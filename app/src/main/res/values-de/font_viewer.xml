@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="font_viewer_error_too_large">Diese Schriftart ist zu groß für eine sichere Vorschau.</string>
+    <string name="font_viewer_error_invalid">Diese Schriftdatei ist ungültig oder wird nicht unterstützt.</string>
+    <string name="font_viewer_error_open_failed">WizeFiles konnte diese Schriftart nicht öffnen. Prüfe, ob die Datei noch vorhanden ist und du Zugriff darauf hast.</string>
+    <string name="font_viewer_collection_faces">%1$d Schriftschnitte</string>
+</resources>

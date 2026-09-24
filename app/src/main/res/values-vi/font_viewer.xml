@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="font_viewer_error_too_large">Phông chữ này quá lớn để xem trước an toàn.</string>
+    <string name="font_viewer_error_invalid">Tệp phông chữ này không hợp lệ hoặc không được hỗ trợ.</string>
+    <string name="font_viewer_error_open_failed">WizeFiles không thể mở phông chữ này. Hãy kiểm tra xem tệp còn tồn tại và bạn có quyền truy cập hay không.</string>
+    <string name="font_viewer_collection_faces">%1$d kiểu</string>
+</resources>

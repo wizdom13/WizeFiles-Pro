@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="font_viewer_error_too_large">यह फ़ॉन्ट सुरक्षित पूर्वावलोकन के लिए बहुत बड़ा है।</string>
+    <string name="font_viewer_error_invalid">यह फ़ॉन्ट फ़ाइल अमान्य है या समर्थित नहीं है।</string>
+    <string name="font_viewer_error_open_failed">WizeFiles इस फ़ॉन्ट को नहीं खोल सका। जाँचें कि फ़ाइल अभी भी मौजूद है और आपके पास इसकी पहुँच है।</string>
+    <string name="font_viewer_collection_faces">%1$d फ़ेस</string>
+</resources>

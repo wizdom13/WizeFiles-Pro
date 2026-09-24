@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center" android:width="4dp" android:height="4dp" android:top="-8dp"
+        android:drawable="@drawable/rv_fastscroll_thumb_grip_dot_default" />
+    <item android:gravity="center" android:width="4dp" android:height="4dp"
+        android:drawable="@drawable/rv_fastscroll_thumb_grip_dot_default" />
+    <item android:gravity="center" android:width="4dp" android:height="4dp" android:bottom="-8dp"
+        android:drawable="@drawable/rv_fastscroll_thumb_grip_dot_default" />
+</layer-list>

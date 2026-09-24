@@ -1,0 +1,12 @@
+/.gradle/
+/.idea/
+/.kotlin/
+/build/
+/captures/
+/local.properties
+/signing.jks
+/signing.properties
+.DS_Store
+*.iml
+/app/libs/rclone-gomobile.aar
+gha-creds-*.json

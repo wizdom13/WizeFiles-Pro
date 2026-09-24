@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <attr name="colorAppBarSurface" format="color" />
+
+    <declare-styleable name="BottomBarLayout">
+        <attr name="barCornerRadius" format="dimension" />
+        <attr name="bottomInsetAsMargin" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="AspectRatioFrameLayout">
+        <attr name="aspectRatio" format="float" />
+        <attr name="aspectRatioMaxWidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="NavigationViewExtra">
+        <attr name="itemSubtitleTextAppearance" format="reference" />
+        <attr name="itemSubtitleTextColor" format="color" />
+        <attr name="itemSubtitleTextSize" format="dimension" />
+        <attr name="dividerVerticalPadding" format="dimension" />
+    </declare-styleable>
+</resources>

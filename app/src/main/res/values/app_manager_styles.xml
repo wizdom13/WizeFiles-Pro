@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <style name="Widget.WizeFiles.AppManager.SelectionAction" parent="Widget.Material3.Button.TextButton">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:minHeight">@dimen/file_list_selection_action_bar_height</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingStart">@dimen/file_list_selection_action_padding</item>
+        <item name="android:paddingEnd">@dimen/file_list_selection_action_padding</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/file_list_selection_action_tint</item>
+        <item name="android:textSize">@dimen/file_list_selection_action_text_size</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="iconGravity">top</item>
+        <item name="iconPadding">@dimen/file_list_selection_action_icon_padding</item>
+        <item name="iconSize">@dimen/file_list_selection_action_icon_size</item>
+        <item name="iconTint">@color/file_list_selection_action_tint</item>
+    </style>
+
+    <style name="Widget.WizeFiles.AppManager.Badge" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">6dp</item>
+        <item name="android:background">@drawable/bg_app_manager_badge</item>
+        <item name="android:paddingStart">6dp</item>
+        <item name="android:paddingTop">1dp</item>
+        <item name="android:paddingEnd">6dp</item>
+        <item name="android:paddingBottom">1dp</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
+    <style name="Widget.WizeFiles.AppManager.SplitBadge" parent="Widget.WizeFiles.AppManager.Badge">
+        <item name="android:layout_marginStart">6dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:background">@drawable/bg_app_manager_split_badge</item>
+        <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
+    </style>
+</resources>

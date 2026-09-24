@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="settings_night_mode_entries">
+            <item>Seguir ajuste del sistema</item><item>Modo claro</item><item>Modo oscuro</item><item>Automático (según la hora)</item><item>Automático (según batería)</item>
+        </string-array>
+    <string-array name="settings_file_name_ellipsize_entries">
+            <item>Cortar el inicio (…name.txt)</item>
+            <item>Cortar el medio (file…name.txt)</item>
+            <item>Cortar el final (filename…)</item>
+            <item>Desplazar texto (marquesina)</item>
+        </string-array>
+    <string-array name="settings_root_strategy_entries">
+            <item>Acceso estándar de usuario (sin root)</item>
+            <item>Modo automático inteligente</item>
+            <item>Forzar acceso root</item>
+        </string-array>
+    <string-array name="settings_open_apk_default_action_entries">
+            <item>Intentar instalar</item>
+            <item>Ver archivos internos</item>
+            <item>Preguntarme siempre</item>
+        </string-array>
+    <string-array name="settings_security_relock_entries">
+            <item>Inmediatamente</item><item>30 segundos</item><item>1 minuto</item><item>5 minutos</item><item>10 minutos</item>
+        </string-array>
+
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_file">
+        <item>Leer</item>
+        <item>Escribir</item>
+        <item>Ejecutar</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_directory">
+        <item>Leer</item>
+        <item>Escribir</item>
+        <item>Buscar</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_special_mode_bits">
+        <item>Establecer UID</item>
+        <item>Establecer GID</item>
+        <item>Bit adhesivo</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_authentication_type_entries">
+        <item>Usuario y contraseña</item>
+        <item>Inicio de sesión anónimo</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_mode_entries">
+        <item>Modo activo</item>
+        <item>Modo pasivo (recomendado)</item>
+    </string-array>
+    <string-array name="storage_edit_sftp_server_authentication_type_entries">
+        <item>Usuario y contraseña</item>
+        <item>Clave pública SSH</item>
+    </string-array>
+    <string-array name="storage_edit_smb_server_authentication_type_entries">
+        <item>Usuario y contraseña</item>
+        <item>Acceso como invitado</item>
+        <item>Acceso anónimo</item>
+    </string-array>
+</resources>

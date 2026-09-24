@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Matching semantic addition role for Material 3 dark surfaces. -->
+    <color name="package_installer_added">#81C784</color>
+</resources>

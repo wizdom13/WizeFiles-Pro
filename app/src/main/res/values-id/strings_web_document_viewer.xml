@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="web_document_viewer_title">Penampil dokumen tersimpan</string>
+    <string name="web_document_viewer_loading">Membuka dokumen tersimpan</string>
+    <string name="web_document_viewer_failed">Dokumen tersimpan ini tidak dapat dibuka.</string>
+    <string name="web_document_viewer_unsafe">Dokumen tersimpan ini rusak atau melampaui batas sumber daya yang aman.</string>
+    <string name="web_document_viewer_unavailable">Penampil dokumen tersimpan internal tidak tersedia untuk berkas ini.</string>
+    <string name="web_document_viewer_renderer_failed">Perender web sistem berhenti saat menampilkan dokumen ini.</string>
+    <string name="web_document_viewer_open_with">Buka dengan</string>
+    <string name="web_document_viewer_open_link">Buka tautan dokumen</string>
+    <string name="web_document_viewer_link_blocked">Tautan dokumen ini diblokir.</string>
+    <string name="web_document_viewer_reload">Muat ulang</string>
+    <string name="web_document_viewer_share">Bagikan dokumen tersimpan</string>
+</resources>

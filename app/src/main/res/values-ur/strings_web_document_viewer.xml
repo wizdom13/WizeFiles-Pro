@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="web_document_viewer_title">محفوظ دستاویز دیکھنے والا</string>
+    <string name="web_document_viewer_loading">محفوظ شدہ دستاویزات کھولیں</string>
+    <string name="web_document_viewer_failed">اس محفوظ شدہ دستاویز کو کھولا نہیں جا سکا۔</string>
+    <string name="web_document_viewer_unsafe">اس محفوظ شدہ دستاویز کو نقصان یا زیادتی سے محفوظ وسائل کی حدود سے تجاوز کیا جاتا ہے۔</string>
+    <string name="web_document_viewer_unavailable">اندرونی محفوظ شدہ دستاویزات دیکھنے والا اس فائل کے لیے غیر موزوں ہے۔</string>
+    <string name="web_document_viewer_renderer_failed">اس دستاویز کو دکھانے کے دوران سسٹم ویب ریڈر نے بند کر دیا۔</string>
+    <string name="web_document_viewer_open_with">کھولیں</string>
+    <string name="web_document_viewer_open_link">اوپن دستاویزی لنک</string>
+    <string name="web_document_viewer_link_blocked">اس دستاویز کا تعلق بلاک کر دیا گیا تھا۔</string>
+    <string name="web_document_viewer_reload">دوبارہ لوڈ کریں</string>
+    <string name="web_document_viewer_share">شیئر محفوظ کردہ دستاویزات</string>
+</resources>

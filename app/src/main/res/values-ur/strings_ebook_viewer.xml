@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="ebook_viewer_title">ای‌میل پڑھنے والے</string>
+    <string name="ebook_viewer_loading">ای‌میل کھولیں</string>
+    <string name="ebook_viewer_failed">یہ ای‌میل نہیں کھولی جا سکتی تھی ۔</string>
+    <string name="ebook_viewer_unsafe">اس ای بک کو نقصان یا اس سے زیادہ محفوظ برتنوں کی حدود میں رکھا جاتا ہے ۔</string>
+    <string name="ebook_viewer_encrypted">نظر انداز یا بے معنی ہے۔ DRM- محفوظ Kindle کتابوں کی تائید نہیں کی جاتی۔</string>
+    <string name="ebook_viewer_print_replica">AZW4 پرنٹ ریپلیکا کتب اندرونی پڑھنے والے کی تائید نہیں کی جاتی ہے۔</string>
+    <string name="ebook_viewer_too_large">یہ کتاب اندرونی پڑھنے والے کی حفاظتی حد سے زیادہ ہے ۔</string>
+    <string name="ebook_viewer_unavailable">اس فائل کے لئے اندرونی ای‌بُک پڑھنے والے کا نام‌ونشان نہیں ہے ۔</string>
+    <string name="ebook_viewer_open_with">کھولیں</string>
+    <string name="ebook_viewer_open_link">اوپن ای بک لنک</string>
+    <string name="ebook_viewer_link_blocked">اس ای بک لنک کو روک دیا گیا تھا ۔</string>
+    <string name="ebook_viewer_resource_failed">ایک اشاعتی وسائل کو بوجھ نہیں اٹھایا جا سکتا تھا ۔</string>
+    <string name="ebook_viewer_toc">ہدایات کے موضوعات</string>
+    <string name="ebook_viewer_no_toc">اس ای بک میں مواد کی کوئی میز نہیں ہے۔</string>
+    <string name="ebook_viewer_smaller">چھوٹا متن</string>
+    <string name="ebook_viewer_larger">بڑے متن</string>
+    <string name="ebook_viewer_theme">موضوع کو تبدیل کریں</string>
+    <string name="ebook_viewer_share">شیئر ای‌میل</string>
+</resources>

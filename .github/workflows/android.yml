@@ -1,0 +1,248 @@
+name: Android CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'documentation/**'
+      - 'web/**'
+      - '*.md'
+      - '**/*.md'
+      - '.github/**'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'LICENSE.*'
+      - 'NOTICE'
+      - 'NOTICE.*'
+      - 'CHANGELOG'
+      - 'CHANGELOG.*'
+      - 'CONTRIBUTING'
+      - 'CONTRIBUTING.*'
+      - 'CODE_OF_CONDUCT'
+      - 'CODE_OF_CONDUCT.*'
+      - 'SECURITY'
+      - 'SECURITY.*'
+      - 'fastlane/metadata/android/**'
+  workflow_dispatch:
+
+jobs:
+  dependency-audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v5
+      with:
+        submodules: true
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v5
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+
+    - name: Validate NVD API key
+      shell: bash
+      run: |
+        set -euo pipefail
+        if [[ -z "${NVD_API_KEY:-}" ]]; then
+          echo "NVD_API_KEY repository secret is required for the blocking dependency audit." >&2
+          echo "Create an NVD API key and store it in GitHub Actions as the NVD_API_KEY repository secret." >&2
+          exit 1
+        fi
+
+    - name: Configure NVD API key for Gradle
+      shell: bash
+      run: |
+        set -euo pipefail
+        cat > "$RUNNER_TEMP/dependency-check.init.gradle" <<'EOF'
+        allprojects {
+            gradle.projectsEvaluated {
+                if (plugins.hasPlugin('org.owasp.dependencycheck')) {
+                    dependencyCheck {
+                        nvd.apiKey = System.getenv('NVD_API_KEY')
+                    }
+                }
+            }
+        }
+        EOF
+
+    - name: Set up Gradle cache
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+
+    - name: Cache OWASP dependency data
+      uses: actions/cache@v4
+      with:
+        path: ~/.gradle/dependency-check-data
+        key: ${{ runner.os }}-dependency-check-v12.2.2-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-dependency-check-v12.2.2-
+
+    - name: Run dependency vulnerability policy
+      run: ./gradlew --init-script "$RUNNER_TEMP/dependency-check.init.gradle" :app:dependencyCheckAnalyze --warning-mode all
+
+    - name: Upload dependency reports
+      if: always()
+      uses: actions/upload-artifact@v5
+      with:
+        name: dependency-check-reports
+        path: app/build/reports/dependency-check-report.*
+        if-no-files-found: warn
+        retention-days: 14
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v5
+      with:
+        submodules: true
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v5
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+
+    - name: Set up Go 1.26.5
+      uses: actions/setup-go@v6
+      with:
+        go-version: '1.26.5'
+        cache: false
+
+    - name: Cache pinned rclone Android library
+      id: rclone-cache
+      uses: actions/cache@v4
+      with:
+        path: app/libs/rclone-gomobile.aar
+        key: ${{ runner.os }}-rclone-${{ hashFiles('scripts/build-rclone-aar.sh', 'rclone-mobile/**') }}
+
+    - name: Build pinned rclone Android library
+      if: steps.rclone-cache.outputs.cache-hit != 'true'
+      run: scripts/build-rclone-aar.sh
+
+    - name: Save pinned rclone Android library
+      if: steps.rclone-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        path: app/libs/rclone-gomobile.aar
+        key: ${{ runner.os }}-rclone-${{ hashFiles('scripts/build-rclone-aar.sh', 'rclone-mobile/**') }}
+
+    - name: Set up Gradle cache
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        cache-read-only: ${{ github.ref != 'refs/heads/main' && !startsWith(github.ref, 'refs/heads/release/') }}
+        cache-cleanup: on-success
+
+    - name: Cache Robolectric Maven artifacts
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2/repository/org/robolectric
+        key: ${{ runner.os }}-robolectric-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-robolectric-
+
+    - name: Make build scripts executable
+      run: chmod +x ./gradlew scripts/build-rclone-aar.sh
+
+    - name: Audit Android translations
+      run: |
+        python3 scripts/validate_android_translations.py
+        python3 scripts/validate_android_translations.py --locale values-ar --require-complete
+        python3 scripts/validate_android_translations.py --locale values-b+es+419 --require-complete
+        python3 scripts/validate_android_translations.py --locale values-de --require-complete
+        python3 scripts/validate_android_translations.py --locale values-fr --require-complete
+        python3 scripts/validate_android_translations.py --locale values-id --require-complete
+        python3 scripts/validate_android_translations.py --locale values-pt-rBR --require-complete
+        python3 scripts/validate_android_translations.py --locale values-tr --require-complete
+        python3 scripts/validate_android_translations.py --locale values-vi --require-complete
+        python3 scripts/validate_android_translations.py --locale values-ru --require-complete
+        python3 scripts/validate_android_translations.py --locale values-zh-rCN --require-complete
+        python3 scripts/validate_android_translations.py --locale values-zh-rTW --require-complete
+        python3 scripts/validate_android_translations.py --locale values-hi --require-complete
+        python3 scripts/validate_android_translations.py --locale values-th --require-complete
+        python3 scripts/validate_android_translations.py --locale values-ur --require-complete
+
+    - name: Validate classified engineering debt
+      run: python3 scripts/validate_engineering_debt.py
+
+    - name: Enforce source-contract test budget
+      run: scripts/verify-source-test-budget.sh
+
+    - name: Verify dependency integrity artifacts
+      run: scripts/verify-dependency-integrity.sh
+
+    - name: Read app version
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        APP_VERSION_NAME=$(sed -n "s/^def appVersionName = '\\([^']*\\)'$/\\1/p" app/build.gradle)
+        if [[ -z "$APP_VERSION_NAME" ]]; then
+          echo "Could not read the hardcoded Android version from app/build.gradle" >&2
+          exit 1
+        fi
+
+        echo "FILE_TAG=v$APP_VERSION_NAME" >> "$GITHUB_ENV"
+
+    - name: Verify clean debug build and JVM tests
+      env:
+        # This gate deliberately ignores setup-gradle's dependency cache. It proves
+        # that the wrapper and declared repositories are sufficient from scratch.
+        WIZEFILES_CLEAN_GRADLE_CACHE: '1'
+      run: scripts/verify-clean-build.sh
+
+    - name: Generate separate JVM coverage reports
+      run: ./gradlew :app:jacocoPureDebugReport :app:jacocoRobolectricDebugReport --warning-mode all
+
+    - name: Upload JVM coverage reports
+      uses: actions/upload-artifact@v5
+      with:
+        name: jvm-coverage-reports
+        path: app/build/reports/jacoco/**
+        retention-days: 14
+
+    - name: Build minified release and run release lint
+      run: ./gradlew assembleRelease lintVitalRelease --warning-mode all
+
+    - name: Verify pinned apksig dependency
+      run: scripts/verify-apksig-dependency.sh
+
+    - name: Cross-check APK signature fixtures
+      run: scripts/verify-apk-signing-fixtures.sh
+
+    - name: Report minified release size
+      shell: bash
+      run: |
+        set -euo pipefail
+        stat -c 'Minified unsigned release APK: %s bytes' \
+          app/build/outputs/apk/release/app-release-unsigned.apk
+
+    - name: Verify 16 KiB native page alignment
+      run: scripts/verify-native-page-size.sh app/build/outputs/apk/debug/app-debug.apk
+
+    - name: Name debug APK
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        DEBUG_APK="app/build/outputs/apk/debug/WizeFiles_${FILE_TAG}_debug.apk"
+        cp app/build/outputs/apk/debug/app-debug.apk "$DEBUG_APK"
+        echo "DEBUG_APK=$DEBUG_APK" >> "$GITHUB_ENV"
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v5
+      with:
+        name: WizeFiles_${{ env.FILE_TAG }}
+        path: ${{ env.DEBUG_APK }}
+        retention-days: 10

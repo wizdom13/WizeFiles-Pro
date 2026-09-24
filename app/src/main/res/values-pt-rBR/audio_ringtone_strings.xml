@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">Definir como toque</string>
+    <string name="audio_player_ringtone_set">Toque definido com sucesso</string>
+    <string name="audio_player_ringtone_failed">Não foi possível definir o toque</string>
+    <string name="audio_player_ringtone_permission_required">Permita que o WizeFiles modifique as configurações do sistema para definir o toque</string>
+</resources>
