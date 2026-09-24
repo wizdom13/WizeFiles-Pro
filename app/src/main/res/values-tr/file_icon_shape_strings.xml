@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="settings_icon_shape_title">Simge şekli</string>
+    <string name="settings_icon_shape_squircle">Sincap</string>
+    <string name="settings_icon_shape_rounded_square">Yuvarlak kare</string>
+    <string name="settings_icon_shape_flower">Çiçek</string>
+    <string name="settings_icon_shape_square">Kare</string>
+    <string name="settings_icon_shape_teardrop">Gözyaşı</string>
+    <string name="settings_icon_shape_pebble">Çakıl Taşı</string>
+    <string name="settings_icon_shape_vessel">Gemi</string>
+    <string name="settings_icon_shape_pentagon">Pentagon</string>
+    <string name="settings_icon_shape_hexagon_1">Altıgen varyant 1</string>
+    <string name="settings_icon_shape_hexagon_2">Altıgen varyant 2</string>
+    <string name="settings_icon_shape_heptagon">Yedigen</string>
+    <string name="settings_icon_shape_octagon">Sekizgen</string>
+</resources>

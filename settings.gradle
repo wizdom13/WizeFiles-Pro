@@ -1,0 +1,13 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+include ':core-files-api'
+include ':feature-browser-domain'
+include ':feature-transfer-domain'
+include ':feature-vault-domain'
+include ':performance-baselines'
+
+// Pure provider contracts must remain verifiable without an Android SDK. This is
+// intentionally opt-in so IDE, CI, release, and ordinary wrapper behavior is unchanged.
+if (!gradle.startParameter.projectProperties.containsKey('coreOnly')) {
+    include ':app'
+}

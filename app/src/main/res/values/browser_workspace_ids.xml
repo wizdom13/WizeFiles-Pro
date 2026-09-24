@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="browserPaneLayout" type="id" />
+    <item name="browserSecondaryPaneContainer" type="id" />
+    <item name="browserBreadcrumbRow" type="id" />
+    <item name="browserSecondaryBreadcrumb" type="id" />
+</resources>

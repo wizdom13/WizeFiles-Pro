@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- app:statusBarBackground is broken when scrolling. -->
+    <com.wisso.wizefiles.ui.CoordinatorAppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorAppBarSurface"
+        android:theme="?actionBarTheme"
+        app:liftOnScroll="true"
+        app:liftOnScrollTargetViewId="@id/recyclerView">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="@integer/file_list_toolbar_scroll_flags">
+
+            <com.wisso.wizefiles.ui.CrossfadeSubtitleToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:paddingStart="@dimen/file_list_toolbar_padding_start"
+                android:paddingEnd="@dimen/file_list_toolbar_padding_end_with_overflow"
+                app:navigationIcon="@drawable/ic_menu_control_normal_24dp"
+                app:navigationContentDescription="@string/open_navigation_drawer"
+                app:popupTheme="?actionBarPopupTheme"
+                app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle.Small" />
+
+            <com.wisso.wizefiles.ui.OverlayToolbar
+                android:id="@+id/overlayToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:paddingStart="@dimen/file_list_toolbar_padding_start"
+                android:paddingEnd="@dimen/file_list_toolbar_padding_end_with_overflow"
+                android:background="?colorAppBarSurface"
+                android:visibility="gone"
+                app:navigationIcon="@drawable/ic_close_control_normal_24dp"
+                app:popupTheme="?actionBarPopupTheme" />
+        </FrameLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/browserTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tab_layout_height"
+            android:visibility="gone"
+            app:tabGravity="start"
+            app:tabMode="scrollable" />
+
+        <com.wisso.wizefiles.feature.filebrowser.BreadcrumbLayout
+            android:id="@+id/breadcrumbLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/file_list_breadcrumb_padding_start"
+            android:paddingEnd="@dimen/screen_edge_margin_minus_12dp" />
+    </com.wisso.wizefiles.ui.CoordinatorAppBarLayout>
+</merge>

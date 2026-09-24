@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="size_in_bytes_format">
+                <item quantity="one">%1$,d octet</item>
+                <item quantity="many">%1$,d octets</item>
+                <item quantity="other">%1$,d octets</item>
+            </plurals>
+    <plurals name="file_job_delete_notification_title_multiple_format">
+                <item quantity="one">Supprimer %1$,d fichier</item>
+                <item quantity="many">Supprimer %1$,d fichiers</item>
+                <item quantity="other">Supprimer %1$,d fichiers</item>
+            </plurals>
+    <plurals name="file_job_restore_selinux_context_notification_title_multiple_format">
+                <item quantity="one">Restauration du contexte SELinux pour %1$,d fichier</item>
+                <item quantity="many">Restauration du contexte SELinux pour %1$,d fichiers</item>
+                <item quantity="other">Restauration du contexte SELinux pour %1$,d fichiers</item>
+            </plurals>
+    <plurals name="file_list_subtitle_directory_count_format">
+                <item quantity="one">%1$,d dossier</item>
+                <item quantity="many">%1$,d dossiers</item>
+                <item quantity="other">%1$,d dossiers</item>
+            </plurals>
+    <plurals name="file_list_subtitle_file_count_format">
+                <item quantity="one">%1$,d fichier</item>
+                <item quantity="many">%1$,d fichiers</item>
+                <item quantity="other">%1$,d fichiers</item>
+            </plurals>
+
+    <plurals name="file_job_archive_scan_notification_title_format">
+        <item quantity="one">Préparation de la compression de %1$,d fichier (%2$s)</item>
+        <item quantity="other">Préparation de la compression de %1$,d fichiers (%2$s)</item>
+    </plurals>
+    <plurals name="file_job_archive_notification_title_multiple_format">
+        <item quantity="one">Ajout de %1$,d fichier dans « %2$s »</item>
+        <item quantity="other">Ajout de %1$,d fichiers dans « %2$s »</item>
+    </plurals>
+    <plurals name="file_job_copy_scan_notification_title_format">
+        <item quantity="one">Préparation de la copie de %1$,d fichier (%2$s)</item>
+        <item quantity="other">Préparation de la copie de %1$,d fichiers (%2$s)</item>
+    </plurals>
+    <plurals name="file_job_copy_notification_title_multiple_format">
+        <item quantity="one">Copie de %1$,d fichier vers « %2$s »</item>
+        <item quantity="other">Copie de %1$,d fichiers vers « %2$s »</item>
+    </plurals>
+    <plurals name="file_job_extract_scan_notification_title_format">
+        <item quantity="one">Préparation de l’extraction de %1$,d fichier (%2$s)</item>
+        <item quantity="other">Préparation de l’extraction de %1$,d fichiers (%2$s)</item>
+    </plurals>
+    <plurals name="file_job_extract_notification_title_multiple_format">
+        <item quantity="one">Extraction de %1$,d fichier vers « %2$s »</item>
+        <item quantity="other">Extraction de %1$,d fichiers vers « %2$s »</item>
+    </plurals>
+    <plurals name="file_job_move_scan_notification_title_format">
+        <item quantity="one">Préparation du déplacement de %1$,d fichier (%2$s)</item>
+        <item quantity="other">Préparation du déplacement de %1$,d fichiers (%2$s)</item>
+    </plurals>
+    <plurals name="file_job_move_notification_title_multiple_format">
+        <item quantity="one">Déplacement de %1$,d fichier vers « %2$s »</item>
+        <item quantity="other">Déplacement de %1$,d fichiers vers « %2$s »</item>
+    </plurals>
+    <plurals name="file_job_delete_scan_notification_title_format">
+        <item quantity="one">Préparation de la suppression de %1$,d fichier</item>
+        <item quantity="other">Préparation de la suppression de %1$,d fichiers</item>
+    </plurals>
+    <plurals name="file_job_set_owner_scan_notification_title_format">
+        <item quantity="one">Préparation du changement de propriétaire de %1$,d fichier</item>
+        <item quantity="other">Préparation du changement de propriétaire de %1$,d fichiers</item>
+    </plurals>
+    <plurals name="file_job_set_owner_notification_title_multiple_format">
+        <item quantity="one">Mise à jour du propriétaire de %1$,d fichier</item>
+        <item quantity="other">Mise à jour du propriétaire de %1$,d fichiers</item>
+    </plurals>
+    <plurals name="file_job_set_group_scan_notification_title_format">
+        <item quantity="one">Préparation du changement de groupe de %1$,d fichier</item>
+        <item quantity="other">Préparation du changement de groupe de %1$,d fichiers</item>
+    </plurals>
+    <plurals name="file_job_set_group_notification_title_multiple_format">
+        <item quantity="one">Mise à jour du groupe de %1$,d fichier</item>
+        <item quantity="other">Mise à jour du groupe de %1$,d fichiers</item>
+    </plurals>
+    <plurals name="file_job_set_mode_scan_notification_title_format">
+        <item quantity="one">Préparation du changement des autorisations de %1$,d fichier</item>
+        <item quantity="other">Préparation du changement des autorisations de %1$,d fichiers</item>
+    </plurals>
+    <plurals name="file_job_set_mode_notification_title_multiple_format">
+        <item quantity="one">Mise à jour des autorisations de %1$,d fichier</item>
+        <item quantity="other">Mise à jour des autorisations de %1$,d fichiers</item>
+    </plurals>
+    <plurals name="file_job_set_selinux_context_scan_notification_title_format">
+        <item quantity="one">Préparation du changement du contexte SELinux de %1$,d fichier</item>
+        <item quantity="other">Préparation du changement du contexte SELinux de %1$,d fichiers</item>
+    </plurals>
+    <plurals name="file_job_set_selinux_context_notification_title_multiple_format">
+        <item quantity="one">Mise à jour du contexte SELinux de %1$,d fichier</item>
+        <item quantity="other">Mise à jour du contexte SELinux de %1$,d fichiers</item>
+    </plurals>
+    <plurals name="file_job_restore_selinux_context_scan_notification_title_format">
+        <item quantity="one">Préparation de la restauration du contexte SELinux de %1$,d fichier</item>
+        <item quantity="other">Préparation de la restauration du contexte SELinux de %1$,d fichiers</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_files_format">
+        <item quantity="one">Voulez-vous vraiment supprimer %1$,d fichier ?</item>
+        <item quantity="other">Voulez-vous vraiment supprimer %1$,d fichiers ?</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_directories_format">
+        <item quantity="one">Voulez-vous vraiment supprimer %1$,d dossier et son contenu ?</item>
+        <item quantity="other">Voulez-vous vraiment supprimer %1$,d dossiers et leur contenu ?</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_mixed_format">
+        <item quantity="one">Voulez-vous vraiment supprimer %1$,d élément ?</item>
+        <item quantity="other">Voulez-vous vraiment supprimer %1$,d éléments ?</item>
+    </plurals>
+    <plurals name="file_list_title_open_file">
+        <item quantity="one">Choisir un fichier</item>
+        <item quantity="other">Choisir des fichiers</item>
+    </plurals>
+    <plurals name="file_list_title_open_directory">
+        <item quantity="one">Choisir un dossier</item>
+        <item quantity="other">Choisir des dossiers</item>
+    </plurals>
+    <plurals name="file_properties_basic_contents_format">
+        <item quantity="one">%1$,d élément occupant %2$s</item>
+        <item quantity="other">%1$,d éléments occupant %2$s</item>
+    </plurals>
+    <plurals name="file_properties_apk_requested_permissions_positive_format">
+        <item quantity="one">%1$,d autorisation requise</item>
+        <item quantity="other">%1$,d autorisations requises</item>
+    </plurals>
+    <plurals name="settings_root_strategy_message_format">
+        <item quantity="one">%1$,d tâche de fichiers est en cours. Modifier les autorisations root maintenant peut provoquer une erreur. Voulez-vous continuer ?</item>
+        <item quantity="other">%1$,d tâches de fichiers sont en cours. Modifier les autorisations root maintenant peut provoquer une erreur. Voulez-vous continuer ?</item>
+    </plurals>
+    <plurals name="file_item_directory_count">
+        <item quantity="one">%1$,d élément</item>
+        <item quantity="other">%1$,d éléments</item>
+    </plurals>
+    <plurals name="storage_cleaner_section_item_count">
+        <item quantity="one">%1$,d élément</item>
+        <item quantity="other">%1$,d éléments</item>
+    </plurals>
+</resources>

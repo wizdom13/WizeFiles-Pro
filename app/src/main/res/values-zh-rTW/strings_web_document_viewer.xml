@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="web_document_viewer_title">儲存的文件檢視器</string>
+    <string name="web_document_viewer_loading">開啟已儲存的文件</string>
+    <string name="web_document_viewer_failed">此儲存的文件無法開啟 。</string>
+    <string name="web_document_viewer_unsafe">此儲存的文件被損壞或超過安全資源限制 。</string>
+    <string name="web_document_viewer_unavailable">此檔案無法使用內部儲存的文件檢視器 。</string>
+    <string name="web_document_viewer_renderer_failed">系統網路渲染器在顯示此文件時停止了 。</string>
+    <string name="web_document_viewer_open_with">開啟</string>
+    <string name="web_document_viewer_open_link">開啟文件連結</string>
+    <string name="web_document_viewer_link_blocked">此文件連結被遮蔽 。</string>
+    <string name="web_document_viewer_reload">重新裝入</string>
+    <string name="web_document_viewer_share">共享已儲存的文件</string>
+</resources>

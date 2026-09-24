@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="size_in_bytes_format">
+                <item quantity="one">%1$,d Byte</item>
+                <item quantity="other">%1$,d Bytes</item>
+            </plurals>
+    <plurals name="file_job_copy_notification_title_multiple_format">
+                <item quantity="one">Kopiere %1$,d Datei nach \"%2$s\"</item>
+                <item quantity="other">Kopiere %1$,d Dateien nach \"%2$s\"</item>
+            </plurals>
+    <plurals name="file_job_extract_notification_title_multiple_format">
+                <item quantity="one">Extrahiere %1$,d Datei nach \"%2$s”</item>
+                <item quantity="other">Extrahiere %1$,d Dateien nach \"%2$s”</item>
+            </plurals>
+    <plurals name="file_job_move_notification_title_multiple_format">
+                <item quantity="one">Verschiebe %1$,d Datei nach \"%2$s\"</item>
+                <item quantity="other">Verschiebe %1$,d Dateien nach \"%2$s\"</item>
+            </plurals>
+    <plurals name="file_job_delete_notification_title_multiple_format">
+                <item quantity="one">Lösche %1$,d Datei</item>
+                <item quantity="other">Lösche %1$,d Dateien</item>
+            </plurals>
+    <plurals name="file_job_restore_selinux_context_notification_title_multiple_format">
+                <item quantity="one">Stelle SELinux Kontext von %1$,d Datei wieder her</item>
+                <item quantity="other">Stelle SELinux Kontext von %1$,d Dateien wieder her</item>
+            </plurals>
+    <plurals name="file_list_subtitle_directory_count_format">
+                <item quantity="one">%1$,d Ordner</item>
+                <item quantity="other">%1$,d Ordner</item>
+            </plurals>
+    <plurals name="file_list_subtitle_file_count_format">
+                <item quantity="one">%1$,d Datei</item>
+                <item quantity="other">%1$,d Dateien</item>
+            </plurals>
+
+    <plurals name="file_job_archive_scan_notification_title_format">
+        <item quantity="one">%1$,d Datei wird zum Komprimieren vorbereitet (%2$s)</item>
+        <item quantity="other">%1$,d Dateien werden zum Komprimieren vorbereitet (%2$s)</item>
+    </plurals>
+    <plurals name="file_job_archive_notification_title_multiple_format">
+        <item quantity="one">%1$,d Datei wird in „%2$s“ gepackt</item>
+        <item quantity="other">%1$,d Dateien werden in „%2$s“ gepackt</item>
+    </plurals>
+    <plurals name="file_job_copy_scan_notification_title_format">
+        <item quantity="one">%1$,d Datei wird zum Kopieren vorbereitet (%2$s)</item>
+        <item quantity="other">%1$,d Dateien werden zum Kopieren vorbereitet (%2$s)</item>
+    </plurals>
+    <plurals name="file_job_extract_scan_notification_title_format">
+        <item quantity="one">%1$,d Datei wird zum Entpacken vorbereitet (%2$s)</item>
+        <item quantity="other">%1$,d Dateien werden zum Entpacken vorbereitet (%2$s)</item>
+    </plurals>
+    <plurals name="file_job_move_scan_notification_title_format">
+        <item quantity="one">%1$,d Datei wird zum Verschieben vorbereitet (%2$s)</item>
+        <item quantity="other">%1$,d Dateien werden zum Verschieben vorbereitet (%2$s)</item>
+    </plurals>
+    <plurals name="file_job_delete_scan_notification_title_format">
+        <item quantity="one">%1$,d Datei wird zum Löschen vorbereitet</item>
+        <item quantity="other">%1$,d Dateien werden zum Löschen vorbereitet</item>
+    </plurals>
+    <plurals name="file_job_set_owner_scan_notification_title_format">
+        <item quantity="one">Eigentümeränderung für %1$,d Datei wird vorbereitet</item>
+        <item quantity="other">Eigentümeränderung für %1$,d Dateien wird vorbereitet</item>
+    </plurals>
+    <plurals name="file_job_set_owner_notification_title_multiple_format">
+        <item quantity="one">Eigentümer von %1$,d Datei wird aktualisiert</item>
+        <item quantity="other">Eigentümer von %1$,d Dateien werden aktualisiert</item>
+    </plurals>
+    <plurals name="file_job_set_group_scan_notification_title_format">
+        <item quantity="one">Gruppenänderung für %1$,d Datei wird vorbereitet</item>
+        <item quantity="other">Gruppenänderung für %1$,d Dateien wird vorbereitet</item>
+    </plurals>
+    <plurals name="file_job_set_group_notification_title_multiple_format">
+        <item quantity="one">Gruppe von %1$,d Datei wird aktualisiert</item>
+        <item quantity="other">Gruppe von %1$,d Dateien wird aktualisiert</item>
+    </plurals>
+    <plurals name="file_job_set_mode_scan_notification_title_format">
+        <item quantity="one">Berechtigungsänderung für %1$,d Datei wird vorbereitet</item>
+        <item quantity="other">Berechtigungsänderung für %1$,d Dateien wird vorbereitet</item>
+    </plurals>
+    <plurals name="file_job_set_mode_notification_title_multiple_format">
+        <item quantity="one">Berechtigungen von %1$,d Datei werden aktualisiert</item>
+        <item quantity="other">Berechtigungen von %1$,d Dateien werden aktualisiert</item>
+    </plurals>
+    <plurals name="file_job_set_selinux_context_scan_notification_title_format">
+        <item quantity="one">Änderung des SELinux-Kontexts für %1$,d Datei wird vorbereitet</item>
+        <item quantity="other">Änderung des SELinux-Kontexts für %1$,d Dateien wird vorbereitet</item>
+    </plurals>
+    <plurals name="file_job_set_selinux_context_notification_title_multiple_format">
+        <item quantity="one">SELinux-Kontext von %1$,d Datei wird aktualisiert</item>
+        <item quantity="other">SELinux-Kontext von %1$,d Dateien wird aktualisiert</item>
+    </plurals>
+    <plurals name="file_job_restore_selinux_context_scan_notification_title_format">
+        <item quantity="one">Wiederherstellung des SELinux-Kontexts für %1$,d Datei wird vorbereitet</item>
+        <item quantity="other">Wiederherstellung des SELinux-Kontexts für %1$,d Dateien wird vorbereitet</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_files_format">
+        <item quantity="one">Möchtest du %1$,d Datei wirklich löschen?</item>
+        <item quantity="other">Möchtest du %1$,d Dateien wirklich löschen?</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_directories_format">
+        <item quantity="one">Möchtest du %1$,d Ordner und seinen Inhalt wirklich löschen?</item>
+        <item quantity="other">Möchtest du %1$,d Ordner und ihren Inhalt wirklich löschen?</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_mixed_format">
+        <item quantity="one">Möchtest du %1$,d Element wirklich löschen?</item>
+        <item quantity="other">Möchtest du %1$,d Elemente wirklich löschen?</item>
+    </plurals>
+    <plurals name="file_list_title_open_file">
+        <item quantity="one">Datei auswählen</item>
+        <item quantity="other">Dateien auswählen</item>
+    </plurals>
+    <plurals name="file_list_title_open_directory">
+        <item quantity="one">Ordner auswählen</item>
+        <item quantity="other">Ordner auswählen</item>
+    </plurals>
+    <plurals name="file_properties_basic_contents_format">
+        <item quantity="one">%1$,d Element mit %2$s</item>
+        <item quantity="other">%1$,d Elemente mit %2$s</item>
+    </plurals>
+    <plurals name="file_properties_apk_requested_permissions_positive_format">
+        <item quantity="one">%1$,d Berechtigung erforderlich</item>
+        <item quantity="other">%1$,d Berechtigungen erforderlich</item>
+    </plurals>
+    <plurals name="settings_root_strategy_message_format">
+        <item quantity="one">Derzeit läuft %1$,d Dateiaufgabe. Wenn du die Root-Berechtigungen jetzt änderst, kann ein Fehler auftreten. Trotzdem ändern?</item>
+        <item quantity="other">Derzeit laufen %1$,d Dateiaufgaben. Wenn du die Root-Berechtigungen jetzt änderst, kann ein Fehler auftreten. Trotzdem ändern?</item>
+    </plurals>
+    <plurals name="file_item_directory_count">
+        <item quantity="one">%1$,d Element</item>
+        <item quantity="other">%1$,d Elemente</item>
+    </plurals>
+    <plurals name="storage_cleaner_section_item_count">
+        <item quantity="one">%1$,d Element</item>
+        <item quantity="other">%1$,d Elemente</item>
+    </plurals>
+</resources>

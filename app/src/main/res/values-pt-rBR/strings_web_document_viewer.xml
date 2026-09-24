@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="web_document_viewer_title">Visualizador de documentos salvos</string>
+    <string name="web_document_viewer_loading">Abrindo documento salvo</string>
+    <string name="web_document_viewer_failed">Não foi possível abrir este documento salvo.</string>
+    <string name="web_document_viewer_unsafe">Este documento salvo está danificado ou excede os limites seguros de recursos.</string>
+    <string name="web_document_viewer_unavailable">O visualizador interno de documentos salvos não está disponível para este arquivo.</string>
+    <string name="web_document_viewer_renderer_failed">O renderizador Web do sistema parou ao exibir este documento.</string>
+    <string name="web_document_viewer_open_with">Abrir com</string>
+    <string name="web_document_viewer_open_link">Abrir link do documento</string>
+    <string name="web_document_viewer_link_blocked">Este link do documento foi bloqueado.</string>
+    <string name="web_document_viewer_reload">Recarregar</string>
+    <string name="web_document_viewer_share">Compartilhar documento salvo</string>
+</resources>
+

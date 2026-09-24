@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="navigation_app_manager">Gerenciador de apps</string>
+    <string name="app_manager_title">Gerenciador de apps</string>
+    <string name="app_manager_search_hint">Pesquisar apps</string>
+    <string name="app_manager_filter_all">Todos</string>
+    <string name="app_manager_filter_user">Usuário</string>
+    <string name="app_manager_filter_system">Sistema</string>
+    <string name="app_manager_filter_disabled">Desativados</string>
+    <string name="app_manager_summary">%1$d apps • %2$s</string>
+    <string name="app_manager_empty">Nenhum app corresponde à pesquisa e ao filtro atuais.</string>
+    <string name="app_manager_load_error">Não foi possível carregar os apps instalados.</string>
+    <string name="app_manager_version_code">Código da versão %1$d</string>
+    <string name="app_manager_version_size">%1$s • %2$s</string>
+    <string name="app_manager_dates">Instalado em %1$s • Atualizado em %2$s</string>
+    <string name="app_manager_badge_split">Split</string>
+    <string name="app_manager_badge_system">Sistema</string>
+    <string name="app_manager_badge_disabled">Desativado</string>
+    <string name="app_manager_selected_count">%1$d selecionados</string>
+    <string name="app_manager_selected">Selecionado</string>
+    <string name="app_manager_uninstall">Desinstalar</string>
+    <string name="app_manager_uninstall_multiple_title">Desinstalar os apps selecionados?</string>
+    <string name="app_manager_uninstall_multiple_message">O Android pedirá que você confirme cada um dos %1$d apps selecionados.</string>
+    <string name="app_manager_uninstall_finished">Solicitações de desinstalação concluídas.</string>
+    <string name="app_manager_uninstall_unavailable">Nenhum desinstalador do sistema está disponível.</string>
+    <string name="app_manager_info">Informações</string>
+    <string name="app_manager_info_unavailable">As informações do app não estão disponíveis para este pacote.</string>
+    <string name="app_manager_open">Abrir</string>
+    <string name="app_manager_open_unavailable">Este app não tem uma atividade que possa ser iniciada.</string>
+    <string name="app_manager_deselect_all">Desmarcar tudo</string>
+    <string name="app_manager_sort_title">Ordenar apps</string>
+    <string name="app_manager_sort_name">Nome</string>
+    <string name="app_manager_sort_size">Tamanho do APK</string>
+    <string name="app_manager_sort_installed">Data de instalação</string>
+    <string name="app_manager_sort_updated">Data de atualização</string>
+    <string name="app_manager_sort_package">Nome do pacote</string>
+    <string name="app_manager_sort_ascending">Ordem crescente</string>
+    <string name="app_manager_sort_descending">Ordem decrescente</string>
+    <string name="app_manager_backup_selected">Fazer backup dos selecionados em…</string>
+    <string name="app_manager_backup_destination_error">O destino selecionado não está disponível.</string>
+    <string name="app_manager_backup_queued">Backup adicionado à Central de transferências.</string>
+    <string name="app_manager_share_chooser">Compartilhar backup de APK</string>
+    <string name="app_manager_share_unavailable">Nenhum app está disponível para compartilhar este backup.</string>
+    <string name="app_manager_export_failed">Não foi possível exportar os apps selecionados.</string>
+    <string name="app_manager_export_cancelled">Exportação de APK cancelada.</string>
+    <string name="app_manager_enable">Ativar</string>
+    <string name="app_manager_disable">Desativar</string>
+</resources>
+

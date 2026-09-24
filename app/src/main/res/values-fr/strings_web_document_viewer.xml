@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="web_document_viewer_title">Visionneuse de documents enregistrés</string>
+    <string name="web_document_viewer_loading">Ouverture du document enregistré</string>
+    <string name="web_document_viewer_failed">Impossible d’ouvrir ce document enregistré.</string>
+    <string name="web_document_viewer_unsafe">Ce document enregistré est endommagé ou dépasse les limites de sécurité des ressources.</string>
+    <string name="web_document_viewer_unavailable">La visionneuse interne de documents enregistrés n’est pas disponible pour ce fichier.</string>
+    <string name="web_document_viewer_renderer_failed">Le moteur de rendu Web du système s’est arrêté pendant l’affichage de ce document.</string>
+    <string name="web_document_viewer_open_with">Ouvrir avec</string>
+    <string name="web_document_viewer_open_link">Ouvrir le lien du document</string>
+    <string name="web_document_viewer_link_blocked">Ce lien du document a été bloqué.</string>
+    <string name="web_document_viewer_reload">Recharger</string>
+    <string name="web_document_viewer_share">Partager le document enregistré</string>
+</resources>

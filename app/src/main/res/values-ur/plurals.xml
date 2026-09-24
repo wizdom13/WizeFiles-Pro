@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <plurals name="size_in_bytes_format">
+        <item quantity="one">%1$,d بائٹس</item>
+        <item quantity="other">%1$,d بائٹس</item>
+    </plurals>
+    <plurals name="file_job_archive_scan_notification_title_format">
+        <item quantity="one">دباؤ کے لئے تیار رہنا %1$,d فائل%2$s)</item>
+        <item quantity="other">دباؤ کے لئے تیار رہنا %1$,d ( فائلیں)%2$s)</item>
+    </plurals>
+    <plurals name="file_job_archive_notification_title_multiple_format">
+        <item quantity="one">پیک %1$,d فائل "%2$s“</item>
+        <item quantity="other">پیک %1$,d "تمام فائلیں%2$s“</item>
+    </plurals>
+    <plurals name="file_job_copy_scan_notification_title_format">
+        <item quantity="one">کاپی کرنے کے لیے تیار %1$,d فائل%2$s)</item>
+        <item quantity="other">کاپی کرنے کے لیے تیار %1$,d ( فائلیں)%2$s)</item>
+    </plurals>
+    <plurals name="file_job_copy_notification_title_multiple_format">
+        <item quantity="one">نقل و حمل %1$,d فائل فہرست حاصل کی جارہی ہے%2$s“</item>
+        <item quantity="other">نقل و حمل %1$,d فائلیں%2$s“</item>
+    </plurals>
+    <plurals name="file_job_extract_scan_notification_title_format">
+        <item quantity="one">نکالنا تیار کرنا %1$,d فائل%2$s)</item>
+        <item quantity="other">نکالنا تیار کرنا %1$,d ( فائلیں)%2$s)</item>
+    </plurals>
+    <plurals name="file_job_extract_notification_title_multiple_format">
+        <item quantity="one">نکالیں %1$,d فائل فہرست حاصل کی جارہی ہے%2$s“</item>
+        <item quantity="other">نکالیں %1$,d فائلیں%2$s“</item>
+    </plurals>
+    <plurals name="file_job_move_scan_notification_title_format">
+        <item quantity="one">منتقل کرنے کے لئے تیار رہنا %1$,d فائل%2$s)</item>
+        <item quantity="other">منتقل کرنے کے لئے تیار رہنا %1$,d ( فائلیں)%2$s)</item>
+    </plurals>
+    <plurals name="file_job_move_notification_title_multiple_format">
+        <item quantity="one">منتقل %1$,d فائل فہرست حاصل کی جارہی ہے%2$s“</item>
+        <item quantity="other">منتقل %1$,d فائلیں%2$s“</item>
+    </plurals>
+    <plurals name="file_job_delete_scan_notification_title_format">
+        <item quantity="one">حذف کرنے کے لیے تیار رہنا %1$,d فائل</item>
+        <item quantity="other">حذف کرنے کے لیے تیار رہنا %1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_job_delete_notification_title_multiple_format">
+        <item quantity="one">غیر متصل %1$,d فائل</item>
+        <item quantity="other">غیر متصل %1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_job_set_owner_scan_notification_title_format">
+        <item quantity="one">مالک کو تبدیل کرنے کے لیے تیار ہو جاتا ہے۔ %1$,d فائل</item>
+        <item quantity="other">مالک کو تبدیل کرنے کے لیے تیار ہو جاتا ہے۔ %1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_job_set_owner_notification_title_multiple_format">
+        <item quantity="one">تسلی‌بخش مالک %1$,d فائل</item>
+        <item quantity="other">تسلی‌بخش مالک %1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_job_set_group_scan_notification_title_format">
+        <item quantity="one">گروپ کو تبدیل کرنے کے لئے تیار ہے %1$,d فائل</item>
+        <item quantity="other">گروپ کو تبدیل کرنے کے لئے تیار ہے %1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_job_set_group_notification_title_multiple_format">
+        <item quantity="one">حوصلہ‌افزائی کیلئے گروپ %1$,d فائل</item>
+        <item quantity="other">حوصلہ‌افزائی کیلئے گروپ %1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_job_set_mode_scan_notification_title_format">
+        <item quantity="one">اجازوں کو تبدیل کرنے کے لیے تیار ہے %1$,d فائل</item>
+        <item quantity="other">اجازوں کو تبدیل کرنے کے لیے تیار ہے %1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_job_set_mode_notification_title_multiple_format">
+        <item quantity="one">نیٹ ورک کے لیے پاس ورڈز تیار کریں %1$,d فائل</item>
+        <item quantity="other">نیٹ ورک کے لیے پاس ورڈز تیار کریں %1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_job_set_selinux_context_scan_notification_title_format">
+        <item quantity="one">تبدیل کرنے کے لیے تیار رہنا SELinux سیاق‌وسباق %1$,d فائل</item>
+        <item quantity="other">تبدیل کرنے کے لیے تیار رہنا SELinux سیاق‌وسباق %1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_job_set_selinux_context_notification_title_multiple_format">
+        <item quantity="one">حوصلہ‌افزائی SELinux سیاق‌وسباق %1$,d فائل</item>
+        <item quantity="other">حوصلہ‌افزائی SELinux سیاق‌وسباق %1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_job_restore_selinux_context_scan_notification_title_format">
+        <item quantity="one">دوبارہ تعمیر کرنے کے لیے تیار رہنا SELinux سیاق‌وسباق %1$,d فائل</item>
+        <item quantity="other">دوبارہ تعمیر کرنے کے لیے تیار رہنا SELinux سیاق‌وسباق %1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_job_restore_selinux_context_notification_title_multiple_format">
+        <item quantity="one">آرام SELinux سیاق‌وسباق %1$,d فائل</item>
+        <item quantity="other">آرام SELinux سیاق‌وسباق %1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_files_format">
+        <item quantity="one">کیا آپ یقینی طور پر حذف کرنا چاہتے ہیں %1$,d فائل؟</item>
+        <item quantity="other">کیا آپ یقینی طور پر حذف کرنا چاہتے ہیں %1$,d فائلیں؟</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_directories_format">
+        <item quantity="one">کیا آپ یقینی طور پر حذف کرنا چاہتے ہیں %1$,d فولڈر اور اس کا مواد ؟</item>
+        <item quantity="other">کیا آپ یقینی طور پر حذف کرنا چاہتے ہیں %1$,d فولڈر اور مواد ؟</item>
+    </plurals>
+    <plurals name="file_delete_message_multiple_mixed_format">
+        <item quantity="one">کیا آپ یقینی طور پر حذف کرنا چاہتے ہیں %1$,d کچھ؟</item>
+        <item quantity="other">کیا آپ یقینی طور پر حذف کرنا چاہتے ہیں %1$,d کچھ؟</item>
+    </plurals>
+    <plurals name="file_list_title_open_file">
+        <item quantity="one">فائل منتخب کریں</item>
+        <item quantity="other">فائلیں منتخب کریں</item>
+    </plurals>
+    <plurals name="file_list_title_open_directory">
+        <item quantity="one">فولڈر منتخب کریں</item>
+        <item quantity="other">فائلیں منتخب کریں</item>
+    </plurals>
+    <plurals name="file_list_subtitle_directory_count_format">
+        <item quantity="one">%1$,d فولڈر</item>
+        <item quantity="other">%1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_list_subtitle_file_count_format">
+        <item quantity="one">%1$,d فائل</item>
+        <item quantity="other">%1$,d فائلیں</item>
+    </plurals>
+    <plurals name="file_properties_basic_contents_format">
+        <item quantity="one">%1$,d آئٹم اٹھا لو %2$s</item>
+        <item quantity="other">%1$,d چیزیں، اٹھا لو %2$s</item>
+    </plurals>
+    <plurals name="file_properties_apk_requested_permissions_positive_format">
+        <item quantity="one">%1$,d اجازت درکار</item>
+        <item quantity="other">%1$,d اجازہ درکار ہے</item>
+    </plurals>
+    <plurals name="settings_root_strategy_message_format">
+        <item quantity="one">آپ اس وقت موجود ہیں %1$,d فائل کا کام چلا رہا ہے. root اب اجازہ غلطی کا سبب بن سکتا ہے.</item>
+        <item quantity="other">آپ اس وقت موجود ہیں %1$,d فائل کے کام چل رہے ہیں. root اب اجازہ غلطی کا سبب بن سکتا ہے.</item>
+    </plurals>
+    <plurals name="file_item_directory_count">
+        <item quantity="one">%1$,d طےشدہ</item>
+        <item quantity="other">%1$,d آئٹمس</item>
+    </plurals>
+    <plurals name="storage_cleaner_section_item_count">
+        <item quantity="one">%1$,d طےشدہ</item>
+        <item quantity="other">%1$,d آئٹمس</item>
+    </plurals>
+</resources>

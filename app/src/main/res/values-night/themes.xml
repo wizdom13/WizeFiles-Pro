@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <style name="Theme.WizeFiles.Black">
+        <item name="colorPrimaryDark">@color/color_primary_dark_black</item>
+        <item name="colorSurface">@android:color/black</item>
+    </style>
+    <style name="Theme.WizeFiles.Translucent.Black">
+        <item name="colorPrimaryDark">@color/color_primary_dark_black</item>
+        <item name="colorSurface">@android:color/black</item>
+    </style>
+    <style name="Theme.WizeFiles.Immersive.Black">
+        <item name="colorPrimaryDark">@color/color_primary_dark_black</item>
+        <item name="colorSurface">@android:color/black</item>
+    </style>
+</resources>

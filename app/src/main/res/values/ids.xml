@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tag_item_animated" type="id" />
+    <item name="file_properties_section_container_0" type="id" />
+    <item name="file_properties_section_container_1" type="id" />
+    <item name="file_properties_section_container_2" type="id" />
+    <item name="file_properties_section_container_3" type="id" />
+    <item name="file_properties_section_container_4" type="id" />
+    <item name="file_properties_section_container_5" type="id" />
+    <item name="file_properties_section_container_6" type="id" />
+</resources>

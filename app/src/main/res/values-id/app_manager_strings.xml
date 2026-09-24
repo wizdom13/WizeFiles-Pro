@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="navigation_app_manager">Pengelola Aplikasi</string>
+    <string name="app_manager_title">Pengelola Aplikasi</string>
+    <string name="app_manager_search_hint">Cari aplikasi</string>
+    <string name="app_manager_filter_all">Semua</string>
+    <string name="app_manager_filter_user">Pengguna</string>
+    <string name="app_manager_filter_system">Sistem</string>
+    <string name="app_manager_filter_disabled">Dinonaktifkan</string>
+    <string name="app_manager_summary">%1$d aplikasi • %2$s</string>
+    <string name="app_manager_empty">Tidak ada aplikasi yang cocok dengan pencarian dan filter saat ini.</string>
+    <string name="app_manager_load_error">Tidak dapat memuat aplikasi yang terpasang.</string>
+    <string name="app_manager_version_code">Kode versi %1$d</string>
+    <string name="app_manager_version_size">%1$s • %2$s</string>
+    <string name="app_manager_dates">Dipasang %1$s • Diperbarui %2$s</string>
+    <string name="app_manager_badge_split">Split</string>
+    <string name="app_manager_badge_system">Sistem</string>
+    <string name="app_manager_badge_disabled">Dinonaktifkan</string>
+    <string name="app_manager_selected_count">%1$d dipilih</string>
+    <string name="app_manager_selected">Dipilih</string>
+    <string name="app_manager_uninstall">Copot pemasangan</string>
+    <string name="app_manager_uninstall_multiple_title">Copot aplikasi yang dipilih?</string>
+    <string name="app_manager_uninstall_multiple_message">Android akan meminta Anda mengonfirmasi setiap %1$d aplikasi yang dipilih.</string>
+    <string name="app_manager_uninstall_finished">Permintaan pencopotan selesai.</string>
+    <string name="app_manager_uninstall_unavailable">Pencopot pemasangan sistem tidak tersedia.</string>
+    <string name="app_manager_info">Info</string>
+    <string name="app_manager_info_unavailable">Info aplikasi tidak tersedia untuk paket ini.</string>
+    <string name="app_manager_open">Buka</string>
+    <string name="app_manager_open_unavailable">Aplikasi ini tidak memiliki aktivitas yang dapat diluncurkan.</string>
+    <string name="app_manager_deselect_all">Batalkan semua pilihan</string>
+    <string name="app_manager_sort_title">Urutkan aplikasi</string>
+    <string name="app_manager_sort_name">Nama</string>
+    <string name="app_manager_sort_size">Ukuran APK</string>
+    <string name="app_manager_sort_installed">Tanggal pemasangan</string>
+    <string name="app_manager_sort_updated">Tanggal pembaruan</string>
+    <string name="app_manager_sort_package">Nama paket</string>
+    <string name="app_manager_sort_ascending">Urutkan menaik</string>
+    <string name="app_manager_sort_descending">Urutkan menurun</string>
+    <string name="app_manager_backup_selected">Cadangkan yang dipilih ke…</string>
+    <string name="app_manager_backup_destination_error">Tujuan yang dipilih tidak tersedia.</string>
+    <string name="app_manager_backup_queued">Pencadangan ditambahkan ke Pusat Transfer.</string>
+    <string name="app_manager_share_chooser">Bagikan cadangan APK</string>
+    <string name="app_manager_share_unavailable">Tidak ada aplikasi yang dapat membagikan cadangan ini.</string>
+    <string name="app_manager_export_failed">Tidak dapat mengekspor aplikasi yang dipilih.</string>
+    <string name="app_manager_export_cancelled">Ekspor APK dibatalkan.</string>
+    <string name="app_manager_enable">Aktifkan</string>
+    <string name="app_manager_disable">Nonaktifkan</string>
+</resources>

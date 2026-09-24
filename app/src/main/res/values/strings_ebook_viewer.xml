@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ebook_viewer_title">Ebook reader</string>
+    <string name="ebook_viewer_loading">Opening ebook</string>
+    <string name="ebook_viewer_failed">This ebook could not be opened.</string>
+    <string name="ebook_viewer_unsafe">This ebook is damaged or exceeds safe container limits.</string>
+    <string name="ebook_viewer_encrypted">Encrypted or DRM-protected Kindle books are not supported.</string>
+    <string name="ebook_viewer_print_replica">AZW4 Print Replica books are not supported by the internal reader.</string>
+    <string name="ebook_viewer_too_large">This ebook exceeds the internal reader safety limit.</string>
+    <string name="ebook_viewer_unavailable">The internal ebook reader is unavailable for this file.</string>
+    <string name="ebook_viewer_open_with">Open with</string>
+    <string name="ebook_viewer_open_link">Open ebook link</string>
+    <string name="ebook_viewer_link_blocked">This ebook link was blocked.</string>
+    <string name="ebook_viewer_resource_failed">A publication resource could not be loaded.</string>
+    <string name="ebook_viewer_toc">Contents</string>
+    <string name="ebook_viewer_no_toc">This ebook has no table of contents.</string>
+    <string name="ebook_viewer_smaller">Smaller text</string>
+    <string name="ebook_viewer_larger">Larger text</string>
+    <string name="ebook_viewer_theme">Change theme</string>
+    <string name="ebook_viewer_share">Share ebook</string>
+</resources>

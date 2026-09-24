@@ -1,0 +1,57 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
+package com.wisso.wizefiles.util
+
+import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.RemoteException
+
+class RemoteCallback : Parcelable {
+    private val localCallback: ((Bundle) -> Unit)?
+    private val remoteCallback: IRemoteCallback?
+
+    constructor(callback: (Bundle) -> Unit) {
+        localCallback = callback
+        remoteCallback = null
+    }
+
+    fun sendResult(result: Bundle) {
+        if (remoteCallback != null) {
+            try {
+                remoteCallback.sendResult(result)
+            } catch (e: RemoteException) {
+                com.wisso.wizefiles.util.AppLog.e("Error", "Unexpected failure", e)
+            }
+        } else {
+            localCallback!!(result)
+        }
+    }
+
+    private inner class Stub : IRemoteCallback.Stub() {
+        override fun sendResult(result: Bundle) {
+            this@RemoteCallback.sendResult(result)
+        }
+    }
+
+    private constructor(source: Parcel) {
+        localCallback = null
+        remoteCallback = IRemoteCallback.Stub.asInterface(source.readStrongBinder())
+    }
+
+    override fun describeContents(): Int = 0
+
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeStrongBinder(Stub().asBinder())
+    }
+
+    companion object {
+        @JvmField
+        val CREATOR = object : Parcelable.Creator<RemoteCallback> {
+            override fun createFromParcel(source: Parcel): RemoteCallback = RemoteCallback(source)
+
+            override fun newArray(size: Int): Array<RemoteCallback?> = arrayOfNulls(size)
+        }
+    }
+}

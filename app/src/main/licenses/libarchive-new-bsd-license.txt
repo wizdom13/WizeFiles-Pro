@@ -1,0 +1,4 @@
+libarchive is distributed under the terms of the New BSD License (BSD-3-Clause).
+
+The vendored libarchive copyright file is not present in this repository snapshot,
+so this entry intentionally avoids adding a specific copyright notice.

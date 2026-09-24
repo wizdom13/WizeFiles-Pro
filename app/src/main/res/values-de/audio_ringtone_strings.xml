@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">Als Klingelton festlegen</string>
+    <string name="audio_player_ringtone_set">Klingelton erfolgreich festgelegt</string>
+    <string name="audio_player_ringtone_failed">Klingelton konnte nicht festgelegt werden</string>
+    <string name="audio_player_ringtone_permission_required">Erlaube WizeFiles, die Systemeinstellungen zu ändern, um den Klingelton festzulegen</string>
+</resources>

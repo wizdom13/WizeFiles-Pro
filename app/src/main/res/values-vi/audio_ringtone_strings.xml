@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">Đặt làm nhạc chuông</string>
+    <string name="audio_player_ringtone_set">Đã đặt nhạc chuông thành công</string>
+    <string name="audio_player_ringtone_failed">Không thể đặt nhạc chuông</string>
+    <string name="audio_player_ringtone_permission_required">Cho phép WizeFiles sửa đổi cài đặt hệ thống để đặt nhạc chuông</string>
+</resources>

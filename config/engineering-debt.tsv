@@ -1,0 +1,27 @@
+# maximum_markers=42
+# path_prefix	category	priority	owner	exit_criteria
+app/src/main/java/com/wisso/wizefiles/data/providers/archive/ArchiveFileSystem.kt	provider-conformance	P1	storage	Archive adapter behavior has outcome tests for cancellation and malformed entries.
+app/src/main/java/com/wisso/wizefiles/data/providers/archive/archiver/ReadArchive.kt	provider-conformance	P1	storage	Archive metadata ambiguity is resolved with extraction outcome tests.
+app/src/main/java/com/wisso/wizefiles/data/providers/common/PathExtensions.kt	provider-conformance	P1	storage	All provider implementations support the replacement read contract.
+app/src/main/java/com/wisso/wizefiles/data/providers/common/PathIteratorDirectoryStream.kt	provider-conformance	P1	storage	Iterator ownership and closure are verified for every provider.
+app/src/main/java/com/wisso/wizefiles/data/providers/common/PollingWatchService.kt	provider-conformance	P1	storage	Watch cancellation and compiler-safe typing have runtime coverage.
+app/src/main/java/com/wisso/wizefiles/data/providers/common/UriAuthority.kt	provider-conformance	P1	storage	Empty-authority URI behavior is replaced with a tested canonical form.
+app/src/main/java/com/wisso/wizefiles/data/providers/content/ContentFileSystem.kt	provider-conformance	P1	storage	Content adapter TODOs have read-only and revocation outcomes.
+app/src/main/java/com/wisso/wizefiles/data/providers/document/DocumentFileSystem.kt	provider-conformance	P1	storage	Document adapter TODOs have cross-process outcome coverage.
+app/src/main/java/com/wisso/wizefiles/data/providers/document/DocumentFileSystemProvider.kt	provider-conformance	P1	storage	MIME loading error and descriptor behavior has hostile-provider coverage.
+app/src/main/java/com/wisso/wizefiles/data/providers/document/resolver/DocumentResolver.kt	provider-conformance	P1	storage	Resolver typing workaround is removed with cross-process query coverage.
+app/src/main/java/com/wisso/wizefiles/data/providers/ftp/FtpFileSystem.kt	provider-conformance	P1	storage	FTP cancellation timeout and partial-output outcomes pass conformance.
+app/src/main/java/com/wisso/wizefiles/data/providers/os/LinuxCopyMove.kt	provider-conformance	P1	storage	Linux metadata order and xattr outcomes are deterministic.
+app/src/main/java/com/wisso/wizefiles/data/providers/os/LinuxDirectoryStream.kt	provider-conformance	P1	storage	Iterator ownership and closure are verified for local Linux paths.
+app/src/main/java/com/wisso/wizefiles/data/providers/os/LocalLinuxFileSystemProvider.kt	provider-conformance	P1	storage	Access checks have revoked-permission and effective-identity outcomes.
+app/src/main/java/com/wisso/wizefiles/data/providers/root/RootableFileSystem.kt	provider-conformance	P1	storage	Root selection behavior has privilege-boundary outcome tests.
+app/src/main/java/com/wisso/wizefiles/data/providers/sftp/SftpFileSystem.kt	provider-conformance	P1	storage	SFTP cancellation timeout and partial-output outcomes pass conformance.
+app/src/main/java/com/wisso/wizefiles/data/providers/smb/SmbFileSystem.kt	provider-conformance	P1	storage	SMB cancellation timeout and partial-output outcomes pass conformance.
+app/src/main/java/com/wisso/wizefiles/feature/filejobs/FileOperationErrorPolicy.kt	destructive-operations	P1	transfers	Provider user-action contracts replace local retry exceptions.
+app/src/main/java/com/wisso/wizefiles/core	platform-compatibility	P2	platform	Supported Android API replaces the compatibility workaround.
+app/src/main/java/com/wisso/wizefiles/feature/filebrowser	browser-maintainability	P2	browser	State or presentation policy is extracted with behavioral tests.
+app/src/main/java/com/wisso/wizefiles/feature/navigation	platform-ux-compatibility	P2	browser	Compatibility behavior has device coverage and no product dependency.
+app/src/main/java/com/wisso/wizefiles/feature/viewer	viewer-compatibility	P2	viewers	Framework or library API removes the workaround with regression coverage.
+app/src/main/java/com/wisso/wizefiles/feature/details	fragment-compatibility	P3	ui	Fragment lifecycle behavior is covered without the workaround.
+app/src/main/java/com/wisso/wizefiles/feature/settings	compiler-lifecycle-compatibility	P3	settings	Compiler or lifecycle behavior permits removal with tests.
+app/src/main/java/com/wisso/wizefiles/ui	ui-compatibility	P3	ui	Upstream widget/compiler behavior permits removal with UI coverage.

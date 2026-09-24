@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="Platform.V30.Theme.WizeFiles" parent="Platform.V29.Theme.WizeFiles">
+        <item name="android:windowLayoutInDisplayCutoutMode">always</item>
+    </style>
+    <style name="Platform.Theme.WizeFiles" parent="Platform.V30.Theme.WizeFiles" />
+
+    <style name="Platform.V30.Theme.WizeFiles.Immersive" parent="Platform.V29.Theme.WizeFiles.Immersive">
+        <item name="android:windowLayoutInDisplayCutoutMode">always</item>
+    </style>
+    <style name="Platform.Theme.WizeFiles.Immersive" parent="Platform.V30.Theme.WizeFiles.Immersive" />
+</resources>

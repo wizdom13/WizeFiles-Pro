@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string-array name="settings_night_mode_entries">
+        <item>Sistem ayarını kullan</item>
+        <item>Açık mod</item>
+        <item>Koyu mod</item>
+        <item>Otomatik (saate göre)</item>
+        <item>Otomatik (bataryaya göre)</item>
+    </string-array>
+    <string-array name="settings_file_name_ellipsize_entries">
+        <item>Baştan kes (…name.txt)</item>
+        <item>Ortadan kes (file…name.txt)</item>
+        <item>Sondan kes (filename…)</item>
+        <item>Kayar metin (Marquee)</item>
+    </string-array>
+    <string-array name="settings_root_strategy_entries">
+        <item>Standart kullanıcı erişimi (root yok)</item>
+        <item>Akıllı otomatik mod</item>
+        <item>Root erişimini zorla</item>
+    </string-array>
+    <string-array name="settings_open_apk_default_action_entries">
+        <item>Yüklemeyi dene</item>
+        <item>İçindeki dosyaları görüntüle</item>
+        <item>Her zaman bana sor</item>
+    </string-array>
+    <string-array name="settings_security_relock_entries">
+        <item>Hemen</item>
+        <item>30 saniye</item>
+        <item>1 dakika</item>
+        <item>5 dakika</item>
+        <item>10 dakika</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_file">
+        <item>Oku</item>
+        <item>Yaz</item>
+        <item>Yürüt</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_directory">
+        <item>Oku</item>
+        <item>Yaz</item>
+        <item>Ara</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_special_mode_bits">
+        <item>UID\'yi Ayarla</item>
+        <item>GID\'yi Ayarla</item>
+        <item>Yapışkan Uç</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_authentication_type_entries">
+        <item>Kullanıcı Adı ve Şifre</item>
+        <item>Anonim Giriş yap</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_mode_entries">
+        <item>Aktif Mod</item>
+        <item>Pasif Mod (Önerilir)</item>
+    </string-array>
+    <string-array name="storage_edit_sftp_server_authentication_type_entries">
+        <item>Kullanıcı Adı ve Şifre</item>
+        <item>SSH Genel Anahtarı</item>
+    </string-array>
+    <string-array name="storage_edit_smb_server_authentication_type_entries">
+        <item>Kullanıcı Adı ve Şifre</item>
+        <item>Misafir Erişimi</item>
+        <item>Anonim Erişim</item>
+    </string-array>
+</resources>

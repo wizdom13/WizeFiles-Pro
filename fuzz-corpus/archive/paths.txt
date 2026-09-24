@@ -1,0 +1,7 @@
+../escape
+/absolute
+C:/drive
+a/../../escape
+a\\b
+a//b
+a/./b

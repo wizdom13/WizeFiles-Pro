@@ -1,0 +1,35 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'application'
+    id 'me.champeau.jmh' version '0.7.3'
+}
+
+kotlin {
+    jvmToolchain(21)
+}
+
+application {
+    mainClass = 'com.wisso.wizefiles.benchmark.PerformanceBaselinesKt'
+}
+
+dependencies {
+    implementation project(':core-files-api')
+    implementation project(':feature-transfer-domain')
+    implementation project(':feature-vault-domain')
+    jmh project(':core-files-api')
+    jmh project(':feature-transfer-domain')
+    jmh project(':feature-vault-domain')
+}
+
+jmh {
+    includes = [findProperty('jmhInclude') ?: '.*']
+    warmupIterations = 3
+    iterations = 20
+    fork = 1
+    timeOnIteration = '500ms'
+    resultFormat = 'CSV'
+    profilers = ['gc']
+}

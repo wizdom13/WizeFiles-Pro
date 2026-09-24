@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_media_rotate"
+        android:icon="@drawable/ic_media_rotate_24dp"
+        android:title="@string/media_preview_rotate"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_media_share"
+        android:icon="@drawable/ic_share_control_normal_24dp"
+        android:title="@string/media_preview_share"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_media_speed"
+        android:title="@string/media_preview_speed"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_media_properties"
+        android:icon="@drawable/ic_info_control_normal_24dp"
+        android:title="@string/media_preview_properties"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_media_open_with"
+        android:icon="@drawable/ic_open_as"
+        android:title="@string/media_preview_open_with"
+        app:showAsAction="never" />
+</menu>

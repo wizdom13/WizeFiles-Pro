@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="ebook_viewer_title">Trình đọc Ebook</string>
+    <string name="ebook_viewer_loading">Đang mở ebook..</string>
+    <string name="ebook_viewer_failed">Không thể mở sổ tay này.</string>
+    <string name="ebook_viewer_unsafe">Cuốn ebook này bị hư hại hoặc vượt quá giới hạn của container an toàn.</string>
+    <string name="ebook_viewer_encrypted">Không hỗ trợ các sách Kindle được mã hóa hay DRM bảo vệ.</string>
+    <string name="ebook_viewer_print_replica">Người đọc nội bộ không ủng hộ sách AZW4 Print Repica.</string>
+    <string name="ebook_viewer_too_large">Sách này vượt quá giới hạn an toàn của độc giả bên trong.</string>
+    <string name="ebook_viewer_unavailable">Trình đọc ebook nội bộ không sẵn sàng cho tập tin này.</string>
+    <string name="ebook_viewer_open_with">Mở bằng</string>
+    <string name="ebook_viewer_open_link">Mở liên kết ebook</string>
+    <string name="ebook_viewer_link_blocked">Cái ebook này bị chặn rồi.</string>
+    <string name="ebook_viewer_resource_failed">Không thể tải tài nguyên ấn phẩm.</string>
+    <string name="ebook_viewer_toc">Nội dung</string>
+    <string name="ebook_viewer_no_toc">Danh sách điện tử này không có mục lục.</string>
+    <string name="ebook_viewer_smaller">Chữ nhỏ hơn</string>
+    <string name="ebook_viewer_larger">Văn bản lớn hơn</string>
+    <string name="ebook_viewer_theme">Thay đổi sắc thái</string>
+    <string name="ebook_viewer_share">Chia sẻ ebook</string>
+</resources>

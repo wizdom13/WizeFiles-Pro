@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="font_viewer_error_too_large">یہ فونٹ محفوظ پیش منظر کے لیے بہت بڑا ہے۔</string>
+    <string name="font_viewer_error_invalid">یہ فونٹ فائل درست نہیں یا معاونت یافتہ نہیں ہے۔</string>
+    <string name="font_viewer_error_open_failed">WizeFiles یہ فونٹ نہیں کھول سکا۔ یقینی بنائیں کہ فائل اب بھی موجود ہے اور آپ کو اس تک رسائی حاصل ہے۔</string>
+    <string name="font_viewer_collection_faces">%1$d فیس</string>
+</resources>

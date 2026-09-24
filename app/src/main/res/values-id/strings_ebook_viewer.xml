@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ebook_viewer_title">Pembaca e-book</string>
+    <string name="ebook_viewer_loading">Membuka e-book</string>
+    <string name="ebook_viewer_failed">E-book ini tidak dapat dibuka.</string>
+    <string name="ebook_viewer_unsafe">E-book ini rusak atau melampaui batas keamanan kontainer.</string>
+    <string name="ebook_viewer_encrypted">Buku Kindle yang dienkripsi atau dilindungi DRM tidak didukung.</string>
+    <string name="ebook_viewer_print_replica">Buku AZW4 Print Replica tidak didukung oleh pembaca internal.</string>
+    <string name="ebook_viewer_too_large">E-book ini melampaui batas keamanan pembaca internal.</string>
+    <string name="ebook_viewer_unavailable">Pembaca e-book internal tidak tersedia untuk berkas ini.</string>
+    <string name="ebook_viewer_open_with">Buka dengan</string>
+    <string name="ebook_viewer_open_link">Buka tautan e-book</string>
+    <string name="ebook_viewer_link_blocked">Tautan e-book ini diblokir.</string>
+    <string name="ebook_viewer_resource_failed">Sumber publikasi tidak dapat dimuat.</string>
+    <string name="ebook_viewer_toc">Daftar isi</string>
+    <string name="ebook_viewer_no_toc">E-book ini tidak memiliki daftar isi.</string>
+    <string name="ebook_viewer_smaller">Teks lebih kecil</string>
+    <string name="ebook_viewer_larger">Teks lebih besar</string>
+    <string name="ebook_viewer_theme">Ubah tema</string>
+    <string name="ebook_viewer_share">Bagikan e-book</string>
+</resources>

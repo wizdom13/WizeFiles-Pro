@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="audio_player_set_ringtone">رنگ ٹون کے طور پر سیٹ کریں</string>
+    <string name="audio_player_ringtone_set">رنگ ٹون کامیابی سے سیٹ ہو گئی</string>
+    <string name="audio_player_ringtone_failed">رنگ ٹون سیٹ نہیں کی جا سکی</string>
+    <string name="audio_player_ringtone_permission_required">رنگ ٹون سیٹ کرنے کے لیے WizeFiles کو سسٹم کی ترتیبات میں ترمیم کی اجازت دیں</string>
+</resources>

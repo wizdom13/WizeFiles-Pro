@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/topToolbarContainer"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle.Small"
+                app:title="@string/vault_default_name" />
+
+            <com.wisso.wizefiles.ui.OverlayToolbar
+                android:id="@+id/overlayToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?colorAppBarSurface"
+                android:visibility="gone"
+                app:navigationIcon="@drawable/ic_close_control_normal_24dp"
+                app:navigationContentDescription="@string/close"
+                app:popupTheme="?actionBarPopupTheme" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/vaultActionContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="8dp">
+
+            <LinearLayout
+                android:id="@+id/vaultPrimaryActionRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/importButton"
+                    style="@style/Widget.WizeFiles.StorageCleaner.ActionButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/vault_import_file"
+                    android:textAllCaps="false" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/lockVaultButton"
+                    style="@style/Widget.WizeFiles.StorageCleaner.ActionButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="@string/vault_lock"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/enableBiometricButton"
+                style="@style/Widget.WizeFiles.StorageCleaner.ActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/vault_enable_biometric"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/emptyView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="24dp"
+            android:text="@string/vault_empty" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/list_bottom_padding_with_fab" />
+    </LinearLayout>
+
+    <include layout="@layout/include_file_list_bottom_bar" />
+
+    <include layout="@layout/include_file_list_speed_dial" />
+</FrameLayout>

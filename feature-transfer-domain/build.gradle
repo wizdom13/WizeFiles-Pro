@@ -1,0 +1,19 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
+apply plugin: 'org.jetbrains.kotlin.jvm'
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(21) }
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+kotlin {
+    compilerOptions { jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17 }
+}
+
+dependencies {
+    implementation project(':core-files-api')
+    testImplementation 'junit:junit:4.13.2'
+}

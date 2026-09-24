@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string-array name="settings_night_mode_entries">
+        <item>依系統設定</item>
+        <item>淺色模式</item>
+        <item>深色模式</item>
+        <item>自動（依時間）</item>
+        <item>自動（依電量）</item>
+    </string-array>
+    <string-array name="settings_file_name_ellipsize_entries">
+        <item>截去開頭（…name.txt）</item>
+        <item>截去中間（file…name.txt）</item>
+        <item>截去結尾（filename…）</item>
+        <item>捲動文字（跑馬燈）</item>
+    </string-array>
+    <string-array name="settings_root_strategy_entries">
+        <item>標準使用者存取（無 Root）</item>
+        <item>智慧自動模式</item>
+        <item>強制 Root 存取</item>
+    </string-array>
+    <string-array name="settings_open_apk_default_action_entries">
+        <item>嘗試安裝</item>
+        <item>檢視內部檔案</item>
+        <item>總是詢問我</item>
+    </string-array>
+    <string-array name="settings_security_relock_entries">
+        <item>立即</item>
+        <item>30 秒</item>
+        <item>1 分鐘</item>
+        <item>5 分鐘</item>
+        <item>10 分鐘</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_file">
+        <item>讀取</item>
+        <item>寫入</item>
+        <item>執行</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_normal_mode_bits_directory">
+        <item>讀取</item>
+        <item>寫入</item>
+        <item>搜尋</item>
+    </string-array>
+    <string-array name="file_properties_permission_set_mode_special_mode_bits">
+        <item>設定 UID</item>
+        <item>設定 GID</item>
+        <item>粘性位點</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_authentication_type_entries">
+        <item>使用者名稱密碼( P)</item>
+        <item>匿名登入</item>
+    </string-array>
+    <string-array name="storage_edit_ftp_server_mode_entries">
+        <item>活動模式</item>
+        <item>被動模式( 建議)</item>
+    </string-array>
+    <string-array name="storage_edit_sftp_server_authentication_type_entries">
+        <item>使用者名稱密碼( P)</item>
+        <item>SSH 公鑰</item>
+    </string-array>
+    <string-array name="storage_edit_smb_server_authentication_type_entries">
+        <item>使用者名稱密碼( P)</item>
+        <item>來賓訪問</item>
+        <item>匿名訪問</item>
+    </string-array>
+</resources>

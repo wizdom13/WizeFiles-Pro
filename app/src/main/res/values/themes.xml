@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="Platform.V21.Theme.WizeFiles" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar">
+        <item name="colorPrimaryDark">@color/system_window_scrim_compat</item>
+    </style>
+    <style name="Platform.Theme.WizeFiles" parent="Platform.V21.Theme.WizeFiles" />
+    <style name="Base.Theme.WizeFiles" parent="Platform.Theme.WizeFiles">
+
+        <item name="actionBarTheme">@style/ThemeOverlay.WizeFiles.ActionBar</item>
+        <item name="actionBarPopupTheme">@style/ThemeOverlay.WizeFiles.ActionBarPopup</item>
+        <item name="android:colorBackground">?colorSurface</item>
+        <item name="dropDownListViewStyle">@style/Widget.WizeFiles.ListView.DropDown</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+
+        <item name="colorAccent">?colorPrimary</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.WizeFiles.Material3.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.WizeFiles.Material3.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.WizeFiles.Material3.LargeComponent</item>
+        <item name="textAppearanceListItem">@style/TextAppearance.WizeFiles.Material3.ListItem</item>
+        <item name="android:textAppearanceListItem">?textAppearanceListItem</item>
+        <item name="textAppearanceListItemSmall">@style/TextAppearance.WizeFiles.Material3.ListItemSmall</item>
+        <item name="android:textAppearanceListItemSmall">?textAppearanceListItemSmall</item>
+        <item name="floatingActionButtonStyle">?floatingActionButtonSecondaryStyle</item>
+        <item name="materialCardViewStyle">@style/Widget.WizeFiles.CardView</item>
+        <item name="navigationViewStyle">@style/Widget.WizeFiles.Material3.NavigationView</item>
+        <item name="simpleMenuPreferenceStyle">@style/Preference.WizeFiles.Material3.SimpleMenuPreference</item>
+        <item name="switchPreferenceCompatStyle">@style/Preference.WizeFiles.Material3.SwitchPreferenceCompat</item>
+        <item name="tabStyle">@style/Widget.WizeFiles.Material3.TabLayout</item>
+        <item name="textInputStyle">?textInputOutlinedStyle</item>
+        <item name="toolbarStyle">@style/Widget.WizeFiles.Material3.Toolbar</item>
+        <item name="minTouchTargetSize">0dp</item>
+
+        <item name="colorAppBarSurface">?colorSurface</item>
+    </style>
+    <style name="Theme.WizeFiles" parent="Base.Theme.WizeFiles" />
+
+    <style name="Platform.V21.Theme.WizeFiles.Translucent" parent="Theme.WizeFiles">
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+    <style name="Platform.Theme.WizeFiles.Translucent" parent="Platform.V21.Theme.WizeFiles.Translucent" />
+    <style name="Base.Theme.WizeFiles.Translucent" parent="Platform.Theme.WizeFiles.Translucent">
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.WizeFiles.Translucent" parent="Base.Theme.WizeFiles.Translucent" />
+
+    <style name="Platform.V21.Theme.WizeFiles.Immersive" parent="Theme.Material3.DynamicColors.Dark.NoActionBar">
+        <item name="android:navigationBarColor">?colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/dark_50_percent</item>
+    </style>
+    <style name="Platform.Theme.WizeFiles.Immersive" parent="Platform.V21.Theme.WizeFiles.Immersive" />
+    <style name="Base.Theme.WizeFiles.Immersive" parent="Platform.Theme.WizeFiles.Immersive">
+
+        <item name="actionBarTheme">@style/ThemeOverlay.WizeFiles.ActionBar</item>
+        <item name="actionBarPopupTheme">@style/ThemeOverlay.WizeFiles.ActionBarPopup</item>
+        <item name="android:colorBackground">?colorSurface</item>
+        <item name="dropDownListViewStyle">@style/Widget.WizeFiles.ListView.DropDown</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowBackground">@android:color/black</item>
+
+        <item name="colorAccent">?colorPrimary</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.WizeFiles.Material3.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.WizeFiles.Material3.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.WizeFiles.Material3.LargeComponent</item>
+        <item name="textAppearanceListItem">@style/TextAppearance.WizeFiles.Material3.ListItem</item>
+        <item name="android:textAppearanceListItem">?textAppearanceListItem</item>
+        <item name="textAppearanceListItemSmall">@style/TextAppearance.WizeFiles.Material3.ListItemSmall</item>
+        <item name="android:textAppearanceListItemSmall">?textAppearanceListItemSmall</item>
+        <item name="floatingActionButtonStyle">?floatingActionButtonSecondaryStyle</item>
+        <item name="materialCardViewStyle">@style/Widget.WizeFiles.CardView</item>
+        <item name="navigationViewStyle">@style/Widget.WizeFiles.Material3.NavigationView</item>
+        <item name="simpleMenuPreferenceStyle">@style/Preference.WizeFiles.Material3.SimpleMenuPreference</item>
+        <item name="switchPreferenceCompatStyle">@style/Preference.WizeFiles.Material3.SwitchPreferenceCompat</item>
+        <item name="tabStyle">@style/Widget.WizeFiles.Material3.TabLayout</item>
+        <item name="textInputStyle">?textInputOutlinedStyle</item>
+        <item name="toolbarStyle">@style/Widget.WizeFiles.Material3.Toolbar</item>
+        <item name="minTouchTargetSize">0dp</item>
+
+        <item name="colorAppBarSurface">@color/dark_50_percent</item>
+    </style>
+    <style name="Theme.WizeFiles.Immersive" parent="Base.Theme.WizeFiles.Immersive" />
+
+    <style name="Theme.WizeFiles.Black" />
+    <style name="Theme.WizeFiles.Translucent.Black" />
+    <style name="Theme.WizeFiles.Immersive.Black" />
+
+    <style name="Theme.WizeFiles.NowPlaying" parent="Theme.WizeFiles">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">?attr/colorSurface</item>
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+    </style>
+
+</resources>

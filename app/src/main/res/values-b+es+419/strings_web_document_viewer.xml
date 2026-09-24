@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="web_document_viewer_title">Visor de documentos guardados</string>
+    <string name="web_document_viewer_loading">Abriendo el documento guardado</string>
+    <string name="web_document_viewer_failed">No se pudo abrir este documento guardado.</string>
+    <string name="web_document_viewer_unsafe">Este documento guardado está dañado o supera los límites seguros de recursos.</string>
+    <string name="web_document_viewer_unavailable">El visor interno de documentos guardados no está disponible para este archivo.</string>
+    <string name="web_document_viewer_renderer_failed">El procesador web del sistema se detuvo mientras mostraba este documento.</string>
+    <string name="web_document_viewer_open_with">Abrir con</string>
+    <string name="web_document_viewer_open_link">Abrir enlace del documento</string>
+    <string name="web_document_viewer_link_blocked">Se bloqueó este enlace del documento.</string>
+    <string name="web_document_viewer_reload">Volver a cargar</string>
+    <string name="web_document_viewer_share">Compartir documento guardado</string>
+</resources>

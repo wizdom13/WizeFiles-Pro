@@ -1,0 +1,24 @@
+// Copyright (C) 2026 Wize Soft (Wissam Shehadeh)
+// SPDX-License-Identifier: GPL-3.0-only
+
+package com.wisso.wizefiles.core.android.compat
+
+import android.os.Build
+import android.widget.TextView
+import androidx.annotation.StyleRes
+import androidx.core.widget.TextViewCompat
+import com.wisso.wizefiles.util.lazyReflectedMethod
+
+private val isSingleLineMethod by lazyReflectedMethod(TextView::class.java, "isSingleLine")
+
+val TextView.isSingleLineCompat: Boolean
+    get() =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            isSingleLine
+        } else {
+            isSingleLineMethod.invoke(this) as Boolean
+        }
+
+fun TextView.setTextAppearanceCompat(@StyleRes resId: Int) {
+    TextViewCompat.setTextAppearance(this, resId)
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:insetLeft="2dp"
+        android:insetTop="7dp"
+        android:insetRight="2dp"
+        android:insetBottom="7dp"
+        android:drawable="@drawable/rv_fastscroll_thumb_horizontal_pill_pressed" />
+    <item
+        android:gravity="center"
+        android:drawable="@drawable/rv_fastscroll_thumb_horizontal_grip_pressed" />
+</layer-list>

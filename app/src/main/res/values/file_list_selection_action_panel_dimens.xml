@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <dimen name="file_list_selection_action_bar_height">64dp</dimen>
+    <dimen name="file_list_selection_action_bar_padding">4dp</dimen>
+    <dimen name="file_list_selection_action_padding">2dp</dimen>
+    <dimen name="file_list_selection_action_icon_padding">2dp</dimen>
+    <dimen name="file_list_selection_action_icon_size">22dp</dimen>
+    <dimen name="file_list_selection_action_text_size">12sp</dimen>
+</resources>
