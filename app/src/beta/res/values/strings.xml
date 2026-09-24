@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="beta_expired_title">Beta period ended</string>
-    <string name="beta_expired_message">This WizeFiles Beta build expired on %1$s after its one-month testing period. Install a newer beta version to continue.</string>
-    <string name="beta_expired_close">Close</string>
-</resources>

@@ -6,8 +6,6 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
 import android.util.Log
-import com.wisso.wizefiles.core.billing.AppBilling
-import com.wisso.wizefiles.core.entitlement.AppEntitlements
 import com.wisso.wizefiles.util.AppLog
 
 private var applicationHolder: Application? = null
@@ -47,9 +45,7 @@ class ApplicationInitializerProvider : ContentProvider() {
     override fun onCreate(): Boolean {
         applicationHolder = context as Application
         val tasks = listOf(
-            AppInitializerTask("initializeAppLog") { AppLog.initialize(application) },
-            AppInitializerTask("initializeEntitlements") { AppEntitlements.initialize(application) },
-            AppInitializerTask("initializeBilling") { AppBilling.initialize(application) }
+            AppInitializerTask("initializeAppLog") { AppLog.initialize(application) }
         ) + appInitializerTasks
 
         safeInfo("Application initialization started")

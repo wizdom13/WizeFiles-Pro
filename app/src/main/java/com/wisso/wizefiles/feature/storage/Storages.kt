@@ -1,8 +1,5 @@
 package com.wisso.wizefiles.storage
 
-import com.wisso.wizefiles.core.entitlement.ProFeature
-import com.wisso.wizefiles.core.entitlement.ProFeatureAccess
-import com.wisso.wizefiles.core.entitlement.ProUsagePolicy
 import com.wisso.wizefiles.provider.ftp.client.FtpClient as FtpConnectionPool
 import com.wisso.wizefiles.provider.sftp.client.SftpClient as SftpConnectionPool
 import com.wisso.wizefiles.settings.Settings
@@ -10,25 +7,12 @@ import com.wisso.wizefiles.util.removeFirst
 import com.wisso.wizefiles.util.valueCompat
 
 object Storages {
-    fun canAddRemoteStorage(): Boolean =
-        ProUsagePolicy.canAddRemoteConnection(
-            existingRemoteCount = Settings.STORAGES.valueCompat.count { it.isRemoteConnection() },
-            isNew = true,
-            isPro = ProFeatureAccess.isAllowed(ProFeature.UNLIMITED_REMOTE_CONNECTIONS),
-        )
+    fun canAddRemoteStorage(): Boolean = true
 
-    fun canAddVault(): Boolean =
-        ProUsagePolicy.canAddVault(
-            existingVaultCount = Settings.STORAGES.valueCompat.count { it is VaultStorage },
-            isNew = true,
-            isPro = ProFeatureAccess.isAllowed(ProFeature.MULTIPLE_VAULTS),
-        )
+    fun canAddVault(): Boolean = true
 
     /**
-     * Returns false when a new storage would exceed a Free limit.
-     *
-     * Editing an existing connection or vault remains allowed so users never lose control of data
-     * they already configured.
+     * Adds or replaces storage entries without commercial account-count limits.
      */
     fun addOrReplace(storage: Storage): Boolean {
         val current = Settings.STORAGES.valueCompat

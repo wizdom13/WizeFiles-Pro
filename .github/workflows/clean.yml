@@ -11,7 +11,6 @@ name: Workflows cleanup
         options:
           - Android CI
           - Android Release
-          - Publish WizeFiles Beta
           - Workflows cleanup
           - All
       delete_artifacts:
@@ -70,7 +69,7 @@ jobs:
           set -euo pipefail
 
           case "$TARGET_WORKFLOW" in
-            "Android CI"|"Android Release"|"Publish WizeFiles Beta"|"Workflows cleanup"|"All") ;;
+            "Android CI"|"Android Release"|"Workflows cleanup"|"All") ;;
             *)
               echo "Unsupported workflow selection: $TARGET_WORKFLOW" >&2
               exit 1

@@ -48,17 +48,25 @@ jobs:
         distribution: 'temurin'
         java-version: '21'
 
-    - name: Validate NVD API key
+    - name: Check NVD API key availability
+      id: nvd_key
       shell: bash
       run: |
         set -euo pipefail
-        if [[ -z "${NVD_API_KEY:-}" ]]; then
-          echo "NVD_API_KEY repository secret is required for the blocking dependency audit." >&2
-          echo "Create an NVD API key and store it in GitHub Actions as the NVD_API_KEY repository secret." >&2
-          exit 1
+        if [[ -n "${NVD_API_KEY:-}" ]]; then
+          echo "available=true" >> "$GITHUB_OUTPUT"
+          exit 0
         fi
+        if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+          echo "available=false" >> "$GITHUB_OUTPUT"
+          echo "::warning::NVD_API_KEY is unavailable for this pull request; dependency audit is skipped."
+          exit 0
+        fi
+        echo "NVD_API_KEY repository secret is required on non-PR runs." >&2
+        exit 1
 
     - name: Configure NVD API key for Gradle
+      if: steps.nvd_key.outputs.available == 'true'
       shell: bash
       run: |
         set -euo pipefail
@@ -75,11 +83,13 @@ jobs:
         EOF
 
     - name: Set up Gradle cache
+      if: steps.nvd_key.outputs.available == 'true'
       uses: gradle/actions/setup-gradle@v4
       with:
         cache-read-only: ${{ github.ref != 'refs/heads/main' }}
 
     - name: Cache OWASP dependency data
+      if: steps.nvd_key.outputs.available == 'true'
       uses: actions/cache@v4
       with:
         path: ~/.gradle/dependency-check-data
@@ -88,6 +98,7 @@ jobs:
           ${{ runner.os }}-dependency-check-v12.2.2-
 
     - name: Run dependency vulnerability policy
+      if: steps.nvd_key.outputs.available == 'true'
       run: ./gradlew --init-script "$RUNNER_TEMP/dependency-check.init.gradle" :app:dependencyCheckAnalyze --warning-mode all
 
     - name: Upload dependency reports

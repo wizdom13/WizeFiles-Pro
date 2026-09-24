@@ -18,7 +18,6 @@ import com.wisso.wizefiles.databinding.FragmentAboutBinding
 import com.wisso.wizefiles.core.files.mime.MimeType
 import com.wisso.wizefiles.util.createIntent
 import com.wisso.wizefiles.feature.filebrowser.FileListActivity
-import com.wisso.wizefiles.feature.pro.ProPurchaseActivity
 import com.wisso.wizefiles.util.AppLog
 import com.wisso.wizefiles.storage.path.AppPath
 import com.wisso.wizefiles.storage.path.LocalAppPath
@@ -55,9 +54,6 @@ class AboutFragment : Fragment() {
         activity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         activity.supportActionBar!!.title = getString(R.string.about_title)
 
-        binding.proLayout.setOnClickListener {
-            startActivity(ProPurchaseActivity.createIntent(requireContext()))
-        }
         binding.licensesLayout.setOnClickListener {
             startActivitySafe(OpenSourceLicensesActivity.createIntent())
         }

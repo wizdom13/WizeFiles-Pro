@@ -40,8 +40,8 @@ class AndroidCiWorkflowSourceTest {
         val workflow = File(root, ".github/workflows/android.yml").readText()
 
         assertTrue("NVD_API_KEY: \${{ secrets.NVD_API_KEY }}" in workflow)
-        assertTrue("- name: Validate NVD API key" in workflow)
-        assertTrue("NVD_API_KEY repository secret is required" in workflow)
+        assertTrue("- name: Check NVD API key availability" in workflow)
+        assertTrue("NVD_API_KEY repository secret is required on non-PR runs" in workflow)
         assertTrue("nvd.apiKey = System.getenv('NVD_API_KEY')" in workflow)
         assertTrue("--init-script \"\$RUNNER_TEMP/dependency-check.init.gradle\"" in workflow)
     }
@@ -52,7 +52,7 @@ class AndroidCiWorkflowSourceTest {
         val suppressions = File(root, "config/dependency-check-suppressions.xml")
 
         assertTrue(
-            "scanConfigurations = ['releaseRuntimeClasspath', 'betaRuntimeClasspath']" in appBuild
+            "scanConfigurations = ['releaseRuntimeClasspath']" in appBuild
         )
         assertTrue("config/dependency-check-suppressions.xml" in appBuild)
         assertTrue("implementation 'org.apache.commons:commons-lang3:3.20.0'" in appBuild)

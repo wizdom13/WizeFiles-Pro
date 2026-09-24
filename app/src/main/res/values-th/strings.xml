@@ -1035,7 +1035,7 @@
     <string name="apk_signing_sign_heading">สร้างการเซ็น APK</string>
     <string name="apk_signing_sign_explanation">เลือก APKการแสดงผลใหม่ และรายการส่วนตัว APK ไม่เคยถูกเขียนทับ</string>
     <string name="apk_signing_verify_heading">ตรวจสอบ APK ลายเซ็น</string>
-    <string name="apk_signing_verify_explanation">การรับรองเป็นการอ่านอย่างเดียว WizeFiles Proup Profiles ส่วนตัว และรายงานแผนการตรวจสอบและลายเซ็นของเอกสาร</string>
+    <string name="apk_signing_verify_explanation">การตรวจสอบเป็นแบบอ่านอย่างเดียว WizeFiles จะจัดเตรียมไฟล์จากผู้ให้บริการไว้เป็นการส่วนตัว และรายงานรูปแบบลายเซ็นที่ตรวจสอบแล้วพร้อมลายนิ้วมือของใบรับรองผู้ลงนาม</string>
     <string name="apk_signing_section_input_output">นําเข้าและส่งออก</string>
     <string name="apk_signing_section_signing_key">กุญแจสําหรับใช้เซ็น</string>
     <string name="apk_signing_section_review_sign">ทบทวนและเซ็น</string>

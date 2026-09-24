@@ -261,7 +261,7 @@ Practical layout:
 
 ## License
 
-This repository includes a `LICENSE` file at the project root. See `LICENSE` for the exact terms.
+WizeFiles project-owned source is free software licensed under the **GNU General Public License v3.0 (GPL-3.0)**. All implemented features are included without purchase, subscription, or license-key gates. Third-party components retain their own upstream licenses; see `THIRD_PARTY_NOTICES.md`, `app/src/main/licenses/`, and the native dependency inventory. See `LICENSE` for the GPLv3 terms.
 
 ## Status / Notes
 

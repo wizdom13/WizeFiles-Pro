@@ -76,11 +76,11 @@ I would implement the gaps in this order:
 5. **Indexed search**
 6. **Archive-as-folder editing**
 
-For monetization:
+For distribution:
 
-* Keep local/SAF file management, tabs, viewers, Transfer Center recovery, signature verification, one remote connection, one vault and single-app App Manager operations free.
-* Reserve dual-pane and cross-pane workflows, sync profiles and schedules, package signing, archive mutation, batch App Manager actions, additional remote connections, rclone power-user setup, additional vaults, root access and built-in local servers for **WizeFiles Pro**.
-* Never block access to existing files, vault data, operation history or recovery because Pro expires.
+* WizeFiles 1.0.0 includes all implemented features without purchase, subscription, account-count, or license-token gates.
+* The project is licensed under the GNU General Public License version 3.
+* Existing former-Pro compatibility checks are no-ops until their call sites are naturally simplified.
 * Keep viewer support focused on file inspection: no built-in image/video editors, gallery or music library, playlists, or PDF editing/annotation. Focused viewers and background audio strengthen file workflows without turning WizeFiles into a media suite.
 
 My overall conclusion is that WizeFiles is not missing basic capability. It is missing a polished **productivity layer**. Dual-pane navigation, batch rename, duplicates, transfer control, PC access and synchronization would close most of the meaningful gap with Solid Explorer, MiXplorer and X-plore.
