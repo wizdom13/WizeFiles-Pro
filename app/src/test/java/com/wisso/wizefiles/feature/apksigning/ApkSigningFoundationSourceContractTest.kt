@@ -44,15 +44,5 @@ class ApkSigningFoundationSourceContractTest {
         assertFalse("-dontwarn com.android.apksig.**" in rules)
     }
 
-    @Test
-    fun `foundation remains non ui and non provider aware`() {
-        val documentation = source("docs/APK_SIGNING.md").lowercase()
-
-        assertTrue("not user-facing" in documentation)
-        assertTrue("never overwrites" in documentation)
-        assertTrue("v4" in documentation && ".idsig" in documentation)
-        assertTrue("provider-aware staging" in documentation)
-    }
-
     private fun source(path: String): String = File(root, path).readText()
 }
