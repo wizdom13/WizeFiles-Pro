@@ -37,7 +37,10 @@
 
 **WizeFiles** is a powerful Android file manager for local storage, removable drives, network shares, cloud accounts, archives, media, Android packages, synchronization, secure storage, and advanced file-management workflows.
 
-**WizeFiles 1.0.0 is free and open-source software licensed under GNU GPL-3.0-only.** Every implemented feature is available without advertisements, subscriptions, in-app purchases, paid tiers, license keys, or feature paywalls.
+**WizeFiles 1.0.0 is free and open-source software licensed under GNU GPL-3.0-only.** The complete WizeFiles source code is maintained in this repository, **[wizdom13/WizeFiles-Pro](https://github.com/wizdom13/WizeFiles-Pro)**. Every implemented feature is available without advertisements, subscriptions, in-app purchases, paid tiers, license keys, or feature paywalls.
+
+> [!IMPORTANT]
+> **WizeFiles-Pro is the repository name only.** WizeFiles no longer has a separate paid “Pro” edition or a Free/Pro feature split. The application is simply **WizeFiles**, and this repository contains its open-source code.
 
 > [!NOTE]
 > WizeFiles is designed to be a complete file-management workspace rather than only a local file browser. Some capabilities depend on Android version, granted permissions, storage-provider support, device hardware, or optional root/Shizuku access.
@@ -451,7 +454,9 @@ WizeFiles does **not** disable Android package verification by itself. Signature
 - Material-style interface
 - Configurable locale/language support
 
-# Free and open source
+# Open-source project
+
+WizeFiles is fully open source, and its source code is maintained in this **WizeFiles-Pro** repository. The repository name is retained for continuity; it does not represent a separate product edition.
 
 WizeFiles has no commercial feature tier.
 
@@ -465,7 +470,9 @@ WizeFiles has no commercial feature tier.
 - No feature-count limits tied to payment
 - All implemented capabilities are available to every user
 
-WizeFiles project-owned source is licensed under **GNU GPL-3.0-only**. Third-party components retain their respective upstream licenses and notices.
+The WizeFiles source code in this repository is licensed under **GNU GPL-3.0-only**. Third-party components retain their respective upstream licenses and notices.
+
+Source repository: **[github.com/wizdom13/WizeFiles-Pro](https://github.com/wizdom13/WizeFiles-Pro)**
 
 # Feature comparison
 
@@ -565,7 +572,7 @@ When reporting a problem, please include enough information to reproduce it, but
 
 # License
 
-WizeFiles project-owned source is licensed under the **GNU General Public License v3.0 only (GPL-3.0-only)**.
+WizeFiles source code in this repository is licensed under the **GNU General Public License v3.0 only (GPL-3.0-only)**.
 
 Third-party components remain under their own upstream licenses and notices. See the project `LICENSE`, `THIRD_PARTY_NOTICES.md`, and included third-party license notices for details.
 
