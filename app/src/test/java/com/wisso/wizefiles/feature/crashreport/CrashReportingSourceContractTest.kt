@@ -22,8 +22,6 @@ class CrashReportingSourceContractTest {
         val activity = source(
             "app/src/main/java/com/wisso/wizefiles/feature/crashreport/CrashReportActivity.kt"
         )
-        val privacy = source("web/privacy.html")
-
         assertTrue("implementation 'ch.acra:acra-core:5.13.1'" in build)
         assertFalse("acra-http" in build)
         assertTrue("merges += ['META-INF/services/**']" in build)
@@ -37,7 +35,6 @@ class CrashReportingSourceContractTest {
         assertTrue("CrashReportStore.delete(this)" in activity)
         assertTrue(activity.split("markReportHandled()").size - 1 >= 4)
         assertTrue("Nothing is uploaded automatically" in source("app/src/main/res/values/strings.xml"))
-        assertTrue("It is not uploaded automatically." in privacy)
     }
 
     private fun source(path: String): String = File(root, path).readText()

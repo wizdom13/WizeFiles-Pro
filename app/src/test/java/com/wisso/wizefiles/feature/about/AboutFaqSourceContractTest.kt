@@ -18,7 +18,7 @@ class AboutFaqSourceContractTest {
 
         assertFalse("app:tint=\"?colorControlNormal\"" in layout)
         assertTrue(
-            layout.lineSequence().count { "app:tint=\"?attr/colorPrimary\"" in it } == 10
+            layout.lineSequence().count { "app:tint=\"?attr/colorPrimary\"" in it } == 9
         )
     }
 

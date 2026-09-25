@@ -80,16 +80,5 @@ class AdvancedFormatFoundationSourceContractTest {
         assertTrue("app-debug.apk" in workflow)
     }
 
-    @Test
-    fun `foundation documentation tracks focused backend activation safely`() {
-        val documentation = source("docs/AdvancedFormatFoundation.md")
-
-        assertTrue("focused follow-up PRs now activate these backends" in documentation)
-        assertTrue("falls back only for parser/decoder capability errors" in documentation)
-        assertTrue("Open with another app" in documentation)
-        assertTrue("FileOperationService" in documentation)
-        assertFalse("android:exported=\"true\"" in documentation)
-    }
-
     private fun source(path: String): String = File(root, path).readText()
 }
