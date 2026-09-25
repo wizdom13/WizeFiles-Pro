@@ -1,4 +1,39 @@
-# WizeFiles
+<p align="center"><a href="https://github.com/wizdom13/WizeFiles-Pro"><img src="icon.png" width="150" alt="WizeFiles icon"></a></p>
+
+<h1 align="center">WizeFiles</h1>
+
+<p align="center"><b>A powerful Android file manager for local storage, networks, cloud accounts, archives, media, Android packages, synchronization, and secure storage.</b></p>
+
+<p align="center">
+  <img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" height="80" alt="IzzyOnDroid — coming soon" title="IzzyOnDroid — coming soon">
+  <a href="https://github.com/wizdom13/WizeFiles-Pro/releases"><img src="https://i.ibb.co/q0mdc4Z/get-it-on-github.png" height="80" alt="Get WizeFiles on GitHub"></a>
+  <br>
+  <a href="https://github-store.org/app?repo=wizdom13/WizeFiles-Pro"><img src="https://raw.githubusercontent.com/kurikomi-labs/komi-store/main/media-resources/ghs_download_badge.png" height="58" alt="Get WizeFiles on GitHub Store"></a>
+</p>
+
+<p align="center"><sub>IzzyOnDroid distribution is planned but not enabled yet.</sub></p>
+
+<p align="center">
+  <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPLv3"></a>
+  <a href="https://github.com/wizdom13/WizeFiles-Pro/actions/workflows/android.yml"><img src="https://github.com/wizdom13/WizeFiles-Pro/actions/workflows/android.yml/badge.svg?branch=main" alt="Android CI status"></a>
+</p>
+
+<hr>
+
+<p align="center">
+  <a href="#highlights">Highlights</a> •
+  <a href="#features">Features</a> •
+  <a href="#local-network-and-cloud-storage">Cloud &amp; network</a> •
+  <a href="#folder-synchronization-and-scheduled-backups">Sync &amp; backup</a> •
+  <a href="#image-viewer">Viewers</a> •
+  <a href="#app-manager">App Manager</a> •
+  <a href="#android-package-installer">Installer</a> •
+  <a href="#storage-cleanup-wizard">Cleanup</a> •
+  <a href="#encryption-vaults-and-privacy">Security &amp; privacy</a> •
+  <a href="#feature-comparison">Comparison</a> •
+  <a href="#project-direction-and-contributions">Project direction</a> •
+  <a href="#license">License</a>
+</p>
 
 **WizeFiles** is a powerful Android file manager for local storage, removable drives, network shares, cloud accounts, archives, media, Android packages, synchronization, secure storage, and advanced file-management workflows.
 
