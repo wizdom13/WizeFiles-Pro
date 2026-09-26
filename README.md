@@ -35,7 +35,7 @@
   <a href="#license">License</a>
 </p>
 
-**WizeFiles** is a powerful Android file manager for local storage, removable drives, network shares, cloud accounts, archives, media, Android packages, synchronization, secure storage, and advanced file-management workflows.
+**WizeFiles** is the **most powerful** Android file manager for local storage, removable drives, network shares, cloud accounts, archives, media, Android packages, synchronization, secure storage, and advanced file-management workflows.
 
 **WizeFiles 1.0.0 is free and open-source software licensed under GNU GPL-3.0-only.** The complete WizeFiles source code is maintained in this repository, **[wizdom13/WizeFiles-Pro](https://github.com/wizdom13/WizeFiles-Pro)**. Every implemented feature is available without advertisements, subscriptions, in-app purchases, paid tiers, license keys, or feature paywalls.
 
