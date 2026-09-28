@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">添加 Syncthing 文件夹</string>
+    <string name="syncthing_pair_help">在另一台设备的 Syncthing 中添加此设备，然后共享具有相同文件夹 ID 的文件夹。两台设备都必须接受配对。仅支持可直接访问的本地文件夹。</string>
+    <string name="syncthing_this_device">复制此设备的 ID</string>
+    <string name="syncthing_device_id">另一台设备的 ID</string>
+    <string name="syncthing_folder_id">共享文件夹 ID（英文字母、数字、. _ -）</string>
+    <string name="syncthing_send_only">仅发送（包括删除）</string>
+    <string name="syncthing_behavior">Syncthing 会直接应用更改，不提供文件预览，并保留冲突副本。双向同步会在两个方向传播删除操作。仅发送模式会发送本地更改和删除操作；远端更改可能导致同步无法完成。任务在 8 分钟后停止，可继续运行。运行期间两台设备都必须在线。</string>
+    <string name="syncthing_versions">保留由另一台设备更改的文件的 5 个版本</string>
+    <string name="syncthing_invalid_setup">无法配置 Syncthing。请检查设备 ID 和文件夹 ID；每个配置都需要独立的本地文件夹和文件夹 ID。</string>
+    <string name="syncthing_local_folder_required">请为 Syncthing 选择可写且可直接访问的本地文件夹。</string>
+    <string name="syncthing_public_network">使用公共发现和中继进行互联网同步（会共享设备 ID 和 IP 地址）。关闭此选项则仅使用本地网络。</string>
+</resources>

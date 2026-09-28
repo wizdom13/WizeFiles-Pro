@@ -97,6 +97,7 @@ android {
         jniLibs {
             useLegacyPackaging = true
             pickFirsts += ['**/libc++_shared.so']
+            keepDebugSymbols += ['**/libsyncthing.so', '**/libsyncthing-launcher.so']
         }
         resources {
             excludes += [
@@ -339,4 +340,19 @@ afterEvaluate {
         }
         reports { xml.required = true; html.required = true }
     }
+}
+
+
+// Package executables from immutable APK native-library storage on Android 11+.
+def syncthingJni = layout.buildDirectory.dir('generated/syncthing/jniLibs')
+android.sourceSets.main.jniLibs.srcDir(syncthingJni.get().asFile)
+android.sourceSets.main.assets.srcDir(file('src/main/licenses'))
+def buildSyncthing = tasks.register('buildSyncthing', Exec) {
+    inputs.file rootProject.file('scripts/build-syncthing.sh')
+    inputs.file file('src/main/jni/syncthing_launcher.c')
+    outputs.dir syncthingJni
+    commandLine 'bash', rootProject.file('scripts/build-syncthing.sh'), syncthingJni.get().asFile
+}
+tasks.configureEach {
+    if (name.matches('merge.*JniLibFolders')) dependsOn buildSyncthing
 }

@@ -61,8 +61,15 @@ tasks.register('buildRcloneAar', Exec) {
 
 if (findProject(':app') != null) project(':app') {
     plugins.withId('com.android.application') {
-        android.defaultConfig.ndk {
-            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        def emulatorAbi = providers.gradleProperty('wizefilesEmulatorAbi').orNull
+        if (emulatorAbi != null && emulatorAbi != 'x86_64') {
+            throw new GradleException('wizefilesEmulatorAbi must be x86_64')
+        }
+        android.buildTypes.configureEach { buildType ->
+            // Native executable tests must not run ARM binaries through a native bridge.
+            // Release packages keep the supported ARM ABIs regardless of this debug option.
+            buildType.ndk.abiFilters.addAll(buildType.name == 'debug' && emulatorAbi != null
+                ? [emulatorAbi] : ['armeabi-v7a', 'arm64-v8a'])
         }
         dependencies.add('implementation', files(rcloneAar))
         tasks.matching { it.name == 'preBuild' }.configureEach {

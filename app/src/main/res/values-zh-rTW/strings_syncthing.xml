@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">新增 Syncthing 資料夾</string>
+    <string name="syncthing_pair_help">在另一台裝置的 Syncthing 中新增此裝置，然後分享具有相同資料夾 ID 的資料夾。兩台裝置都必須接受配對。僅支援可直接存取的本機資料夾。</string>
+    <string name="syncthing_this_device">複製此裝置的 ID</string>
+    <string name="syncthing_device_id">另一台裝置的 ID</string>
+    <string name="syncthing_folder_id">共用資料夾 ID（英文字母、數字、. _ -）</string>
+    <string name="syncthing_send_only">僅傳送（包含刪除）</string>
+    <string name="syncthing_behavior">Syncthing 會直接套用變更，不提供檔案預覽，並保留衝突副本。雙向同步會在兩個方向傳播刪除操作。僅傳送模式會傳送本機變更和刪除操作；遠端變更可能導致同步無法完成。工作會在 8 分鐘後停止，之後可繼續執行。執行期間兩台裝置都必須連線。</string>
+    <string name="syncthing_versions">保留由另一台裝置變更的檔案的 5 個版本</string>
+    <string name="syncthing_invalid_setup">無法設定 Syncthing。請檢查裝置 ID 和資料夾 ID；每個設定檔都需要獨立的本機資料夾和資料夾 ID。</string>
+    <string name="syncthing_local_folder_required">請為 Syncthing 選取可寫入且可直接存取的本機資料夾。</string>
+    <string name="syncthing_public_network">使用公開探索和中繼進行網際網路同步（會分享裝置 ID 和 IP 位址）。關閉此選項則僅使用區域網路。</string>
+</resources>

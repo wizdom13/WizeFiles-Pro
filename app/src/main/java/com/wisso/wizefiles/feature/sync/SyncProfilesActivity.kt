@@ -5,6 +5,9 @@ package com.wisso.wizefiles.feature.sync
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.view.Menu
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -22,6 +25,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.wisso.wizefiles.R
 import com.wisso.wizefiles.databinding.ActivitySyncProfilesBinding
 import com.wisso.wizefiles.databinding.DialogSyncProfileBinding
+import com.wisso.wizefiles.databinding.DialogSyncthingPairingBinding
 import com.wisso.wizefiles.feature.filebrowser.FileListActivity
 import com.wisso.wizefiles.feature.transfer.TransferDetailActivity
 import com.wisso.wizefiles.feature.transfer.formatTransferPath
@@ -38,11 +42,17 @@ class SyncProfilesActivity : AppCompatActivity() {
     private lateinit var adapter: SyncProfilesAdapter
     private val executor = Executors.newSingleThreadExecutor()
     private var pendingSource: AppPath? = null
+    private var syncthingSource = false
     private var destinationLaunchPending = false
     private val destinationPickerLaunchRunnable = Runnable(::launchDestinationPickerIfReady)
 
     private val sourcePicker =
         registerForActivityResult(FileListActivity.OpenDirectoryContract()) { source ->
+            if (syncthingSource) {
+                syncthingSource = false
+                if (source != null) showSyncthingPairing(source)
+                return@registerForActivityResult
+            }
             pendingSource = source
             destinationLaunchPending = source != null
             if (source == null) {
@@ -66,6 +76,7 @@ class SyncProfilesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        syncthingSource = savedInstanceState?.getBoolean("syncthing_source") == true
         pendingSource = savedInstanceState
             ?.getString(STATE_PENDING_SOURCE_URI)
             ?.toAppPathOrNull()
@@ -99,6 +110,85 @@ class SyncProfilesActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menu.add(R.string.syncthing_setup).setOnMenuItemClickListener {
+            syncthingSource = true
+            launchSourcePicker()
+            true
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun showSyncthingPairing(source: AppPath) {
+        if (runCatching { SyncthingLocalFolder.resolve(source.toUriString()) }.isFailure) {
+            Toast.makeText(this, R.string.syncthing_local_folder_required, Toast.LENGTH_LONG).show()
+            return
+        }
+        val form = DialogSyncthingPairingBinding.inflate(layoutInflater)
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.syncthing_setup).setView(form.root)
+            .setNegativeButton(android.R.string.cancel, null)
+            .setPositiveButton(android.R.string.ok, null).create()
+        fun busy(value: Boolean) {
+            form.copyDevice.isEnabled = !value
+            form.device.isEnabled = !value
+            form.folder.isEnabled = !value
+            form.publicNetwork.isEnabled = !value
+            dialog.getButton(DialogInterface.BUTTON_POSITIVE).isEnabled = !value
+        }
+        form.copyDevice.setOnClickListener {
+            busy(true)
+            executor.execute {
+                val result = runCatching {
+                    val runtime = SyncthingRuntime.get(applicationContext).acquire()
+                    try { SyncthingRestEngine(runtime).deviceId() } finally { runtime.release() }
+                }
+                runOnUiThread {
+                    if (isFinishing || isDestroyed || !dialog.isShowing) return@runOnUiThread
+                    busy(false)
+                    result.onSuccess { id ->
+                        getSystemService(ClipboardManager::class.java).setPrimaryClip(
+                            ClipData.newPlainText("Syncthing", id))
+                        form.error.text = id
+                    }.onFailure { form.error.setText(R.string.syncthing_invalid_setup) }
+                }
+            }
+        }
+        dialog.setOnShowListener {
+            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                val device = form.device.text.toString().trim().uppercase(java.util.Locale.ROOT)
+                val folder = form.folder.text.toString().trim()
+                if (!folder.matches(Regex("[A-Za-z0-9][A-Za-z0-9._-]{0,63}"))) {
+                    form.error.setText(R.string.syncthing_invalid_setup)
+                    return@setOnClickListener
+                }
+                busy(true)
+                executor.execute {
+                    val result = runCatching {
+                        val runtime = SyncthingRuntime.get(applicationContext).acquire()
+                        try {
+                            val canonical = org.json.JSONObject(runtime.request("GET",
+                                "/rest/svc/deviceid?id=" + SyncthingHttp.component(device), null)).getString("id")
+                            require(canonical != SyncthingRestEngine(runtime).deviceId())
+                            SyncthingEndpoint(canonical, folder).also {
+                                SyncthingProfilePolicy.validateUnique("", source.toUriString(), it, SyncRepository.profiles())
+                            }
+                        } finally { runtime.release() }
+                    }
+                    runOnUiThread {
+                        if (isFinishing || isDestroyed || !dialog.isShowing) return@runOnUiThread
+                        busy(false)
+                        result.onSuccess {
+                            dialog.dismiss()
+                            showEditor(null, source, null, SyncthingEndpointCodec.encode(it), form.publicNetwork.isChecked)
+                        }.onFailure { form.error.setText(R.string.syncthing_invalid_setup) }
+                    }
+                }
+            }
+        }
+        dialog.show()
+    }
+
     override fun onResume() {
         super.onResume()
         refresh()
@@ -115,6 +205,7 @@ class SyncProfilesActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean("syncthing_source", syncthingSource)
         pendingSource?.let { outState.putString(STATE_PENDING_SOURCE_URI, it.toUriString()) }
         outState.putBoolean(STATE_DESTINATION_LAUNCH_PENDING, destinationLaunchPending)
         super.onSaveInstanceState(outState)
@@ -205,10 +296,12 @@ class SyncProfilesActivity : AppCompatActivity() {
         binding.emptyText.isVisible = profiles.isEmpty()
     }
 
-    private fun showEditor(existing: SyncProfile?, source: AppPath?, destination: AppPath?) {
+    private fun showEditor(existing: SyncProfile?, source: AppPath?, destination: AppPath?,
+        syncthingEndpoint: String? = null, publicNetwork: Boolean = false) {
         val profile = existing
         val sourceUri = profile?.sourceUri ?: requireNotNull(source).toUriString()
-        val destinationUri = profile?.destinationUri ?: requireNotNull(destination).toUriString()
+        val destinationUri = profile?.destinationUri ?: syncthingEndpoint ?: requireNotNull(destination).toUriString()
+        val isSyncthing = SyncthingEndpointCodec.isSyncthingUri(destinationUri)
         val schedule = profile?.let { SyncScheduleCodec.decode(it.scheduleJson) } ?: SyncSchedule()
         val currentFilters = profile?.let { SyncFilterCodec.decode(it.filtersJson) } ?: SyncFilterRules()
         val editor = DialogSyncProfileBinding.inflate(layoutInflater)
@@ -220,7 +313,7 @@ class SyncProfilesActivity : AppCompatActivity() {
         )
         editor.name.setText(profile?.name ?: getString(R.string.sync_default_profile_name))
 
-        var selectedMode = profile?.mode ?: SyncMode.UPDATE_DESTINATION
+        var selectedMode = profile?.mode ?: if (isSyncthing) SyncMode.TWO_WAY else SyncMode.UPDATE_DESTINATION
         var selectedConflict = profile?.conflictPolicy ?: SyncConflictPolicy.KEEP_BOTH
         var selectedScheduleType = schedule.type
         val weekDays = DayOfWeek.values().toList()
@@ -233,6 +326,11 @@ class SyncProfilesActivity : AppCompatActivity() {
         editor.charging.isChecked = schedule.chargingOnly
         editor.versionProtection.isChecked =
             profile?.protectionJson?.contains("\"enabled\":true") == true
+        if (isSyncthing) {
+            editor.endpoints.append("\n\n" + getString(R.string.syncthing_behavior))
+            editor.versionProtection.setText(R.string.syncthing_versions)
+            if (profile == null) editor.versionProtection.isChecked = true
+        }
         editor.includeHidden.isChecked = currentFilters.includeHidden
         editor.excludedExtensions.setText(currentFilters.excludedExtensions.joinToString(","))
 
@@ -247,8 +345,8 @@ class SyncProfilesActivity : AppCompatActivity() {
 
         configureDropdown(
             editor.mode,
-            SyncMode.entries,
-            ::modeLabel,
+            if (isSyncthing) listOf(SyncMode.TWO_WAY, SyncMode.MIRROR) else SyncMode.entries,
+            { mode -> if (isSyncthing && mode == SyncMode.MIRROR) getString(R.string.syncthing_send_only) else modeLabel(mode) },
             selectedMode
         ) { mode ->
             selectedMode = mode
@@ -258,7 +356,7 @@ class SyncProfilesActivity : AppCompatActivity() {
         }
         configureDropdown(
             editor.conflict,
-            SyncConflictPolicy.entries,
+            if (isSyncthing) listOf(SyncConflictPolicy.KEEP_BOTH) else SyncConflictPolicy.entries,
             ::conflictLabel,
             selectedConflict
         ) { selectedConflict = it }
@@ -310,7 +408,7 @@ class SyncProfilesActivity : AppCompatActivity() {
                         ?: getString(R.string.sync_default_profile_name),
                     mode = selectedMode,
                     conflictPolicy = selectedConflict,
-                    propagateDeletions = selectedMode == SyncMode.TWO_WAY,
+                    propagateDeletions = isSyncthing || selectedMode == SyncMode.TWO_WAY,
                     protectionJson = if (enabledProtection) {
                         "{\"enabled\":true,\"retentionDays\":30,\"versionsPerFile\":5}"
                     } else {
@@ -324,6 +422,9 @@ class SyncProfilesActivity : AppCompatActivity() {
                                 .split(',').map(String::trim).filter(String::isNotEmpty).toSet()
                         )
                     ),
+                    constraintsJson = if (isSyncthing && profile == null)
+                        org.json.JSONObject().put("syncthingPublicNetwork", publicNetwork).toString()
+                        else profile?.constraintsJson ?: "{}",
                     scheduleJson = SyncScheduleCodec.encode(newSchedule),
                     updatedAtMillis = System.currentTimeMillis()
                 )
@@ -336,6 +437,12 @@ class SyncProfilesActivity : AppCompatActivity() {
     }
 
     private fun planAndOpen(profile: SyncProfile) {
+        if (SyncBackendRouter.kind(profile) == SyncBackendKind.SYNCTHING) {
+            val paused = SyncRepository.runs(profile.id).firstOrNull { it.state == SyncRunState.PAUSED }
+            SyncthingRunWorker.enqueue(this, profile.id, paused?.id)
+            Toast.makeText(this, R.string.sync_running, Toast.LENGTH_SHORT).show()
+            return
+        }
         val existing = SyncRepository.runs(profile.id).firstOrNull { !it.state.isTerminal }
         if (existing != null) {
             if (existing.state == SyncRunState.PREVIEW_READY ||
@@ -493,3 +600,4 @@ internal fun shouldLaunchPendingDestinationPicker(
     isResumed: Boolean,
     hasWindowFocus: Boolean
 ): Boolean = hasPendingLaunch && hasPendingSource && isResumed && hasWindowFocus
+

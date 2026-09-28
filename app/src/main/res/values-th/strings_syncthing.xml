@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">เพิ่มโฟลเดอร์ Syncthing</string>
+    <string name="syncthing_pair_help">เพิ่มอุปกรณ์นี้ใน Syncthing บนอุปกรณ์อีกเครื่อง แล้วแชร์โฟลเดอร์ที่ใช้ ID โฟลเดอร์เดียวกัน ทั้งสองอุปกรณ์ต้องยอมรับการจับคู่ รองรับเฉพาะโฟลเดอร์ในเครื่องที่เข้าถึงได้โดยตรงเท่านั้น</string>
+    <string name="syncthing_this_device">คัดลอก ID ของอุปกรณ์นี้</string>
+    <string name="syncthing_device_id">ID ของอุปกรณ์อีกเครื่อง</string>
+    <string name="syncthing_folder_id">ID โฟลเดอร์ที่แชร์ (ตัวอักษรอังกฤษ ตัวเลข . _ -)</string>
+    <string name="syncthing_send_only">ส่งอย่างเดียว (รวมการลบ)</string>
+    <string name="syncthing_behavior">Syncthing ใช้การเปลี่ยนแปลงโดยตรงโดยไม่แสดงตัวอย่างไฟล์และเก็บสำเนาที่ขัดแย้งกัน การซิงค์สองทางส่งต่อการลบทั้งสองทิศทาง โหมดส่งอย่างเดียวส่งการเปลี่ยนแปลงและการลบในเครื่อง การเปลี่ยนแปลงจากอีกเครื่องอาจทำให้ซิงค์ไม่สำเร็จ การทำงานจะหยุดหลัง 8 นาทีและทำต่อได้ ทั้งสองอุปกรณ์ต้องออนไลน์ขณะทำงาน</string>
+    <string name="syncthing_versions">เก็บ 5 เวอร์ชันของไฟล์ที่อุปกรณ์อีกเครื่องแก้ไข</string>
+    <string name="syncthing_invalid_setup">ตั้งค่า Syncthing ไม่สำเร็จ ตรวจสอบ ID อุปกรณ์และโฟลเดอร์ แต่ละโปรไฟล์ต้องใช้โฟลเดอร์ในเครื่องและ ID โฟลเดอร์แยกกัน</string>
+    <string name="syncthing_local_folder_required">เลือกโฟลเดอร์ในเครื่องที่เขียนได้และเข้าถึงได้โดยตรงสำหรับ Syncthing</string>
+    <string name="syncthing_public_network">ใช้การค้นหาสาธารณะและรีเลย์เพื่อซิงค์ผ่านอินเทอร์เน็ต (แชร์ ID อุปกรณ์และที่อยู่ IP) ปิดไว้หากใช้เฉพาะเครือข่ายภายในเท่านั้น</string>
+</resources>

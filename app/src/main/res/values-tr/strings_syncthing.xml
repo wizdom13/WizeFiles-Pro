@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">Syncthing klasörü ekle</string>
+    <string name="syncthing_pair_help">Diğer cihazınızdaki Syncthing uygulamasına bu cihazı ekleyin, ardından aynı klasör kimliğine sahip bir klasörü paylaşın. Her iki cihaz da eşleştirmeyi kabul etmelidir. Yalnızca doğrudan erişilebilen yerel klasörler desteklenir.</string>
+    <string name="syncthing_this_device">Bu cihazın kimliğini kopyala</string>
+    <string name="syncthing_device_id">Diğer cihazın kimliği</string>
+    <string name="syncthing_folder_id">Paylaşılan klasör kimliği (harfler, rakamlar, . _ -)</string>
+    <string name="syncthing_send_only">Yalnızca gönder (silmeler dahil)</string>
+    <string name="syncthing_behavior">Syncthing, dosya önizlemesi olmadan değişiklikleri doğrudan uygular ve çakışan kopyaları saklar. Çift yönlü eşitleme, silmeleri her iki yönde de iletir. Yalnızca gönder modu yerel değişiklikleri ve silmeleri iletir; uzak değişiklikler tamamlanmayı engelleyebilir. İşlemler 8 dakika sonra durur ve sürdürülebilir. İşlem sırasında her iki cihaz da çevrimiçi olmalıdır.</string>
+    <string name="syncthing_versions">Diğer cihazın değiştirdiği dosyaların 5 sürümünü sakla</string>
+    <string name="syncthing_invalid_setup">Syncthing yapılandırılamadı. Cihaz ve klasör kimliklerini kontrol edin; her profil ayrı bir yerel klasör ve klasör kimliği gerektirir.</string>
+    <string name="syncthing_local_folder_required">Syncthing için yazılabilir, doğrudan erişilebilen bir yerel klasör seçin.</string>
+    <string name="syncthing_public_network">İnternet eşitlemesi için genel keşif ve aktarıcıları kullan (cihaz kimliği ve IP adresi paylaşılır). Yalnızca yerel ağ için kapalı bırakın.</string>
+</resources>

@@ -40,3 +40,17 @@ The generated Android binding includes components from the Go project. Those
 components are distributed under the Go project's BSD-style license.
 
 Source and license: https://go.googlesource.com/mobile/
+
+
+## Syncthing
+
+WizeFiles packages unmodified Syncthing v2.1.5, Copyright the Syncthing Authors,
+under MPL-2.0. The license is included at `app/src/main/licenses/Syncthing-MPL-2.0.txt`.
+Corresponding source is pinned to commit `2ca95cf1498104113fdfde46df4107f2450a0f71`:
+https://github.com/syncthing/syncthing/tree/2ca95cf1498104113fdfde46df4107f2450a0f71
+
+`scripts/build-syncthing.sh` reproduces the native executable from this source using
+Go 1.26.5 and Android NDK 29.0.14206865. Upstream Go dependencies are pinned by that
+commit's go.mod/go.sum. Upstream bundled notices are available in its embedded web assets
+and source distribution. The engine runs as a separate
+executable. WizeFiles' launcher and REST client are GPL-3.0-only project code.

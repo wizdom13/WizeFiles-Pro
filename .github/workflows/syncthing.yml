@@ -1,0 +1,84 @@
+name: Syncthing integration
+on:
+  pull_request:
+    paths:
+      - 'app/src/**/sync/**'
+      - 'app/src/main/jni/syncthing_launcher.c'
+      - 'app/src/main/res/**/strings_syncthing.xml'
+      - 'app/src/main/res/layout/dialog_syncthing_pairing.xml'
+      - 'app/build.gradle'
+      - 'build.gradle'
+      - 'scripts/build-rclone-aar.sh'
+      - 'scripts/*syncthing*'
+      - '.github/workflows/syncthing.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: syncthing-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  protocol:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.26.5'
+          cache: false
+      - name: Build exact upstream engine
+        run: SYNCTHING_HOST_BUILD=1 bash scripts/build-syncthing.sh "$RUNNER_TEMP/syncthing"
+      - name: Test two local peers
+        run: python3 scripts/test-syncthing-runtime.py "$RUNNER_TEMP/syncthing/syncthing" "$RUNNER_TEMP/syncthing/syncthing-launcher"
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    env:
+      RCLONE_ANDROID_TARGETS: android/amd64
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: true
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.26.5'
+          cache: false
+      - uses: actions/cache@v4
+        id: rclone-cache
+        with:
+          path: app/libs/rclone-gomobile.aar
+          key: ${{ runner.os }}-rclone-x86_64-${{ hashFiles('scripts/build-rclone-aar.sh', 'rclone-mobile/**') }}
+      - if: steps.rclone-cache.outputs.cache-hit != 'true'
+        run: bash scripts/build-rclone-aar.sh
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Free disk space for native builds and emulator
+        run: |
+          sudo rm -rf /opt/hostedtoolcache/CodeQL /usr/share/dotnet /usr/local/share/powershell
+      - name: Build all packaged engine ABIs
+        run: ./gradlew -PwizefilesEmulatorAbi=x86_64 :app:assembleDebug :app:assembleDebugAndroidTest :app:testPureDebugUnitTest
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 36
+          target: google_apis
+          arch: x86_64
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          script: ./gradlew -PwizefilesEmulatorAbi=x86_64 :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.wisso.wizefiles.feature.sync.SyncthingRuntimeTest || { adb logcat -d -b crash; exit 1; }
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: syncthing-test-reports
+          path: |
+            app/build/reports/tests/**
+            app/build/reports/androidTests/**
+            app/build/outputs/androidTest-results/**

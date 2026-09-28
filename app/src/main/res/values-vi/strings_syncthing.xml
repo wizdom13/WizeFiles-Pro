@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">Thêm thư mục Syncthing</string>
+    <string name="syncthing_pair_help">Thêm thiết bị này vào Syncthing trên thiết bị kia, rồi chia sẻ thư mục có cùng ID thư mục. Cả hai thiết bị phải chấp nhận ghép nối. Chỉ hỗ trợ thư mục cục bộ có thể truy cập trực tiếp.</string>
+    <string name="syncthing_this_device">Sao chép ID thiết bị này</string>
+    <string name="syncthing_device_id">ID thiết bị kia</string>
+    <string name="syncthing_folder_id">ID thư mục chia sẻ (chữ cái Latin, số, . _ -)</string>
+    <string name="syncthing_send_only">Chỉ gửi (bao gồm xóa)</string>
+    <string name="syncthing_behavior">Syncthing áp dụng thay đổi trực tiếp, không xem trước tệp và giữ các bản sao xung đột. Đồng bộ hai chiều truyền thao tác xóa theo cả hai hướng. Chế độ chỉ gửi truyền thay đổi và thao tác xóa cục bộ; thay đổi từ xa có thể ngăn hoàn tất. Mỗi lần chạy dừng sau 8 phút và có thể tiếp tục. Cả hai thiết bị phải trực tuyến trong khi chạy.</string>
+    <string name="syncthing_versions">Giữ 5 phiên bản của tệp do thiết bị kia thay đổi</string>
+    <string name="syncthing_invalid_setup">Không thể cấu hình Syncthing. Kiểm tra ID thiết bị và thư mục; mỗi hồ sơ cần một thư mục cục bộ và ID thư mục riêng.</string>
+    <string name="syncthing_local_folder_required">Chọn thư mục cục bộ có thể ghi và truy cập trực tiếp cho Syncthing.</string>
+    <string name="syncthing_public_network">Dùng khám phá công khai và máy chủ chuyển tiếp để đồng bộ qua Internet (chia sẻ ID thiết bị và địa chỉ IP). Tắt để chỉ dùng mạng cục bộ.</string>
+</resources>

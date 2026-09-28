@@ -67,6 +67,12 @@ jobs:
           distribution: temurin
           java-version: '21'
 
+      - name: Set up Go 1.26.5
+        uses: actions/setup-go@v6
+        with:
+          go-version: '1.26.5'
+          cache: false
+
       - name: Set up Gradle cache
         uses: gradle/actions/setup-gradle@v4
         with:
@@ -124,4 +130,5 @@ jobs:
           tag_name: ${{ env.FILE_TAG }}
           files: ${{ steps.rename_apk.outputs.renamed_apk }}
           generate_release_notes: true
+
 

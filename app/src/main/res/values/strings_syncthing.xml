@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">Add Syncthing folder</string>
+    <string name="syncthing_pair_help">Add this device in Syncthing on your other device, then share a folder with the same folder ID. Both devices must accept the pairing. Only directly accessible local folders are supported.</string>
+    <string name="syncthing_this_device">Copy this device ID</string>
+    <string name="syncthing_device_id">Other device ID</string>
+    <string name="syncthing_folder_id">Shared folder ID (letters, numbers, . _ -)</string>
+    <string name="syncthing_send_only">Send only (includes deletions)</string>
+    <string name="syncthing_behavior">Syncthing applies changes directly without a file preview and keeps conflict copies. Two-way sync propagates deletions in both directions. Send-only sends local changes and deletions; remote changes may prevent completion. Runs stop after 8 minutes and can resume. Both devices must be online during a run.</string>
+    <string name="syncthing_versions">Keep 5 versions of files changed by the other device</string>
+    <string name="syncthing_invalid_setup">Could not configure Syncthing. Check the device ID and folder ID; each profile needs a separate local folder and folder ID.</string>
+    <string name="syncthing_local_folder_required">Select a writable, directly accessible local folder for Syncthing.</string>
+    <string name="syncthing_public_network">Use public discovery and relays for Internet sync (shares device ID and IP address). Leave off for local network only.</string>
+</resources>

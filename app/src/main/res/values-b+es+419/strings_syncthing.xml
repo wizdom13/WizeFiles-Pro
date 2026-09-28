@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">Agregar carpeta de Syncthing</string>
+    <string name="syncthing_pair_help">Agrega este dispositivo en Syncthing en el otro dispositivo y comparte una carpeta con el mismo ID de carpeta. Ambos dispositivos deben aceptar la vinculación. Solo se admiten carpetas locales accesibles directamente.</string>
+    <string name="syncthing_this_device">Copiar el ID de este dispositivo</string>
+    <string name="syncthing_device_id">ID del otro dispositivo</string>
+    <string name="syncthing_folder_id">ID de carpeta compartida (letras, números, . _ -)</string>
+    <string name="syncthing_send_only">Solo enviar (incluye eliminaciones)</string>
+    <string name="syncthing_behavior">Syncthing aplica cambios directamente, sin vista previa de archivos, y conserva copias en conflicto. La sincronización bidireccional propaga eliminaciones en ambos sentidos. Solo enviar propaga cambios y eliminaciones locales; los cambios remotos pueden impedir que finalice. Las ejecuciones se detienen a los 8 minutos y se pueden reanudar. Ambos dispositivos deben estar conectados durante la ejecución.</string>
+    <string name="syncthing_versions">Conservar 5 versiones de los archivos modificados por el otro dispositivo</string>
+    <string name="syncthing_invalid_setup">No se pudo configurar Syncthing. Revisa los ID del dispositivo y de la carpeta; cada perfil necesita una carpeta local y un ID de carpeta distintos.</string>
+    <string name="syncthing_local_folder_required">Selecciona una carpeta local con permiso de escritura y acceso directo para Syncthing.</string>
+    <string name="syncthing_public_network">Usar descubrimiento público y retransmisores para sincronizar por Internet (comparte el ID del dispositivo y la dirección IP). Desactiva para usar solo la red local.</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">Adicionar pasta do Syncthing</string>
+    <string name="syncthing_pair_help">Adicione este dispositivo no Syncthing do outro dispositivo e compartilhe uma pasta com o mesmo ID de pasta. Ambos os dispositivos precisam aceitar o pareamento. Apenas pastas locais acessíveis diretamente são compatíveis.</string>
+    <string name="syncthing_this_device">Copiar o ID deste dispositivo</string>
+    <string name="syncthing_device_id">ID do outro dispositivo</string>
+    <string name="syncthing_folder_id">ID da pasta compartilhada (letras, números, . _ -)</string>
+    <string name="syncthing_send_only">Somente enviar (inclui exclusões)</string>
+    <string name="syncthing_behavior">O Syncthing aplica alterações diretamente, sem prévia dos arquivos, e mantém cópias em conflito. A sincronização bidirecional propaga exclusões nos dois sentidos. Somente enviar transmite alterações e exclusões locais; alterações remotas podem impedir a conclusão. As execuções param após 8 minutos e podem ser retomadas. Ambos os dispositivos devem estar conectados durante a execução.</string>
+    <string name="syncthing_versions">Manter 5 versões dos arquivos alterados pelo outro dispositivo</string>
+    <string name="syncthing_invalid_setup">Não foi possível configurar o Syncthing. Confira os IDs do dispositivo e da pasta; cada perfil precisa de uma pasta local e um ID de pasta distintos.</string>
+    <string name="syncthing_local_folder_required">Selecione uma pasta local gravável e acessível diretamente para o Syncthing.</string>
+    <string name="syncthing_public_network">Usar descoberta pública e retransmissores para sincronizar pela Internet (compartilha o ID do dispositivo e o endereço IP). Desative para usar apenas a rede local.</string>
+</resources>

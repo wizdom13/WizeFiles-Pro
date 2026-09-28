@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">Syncthing فولڈر شامل کریں</string>
+    <string name="syncthing_pair_help">دوسرے آلے پر Syncthing میں یہ آلہ شامل کریں، پھر اسی فولڈر ID والا فولڈر شیئر کریں۔ دونوں آلات پر جوڑا بنانا قبول کرنا ضروری ہے۔ صرف براہ راست قابل رسائی مقامی فولڈر معاون ہیں۔</string>
+    <string name="syncthing_this_device">اس آلے کی ID کاپی کریں</string>
+    <string name="syncthing_device_id">دوسرے آلے کی ID</string>
+    <string name="syncthing_folder_id">مشترکہ فولڈر ID (انگریزی حروف، اعداد، . _ -)</string>
+    <string name="syncthing_send_only">صرف بھیجیں (حذف کرنا بھی شامل)</string>
+    <string name="syncthing_behavior">Syncthing فائلوں کا پیش منظر دکھائے بغیر تبدیلیاں لاگو کرتا ہے اور متصادم نقول محفوظ رکھتا ہے۔ دو طرفہ ہم وقت سازی حذف کرنے کی کارروائی دونوں سمتوں میں منتقل کرتی ہے۔ صرف بھیجنے کا موڈ مقامی تبدیلیاں اور حذف کرنے کی کارروائیاں بھیجتا ہے؛ دور کی تبدیلیاں تکمیل روک سکتی ہیں۔ عمل 8 منٹ بعد رک جاتا ہے اور دوبارہ جاری کیا جا سکتا ہے۔ عمل کے دوران دونوں آلات آن لائن ہونے چاہئیں۔</string>
+    <string name="syncthing_versions">دوسرے آلے سے تبدیل کی گئی فائلوں کے 5 نسخے رکھیں</string>
+    <string name="syncthing_invalid_setup">Syncthing کی ترتیب مکمل نہ ہو سکی۔ آلے اور فولڈر کی ID چیک کریں؛ ہر پروفائل کے لیے الگ مقامی فولڈر اور فولڈر ID ضروری ہے۔</string>
+    <string name="syncthing_local_folder_required">Syncthing کے لیے قابل تحریر اور براہ راست قابل رسائی مقامی فولڈر منتخب کریں۔</string>
+    <string name="syncthing_public_network">انٹرنیٹ ہم وقت سازی کے لیے عوامی دریافت اور ریلے استعمال کریں (آلے کی ID اور IP پتہ شیئر ہوتا ہے)۔ صرف مقامی نیٹ ورک کے لیے اسے بند رکھیں۔</string>
+</resources>

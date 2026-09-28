@@ -175,7 +175,9 @@ internal object SyncScheduler {
 
 internal object SyncScheduledRunCoordinator {
     suspend fun run(context: Context, profileId: String): SyncWorkerResult =
-        SyncRunCoordinator().runScheduled(profileId)
+        if (SyncRepository.profile(profileId)?.let(SyncBackendRouter::kind) == SyncBackendKind.SYNCTHING) {
+            SyncthingSyncRunner.run(context, profileId, SyncRunTrigger.SCHEDULED)
+        } else SyncRunCoordinator().runScheduled(profileId)
 }
 
 internal enum class SyncWorkerResult {
@@ -208,11 +210,15 @@ internal class SyncRunWorker(
             !it.state.isTerminal && it.id != recoverable?.id
         }
         val result = if (recoverable != null) {
+            if (SyncBackendRouter.kind(profile) == SyncBackendKind.SYNCTHING) {
+                SyncthingSyncRunner.run(applicationContext, profileId, SyncRunTrigger.SCHEDULED, recoverable.id)
+            } else {
             runCatching { SyncRunCoordinator().resume(recoverable.id) }
                 .fold(
                     onSuccess = { if (it.failed == 0) SyncWorkerResult.SUCCESS else SyncWorkerResult.RETRY },
                     onFailure = { SyncWorkerResult.RETRY }
                 )
+            }
         } else if (paused != null) {
             SyncWorkerResult.SUCCESS
         } else if (hasOtherActiveRun) {
@@ -258,6 +264,10 @@ internal class SyncResumeWorker(
         val run = SyncRepository.run(runId) ?: return Result.failure()
         tryEnterSyncForeground(run.profileId)
         SyncRecoveryManager.reconcileDetachedRun(run.profileId)
+        if (SyncRepository.profile(run.profileId)?.let(SyncBackendRouter::kind) == SyncBackendKind.SYNCTHING) {
+            return if (SyncthingSyncRunner.run(applicationContext, run.profileId, SyncRunTrigger.RETRY, runId) ==
+                SyncWorkerResult.SUCCESS) Result.success() else Result.retry()
+        }
         return runCatching {
             val coordinator = SyncRunCoordinator()
             when (run.state) {
@@ -293,7 +303,7 @@ internal class SyncResumeWorker(
     }
 }
 
-private suspend fun CoroutineWorker.tryEnterSyncForeground(profileId: String) {
+internal suspend fun CoroutineWorker.tryEnterSyncForeground(profileId: String) {
     try {
         setForeground(syncForegroundInfo(applicationContext, profileId))
     } catch (exception: Exception) {

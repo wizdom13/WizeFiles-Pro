@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">Syncthing फ़ोल्डर जोड़ें</string>
+    <string name="syncthing_pair_help">अपने दूसरे डिवाइस पर Syncthing में इस डिवाइस को जोड़ें, फिर समान फ़ोल्डर ID वाला फ़ोल्डर साझा करें। दोनों डिवाइस पर पेयरिंग स्वीकार करनी होगी। केवल सीधे पहुँच योग्य स्थानीय फ़ोल्डर समर्थित हैं।</string>
+    <string name="syncthing_this_device">इस डिवाइस की ID कॉपी करें</string>
+    <string name="syncthing_device_id">दूसरे डिवाइस की ID</string>
+    <string name="syncthing_folder_id">साझा फ़ोल्डर ID (अंग्रेज़ी अक्षर, अंक, . _ -)</string>
+    <string name="syncthing_send_only">केवल भेजें (मिटाना भी शामिल)</string>
+    <string name="syncthing_behavior">Syncthing फ़ाइल पूर्वावलोकन के बिना बदलाव लागू करता है और विरोध वाली प्रतियाँ रखता है। दोतरफ़ा सिंक दोनों दिशाओं में फ़ाइलें मिटाने के बदलाव भेजता है। केवल भेजें मोड स्थानीय बदलाव और मिटाने की कार्रवाइयाँ भेजता है; दूसरे डिवाइस के बदलाव प्रक्रिया पूरी होने से रोक सकते हैं। प्रक्रिया 8 मिनट बाद रुकती है और फिर जारी की जा सकती है। प्रक्रिया के दौरान दोनों डिवाइस ऑनलाइन होने चाहिए।</string>
+    <string name="syncthing_versions">दूसरे डिवाइस से बदली गई फ़ाइलों के 5 संस्करण रखें</string>
+    <string name="syncthing_invalid_setup">Syncthing सेट अप नहीं हो सका। डिवाइस और फ़ोल्डर ID जाँचें; हर प्रोफ़ाइल को अलग स्थानीय फ़ोल्डर और फ़ोल्डर ID चाहिए।</string>
+    <string name="syncthing_local_folder_required">Syncthing के लिए लिखने योग्य और सीधे पहुँच योग्य स्थानीय फ़ोल्डर चुनें।</string>
+    <string name="syncthing_public_network">इंटरनेट सिंक के लिए सार्वजनिक खोज और रिले इस्तेमाल करें (डिवाइस ID और IP पता साझा होता है)। केवल स्थानीय नेटवर्क के लिए इसे बंद रखें।</string>
+</resources>

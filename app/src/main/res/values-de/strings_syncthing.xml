@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">Syncthing-Ordner hinzufügen</string>
+    <string name="syncthing_pair_help">Füge dieses Gerät auf dem anderen Gerät in Syncthing hinzu und teile einen Ordner mit derselben Ordner-ID. Beide Geräte müssen die Kopplung akzeptieren. Nur direkt zugängliche lokale Ordner werden unterstützt.</string>
+    <string name="syncthing_this_device">ID dieses Geräts kopieren</string>
+    <string name="syncthing_device_id">ID des anderen Geräts</string>
+    <string name="syncthing_folder_id">Gemeinsame Ordner-ID (Buchstaben, Zahlen, . _ -)</string>
+    <string name="syncthing_send_only">Nur senden (einschließlich Löschungen)</string>
+    <string name="syncthing_behavior">Syncthing übernimmt Änderungen direkt ohne Dateivorschau und behält Konfliktkopien. Die beidseitige Synchronisierung überträgt Löschungen in beide Richtungen. Nur senden überträgt lokale Änderungen und Löschungen; entfernte Änderungen können den Abschluss verhindern. Läufe enden nach 8 Minuten und können fortgesetzt werden. Beide Geräte müssen während des Laufs online sein.</string>
+    <string name="syncthing_versions">5 Versionen der vom anderen Gerät geänderten Dateien behalten</string>
+    <string name="syncthing_invalid_setup">Syncthing konnte nicht eingerichtet werden. Prüfe Geräte- und Ordner-ID; jedes Profil benötigt einen eigenen lokalen Ordner und eine eigene Ordner-ID.</string>
+    <string name="syncthing_local_folder_required">Wähle einen beschreibbaren, direkt zugänglichen lokalen Ordner für Syncthing.</string>
+    <string name="syncthing_public_network">Öffentliche Suche und Relays für die Synchronisierung über das Internet verwenden (teilt Geräte-ID und IP-Adresse). Für ein rein lokales Netzwerk deaktiviert lassen.</string>
+</resources>

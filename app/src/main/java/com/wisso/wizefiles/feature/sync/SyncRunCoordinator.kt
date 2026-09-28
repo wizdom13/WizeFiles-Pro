@@ -38,6 +38,9 @@ internal class SyncRunCoordinator(
     fun plan(profileId: String, trigger: SyncRunTrigger): PlannedSyncRun {
         ProFeatureAccess.require(ProFeature.SYNC_PROFILES)
         val profile = requireNotNull(SyncRepository.profile(profileId))
+        require(SyncBackendRouter.kind(profile) == SyncBackendKind.FILE_SYSTEM) {
+            "Syncthing profiles must use the Syncthing engine"
+        }
         SyncDomainPolicy.validate(profile)
         checkNoActiveRun(profileId)
         val source = scanner.scan(profile.sourceUri)
@@ -179,6 +182,9 @@ internal class SyncRunCoordinator(
 
     private fun executeReady(run: SyncRun): SyncExecutionResult {
         val profile = requireNotNull(SyncRepository.profile(run.profileId))
+        require(SyncBackendRouter.kind(profile) == SyncBackendKind.FILE_SYSTEM) {
+            "Syncthing profiles must use the Syncthing engine"
+        }
         val result = executor.execute(profile, run)
         if (!result.paused && !result.cancelled && result.failed == 0 && result.blocked == 0) {
             commitBaseline(profile, run.id)
@@ -191,6 +197,9 @@ internal class SyncRunCoordinator(
         require(run.state == SyncRunState.PAUSED || run.state == SyncRunState.FAILED ||
             run.state == SyncRunState.COMPLETED_WITH_WARNINGS)
         val profile = requireNotNull(SyncRepository.profile(run.profileId))
+        require(SyncBackendRouter.kind(profile) == SyncBackendKind.FILE_SYSTEM) {
+            "Syncthing profiles must use the Syncthing engine"
+        }
         check(
             SyncRepository.runs(profile.id).none {
                 it.id != run.id && !it.state.isTerminal

@@ -6,6 +6,11 @@ set -euo pipefail
 RCLONE_VERSION="v1.74.4"
 GOMOBILE_VERSION="v0.0.0-20260709172247-6129f5bee9d5"
 ANDROID_API="30"
+RCLONE_ANDROID_TARGETS="${RCLONE_ANDROID_TARGETS:-android/arm,android/arm64}"
+case "$RCLONE_ANDROID_TARGETS" in
+    android/arm,android/arm64|android/amd64) ;;
+    *) echo 'Unsupported rclone Android target set' >&2; exit 1 ;;
+esac
 
 repository_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 output_path="${1:-${repository_root}/app/libs/rclone-gomobile.aar}"
@@ -38,7 +43,7 @@ cp -R "${repository_root}/rclone-mobile" ./gomobile
 mkdir -p "$(dirname "${output_path}")"
 gomobile bind \
     -trimpath \
-    -target=android/arm,android/arm64 \
+    -target="$RCLONE_ANDROID_TARGETS" \
     -androidapi="${ANDROID_API}" \
     -ldflags="-linkmode=external -extldflags=-Wl,-z,max-page-size=16384" \
     -javapkg=org.rclone \

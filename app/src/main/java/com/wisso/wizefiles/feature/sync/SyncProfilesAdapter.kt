@@ -81,7 +81,11 @@ internal class SyncProfilesAdapter(
                 formatTransferPath(context, profile.destinationUri)
             val schedule = SyncScheduleCodec.decode(profile.scheduleJson)
             binding.status.text = buildList {
-                add(modeLabel(context, profile.mode))
+                add(if (SyncBackendRouter.kind(profile) == SyncBackendKind.SYNCTHING) {
+                    "Syncthing • " + if (profile.mode == SyncMode.MIRROR)
+                        context.getString(com.wisso.wizefiles.R.string.syncthing_send_only)
+                    else modeLabel(context, profile.mode)
+                } else modeLabel(context, profile.mode))
                 add(scheduleLabel(context, schedule))
                 latest?.let {
                     add(it.state.name.lowercase().replace('_', ' ').replaceFirstChar(Char::uppercase))
@@ -169,3 +173,4 @@ internal class SyncProfilesAdapter(
         const val MENU_DELETE = 2
     }
 }
+

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="24dp">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="@string/syncthing_pair_help" />
+        <Button android:id="@+id/copy_device" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:text="@string/syncthing_this_device" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:hint="@string/syncthing_device_id">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/device" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:inputType="textVisiblePassword"
+                android:maxLength="128" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:hint="@string/syncthing_folder_id">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/folder" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:inputType="textVisiblePassword"
+                android:maxLength="64" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <CheckBox android:id="@+id/public_network" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:text="@string/syncthing_public_network" />
+        <TextView android:id="@+id/error" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:accessibilityLiveRegion="polite" />
+    </LinearLayout>
+</ScrollView>

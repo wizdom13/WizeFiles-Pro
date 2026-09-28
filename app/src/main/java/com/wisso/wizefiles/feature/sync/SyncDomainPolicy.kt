@@ -9,7 +9,11 @@ import com.wisso.wizefiles.storage.SyncPlan as DomainSyncPlan
 
 /** Maps persisted app profiles into the provider-neutral safety contract before planning. */
 internal object SyncDomainPolicy {
-    fun validate(profile: SyncProfile): DomainSyncPlan = DomainSyncPlan(
+    fun validate(profile: SyncProfile): DomainSyncPlan {
+        if (SyncBackendRouter.kind(profile) == SyncBackendKind.SYNCTHING) {
+            SyncthingProfilePolicy.validate(profile)
+        }
+        return DomainSyncPlan(
         sourceEndpointId = profile.sourceUri,
         targetEndpointId = profile.destinationUri,
         direction = if (profile.mode == SyncMode.TWO_WAY) SyncDirection.TWO_WAY else SyncDirection.PUSH,
@@ -24,5 +28,6 @@ internal object SyncDomainPolicy {
         },
         // Baseline-tracked two-way deletion propagation is not "delete extraneous" mirror behavior.
         deleteExtraneous = profile.mode == SyncMode.MIRROR
-    )
+        )
+    }
 }

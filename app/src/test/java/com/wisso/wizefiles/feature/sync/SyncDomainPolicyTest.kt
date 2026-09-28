@@ -30,6 +30,65 @@ class SyncDomainPolicyTest {
         assertEquals(false, plan.deleteExtraneous)
     }
 
+    @Test fun `syncthing endpoint round trips device and folder ids`() {
+        val endpoint = SyncthingEndpoint(
+            deviceId = "DEVICE-ID-123",
+            folderId = "Photos Shared"
+        )
+
+        assertEquals(
+            endpoint,
+            SyncthingEndpointCodec.decode(SyncthingEndpointCodec.encode(endpoint))
+        )
+    }
+
+    @Test fun `syncthing mirror uses send only and update only is rejected`() {
+        val destination = SyncthingEndpointCodec.encode(
+            SyncthingEndpoint("DEVICE-ID-123", "documents")
+        )
+
+        assertThrows(IllegalArgumentException::class.java) {
+            SyncthingProfilePolicy.folderMode(profile("file:///documents", destination))
+        }
+        assertEquals(
+            SyncthingFolderMode.SEND_ONLY,
+            SyncthingProfilePolicy.folderMode(
+                profile("file:///documents", destination).copy(mode = SyncMode.MIRROR, propagateDeletions = true)
+            )
+        )
+    }
+
+    @Test fun `syncthing two way profile uses send receive mode`() {
+        val destination = SyncthingEndpointCodec.encode(
+            SyncthingEndpoint("DEVICE-ID-123", "documents")
+        )
+
+        val profile = profile("file:///documents", destination).copy(mode = SyncMode.TWO_WAY, propagateDeletions = true)
+
+        assertEquals(SyncthingFolderMode.SEND_RECEIVE, SyncthingProfilePolicy.folderMode(profile))
+        assertEquals(SyncDirection.TWO_WAY, SyncDomainPolicy.validate(profile).direction)
+    }
+
+    @Test fun `syncthing rejects move source mode`() {
+        val destination = SyncthingEndpointCodec.encode(
+            SyncthingEndpoint("DEVICE-ID-123", "documents")
+        )
+
+        assertThrows(IllegalArgumentException::class.java) {
+            SyncDomainPolicy.validate(
+                profile("file:///documents", destination).copy(mode = SyncMode.MOVE_SOURCE)
+            )
+        }
+    }
+
+    @Test fun `malformed syncthing destination is rejected`() {
+        assertThrows(IllegalArgumentException::class.java) {
+            SyncDomainPolicy.validate(
+                profile("file:///documents", "syncthing://device/one/two")
+            )
+        }
+    }
+
     private fun profile(source: String, destination: String) = SyncProfile(
         name = "test",
         sourceUri = source,
@@ -37,3 +96,4 @@ class SyncDomainPolicyTest {
         mode = SyncMode.UPDATE_DESTINATION
     )
 }
+

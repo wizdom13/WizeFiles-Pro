@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">Ajouter un dossier Syncthing</string>
+    <string name="syncthing_pair_help">Ajoutez cet appareil dans Syncthing sur votre autre appareil, puis partagez un dossier avec le même identifiant de dossier. Les deux appareils doivent accepter l’association. Seuls les dossiers locaux directement accessibles sont pris en charge.</string>
+    <string name="syncthing_this_device">Copier l’identifiant de cet appareil</string>
+    <string name="syncthing_device_id">Identifiant de l’autre appareil</string>
+    <string name="syncthing_folder_id">Identifiant du dossier partagé (lettres, chiffres, . _ -)</string>
+    <string name="syncthing_send_only">Envoi uniquement (suppressions incluses)</string>
+    <string name="syncthing_behavior">Syncthing applique les modifications sans aperçu des fichiers et conserve les copies en conflit. La synchronisation bidirectionnelle propage les suppressions dans les deux sens. Le mode envoi uniquement transmet les modifications et suppressions locales ; les modifications distantes peuvent empêcher la fin de l’opération. Les opérations s’arrêtent après 8 minutes et peuvent reprendre. Les deux appareils doivent être connectés pendant l’opération.</string>
+    <string name="syncthing_versions">Conserver 5 versions des fichiers modifiés par l’autre appareil</string>
+    <string name="syncthing_invalid_setup">Impossible de configurer Syncthing. Vérifiez les identifiants de l’appareil et du dossier ; chaque profil nécessite un dossier local et un identifiant de dossier distincts.</string>
+    <string name="syncthing_local_folder_required">Choisissez un dossier local accessible directement et en écriture pour Syncthing.</string>
+    <string name="syncthing_public_network">Utiliser la découverte publique et les relais pour la synchronisation par Internet (partage l’identifiant de l’appareil et l’adresse IP). Désactivez pour utiliser uniquement le réseau local.</string>
+</resources>

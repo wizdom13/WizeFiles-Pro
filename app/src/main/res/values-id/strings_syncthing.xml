@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">Tambahkan folder Syncthing</string>
+    <string name="syncthing_pair_help">Tambahkan perangkat ini di Syncthing pada perangkat lain, lalu bagikan folder dengan ID folder yang sama. Kedua perangkat harus menyetujui pemasangan. Hanya folder lokal yang dapat diakses langsung yang didukung.</string>
+    <string name="syncthing_this_device">Salin ID perangkat ini</string>
+    <string name="syncthing_device_id">ID perangkat lain</string>
+    <string name="syncthing_folder_id">ID folder bersama (huruf, angka, . _ -)</string>
+    <string name="syncthing_send_only">Hanya kirim (termasuk penghapusan)</string>
+    <string name="syncthing_behavior">Syncthing menerapkan perubahan langsung tanpa pratinjau file dan menyimpan salinan konflik. Sinkronisasi dua arah meneruskan penghapusan ke kedua arah. Hanya kirim meneruskan perubahan dan penghapusan lokal; perubahan jarak jauh dapat menghalangi penyelesaian. Proses berhenti setelah 8 menit dan dapat dilanjutkan. Kedua perangkat harus daring selama proses.</string>
+    <string name="syncthing_versions">Simpan 5 versi file yang diubah oleh perangkat lain</string>
+    <string name="syncthing_invalid_setup">Tidak dapat mengonfigurasi Syncthing. Periksa ID perangkat dan folder; setiap profil memerlukan folder lokal dan ID folder yang berbeda.</string>
+    <string name="syncthing_local_folder_required">Pilih folder lokal yang dapat ditulis dan diakses langsung untuk Syncthing.</string>
+    <string name="syncthing_public_network">Gunakan penemuan publik dan relai untuk sinkronisasi Internet (membagikan ID perangkat dan alamat IP). Nonaktifkan untuk jaringan lokal saja.</string>
+</resources>

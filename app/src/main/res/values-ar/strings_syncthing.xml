@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="syncthing_setup">إضافة مجلد Syncthing</string>
+    <string name="syncthing_pair_help">أضف هذا الجهاز إلى Syncthing على جهازك الآخر، ثم شارك مجلدًا بنفس معرّف المجلد. يجب قبول الاقتران على الجهازين. تُدعم المجلدات المحلية المتاحة مباشرة فقط.</string>
+    <string name="syncthing_this_device">نسخ معرّف هذا الجهاز</string>
+    <string name="syncthing_device_id">معرّف الجهاز الآخر</string>
+    <string name="syncthing_folder_id">معرّف المجلد المشترك (حروف لاتينية وأرقام و . _ -)</string>
+    <string name="syncthing_send_only">إرسال فقط (يشمل الحذف)</string>
+    <string name="syncthing_behavior">يطبّق Syncthing التغييرات مباشرة دون معاينة الملفات ويحتفظ بنسخ التعارض. تنقل المزامنة ثنائية الاتجاه الحذف في الاتجاهين. ينقل وضع الإرسال فقط التغييرات والحذف المحليين؛ وقد تمنع التغييرات البعيدة اكتمال المزامنة. تتوقف العمليات بعد 8 دقائق ويمكن استئنافها. يجب أن يكون الجهازان متصلين أثناء العملية.</string>
+    <string name="syncthing_versions">الاحتفاظ بخمسة إصدارات من الملفات التي يغيّرها الجهاز الآخر</string>
+    <string name="syncthing_invalid_setup">تعذّر إعداد Syncthing. تحقق من معرّفي الجهاز والمجلد؛ يحتاج كل ملف تعريف إلى مجلد محلي ومعرّف مجلد منفصلين.</string>
+    <string name="syncthing_local_folder_required">اختر مجلدًا محليًا قابلًا للكتابة ومتاحًا مباشرة لـ Syncthing.</string>
+    <string name="syncthing_public_network">استخدام الاكتشاف العام وخوادم الترحيل للمزامنة عبر الإنترنت (يشارك معرّف الجهاز وعنوان IP). عطّل الخيار لاستخدام الشبكة المحلية فقط.</string>
+</resources>
