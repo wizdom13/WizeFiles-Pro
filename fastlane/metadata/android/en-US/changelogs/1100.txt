@@ -1,0 +1,5 @@
+WizeFiles 1.1.0
+
+- Added native Syncthing device pairing and two-way/send-only folder sync.
+- Added manual and scheduled Syncthing sessions (up to 8 minutes), with history, exclusions, pause/cancel and recovery.
+- Fixed PDF opening and rendering, including remote files.
