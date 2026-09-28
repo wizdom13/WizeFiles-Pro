@@ -2,7 +2,7 @@
 
 <h1 align="center">WizeFiles</h1>
 
-<p align="center"><b>A powerful Android file manager for local storage, networks, cloud accounts, archives, media, Android packages, synchronization, and secure storage.</b></p>
+<p align="center"><b>The most powerful Android file manager for local storage, networks, cloud accounts, archives, media, Android packages, synchronization, and secure storage.</b></p>
 
 <p align="center">
   <img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" height="80" alt="IzzyOnDroid — coming soon" title="IzzyOnDroid — coming soon">
@@ -22,6 +22,7 @@
 
 <p align="center">
   <a href="#highlights">Highlights</a> •
+  <a href="#screenshots">Screenshots</a> •
   <a href="#features">Features</a> •
   <a href="#local-network-and-cloud-storage">Cloud &amp; network</a> •
   <a href="#folder-synchronization-and-scheduled-backups">Sync &amp; backup</a> •
@@ -65,6 +66,32 @@
 - Android package signing and verification tools
 - Root and Shizuku-assisted workflows
 - Android TV, tablet, foldable, mouse, and physical-keyboard support
+
+---
+
+## Screenshots
+
+### Phone
+
+<p align="center">
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/01.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/01.jpg" width="160" alt="Phone screenshot 1"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/02.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/02.jpg" width="160" alt="Phone screenshot 2"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/03.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/03.jpg" width="160" alt="Phone screenshot 3"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/04.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/04.jpg" width="160" alt="Phone screenshot 4"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/05.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/05.jpg" width="160" alt="Phone screenshot 5"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/06.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/06.jpg" width="160" alt="Phone screenshot 6"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/07.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/07.jpg" width="160" alt="Phone screenshot 7"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/08.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/08.jpg" width="160" alt="Phone screenshot 8"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/09.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/09.jpg" width="160" alt="Phone screenshot 9"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/10.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/10.jpg" width="160" alt="Phone screenshot 10"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/11.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/11.jpg" width="160" alt="Phone screenshot 11"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/12.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/12.jpg" width="160" alt="Phone screenshot 12"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/13.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/13.jpg" width="160" alt="Phone screenshot 13"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/14.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/14.jpg" width="160" alt="Phone screenshot 14"></a>
+  <a href="fastlane/metadata/android/en-US/images/phoneScreenshots/15.jpg"><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/15.jpg" width="160" alt="Phone screenshot 15"></a>
+</p>
+
+---
 
 # Features
 
@@ -456,7 +483,7 @@ WizeFiles does **not** disable Android package verification by itself. Signature
 
 # Open-source project
 
-WizeFiles is fully open source, and its source code is maintained in this **WizeFiles-Pro** repository. The repository name is retained for continuity; it does not represent a separate product edition.
+WizeFiles is fully open source and its complete source code is maintained in this repository.
 
 WizeFiles has no commercial feature tier.
 

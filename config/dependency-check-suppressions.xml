@@ -51,6 +51,18 @@
 
     <suppress>
         <notes><![CDATA[
+        io.github.oothp PDF renderer artifacts are Android PDF/Pdfium libraries, not GitHub
+        Enterprise Server. Dependency-Check derives the unrelated github:github CPE solely from
+        the Maven group prefix and otherwise reports GitHub Enterprise CVEs such as CVE-2012-2055
+        and CVE-2020-10517/10518/10519 against these PDF libraries.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.github\.oothp/(android-pdf-viewer|pdfium-android)@.*$</packageUrl>
+        <cpe>cpe:/a:github:github</cpe>
+    </suppress>
+
+
+    <suppress>
+        <notes><![CDATA[
         eu.agno3.jcifs:jcifs-ng is a Java SMB/CIFS library. CVE-2026-35002 applies to the unrelated
         Python Agno AI framework (agno-agi/agno), not jcifs-ng.
         ]]></notes>

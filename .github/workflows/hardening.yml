@@ -1,7 +1,9 @@
 name: Scheduled hardening
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
     paths:
       - 'core-files-api/**'
       - 'fuzz-corpus/**'

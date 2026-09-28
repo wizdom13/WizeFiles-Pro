@@ -1,0 +1,52 @@
+<p><b>WizeFiles</b> is a powerful open-source file manager for Android, designed for local storage, removable drives, network shares, cloud accounts, archives, media, Android packages, synchronization and secure storage.</p>
+
+<p>WizeFiles is free software licensed under GPL-3.0-only. There are no advertisements, subscriptions, in-app purchases, license keys or paid feature tiers.</p>
+
+<p><b>File management</b></p>
+<ul>
+<li>Browse internal storage, SD cards, USB drives and SAF locations</li>
+<li>Multiple tabs and adaptive dual-pane browsing</li>
+<li>Cross-pane drag and drop</li>
+<li>Copy, move, rename, duplicate, delete and advanced batch rename</li>
+<li>Indexed search, bookmarks, sorting and filtering</li>
+<li>Persistent Transfer Center with progress, retry, history and recovery</li>
+</ul>
+
+<p><b>Network and cloud storage</b></p>
+<ul>
+<li>FTP/FTPS, SFTP, SMB, WebDAV and S3-compatible storage</li>
+<li>Cloud accounts through the built-in cloud engine</li>
+<li>Cross-provider transfers</li>
+<li>Folder synchronization and scheduled jobs</li>
+<li>Browser/PC access and local sharing</li>
+<li>Nearby device transfer with QR-authenticated pairing</li>
+</ul>
+
+<p><b>Viewers and media</b></p>
+<ul>
+<li>Built-in image, video and background audio viewers</li>
+<li>Read-only PDF viewer with scrolling and zoom</li>
+<li>EPUB/MOBI e-book reader</li>
+<li>Offline HTML, MHT, CHM and MAFF viewing</li>
+<li>Text editor and TTF/OTF/TTC font viewer</li>
+</ul>
+
+<p><b>Archives and Android packages</b></p>
+<ul>
+<li>Browse, create and extract common archives</li>
+<li>Password-protected archive support</li>
+<li>App Manager with APK/APKS backup</li>
+<li>APK, APKS, APKM and XAPK inspection and installation</li>
+<li>Android package signing and signature verification tools</li>
+</ul>
+
+<p><b>Privacy, security and storage tools</b></p>
+<ul>
+<li>Encrypted Vaults and standalone file encryption</li>
+<li>Trash Bin with restore support</li>
+<li>Secure local-file shredder</li>
+<li>Storage Cleanup Wizard, duplicate detection and visual disk analysis</li>
+<li>Optional root and Shizuku-assisted workflows</li>
+</ul>
+
+<p>WizeFiles supports Android 11 and later and is designed for phones, tablets, foldables, Android TV, mouse and physical-keyboard use.</p>

@@ -23,13 +23,18 @@ object PdfViewerIntents {
             null
         } ?: return null
         if (
-            InternalOpenPolicy.targetFor(current.mimeType, legacyPath.isArchivePath) !=
-            InternalOpenPolicy.Target.PDF_VIEWER
+            InternalOpenPolicy.targetFor(
+                current.mimeType,
+                legacyPath.isArchivePath,
+                current.path.name
+            ) != InternalOpenPolicy.Target.PDF_VIEWER
         ) {
             return null
         }
         return Intent(context, PdfViewerActivity::class.java)
-            .setType(current.mimeType.value)
+            .setType(PDF_MIME_TYPE)
             .apply { extraPath = current.path }
     }
+
+    private const val PDF_MIME_TYPE = "application/pdf"
 }

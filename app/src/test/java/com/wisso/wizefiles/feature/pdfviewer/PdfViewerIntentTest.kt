@@ -34,6 +34,18 @@ class PdfViewerIntentTest {
     }
 
     @Test
+    fun `pdf extension is accepted when provider reports generic mime type`() {
+        val current = item("document.pdf", "application/octet-stream")
+        val intent = PdfViewerIntents.create(context, current)
+
+        assertNotNull(intent)
+        val launchIntent = requireNotNull(intent)
+        assertEquals(PdfViewerActivity::class.java.name, launchIntent.component?.className)
+        assertEquals("application/pdf", launchIntent.type)
+        assertEquals(current.path.rawPath, launchIntent.extraPath?.rawPath)
+    }
+
+    @Test
     fun `non pdf files are rejected by the pdf destination`() {
         assertNull(PdfViewerIntents.create(context, item("photo.jpg", "image/jpeg")))
     }

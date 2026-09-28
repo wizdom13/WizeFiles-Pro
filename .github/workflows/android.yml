@@ -28,8 +28,80 @@ on:
       - 'fastlane/metadata/android/**'
   workflow_dispatch:
 
+concurrency:
+  group: android-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
+  pr-checks:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v5
+      with:
+        submodules: true
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v5
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+
+    - name: Set up Go 1.26.5
+      uses: actions/setup-go@v6
+      with:
+        go-version: '1.26.5'
+        cache: false
+
+    - name: Cache pinned rclone Android library
+      id: rclone-cache
+      uses: actions/cache@v4
+      with:
+        path: app/libs/rclone-gomobile.aar
+        key: ${{ runner.os }}-rclone-${{ hashFiles('scripts/build-rclone-aar.sh', 'rclone-mobile/**') }}
+
+    - name: Build pinned rclone Android library
+      if: steps.rclone-cache.outputs.cache-hit != 'true'
+      run: scripts/build-rclone-aar.sh
+
+    - name: Set up Gradle cache
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        cache-cleanup: on-success
+
+    - name: Cache Robolectric Maven artifacts
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2/repository/org/robolectric
+        key: ${{ runner.os }}-robolectric-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-robolectric-
+
+    - name: Make build scripts executable
+      run: chmod +x ./gradlew scripts/build-rclone-aar.sh
+
+    - name: Run fast repository policy checks
+      run: |
+        python3 scripts/validate_android_translations.py
+        python3 scripts/validate_engineering_debt.py
+        scripts/verify-source-test-budget.sh
+        scripts/verify-dependency-integrity.sh
+
+    - name: Compile debug code and run fast JVM tests
+      run: >-
+        ./gradlew
+        :app:compileDebugKotlin
+        :app:testPureDebugUnitTest
+        :core-files-api:test
+        :feature-browser-domain:test
+        :feature-transfer-domain:test
+        :feature-vault-domain:test
+        --warning-mode all
+
   dependency-audit:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -48,25 +120,17 @@ jobs:
         distribution: 'temurin'
         java-version: '21'
 
-    - name: Check NVD API key availability
-      id: nvd_key
+    - name: Validate NVD API key
       shell: bash
       run: |
         set -euo pipefail
-        if [[ -n "${NVD_API_KEY:-}" ]]; then
-          echo "available=true" >> "$GITHUB_OUTPUT"
-          exit 0
+        if [[ -z "${NVD_API_KEY:-}" ]]; then
+          echo "NVD_API_KEY repository secret is required for the blocking dependency audit." >&2
+          echo "Create an NVD API key and store it in GitHub Actions as the NVD_API_KEY repository secret." >&2
+          exit 1
         fi
-        if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
-          echo "available=false" >> "$GITHUB_OUTPUT"
-          echo "::warning::NVD_API_KEY is unavailable for this pull request; dependency audit is skipped."
-          exit 0
-        fi
-        echo "NVD_API_KEY repository secret is required on non-PR runs." >&2
-        exit 1
 
     - name: Configure NVD API key for Gradle
-      if: steps.nvd_key.outputs.available == 'true'
       shell: bash
       run: |
         set -euo pipefail
@@ -83,13 +147,11 @@ jobs:
         EOF
 
     - name: Set up Gradle cache
-      if: steps.nvd_key.outputs.available == 'true'
       uses: gradle/actions/setup-gradle@v4
       with:
         cache-read-only: ${{ github.ref != 'refs/heads/main' }}
 
     - name: Cache OWASP dependency data
-      if: steps.nvd_key.outputs.available == 'true'
       uses: actions/cache@v4
       with:
         path: ~/.gradle/dependency-check-data
@@ -98,7 +160,6 @@ jobs:
           ${{ runner.os }}-dependency-check-v12.2.2-
 
     - name: Run dependency vulnerability policy
-      if: steps.nvd_key.outputs.available == 'true'
       run: ./gradlew --init-script "$RUNNER_TEMP/dependency-check.init.gradle" :app:dependencyCheckAnalyze --warning-mode all
 
     - name: Upload dependency reports
@@ -111,6 +172,7 @@ jobs:
         retention-days: 14
 
   build:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
 
     steps:

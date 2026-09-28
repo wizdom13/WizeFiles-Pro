@@ -60,3 +60,6 @@
 -keep class go.** { *; }
 -keep class org.rclone.gomobile.** { *; }
 
+
+# Pdfium Android native bridge used by the internal PDF reader.
+-keep class com.shockwave.** { *; }

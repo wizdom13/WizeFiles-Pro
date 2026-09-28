@@ -13,16 +13,31 @@ class AndroidCiWorkflowSourceTest {
         .first { File(it, "app/src/main/AndroidManifest.xml").isFile }
 
     @Test
-    fun `pull requests use the wrapper for clean JVM and release verification`() {
+    fun `pull requests use fast checks while pushes retain full qualification`() {
         val workflow = File(root, ".github/workflows/android.yml").readText()
         val cleanBuild = File(root, "scripts/verify-clean-build.sh").readText()
 
+        assertTrue("  pr-checks:" in workflow)
+        assertTrue("if: github.event_name == 'pull_request'" in workflow)
+        assertTrue("- name: Compile debug code and run fast JVM tests" in workflow)
+        assertTrue(":app:compileDebugKotlin" in workflow)
+        assertTrue(":app:testPureDebugUnitTest" in workflow)
+        assertTrue(":core-files-api:test" in workflow)
+        assertTrue(":feature-browser-domain:test" in workflow)
+        assertTrue(":feature-transfer-domain:test" in workflow)
+        assertTrue(":feature-vault-domain:test" in workflow)
+        assertTrue("cancel-in-progress: \${{ github.event_name == 'pull_request' }}" in workflow)
+
+        assertTrue("  dependency-audit:" in workflow)
+        assertTrue("  build:" in workflow)
+        assertTrue("if: github.event_name != 'pull_request'" in workflow)
         assertTrue("- name: Verify clean debug build and JVM tests" in workflow)
         assertTrue("WIZEFILES_CLEAN_GRADLE_CACHE: '1'" in workflow)
         assertTrue("run: scripts/verify-clean-build.sh" in workflow)
+        assertTrue("- name: Build minified release and run release lint" in workflow)
+        assertTrue("run: ./gradlew assembleRelease lintVitalRelease --warning-mode all" in workflow)
+
         assertTrue("./gradlew --no-daemon clean" in cleanBuild)
-        // This source-level policy is appropriate because the invariant is the checked-in CI
-        // command itself: every pure JVM module and both complete app test partitions must run.
         assertTrue(":core-files-api:test" in cleanBuild)
         assertTrue(":feature-browser-domain:test" in cleanBuild)
         assertTrue(":feature-transfer-domain:test" in cleanBuild)
@@ -31,9 +46,6 @@ class AndroidCiWorkflowSourceTest {
         assertTrue(":app:assembleDebug" in cleanBuild)
         assertTrue(":app:testPureDebugUnitTest" in cleanBuild)
         assertTrue(":app:testRobolectricDebugUnitTest" in cleanBuild)
-        assertTrue("- name: Build minified release and run release lint" in workflow)
-        assertTrue("run: ./gradlew assembleRelease lintVitalRelease --warning-mode all" in workflow)
-        assertFalse("if: github.event_name != 'pull_request'" in workflow)
         assertFalse(":app:compileBetaKotlin" in workflow)
         assertFalse("assembleDebug assembleRelease" in workflow)
     }
@@ -43,8 +55,8 @@ class AndroidCiWorkflowSourceTest {
         val workflow = File(root, ".github/workflows/android.yml").readText()
 
         assertTrue("NVD_API_KEY: \${{ secrets.NVD_API_KEY }}" in workflow)
-        assertTrue("- name: Check NVD API key availability" in workflow)
-        assertTrue("NVD_API_KEY repository secret is required on non-PR runs" in workflow)
+        assertTrue("- name: Validate NVD API key" in workflow)
+        assertTrue("NVD_API_KEY repository secret is required" in workflow)
         assertTrue("nvd.apiKey = System.getenv('NVD_API_KEY')" in workflow)
         assertTrue("--init-script \"\$RUNNER_TEMP/dependency-check.init.gradle\"" in workflow)
     }

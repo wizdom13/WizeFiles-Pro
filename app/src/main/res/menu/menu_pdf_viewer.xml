@@ -5,12 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_pdf_search"
-        android:icon="@drawable/ic_search_control_normal_24dp"
-        android:title="@string/pdf_viewer_search"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/action_pdf_share"
         android:icon="@drawable/ic_share_control_normal_24dp"
         android:title="@string/pdf_viewer_share"

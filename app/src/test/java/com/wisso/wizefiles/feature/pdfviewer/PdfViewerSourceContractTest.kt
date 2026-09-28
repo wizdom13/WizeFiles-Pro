@@ -30,24 +30,36 @@ class PdfViewerSourceContractTest {
     }
 
     @Test
-    fun `fragment owns reading search safe links and adaptive pages`() {
+    fun `fragment renders staged files with Pdfium zoom and safe links`() {
         val fragment = source(
             "app/src/main/java/com/wisso/wizefiles/feature/pdfviewer/WizePdfViewerFragment.kt"
         )
         val activity = source(
             "app/src/main/java/com/wisso/wizefiles/feature/pdfviewer/PdfViewerActivity.kt"
         )
+        val viewModel = source(
+            "app/src/main/java/com/wisso/wizefiles/feature/pdfviewer/PdfViewerViewModel.kt"
+        )
         val gradle = source("app/build.gradle")
 
-        assertTrue("androidx.pdf:pdf-viewer-fragment:1.0.0-alpha19" in gradle)
-        assertTrue("compileSdkExtension = 19" in gradle)
-        assertTrue("class WizePdfViewerFragment : PdfViewerFragment()" in fragment)
-        assertTrue("documentUri" in activity)
-        assertTrue("isTextSearchActive" in fragment)
-        assertTrue("override fun onLinkClicked" in fragment)
+        assertTrue("io.github.oothp:android-pdf-viewer:3.2.0-beta06" in gradle)
+        assertFalse("androidx.pdf:pdf-viewer-fragment" in gradle)
+        assertTrue("class WizePdfViewerFragment : Fragment()" in fragment)
+        assertTrue("PDFView(requireContext(), null)" in fragment)
+        assertTrue(".enableDoubletap(true)" in fragment)
+        assertTrue(".pageFitPolicy(FitPolicy.WIDTH)" in fragment)
+        assertTrue(".fitEachPage(true)" in fragment)
         assertTrue("PdfLinkPolicy.allowsScheme" in fragment)
-        assertTrue("view.pagesPerRow = pagesPerRow" in fragment)
-        assertTrue("isToolboxVisible = false" in fragment)
+        assertTrue("onPdfDocumentReady(pageCount)" in fragment)
+        assertTrue("onPdfDocumentError(error)" in fragment)
+
+        assertTrue("PdfViewerViewModel.State.Ready" in activity)
+        assertTrue("state.session.file" in activity)
+        assertTrue("fragment.documentFile" in activity)
+        assertTrue("FormatStagingStore" in viewModel)
+        assertTrue("source.newInputStream()" in viewModel)
+        assertTrue("MAX_STAGED_SOURCE_BYTES" in viewModel)
+        assertFalse("Uri.fromFile" in viewModel)
         assertFalse("WebView" in fragment)
         assertFalse("ACTION_ANNOTATE" in fragment)
     }
@@ -85,7 +97,6 @@ class PdfViewerSourceContractTest {
         assertTrue("createSendStreamIntent" in activity)
         assertTrue("createViewIntent" in activity)
         assertTrue("FilePropertiesDialogFragment.show" in activity)
-        assertTrue("action_pdf_search" in menu)
         assertTrue("action_pdf_share" in menu)
         assertTrue("action_pdf_properties" in menu)
         assertTrue("action_pdf_open_with" in menu)

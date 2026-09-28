@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.viewModels
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -17,6 +18,7 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.commitNow
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.wisso.wizefiles.R
 import com.wisso.wizefiles.core.app.BaseThemedActivity
 import com.wisso.wizefiles.core.files.mime.MimeType
@@ -42,9 +44,11 @@ import kotlinx.coroutines.withContext
 class PdfViewerActivity : BaseThemedActivity(), WizePdfViewerFragment.Listener {
     private lateinit var binding: ActivityPdfViewerBinding
     private lateinit var documentPath: AppPath
+    private val viewModel: PdfViewerViewModel by viewModels()
     private var documentMimeType = MimeType(PDF_MIME_TYPE)
     private var viewerFragment: WizePdfViewerFragment? = null
     private var isFullscreen = false
+    private var replaceFragmentOnReady = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +67,10 @@ class PdfViewerActivity : BaseThemedActivity(), WizePdfViewerFragment.Listener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = documentPath.name
 
-        binding.retryButton.setOnClickListener { loadDocument(replaceFragment = true) }
+        binding.retryButton.setOnClickListener {
+            replaceFragmentOnReady = true
+            viewModel.retry(documentPath)
+        }
         binding.openWithButton.setOnClickListener { openExternally() }
         onBackPressedDispatcher.addCallback(
             this,
@@ -80,7 +87,12 @@ class PdfViewerActivity : BaseThemedActivity(), WizePdfViewerFragment.Listener {
                 }
             }
         )
-        loadDocument(replaceFragment = false)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collect(::renderSourceState)
+            }
+        }
+        viewModel.load(documentPath)
         if (isFullscreen) setFullscreen(true)
     }
 
@@ -93,10 +105,6 @@ class PdfViewerActivity : BaseThemedActivity(), WizePdfViewerFragment.Listener {
         when (item.itemId) {
             android.R.id.home -> {
                 onBackPressedDispatcher.onBackPressed()
-                true
-            }
-            R.id.action_pdf_search -> {
-                viewerFragment?.toggleSearch()
                 true
             }
             R.id.action_pdf_fullscreen -> {
@@ -152,12 +160,25 @@ class PdfViewerActivity : BaseThemedActivity(), WizePdfViewerFragment.Listener {
         setFullscreen(enterImmersive)
     }
 
-    private fun loadDocument(replaceFragment: Boolean) {
-        val legacyPath = legacyPathOrNull()
-        if (legacyPath == null) {
-            showError(R.string.pdf_viewer_unavailable)
-            return
+    private fun renderSourceState(state: PdfViewerViewModel.State) {
+        when (state) {
+            PdfViewerViewModel.State.Idle -> Unit
+            PdfViewerViewModel.State.Loading -> {
+                binding.loadingProgress.isVisible = true
+                binding.errorPanel.isVisible = false
+                supportActionBar?.subtitle = null
+            }
+            is PdfViewerViewModel.State.Ready -> {
+                attachDocument(state.session.file, replaceFragmentOnReady)
+                replaceFragmentOnReady = false
+            }
+            is PdfViewerViewModel.State.Error -> {
+                showError(R.string.pdf_viewer_failed)
+            }
         }
+    }
+
+    private fun attachDocument(file: java.io.File, replaceFragment: Boolean) {
         binding.loadingProgress.isVisible = true
         binding.errorPanel.isVisible = false
         supportActionBar?.subtitle = null
@@ -172,8 +193,7 @@ class PdfViewerActivity : BaseThemedActivity(), WizePdfViewerFragment.Listener {
                 }
             }
             viewerFragment = fragment
-            val uri = legacyPath.fileProviderUri
-            if (fragment.documentUri != uri) fragment.documentUri = uri
+            if (fragment.documentFile != file) fragment.documentFile = file
         } catch (_: UnsupportedOperationException) {
             showError(R.string.pdf_viewer_unsupported_device)
         } catch (_: RuntimeException) {

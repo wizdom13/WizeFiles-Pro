@@ -189,8 +189,13 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'androidx.recyclerview:recyclerview:1.4.0'
     implementation 'androidx.viewpager2:viewpager2:1.1.0'
-    implementation 'androidx.pdf:pdf-viewer-fragment:1.0.0-alpha19'
+    implementation 'io.github.oothp:android-pdf-viewer:3.2.0-beta06'
     implementation 'androidx.security:security-crypto:1.1.0-alpha06'
+    constraints {
+        implementation('com.google.crypto.tink:tink-android:1.22.0') {
+            because 'security-crypto pulls vulnerable Tink 1.8.0 (CVE-2026-15432)'
+        }
+    }
     implementation 'androidx.sqlite:sqlite-bundled:2.7.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.work:work-runtime-ktx:2.11.2'

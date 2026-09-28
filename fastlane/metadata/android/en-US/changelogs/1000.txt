@@ -1,0 +1,7 @@
+WizeFiles 1.0.0
+
+• Now fully free and open source under GPL-3.0-only.
+• Removed ads, purchases, subscriptions, license keys, and feature paywalls.
+• Added local, SAF, network, and cloud file management with FTP/FTPS, SFTP, SMB, WebDAV, S3, and cloud accounts.
+• Added dual-pane browsing, Transfer Center, sync and scheduled jobs.
+• Added Vaults, cleanup tools, built-in viewers, App Manager, and APK/APKS/APKM/XAPK installation.

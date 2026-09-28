@@ -7,14 +7,21 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.pdf.ExperimentalPdfApi
-import androidx.pdf.PdfDocument
-import androidx.pdf.content.ExternalLink
-import androidx.pdf.view.PdfView
-import androidx.pdf.viewer.fragment.PdfViewerFragment
-import kotlin.math.roundToInt
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.github.barteksc.pdfviewer.PDFView
+import com.github.barteksc.pdfviewer.util.FitPolicy
+import java.io.File
 
-class WizePdfViewerFragment : PdfViewerFragment() {
+/**
+ * WizeFiles-owned PDF reader surface.
+ *
+ * AndroidX PdfViewerFragment proved unreliable on physical devices by remaining indefinitely in
+ * its loading state. This fragment deliberately uses the staged regular file directly through the
+ * Pdfium-backed AndroidPdfViewer view instead of delegating document loading to AndroidX's
+ * sandboxed fragment state machine.
+ */
+class WizePdfViewerFragment : Fragment() {
     interface Listener {
         fun onPdfDocumentReady(pageCount: Int)
         fun onPdfDocumentError(error: Throwable)
@@ -24,71 +31,48 @@ class WizePdfViewerFragment : PdfViewerFragment() {
     }
 
     private var listener: Listener? = null
-    private var readerView: PdfView? = null
-    private val pageLayoutListener = View.OnLayoutChangeListener {
-            _, _, _, _, _, _, _, _, _ ->
-        updatePageLayout()
-    }
+    private var pdfView: PDFView? = null
+    private var pendingFile: File? = null
+    private var loadedFile: File? = null
+
+    var documentFile: File?
+        get() = pendingFile
+        set(value) {
+            pendingFile = value
+            if (view != null) loadPendingDocument()
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         listener = context as? Listener
     }
 
+    override fun onCreateView(
+        inflater: android.view.LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View =
+        PDFView(requireContext(), null).also { view ->
+            pdfView = view
+            view.layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+        }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        isToolboxVisible = false
+        loadPendingDocument()
     }
 
-    override fun onLoadDocumentSuccess(document: PdfDocument) {
-        super.onLoadDocumentSuccess(document)
-        isToolboxVisible = false
-        listener?.onPdfDocumentReady(document.pageCount)
-    }
+    fun closeSearch(): Boolean = false
 
-    override fun onLoadDocumentError(error: Throwable) {
-        super.onLoadDocumentError(error)
-        listener?.onPdfDocumentError(error)
-    }
-
-    override fun onLinkClicked(externalLink: ExternalLink): Boolean {
-        val uri = externalLink.uri
-        if (PdfLinkPolicy.allowsScheme(uri.scheme)) {
-            listener?.onPdfExternalLink(uri)
-        } else {
-            listener?.onPdfLinkBlocked(uri)
-        }
-        return true
-    }
-
-    override fun onRequestImmersiveMode(enterImmersive: Boolean) {
-        listener?.onPdfImmersiveModeRequested(enterImmersive)
-    }
-
-    @OptIn(ExperimentalPdfApi::class)
-    override fun onPdfViewCreated(pdfView: PdfView) {
-        readerView?.removeOnLayoutChangeListener(pageLayoutListener)
-        readerView = pdfView
-        pdfView.addOnLayoutChangeListener(pageLayoutListener)
-        pdfView.post {
-            updatePageLayout()
-            pdfView.pdfDocument?.let { listener?.onPdfDocumentReady(it.pageCount) }
-        }
-    }
-
-    fun closeSearch(): Boolean {
-        if (!isTextSearchActive) return false
-        isTextSearchActive = false
-        return true
-    }
-
-    fun toggleSearch() {
-        isTextSearchActive = !isTextSearchActive
-    }
+    fun toggleSearch() = Unit
 
     override fun onDestroyView() {
-        readerView?.removeOnLayoutChangeListener(pageLayoutListener)
-        readerView = null
+        pdfView?.recycle()
+        pdfView = null
+        loadedFile = null
         super.onDestroyView()
     }
 
@@ -97,23 +81,53 @@ class WizePdfViewerFragment : PdfViewerFragment() {
         super.onDetach()
     }
 
-    private fun updatePageLayout() {
-        val view = readerView ?: return
-        if (view.width <= 0) return
-        val widthDp = view.width / resources.displayMetrics.density
-        val pagesPerRow = if (widthDp >= TWO_PAGE_MIN_WIDTH_DP) 2 else 1
-        if (view.pagesPerRow == pagesPerRow) return
-        val firstVisiblePage = view.firstVisiblePage.coerceAtLeast(0)
-        view.pagesPerRow = pagesPerRow
-        view.horizontalPageSpacing = (PAGE_SPACING_DP * resources.displayMetrics.density)
-            .roundToInt()
-        view.post {
-            if (view.pdfDocument != null) view.scrollToPage(firstVisiblePage)
-        }
+    private fun loadPendingDocument() {
+        val file = pendingFile ?: return
+        val view = pdfView ?: return
+        if (loadedFile == file) return
+
+        loadedFile = file
+        view.recycle()
+        view.fromFile(file)
+            .enableSwipe(true)
+            .swipeHorizontal(false)
+            .enableDoubletap(true)
+            .defaultPage(0)
+            .enableAnnotationRendering(true)
+            .enableAntialiasing(true)
+            .spacing(PAGE_SPACING_DP)
+            .autoSpacing(true)
+            .pageFitPolicy(FitPolicy.WIDTH)
+            .fitEachPage(true)
+            .pageSnap(false)
+            .pageFling(false)
+            .linkHandler { event ->
+                val link = event.link
+                val destinationPage = link.destPageIdx
+                val rawUri = link.uri
+                when {
+                    destinationPage != null -> view.jumpTo(destinationPage)
+                    !rawUri.isNullOrBlank() -> {
+                        val uri = Uri.parse(rawUri)
+                        if (PdfLinkPolicy.allowsScheme(uri.scheme)) {
+                            listener?.onPdfExternalLink(uri)
+                        } else {
+                            listener?.onPdfLinkBlocked(uri)
+                        }
+                    }
+                }
+            }
+            .onLoad { pageCount ->
+                listener?.onPdfDocumentReady(pageCount)
+            }
+            .onError { error ->
+                loadedFile = null
+                listener?.onPdfDocumentError(error)
+            }
+            .load()
     }
 
     private companion object {
-        const val TWO_PAGE_MIN_WIDTH_DP = 840f
-        const val PAGE_SPACING_DP = 12f
+        const val PAGE_SPACING_DP = 8
     }
 }
