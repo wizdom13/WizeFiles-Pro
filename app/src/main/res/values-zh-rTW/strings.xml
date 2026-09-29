@@ -639,7 +639,7 @@
     <string name="faq_question_manage_files">我該怎麼辦? WizeFiles? 。 。 。 。 。</string>
     <string name="faq_answer_manage_files">WizeFiles 可以瀏覽本地, root- 能夠、網路和雲端儲存;複製、移動、重新命名、共享和刪除專案;編輯文字;預覽支援的內容;建立和編輯檔案;透過傳輸中心執行更長的工作。</string>
     <string name="faq_question_permissions">為什麼應用程式要求檔案訪問?</string>
-    <string name="faq_answer_permissions">WizeFiles 需要儲存空間存取權，才能顯示、複製、移動、重新命名和刪除您選擇管理的檔案。只有相關功能需要時，才會要求 Bluetooth、鄰近裝置、通知、生物辨識和網路權限。</string>
+    <string name="faq_answer_permissions">WizeFiles 需要儲存空間存取權，才能顯示、複製、移動、重新命名和刪除您選擇管理的檔案。只有相關功能需要時，才會要求 相機、鄰近裝置、通知、生物辨識和網路權限。</string>
     <string name="faq_question_recycle_bin">"迴圈斌"是如何運作的?.</string>
     <string name="faq_answer_recycle_bin">啟用資源回收筒後，支援的已刪除項目會先移入資源回收筒，以便稍後還原。清空資源回收筒、永久刪除項目，或在其中仍有項目時關閉此功能，均無法復原。</string>
     <string name="faq_question_network_storage">我能連線到網路還是雲端儲存器?</string>
@@ -651,7 +651,7 @@
     <string name="faq_question_sync_backup">同步備份是做什麼的( B) ?</string>
     <string name="faq_answer_sync_backup">開啟工具 &gt; 同步和備份, 在開始前建立可重複使用的資料夾對並預覽計劃中的更改 。 請檢查預覽中選中的模式和衝突規則, 以便您知道哪一邊將被更新 。</string>
     <string name="faq_question_nearby_transfer">Nearby Transfer是怎麼運作的?</string>
-    <string name="faq_answer_nearby_transfer">開啟工具 &gt; 近距離傳輸以複製檔案或直接在附近之間完成資料夾 WizeFiles 裝置。 Bluetooth 發現並認證裝置, Wi&lt;unk&gt;Fi 攜帶傳輸, 以及一次性的 QR 碼驗證連線。 傳送永遠不會刪除原件 。</string>
+    <string name="faq_answer_nearby_transfer">@string/nearby_network_help</string>
     <string name="faq_question_security">我怎麼保護檔案瀏覽器?</string>
     <string name="faq_answer_security">在 App 設定 &gt; 安全性中, 建立密碼並啟用保護瀏覽器。 您可以選擇先提供生物識別解鎖, 保留密碼後退, 並選擇多快 WizeFiles 又鎖了</string>
     <string name="faq_question_settings_backup">我能支援App設定嗎?</string>
@@ -1334,3 +1334,4 @@
     <string name="text_editor_save_failure">無法儲存此檔案。請檢查該位置是否可寫入。</string>
     <string name="text_editor_load_failure">無法開啟此檔案。請檢查檔案是否仍然存在以及您是否有存取權限。</string>
 </resources>
+

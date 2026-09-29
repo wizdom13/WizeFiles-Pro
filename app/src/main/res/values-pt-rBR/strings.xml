@@ -639,7 +639,7 @@
     <string name="faq_question_manage_files">O que posso fazer com WizeFiles?</string>
     <string name="faq_answer_manage_files">WizeFiles pode navegar localmente, compatível com root, rede e armazenamento em nuvem; copiar, mover, renomear, compartilhar e excluir itens; editar texto; visualizar conteúdo suportado; criar e editar arquivos; e execute trabalhos mais longos através do Transfer Center.</string>
     <string name="faq_question_permissions">Por que o aplicativo solicita acesso a arquivos?</string>
-    <string name="faq_answer_permissions">WizeFiles precisa de acesso ao armazenamento para poder exibir, copiar, mover, renomear e excluir arquivos que você escolhe gerenciar. Bluetooth, permissões de dispositivo próximo, notificação, biometria e rede são solicitadas somente quando um recurso precisa delas.</string>
+    <string name="faq_answer_permissions">WizeFiles precisa de acesso ao armazenamento para poder exibir, copiar, mover, renomear e excluir arquivos que você escolhe gerenciar. câmera, permissões de dispositivo próximo, notificação, biometria e rede são solicitadas somente quando um recurso precisa delas.</string>
     <string name="faq_question_recycle_bin">Como funciona a Lixeira?</string>
     <string name="faq_answer_recycle_bin">Quando a Lixeira está ativada, os itens excluídos suportados são movidos para lá primeiro para que você possa restaurá-los mais tarde. Esvaziar a lixeira, excluir permanentemente um item ou desativar o recurso enquanto ele contém itens não pode ser desfeito.</string>
     <string name="faq_question_network_storage">Posso me conectar à rede ou ao armazenamento em nuvem?</string>
@@ -651,7 +651,7 @@
     <string name="faq_question_sync_backup">O que a sincronização e backup fazem?</string>
     <string name="faq_answer_sync_backup">Abra Ferramentas &gt; Sincronização e Backup para criar pares de pastas reutilizáveis ​​e visualizar as alterações planejadas antes de começar. Revise o modo selecionado e as regras de conflito na visualização para saber qual lado será atualizado.</string>
     <string name="faq_question_nearby_transfer">Como funciona a transferência nas proximidades?</string>
-    <string name="faq_answer_nearby_transfer">Abra Ferramentas &gt; Transferência nas proximidades para copiar arquivos ou pastas completas diretamente entre dispositivos WizeFiles próximos. Bluetooth descobre e autentica dispositivos, o Wi-Fi realiza a transferência e um código QR único verifica a conexão. O envio nunca exclui os originais.</string>
+    <string name="faq_answer_nearby_transfer">@string/nearby_network_help</string>
     <string name="faq_question_security">Como posso proteger o navegador de arquivos?</string>
     <string name="faq_answer_security">Em Configurações do aplicativo &gt; Segurança, crie uma senha e ative Proteger navegador. Opcionalmente, você pode oferecer o desbloqueio biométrico primeiro, manter a senha alternativa e escolher a rapidez com que WizeFiles será bloqueado novamente.</string>
     <string name="faq_question_settings_backup">Posso fazer backup das configurações do aplicativo?</string>
@@ -1334,3 +1334,4 @@
     <string name="text_editor_save_failure">Não foi possível salvar este arquivo. Verifique se o local permite gravação.</string>
     <string name="text_editor_load_failure">Não foi possível abrir este arquivo. Verifique se ele ainda existe e se você tem acesso.</string>
 </resources>
+

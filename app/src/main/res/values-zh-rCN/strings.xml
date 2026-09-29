@@ -639,7 +639,7 @@
     <string name="faq_question_manage_files">我该怎么办? WizeFiles? 。 。 。 。 。</string>
     <string name="faq_answer_manage_files">WizeFiles 可以浏览本地, root- 能够、网络和云存储;复制、移动、重命名、共享和删除项目;编辑文本;预览支持的内容;创建和编辑档案;通过传输中心运行更长的工作。</string>
     <string name="faq_question_permissions">为什么应用程序要求文件访问?</string>
-    <string name="faq_answer_permissions">WizeFiles 需要存储访问权限，才能显示、复制、移动、重命名和删除您选择管理的文件。只有相关功能需要时，才会请求 Bluetooth、附近设备、通知、生物识别和网络权限。</string>
+    <string name="faq_answer_permissions">WizeFiles 需要存储访问权限，才能显示、复制、移动、重命名和删除您选择管理的文件。只有相关功能需要时，才会请求 相机、附近设备、通知、生物识别和网络权限。</string>
     <string name="faq_question_recycle_bin">"循环斌"是如何运作的?.</string>
     <string name="faq_answer_recycle_bin">启用回收站后，支持的已删除项目会先移入回收站，以便稍后恢复。清空回收站、永久删除项目，或在回收站中仍有项目时关闭此功能，均无法撤销。</string>
     <string name="faq_question_network_storage">我能连接到网络还是云存储器?</string>
@@ -651,7 +651,7 @@
     <string name="faq_question_sync_backup">同步备份是做什么的( B) ?</string>
     <string name="faq_answer_sync_backup">打开工具 &gt; 同步和备份, 在开始前创建可重复使用的文件夹对并预览计划中的更改 。 请检查预览中选中的模式和冲突规则, 以便您知道哪一边将被更新 。</string>
     <string name="faq_question_nearby_transfer">Nearby Transfer是怎么运作的?</string>
-    <string name="faq_answer_nearby_transfer">打开工具 &gt; 近距离传输以复制文件或直接在附近之间完成文件夹 WizeFiles 设备。 Bluetooth 发现并认证设备, Wi&lt;unk&gt;Fi 携带传输, 以及一次性的 QR 码验证连接。 发送永远不会删除原件 。</string>
+    <string name="faq_answer_nearby_transfer">@string/nearby_network_help</string>
     <string name="faq_question_security">我怎么保护文件浏览器?</string>
     <string name="faq_answer_security">在 App 设置 &gt; 安全性中, 创建密码并启用保护浏览器。 您可以选择先提供生物识别解锁, 保留密码后退, 并选择多快 WizeFiles 又锁了</string>
     <string name="faq_question_settings_backup">我能支持App设置吗?</string>
@@ -1334,3 +1334,4 @@
     <string name="text_editor_save_failure">无法保存此文件。请检查该位置是否可写。</string>
     <string name="text_editor_load_failure">无法打开此文件。请检查文件是否仍然存在以及您是否有访问权限。</string>
 </resources>
+

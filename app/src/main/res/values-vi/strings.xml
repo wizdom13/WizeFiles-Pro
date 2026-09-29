@@ -639,7 +639,7 @@
     <string name="faq_question_manage_files">Tôi có thể làm gì với WizeFiles?</string>
     <string name="faq_answer_manage_files">WizeFiles có thể duyệt bộ nhớ cục bộ, có khả năng root, mạng và đám mây; sao chép, di chuyển, đổi tên, chia sẻ và xóa các mục; chỉnh sửa văn bản; xem trước nội dung được hỗ trợ; tạo và chỉnh sửa tài liệu lưu trữ; và thực hiện các công việc lâu hơn thông qua Trung tâm Chuyển giao.</string>
     <string name="faq_question_permissions">Tại sao ứng dụng yêu cầu quyền truy cập tệp?</string>
-    <string name="faq_answer_permissions">WizeFiles cần quyền truy cập bộ nhớ để hiển thị, sao chép, di chuyển, đổi tên và xóa các tệp bạn chọn quản lý. Quyền Bluetooth, thiết bị ở gần, thông báo, sinh trắc học và mạng chỉ được yêu cầu khi một tính năng cần đến.</string>
+    <string name="faq_answer_permissions">WizeFiles cần quyền truy cập bộ nhớ để hiển thị, sao chép, di chuyển, đổi tên và xóa các tệp bạn chọn quản lý. Quyền máy ảnh, thiết bị ở gần, thông báo, sinh trắc học và mạng chỉ được yêu cầu khi một tính năng cần đến.</string>
     <string name="faq_question_recycle_bin">Thùng rác hoạt động như thế nào?</string>
     <string name="faq_answer_recycle_bin">Khi bật Thùng rác, các mục đã xóa được hỗ trợ sẽ được chuyển vào đó trước để bạn có thể khôi phục sau. Không thể hoàn tác việc dọn sạch thùng, xóa vĩnh viễn một mục hoặc tắt tính năng khi trong thùng vẫn còn mục.</string>
     <string name="faq_question_network_storage">Tôi có thể kết nối với mạng hoặc bộ lưu trữ đám mây không?</string>
@@ -651,7 +651,7 @@
     <string name="faq_question_sync_backup">Đồng bộ hóa và sao lưu có tác dụng gì?</string>
     <string name="faq_answer_sync_backup">Mở Công cụ &gt; Đồng bộ hóa &amp; Sao lưu để tạo các cặp thư mục có thể sử dụng lại và xem trước các thay đổi đã lên kế hoạch trước khi bắt đầu. Xem lại chế độ đã chọn và các quy tắc xung đột trong bản xem trước để bạn biết bên nào sẽ được cập nhật.</string>
     <string name="faq_question_nearby_transfer">Chuyển khoản lân cận hoạt động như thế nào?</string>
-    <string name="faq_answer_nearby_transfer">Mở Công cụ &gt; Truyền lân cận để sao chép tệp hoặc hoàn thành các thư mục trực tiếp giữa các thiết bị WizeFiles lân cận. Bluetooth phát hiện và xác thực thiết bị, Wi‑Fi thực hiện quá trình truyền và mã QR một lần sẽ xác minh kết nối. Việc gửi không bao giờ xóa bản gốc.</string>
+    <string name="faq_answer_nearby_transfer">@string/nearby_network_help</string>
     <string name="faq_question_security">Làm cách nào để bảo vệ trình duyệt tệp?</string>
     <string name="faq_answer_security">Trong Cài đặt ứng dụng &gt; Bảo mật, tạo mật khẩu và bật Bảo vệ trình duyệt. Bạn có thể tùy ý cung cấp tính năng mở khóa sinh trắc học trước, giữ lại mật khẩu dự phòng và chọn tốc độ khóa lại WizeFiles.</string>
     <string name="faq_question_settings_backup">Tôi có thể sao lưu Cài đặt ứng dụng không?</string>
@@ -1334,3 +1334,4 @@
     <string name="text_editor_save_failure">Không thể lưu tệp này. Hãy kiểm tra xem vị trí có cho phép ghi hay không.</string>
     <string name="text_editor_load_failure">Không thể mở tệp này. Hãy kiểm tra xem tệp còn tồn tại và bạn có quyền truy cập hay không.</string>
 </resources>
+

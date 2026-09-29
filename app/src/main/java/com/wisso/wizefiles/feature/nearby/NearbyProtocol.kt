@@ -17,7 +17,7 @@ import java.util.zip.GZIPOutputStream
 import com.wisso.wizefiles.storage.SecureRelativePath
 
 internal const val NEARBY_PROTOCOL_VERSION = 1
-internal const val NEARBY_SERVICE_ID = "com.wisso.wizefiles.nearby.v1"
+internal const val NEARBY_SERVICE_ID = "com.wisso.wizefiles.nearby.lan.v2"
 internal const val NEARBY_DISCOVERY_MILLIS = 120_000L
 internal const val NEARBY_OFFER_MILLIS = 60_000L
 internal const val NEARBY_ACK_BYTES = 4L * 1024L * 1024L
@@ -275,3 +275,4 @@ internal object NearbyPathSecurity {
         }
     }
 }
+

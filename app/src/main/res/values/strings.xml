@@ -650,7 +650,7 @@ https://wizesoft.me/WizeFiles</string>
     <string name="faq_question_manage_files">What can I do with WizeFiles?</string>
     <string name="faq_answer_manage_files">WizeFiles can browse local, root-capable, network, and cloud storage; copy, move, rename, share, and delete items; edit text; preview supported content; create and edit archives; and run longer jobs through Transfer Center.</string>
     <string name="faq_question_permissions">Why does the app ask for file access?</string>
-    <string name="faq_answer_permissions">WizeFiles needs storage access so it can display, copy, move, rename, and delete files that you choose to manage. Bluetooth, nearby-device, notification, biometric, and network permissions are requested only when a feature needs them.</string>
+    <string name="faq_answer_permissions">WizeFiles needs storage access so it can display, copy, move, rename, and delete files that you choose to manage. Camera, nearby-device, notification, biometric, and network permissions are requested only when a feature needs them.</string>
     <string name="faq_question_recycle_bin">How does the Trash Bin work?</string>
     <string name="faq_answer_recycle_bin">When Trash Bin is enabled, supported deleted items are moved there first so you can restore them later. Emptying the bin, permanently deleting an item, or disabling the feature while it contains items cannot be undone.</string>
     <string name="faq_question_network_storage">Can I connect to network or cloud storage?</string>
@@ -662,7 +662,7 @@ https://wizesoft.me/WizeFiles</string>
     <string name="faq_question_sync_backup">What does Sync &amp; Backup do?</string>
     <string name="faq_answer_sync_backup">Open Tools &gt; Sync &amp; Backup to create reusable folder pairs and preview planned changes before starting. Review the selected mode and conflict rules in the preview so you know which side will be updated.</string>
     <string name="faq_question_nearby_transfer">How does Nearby Transfer work?</string>
-    <string name="faq_answer_nearby_transfer">Open Tools &gt; Nearby Transfer to copy files or complete folders directly between nearby WizeFiles devices. Bluetooth discovers and authenticates devices, Wi‑Fi carries the transfer, and a one-time QR code verifies the connection. Sending never deletes the originals.</string>
+    <string name="faq_answer_nearby_transfer">@string/nearby_network_help</string>
     <string name="faq_question_security">How can I protect the file browser?</string>
     <string name="faq_answer_security">In App Settings &gt; Security, create a password and enable Protect Browser. You can optionally offer biometric unlock first, keep password fallback, and choose how quickly WizeFiles locks again.</string>
     <string name="faq_question_settings_backup">Can I back up App Settings?</string>
@@ -1406,3 +1406,4 @@ https://wizesoft.me/WizeFiles</string>
     <string name="storage_cleaner_duplicate_review_required_hint">Your saved keep copy is no longer available. Choose and save the copy to keep before cleaning this group.</string>
     <string name="storage_cleaner_duplicate_review_required">Review required</string>
 </resources>
+

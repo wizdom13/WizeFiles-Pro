@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">Подключите оба устройства к одной сети Wi-Fi или точке доступа телефона и откройте передачу поблизости. Обновите WizeFiles на обоих устройствах. Подтвердите подключение на получателе и отсканируйте его QR-код на отправителе. Передача зашифрована и не требует интернета или сервисов Google Play. Файлы копируются, оригиналы сохраняются.</string>
+    <string name="nearby_scan_title">Сканировать QR-код проверки</string>
+    <string name="nearby_scan_help">Наведите камеру на QR-код проверки на принимающем устройстве. Сканирование работает без интернета и не сохраняет изображения.</string>
+    <string name="nearby_camera_permission">Разрешите доступ к камере для сканирования QR-кода проверки. Это можно сделать в настройках приложения Android.</string>
+    <string name="nearby_camera_unavailable">Камера недоступна. Закройте другие приложения, использующие её, и повторите попытку. Для проверки получателя необходима камера.</string>
+</resources>

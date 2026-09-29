@@ -3,7 +3,6 @@
 
 package com.wisso.wizefiles.feature.nearby
 
-import com.google.android.gms.nearby.connection.Payload
 import com.wisso.wizefiles.feature.transfer.TransferItemRecord
 import com.wisso.wizefiles.storage.NearbyPayloadLedger
 import com.wisso.wizefiles.storage.NearbyPayloadCheckpoint
@@ -12,61 +11,75 @@ import java.io.Closeable
 /** Owns payload correlation and stream resources for one transport session. */
 internal class NearbyPayloadStore(private val maxPendingIncoming: Int) : Closeable {
     private val ledger = NearbyPayloadLedger(maxPendingIncoming)
-    private val incomingPayloads = mutableMapOf<Long, Payload>()
+    private val incomingPayloads = mutableMapOf<Long, NearbyPayload>()
+    private var activeIncoming: NearbyPayload? = null
     private val incomingMetadata = mutableMapOf<Long, NearbyIncomingStream>()
     private val outgoingStreams = mutableMapOf<Long, Closeable>()
     private val outgoingItems = mutableMapOf<Long, TransferItemRecord>()
 
-    val activePayloadId: Long? get() = ledger.activePayloadId
-    fun checkpoints(): List<NearbyPayloadCheckpoint> = ledger.checkpoints()
+    val activePayloadId: Long? @Synchronized get() = ledger.activePayloadId
+    @Synchronized fun checkpoints(): List<NearbyPayloadCheckpoint> = ledger.checkpoints()
+    @Synchronized fun hasIncomingMetadata(payloadId: Long): Boolean = payloadId in incomingMetadata
 
-    fun acceptIncoming(payload: Payload): Boolean {
+    @Synchronized fun acceptIncoming(payload: NearbyPayload): Boolean {
         if (!ledger.acceptIncomingPayload(payload.id)) return false
         incomingPayloads[payload.id] = payload
         return true
     }
 
-    fun acceptMetadata(metadata: NearbyIncomingStream) {
+    @Synchronized fun acceptMetadata(metadata: NearbyIncomingStream) {
         require(ledger.acceptIncomingMetadata(metadata.payloadId)) {
             "Duplicate, active, or excessive incoming stream metadata"
         }
         incomingMetadata[metadata.payloadId] = metadata
     }
 
-    fun claimIncoming(payloadId: Long): Pair<Payload, NearbyIncomingStream>? {
+    @Synchronized fun claimIncoming(payloadId: Long): Pair<NearbyPayload, NearbyIncomingStream>? {
         val payload = incomingPayloads[payloadId] ?: return null
         val metadata = incomingMetadata[payloadId] ?: return null
         require(activePayloadId == null) { "Overlapping incoming streams are forbidden" }
         check(ledger.claimIncoming(payloadId)) { "Payload correlation state is inconsistent" }
         incomingPayloads.remove(payloadId)
+        activeIncoming = payload
         incomingMetadata.remove(payloadId)
         return payload to metadata
     }
 
-    fun trackOutgoing(payload: Payload, stream: Closeable, item: TransferItemRecord) {
+    @Synchronized fun trackOutgoing(payload: NearbyPayload, stream: Closeable, item: TransferItemRecord) {
         require(ledger.trackOutgoing(payload.id)) { "Overlapping or duplicate outgoing stream" }
         outgoingStreams[payload.id] = stream
         outgoingItems[payload.id] = item
     }
 
-    fun outgoingItem(payloadId: Long): TransferItemRecord? = outgoingItems[payloadId]
+    @Synchronized fun outgoingItem(payloadId: Long): TransferItemRecord? = outgoingItems[payloadId]
 
-    fun finishOutgoing(payloadId: Long) {
+    @Synchronized fun finishOutgoing(payloadId: Long) {
         outgoingStreams.remove(payloadId)?.let { runCatching(it::close) }
         outgoingItems.remove(payloadId)
         ledger.finish(payloadId)
     }
 
-    fun clearActive(): Long? = ledger.completeIncoming()
-
-    fun completeIncoming() {
-        ledger.completeIncoming()
+    @Synchronized fun clearActive(): Long? {
+        activeIncoming?.let { payload ->
+            payload.markCanceled()
+            runCatching { payload.asStream()?.asInputStream()?.close() }
+        }
+        activeIncoming = null
+        return ledger.completeIncoming()
     }
 
-    override fun close() {
+    @Synchronized fun completeIncoming(payloadId: Long) {
+        if (activeIncoming?.id != payloadId) return
+        activeIncoming = null
+        ledger.finish(payloadId)
+    }
+
+    @Synchronized override fun close() {
+        clearActive()
         outgoingStreams.values.forEach { runCatching(it::close) }
         outgoingStreams.clear()
         outgoingItems.clear()
+        incomingPayloads.values.forEach { runCatching { it.asStream()?.asInputStream()?.close() } }
         incomingPayloads.clear()
         incomingMetadata.clear()
         ledger.clear()

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">Conecta ambos dispositivos a la misma red Wi-Fi o a un punto de acceso del teléfono y abre Transferencia cercana. Actualiza WizeFiles en ambos. Aprueba la conexión en el receptor y escanea su QR desde el emisor. Las transferencias están cifradas y no necesitan internet ni servicios de Google Play. Se copian los archivos y se conservan los originales.</string>
+    <string name="nearby_scan_title">Escanear QR de verificación</string>
+    <string name="nearby_scan_help">Apunta la cámara al QR de verificación del dispositivo receptor. El escaneo funciona sin internet y no guarda imágenes.</string>
+    <string name="nearby_camera_permission">Permite el acceso a la cámara para escanear el QR de verificación. Puedes habilitarlo en los ajustes de la app en Android.</string>
+    <string name="nearby_camera_unavailable">La cámara no está disponible. Cierra otras apps que la usen e inténtalo de nuevo. Se necesita una cámara para verificar el receptor.</string>
+</resources>

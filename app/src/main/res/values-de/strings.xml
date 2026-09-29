@@ -600,7 +600,7 @@ https://wizesoft.me/WizeFiles</string>
     <string name="faq_question_manage_files">Was kann ich mit WizeFiles tun?</string>
     <string name="faq_answer_manage_files">WizeFiles kann lokalen, Root-fähigen, Netzwerk- und Cloud-Speicher durchsuchen, Elemente kopieren, verschieben, umbenennen, teilen und löschen, Text bearbeiten, unterstützte Inhalte anzeigen, Archive erstellen und bearbeiten sowie längere Aufgaben über das Übertragungszentrum ausführen.</string>
     <string name="faq_question_permissions">Warum fragt die App nach Dateizugriff?</string>
-    <string name="faq_answer_permissions">WizeFiles benötigt Speicherzugriff, um die von dir verwalteten Dateien anzuzeigen, zu kopieren, zu verschieben, umzubenennen und zu löschen. Berechtigungen für Bluetooth, Geräte in der Nähe, Benachrichtigungen, Biometrie und Netzwerk werden nur angefordert, wenn eine Funktion sie benötigt.</string>
+    <string name="faq_answer_permissions">WizeFiles benötigt Speicherzugriff, um die von dir verwalteten Dateien anzuzeigen, zu kopieren, zu verschieben, umzubenennen und zu löschen. Berechtigungen für Kamera, Geräte in der Nähe, Benachrichtigungen, Biometrie und Netzwerk werden nur angefordert, wenn eine Funktion sie benötigt.</string>
     <string name="faq_question_recycle_bin">Wie funktioniert der Papierkorb?</string>
     <string name="faq_answer_recycle_bin">Wenn der Papierkorb aktiviert ist, werden unterstützte gelöschte Elemente zunächst dorthin verschoben, damit du sie später wiederherstellen kannst. Das Leeren des Papierkorbs, das dauerhafte Löschen eines Elements oder das Deaktivieren der Funktion bei gefülltem Papierkorb kann nicht rückgängig gemacht werden.</string>
     <string name="faq_question_network_storage">Kann ich Netzwerk- oder Cloud-Speicher verbinden?</string>
@@ -612,7 +612,7 @@ https://wizesoft.me/WizeFiles</string>
     <string name="faq_question_sync_backup">Was macht Synchronisierung und Sicherung?</string>
     <string name="faq_answer_sync_backup">Öffne Werkzeuge &gt; Synchronisierung und Sicherung, um wiederverwendbare Ordnerpaare zu erstellen und geplante Änderungen vor dem Start zu prüfen. Kontrolliere in der Vorschau den ausgewählten Modus und die Konfliktregeln, damit du weißt, welche Seite aktualisiert wird.</string>
     <string name="faq_question_nearby_transfer">Wie funktioniert die Nahübertragung?</string>
-    <string name="faq_answer_nearby_transfer">Öffne Werkzeuge &gt; Nahübertragung, um Dateien oder vollständige Ordner direkt zwischen WizeFiles-Geräten in der Nähe zu kopieren. Bluetooth findet und authentifiziert Geräte, WLAN überträgt die Daten und ein einmaliger QR-Code überprüft die Verbindung. Beim Senden werden die Originale nie gelöscht.</string>
+    <string name="faq_answer_nearby_transfer">@string/nearby_network_help</string>
     <string name="faq_question_security">Wie kann ich den Dateibrowser schützen?</string>
     <string name="faq_answer_security">Erstelle unter App-Einstellungen &gt; Sicherheit ein Passwort und aktiviere Browser schützen. Optional kannst du zuerst biometrisches Entsperren anbieten, das Passwort als Alternative behalten und festlegen, wie schnell WizeFiles wieder gesperrt wird.</string>
     <string name="faq_question_settings_backup">Kann ich die App-Einstellungen sichern?</string>
@@ -1346,3 +1346,4 @@ https://wizesoft.me/WizeFiles</string>
     <string name="text_editor_save_failure">Diese Datei kann nicht gespeichert werden. Prüfe, ob der Speicherort beschreibbar ist.</string>
     <string name="text_editor_load_failure">Diese Datei kann nicht geöffnet werden. Prüfe, ob sie noch vorhanden ist und du Zugriff hast.</string>
 </resources>
+

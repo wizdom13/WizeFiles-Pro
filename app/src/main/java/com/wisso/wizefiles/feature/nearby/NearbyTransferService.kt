@@ -16,17 +16,6 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import androidx.core.app.NotificationCompat
-import com.google.android.gms.nearby.Nearby
-import com.google.android.gms.nearby.connection.AdvertisingOptions
-import com.google.android.gms.nearby.connection.ConnectionInfo
-import com.google.android.gms.nearby.connection.ConnectionResolution
-import com.google.android.gms.nearby.connection.ConnectionsClient
-import com.google.android.gms.nearby.connection.ConnectionsStatusCodes
-import com.google.android.gms.nearby.connection.DiscoveredEndpointInfo
-import com.google.android.gms.nearby.connection.DiscoveryOptions
-import com.google.android.gms.nearby.connection.Payload
-import com.google.android.gms.nearby.connection.PayloadCallback
-import com.google.android.gms.nearby.connection.Strategy
 import com.wisso.wizefiles.R
 import com.wisso.wizefiles.feature.transfer.LongRunningOperationLimiter
 import com.wisso.wizefiles.feature.sync.SyncPathResolver
@@ -52,7 +41,7 @@ import kotlin.math.max
 
 class NearbyTransferService : Service() {
     private val domainSession = NearbySessionDomainController()
-    private lateinit var connections: ConnectionsClient
+    private lateinit var connections: NearbyLanClient
     private val worker = Executors.newSingleThreadExecutor()
     private val handler = Handler(Looper.getMainLooper())
     private val store by lazy { NearbySessionStore(this) }
@@ -78,11 +67,11 @@ class NearbyTransferService : Service() {
                     )
                 }
             },
-            onCompleted={complete ->
-                payloadStore.completeIncoming()
+            onCompleted={payloadId,complete ->
+                payloadStore.completeIncoming(payloadId)
                 if(complete) {
                     handler.post {
-                        publish(NearbyPhase.CONNECTED,message="Finalizing transfer…")
+                        if (!pauseRequested) publish(NearbyPhase.CONNECTED,message="Finalizing transfer…")
                     }
                 }
             },
@@ -106,6 +95,7 @@ class NearbyTransferService : Service() {
     private val activePayloadId: Long?
         get() = payloadStore.activePayloadId
     @Volatile private var pauseRequested = false
+    @Volatile private var streamGeneration = 0
     private var slotHeld = false
     private var resumeOperationId = ""
     private val discoveryTimeout = Runnable {
@@ -121,7 +111,7 @@ class NearbyTransferService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        connections = Nearby.getConnectionsClient(this)
+        connections = NearbyLanClient(this)
         instance = this
         foregroundNotifier.createChannel()
     }
@@ -197,6 +187,7 @@ class NearbyTransferService : Service() {
         pauseRequested = false
         val active = operationId == requestedOperationId && endpointId != null
         if (active) {
+            connections.setTransferPaused(false)
             if (domainSession.state == com.wisso.wizefiles.storage.NearbySessionState.PAUSED) {
                 domainSession.resumeTransfer()
             }
@@ -234,10 +225,9 @@ class NearbyTransferService : Service() {
     private fun startDiscovery() {
         domainSession.reset()
         domainSession.beginDiscovery()
-        val options = DiscoveryOptions.Builder().setStrategy(Strategy.P2P_POINT_TO_POINT).build()
         sessionRegistry.reset()
         val until = NearbyDeadlinePolicy.deadline(System.currentTimeMillis(), NEARBY_DISCOVERY_MILLIS)
-        connections.startDiscovery(NEARBY_SERVICE_ID, transportAdapter.discoveryCallback, options)
+        connections.startDiscovery(NEARBY_SERVICE_ID, transportAdapter.discoveryCallback)
             .addOnSuccessListener {
                 publish(NearbyPhase.DISCOVERING, message = "Choose a nearby device", endsAt = until)
                 handler.removeCallbacks(discoveryTimeout)
@@ -249,9 +239,8 @@ class NearbyTransferService : Service() {
     private fun startAdvertising() {
         domainSession.reset()
         domainSession.beginDiscovery()
-        val options = AdvertisingOptions.Builder().setStrategy(Strategy.P2P_POINT_TO_POINT).build()
         val until = NearbyDeadlinePolicy.deadline(System.currentTimeMillis(), NEARBY_DISCOVERY_MILLIS)
-        connections.startAdvertising(nearbyDeviceName(), NEARBY_SERVICE_ID, transportAdapter.connectionCallback, options)
+        connections.startAdvertising(nearbyDeviceName(), NEARBY_SERVICE_ID, transportAdapter.connectionCallback)
             .addOnSuccessListener {
                 publish(
                     NearbyPhase.ADVERTISING,
@@ -271,7 +260,7 @@ class NearbyTransferService : Service() {
             .addOnFailureListener { failSession(it.message ?: "Could not connect") }
     }
 
-    private fun onEndpointFound(id: String, info: DiscoveredEndpointInfo) {
+    private fun onEndpointFound(id: String, info: NearbyDiscoveryInfo) {
         if (info.serviceId != NEARBY_SERVICE_ID) return
         sessionRegistry.discovered(NearbyEndpoint(id, info.endpointName.take(64)))
         publish(snapshot.phase, endpoints = sessionRegistry.endpoints())
@@ -282,7 +271,7 @@ class NearbyTransferService : Service() {
         publish(snapshot.phase, endpoints = sessionRegistry.endpoints())
     }
 
-    private fun onConnectionInitiated(id: String, info: ConnectionInfo) {
+    private fun onConnectionInitiated(id: String, info: NearbyConnectionInfo) {
         if (!domainSession.peerFound()) {
             connections.rejectConnection(id)
             failSession("Nearby connection callback arrived out of order")
@@ -314,9 +303,9 @@ class NearbyTransferService : Service() {
         )
     }
 
-    private fun onConnectionResult(id: String, resolution: ConnectionResolution) {
+    private fun onConnectionResult(id: String, resolution: NearbyConnectionResult) {
         clearPendingAuthentication()
-        if (resolution.status.statusCode != ConnectionsStatusCodes.STATUS_OK) {
+        if (!resolution.accepted) {
             failSession("The connection was rejected or could not be established", operationId.isNotEmpty())
             return
         }
@@ -369,6 +358,7 @@ class NearbyTransferService : Service() {
         val qr = NearbyQrAuthentication.encode(token)
         connections.acceptConnection(id, payloadCallback)
             .addOnSuccessListener {
+                if (endpointId != null) return@addOnSuccessListener
                 publish(
                     NearbyPhase.AUTH_QR_VISIBLE,
                     authQr = qr,
@@ -402,6 +392,7 @@ class NearbyTransferService : Service() {
         }
         connections.acceptConnection(id, payloadCallback)
             .addOnSuccessListener {
+                if (endpointId != null) return@addOnSuccessListener
                 publish(
                     NearbyPhase.CONNECTED,
                     authQr = "",
@@ -449,20 +440,20 @@ class NearbyTransferService : Service() {
             cancel = ::cancel
         )
     }
-    private val payloadCallback: PayloadCallback
+    private val payloadCallback: NearbyPayloadCallback
         get() = payloadProcessor.callback
 
     private val transportAdapter by lazy {
         NearbyTransportAdapter(object : NearbyTransportAdapter.Events {
-            override fun endpointFound(id: String, info: DiscoveredEndpointInfo) =
+            override fun endpointFound(id: String, info: NearbyDiscoveryInfo) =
                 onEndpointFound(id, info)
 
             override fun endpointLost(id: String) = onEndpointLost(id)
 
-            override fun connectionInitiated(id: String, info: ConnectionInfo) =
+            override fun connectionInitiated(id: String, info: NearbyConnectionInfo) =
                 onConnectionInitiated(id, info)
 
-            override fun connectionResult(id: String, resolution: ConnectionResolution) =
+            override fun connectionResult(id: String, resolution: NearbyConnectionResult) =
                 onConnectionResult(id, resolution)
 
             override fun disconnected(id: String) = onDisconnected(id)
@@ -496,6 +487,10 @@ class NearbyTransferService : Service() {
                 require(role == NearbyRole.RECEIVE)
                 require(metadata.sessionId == sessionId)
                 require(metadata.offset >= 0 && metadata.length >= 0)
+                if (pauseRequested) {
+                    connections.cancelPayload(metadata.payloadId)
+                    return
+                }
                 payloadStore.acceptMetadata(metadata)
                 persistPayloadCheckpoints()
                 maybeConsumeStream(metadata.payloadId)
@@ -507,6 +502,11 @@ class NearbyTransferService : Service() {
             "FILE_COMPLETE" -> completeSentItem(message.body.getString("itemId"))
             "PAUSE" -> remotePause()
             "RESUME_REQUEST" -> {
+                connections.setTransferPaused(false)
+                pauseRequested = false
+                if (domainSession.state == com.wisso.wizefiles.storage.NearbySessionState.PAUSED) {
+                    domainSession.resumeTransfer()
+                }
                 recovery.markRunning(operationId)
                 publish(NearbyPhase.TRANSFERRING, message = "Resuming transfer…")
                 if (role == NearbyRole.SEND) sendNext()
@@ -583,6 +583,9 @@ class NearbyTransferService : Service() {
         remoteOffsets.clear()
         val offsets = body.getJSONObject("offsets")
         offsets.keys().forEach { key -> remoteOffsets[key] = offsets.getLong(key).coerceAtLeast(0) }
+        TransferRepository.items(operationId).filter { !it.isDirectory && NearbyTransferPlanner.remoteId(it) !in remoteOffsets }.forEach {
+            TransferDatabase.skipItem(it.id)
+        }
         TransferRepository.items(operationId).filter { it.isDirectory }.forEach {
             if (it.state != TransferItemState.COPIED) TransferDatabase.completeItem(it.id, "nearby://$peerName/${NearbyTransferPlanner.remoteId(it)}")
         }
@@ -624,12 +627,14 @@ class NearbyTransferService : Service() {
             return
         }
         val remoteId = NearbyTransferPlanner.remoteId(item)
-        val offset = max(item.bytesCompleted, remoteOffsets[remoteId] ?: 0).coerceAtMost(item.sizeBytes)
+        // On reconnect the receiver's durable checkpoint is authoritative.
+        val offset = (remoteOffsets[remoteId] ?: item.bytesCompleted).coerceIn(0, item.sizeBytes)
         if (offset == item.sizeBytes) {
             TransferDatabase.completeItem(item.id, "nearby://$peerName/$remoteId")
             sendNext()
             return
         }
+        val generation = streamGeneration
         worker.execute {
             runCatching {
                 val source = requireNotNull(SyncPathResolver.resolve(item.sourceUri)) { "Source vanished" }
@@ -640,14 +645,25 @@ class NearbyTransferService : Service() {
                     Files.getLastModifiedTime(source, LinkOption.NOFOLLOW_LINKS).toMillis() == item.modifiedMillis
                 ) { "Source changed after the offer was accepted" }
                 val input = Files.newInputStream(source)
-                skipNearbyInputFully(input, offset)
-                val payload = Payload.fromStream(input)
-                payloadStore.trackOutgoing(payload, input, item)
-                persistPayloadCheckpoints()
-                sendControl(NearbyProtocol.fileBegin(sessionId, remoteId, payload.id, offset, item.sizeBytes - offset))
-                connections.sendPayload(requireNotNull(endpointId), payload)
-                    .addOnFailureListener { failSession(it.message ?: "Could not send file", true) }
-            }.onFailure { handler.post { failSession(it.message ?: "Could not open source", true) } }
+                try { skipNearbyInputFully(input, offset) } catch (failure: Exception) {
+                    input.close()
+                    throw failure
+                }
+                val payload = NearbyPayload.fromStream(input, item.sizeBytes - offset)
+                handler.post {
+                    if (generation != streamGeneration || pauseRequested || endpointId == null) {
+                        input.close()
+                        return@post
+                    }
+                    payloadStore.trackOutgoing(payload, input, item)
+                    persistPayloadCheckpoints()
+                    sendControl(NearbyProtocol.fileBegin(sessionId, remoteId, payload.id, offset, item.sizeBytes - offset))
+                    connections.sendPayload(requireNotNull(endpointId), payload)
+                        .addOnFailureListener { failSession(it.message ?: "Could not send file", true) }
+                }
+            }.onFailure { failure -> handler.post {
+                if (generation == streamGeneration) failSession(failure.message ?: "Could not open source", true)
+            } }
         }
     }
 
@@ -693,6 +709,11 @@ class NearbyTransferService : Service() {
     }
 
     private fun maybeConsumeStream(payloadId: Long) {
+        if (pauseRequested) {
+            connections.cancelPayload(payloadId)
+            payloadStore.close()
+            return
+        }
         val (payload, metadata) = payloadStore.claimIncoming(payloadId) ?: return
         worker.execute { incomingWriter.receive(payload,metadata) }
     }
@@ -700,8 +721,11 @@ class NearbyTransferService : Service() {
     private fun pause() {
         if (operationId.isEmpty()) return
         pauseRequested = true
+        ++streamGeneration
+        connections.setTransferPaused(true)
         sendControl(NearbyProtocol.command("PAUSE", sessionId))
-        payloadStore.clearActive()?.let(connections::cancelPayload)
+        activePayloadId?.let(connections::cancelPayload)
+        payloadStore.close()
         runCatching { TransferRepository.transition(operationId, TransferOperationState.PAUSE_REQUESTED) }
         if (!domainSession.pause()) return
         persistDomainState("Transfer paused")
@@ -710,7 +734,10 @@ class NearbyTransferService : Service() {
 
     private fun remotePause() {
         pauseRequested = true
-        payloadStore.clearActive()?.let(connections::cancelPayload)
+        ++streamGeneration
+        connections.setTransferPaused(true)
+        activePayloadId?.let(connections::cancelPayload)
+        payloadStore.close()
         runCatching { TransferRepository.transition(operationId, TransferOperationState.PAUSE_REQUESTED) }
         if (!domainSession.pause()) return
         persistDomainState("Paused by the other device")
@@ -777,7 +804,7 @@ class NearbyTransferService : Service() {
 
     private fun sendControl(bytes: ByteArray) {
         val id = endpointId ?: return
-        connections.sendPayload(id, Payload.fromBytes(bytes))
+        connections.sendPayload(id, NearbyPayload.fromBytes(bytes))
             .addOnFailureListener { failSession(it.message ?: "Connection failed", true) }
     }
 
@@ -802,9 +829,6 @@ class NearbyTransferService : Service() {
 
     private fun requireReady() {
         require(NearbyPermissions.granted(this)) { "Nearby permissions are required" }
-        require(NearbyPermissions.playServicesAvailable(this)) {
-            "Nearby Transfer requires Google Play services"
-        }
     }
 
     private fun publish(
@@ -838,6 +862,7 @@ class NearbyTransferService : Service() {
     }
 
     private fun resetTransport() {
+        ++streamGeneration
         connections.stopAdvertising()
         connections.stopDiscovery()
         connections.stopAllEndpoints()
@@ -854,11 +879,12 @@ class NearbyTransferService : Service() {
     }
 
     override fun onDestroy() {
+        ++streamGeneration
         handler.removeCallbacks(discoveryTimeout)
         clearPendingAuthentication()
         connections.stopAdvertising()
         connections.stopDiscovery()
-        connections.stopAllEndpoints()
+        connections.close()
         payloadStore.close()
         worker.shutdownNow()
         releaseSlot()
@@ -946,3 +972,4 @@ class NearbyTransferService : Service() {
         }
     }
 }
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">Verbinde beide Geräte mit demselben WLAN oder einem Handy-Hotspot und öffne die Nahübertragung. Aktualisiere WizeFiles auf beiden Geräten. Bestätige die Verbindung am Empfänger und scanne dessen QR-Code am Sender. Die Übertragung ist verschlüsselt und benötigt weder Internet noch Google Play-Dienste. Dateien werden kopiert; die Originale bleiben erhalten.</string>
+    <string name="nearby_scan_title">Bestätigungs-QR scannen</string>
+    <string name="nearby_scan_help">Richte die Kamera auf den Bestätigungs-QR-Code des empfangenden Geräts. Der Scan funktioniert offline und speichert keine Bilder.</string>
+    <string name="nearby_camera_permission">Erlaube den Kamerazugriff, um den Bestätigungs-QR-Code zu scannen. Du kannst ihn in den Android-App-Einstellungen aktivieren.</string>
+    <string name="nearby_camera_unavailable">Die Kamera ist nicht verfügbar. Schließe andere Apps, die sie verwenden, und versuche es erneut. Zur Bestätigung des Empfängers ist eine Kamera erforderlich.</string>
+</resources>

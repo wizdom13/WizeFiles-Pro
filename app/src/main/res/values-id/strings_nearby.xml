@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">Hubungkan kedua perangkat ke jaringan Wi-Fi yang sama atau hotspot ponsel, lalu buka Transfer Sekitar. Perbarui WizeFiles di keduanya. Setujui koneksi pada penerima dan pindai QR-nya pada pengirim. Transfer dienkripsi dan tidak memerlukan internet atau layanan Google Play. Pengiriman menyalin berkas dan mempertahankan berkas asli.</string>
+    <string name="nearby_scan_title">Pindai QR verifikasi</string>
+    <string name="nearby_scan_help">Arahkan kamera ke QR verifikasi pada perangkat penerima. Pemindaian berfungsi secara offline dan tidak menyimpan gambar.</string>
+    <string name="nearby_camera_permission">Izinkan akses kamera untuk memindai QR verifikasi. Anda dapat mengaktifkannya di setelan aplikasi Android.</string>
+    <string name="nearby_camera_unavailable">Kamera tidak tersedia. Tutup aplikasi lain yang menggunakannya lalu coba lagi. Kamera diperlukan untuk memverifikasi perangkat penerima.</string>
+</resources>

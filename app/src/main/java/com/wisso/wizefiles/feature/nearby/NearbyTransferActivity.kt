@@ -17,9 +17,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.mlkit.vision.barcode.common.Barcode
-import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
-import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.qrcode.QRCodeWriter
@@ -51,12 +48,13 @@ class NearbyTransferActivity : AppCompatActivity() {
     private var pendingOffer: NearbyOffer? = null
     private var pendingResumeOperationId = ""
     private var permissionExplanationShown = false
-    private val qrScanner by lazy {
-        val options = GmsBarcodeScannerOptions.Builder()
-            .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
-            .enableAutoZoom()
-            .build()
-        GmsBarcodeScanning.getClient(this, options)
+    private val qrScanner = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val value = result.data?.getStringExtra(NearbyQrScannerActivity.EXTRA_QR)
+        if (result.resultCode == RESULT_OK && !value.isNullOrBlank()) {
+            NearbyTransferService.command(this, NearbyTransferService.ACTION_AUTH_SCAN) {
+                putExtra(NearbyTransferService.EXTRA_AUTH_QR, value)
+            }
+        }
     }
 
     private val permissions = registerForActivityResult(
@@ -137,14 +135,6 @@ class NearbyTransferActivity : AppCompatActivity() {
     }
 
     private fun beginWithPermissions(action: PendingAction) {
-        if (!NearbyPermissions.playServicesAvailable(this)) {
-            MaterialAlertDialogBuilder(this)
-                .setTitle("Google Play services required")
-                .setMessage("Nearby Transfer uses Google Play services to discover and connect directly to nearby WizeFiles devices.")
-                .setPositiveButton(android.R.string.ok, null)
-                .show()
-            return
-        }
         pendingAction = action
         if (NearbyPermissions.granted(this)) {
             executePendingAction()
@@ -152,12 +142,12 @@ class NearbyTransferActivity : AppCompatActivity() {
             permissionExplanationShown = true
             MaterialAlertDialogBuilder(this)
                 .setTitle("Allow nearby transfer")
-                .setMessage("Bluetooth is used to find and authenticate nearby devices. Wi‑Fi is used for a fast direct transfer. These permissions are requested only when you start Nearby Transfer.")
+                .setMessage(R.string.nearby_network_help)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton("Continue") { _, _ -> permissions.launch(NearbyPermissions.requiredAtRuntime()) }
+                .setPositiveButton("Continue") { _, _ -> permissions.launch(NearbyPermissions.requiredAtRuntime(this)) }
                 .show()
         } else {
-            permissions.launch(NearbyPermissions.requiredAtRuntime())
+            permissions.launch(NearbyPermissions.requiredAtRuntime(this))
         }
     }
 
@@ -193,8 +183,7 @@ class NearbyTransferActivity : AppCompatActivity() {
         }
         screen.clear()
         screen.intro(
-            "Send files and complete folders directly between WizeFiles devices. " +
-                "Sending always copies; it never deletes the originals.",
+            getString(R.string.nearby_network_help),
             R.drawable.ic_nearby_transfer_control_normal_24dp
         )
         when (state.phase) {
@@ -318,29 +307,7 @@ class NearbyTransferActivity : AppCompatActivity() {
     }
 
     private fun scanVerificationQr() {
-        qrScanner.startScan()
-            .addOnSuccessListener { barcode ->
-                val value = barcode.rawValue
-                if (value.isNullOrBlank()) {
-                    Toast.makeText(this, "The scanned QR is empty", Toast.LENGTH_LONG).show()
-                } else {
-                    NearbyTransferService.command(this, NearbyTransferService.ACTION_AUTH_SCAN) {
-                        putExtra(NearbyTransferService.EXTRA_AUTH_QR, value)
-                    }
-                }
-            }
-            .addOnCanceledListener { Unit }
-            .addOnFailureListener {
-                MaterialAlertDialogBuilder(this)
-                    .setTitle("QR scanner is not ready")
-                    .setMessage(
-                        "Connect to the internet once so Google Play services can prepare the " +
-                            "QR scanner, then try again. Nearby Transfer works offline afterward."
-                    )
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .setPositiveButton("Try again") { _, _ -> scanVerificationQr() }
-                    .show()
-            }
+        qrScanner.launch(Intent(this, NearbyQrScannerActivity::class.java))
     }
 
     private fun inspectConflicts(offer: NearbyOffer, destination: AppPath) {
@@ -508,3 +475,4 @@ internal fun resolvePickedDestinationOffer(
     val offer = serviceOffer ?: pendingOffer ?: return null
     return selectedDestination to offer
 }
+

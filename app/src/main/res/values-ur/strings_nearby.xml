@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">دونوں آلات کو ایک ہی Wi-Fi نیٹ ورک یا فون ہاٹ اسپاٹ سے جوڑیں، پھر قریبی منتقلی کھولیں۔ دونوں پر WizeFiles اپ ڈیٹ کریں۔ وصول کنندہ پر اتصال منظور کریں اور بھیجنے والے پر اس کا QR اسکین کریں۔ منتقلی خفیہ کاری کے ساتھ ہوتی ہے اور انٹرنیٹ یا Google Play سروسز کی ضرورت نہیں۔ فائلیں نقل ہوتی ہیں اور اصل فائلیں محفوظ رہتی ہیں۔</string>
+    <string name="nearby_scan_title">تصدیقی QR اسکین کریں</string>
+    <string name="nearby_scan_help">کیمرے کو وصول کنندہ آلے پر دکھائے گئے تصدیقی QR کی طرف کریں۔ اسکین آف لائن کام کرتا ہے اور تصاویر محفوظ نہیں ہوتیں۔</string>
+    <string name="nearby_camera_permission">تصدیقی QR اسکین کرنے کے لیے کیمرے تک رسائی دیں۔ اسے Android کی ایپ ترتیبات میں فعال کر سکتے ہیں۔</string>
+    <string name="nearby_camera_unavailable">کیمرہ دستیاب نہیں ہے۔ اسے استعمال کرنے والی دوسری ایپس بند کر کے دوبارہ کوشش کریں۔ وصول کنندہ کی تصدیق کے لیے کیمرہ ضروری ہے۔</string>
+</resources>

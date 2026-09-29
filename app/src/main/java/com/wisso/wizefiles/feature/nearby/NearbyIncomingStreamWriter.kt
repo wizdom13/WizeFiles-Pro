@@ -3,7 +3,6 @@
 
 package com.wisso.wizefiles.feature.nearby
 
-import com.google.android.gms.nearby.connection.Payload
 import com.wisso.wizefiles.feature.sync.SyncPathResolver
 import com.wisso.wizefiles.feature.transfer.TransferDatabase
 import com.wisso.wizefiles.feature.transfer.TransferItemRecord
@@ -33,10 +32,10 @@ internal class NearbyIncomingStreamWriter(
     private val pauseRequested:()->Boolean,
     private val sendControl:(ByteArray)->Unit,
     private val onProgress:(TransferItemRecord,Long,Long)->Unit,
-    private val onCompleted:(Boolean)->Unit,
+    private val onCompleted:(Long,Boolean)->Unit,
     private val onFailure:(Throwable)->Unit
 ) {
-    fun receive(payload:Payload,metadata:NearbyIncomingStream) {
+    fun receive(payload:NearbyPayload,metadata:NearbyIncomingStream) {
         runCatching {
             val currentOperationId=operationId()
             val item=requireNotNull(
@@ -47,6 +46,7 @@ internal class NearbyIncomingStreamWriter(
                 )
             ) { "Unknown incoming item" }
             require(!item.isDirectory && item.state!=TransferItemState.SKIPPED)
+            require(payload.length == metadata.length) { "Transport and offer stream lengths differ" }
             require(metadata.offset+metadata.length==item.sizeBytes) {
                 "Unexpected stream length"
             }
@@ -68,10 +68,7 @@ internal class NearbyIncomingStreamWriter(
                 }
             NearbyTransferPlanner.requireSafeReceivePath(item,temporary)
             if(metadata.offset==0L) Files.deleteIfExists(temporary)
-            val existing=if(Files.exists(temporary)) Files.size(temporary) else 0L
-            require(existing==metadata.offset) {
-                "Resume checkpoint does not match temporary file"
-            }
+            prepareNearbyResumeFile(temporary, metadata.offset)
             requireNotNull(payload.asStream()).asInputStream().use { input ->
                 Files.newOutputStream(
                     temporary,
@@ -80,18 +77,21 @@ internal class NearbyIncomingStreamWriter(
                     StandardOpenOption.APPEND
                 ).use { output ->
                     copyIncoming(input,output,item,metadata)
+                    // Do not finalize or ACK completion until the authenticated END frame arrives.
+                    require(input.read() == -1) { "Incoming stream exceeded its declared length" }
+                    check(!payload.isCanceled) { "Stream was canceled" }
                 }
             }
             NearbyTransferPlanner.finalizeReceived(item,temporary,conflictPolicy())
-            sendControl(
-                NearbyProtocol.fileComplete(activeSessionId(),metadata.itemId,item.sizeBytes)
-            )
             val complete=TransferRepository.items(currentOperationId).all {
                 it.state in setOf(TransferItemState.COPIED,TransferItemState.SKIPPED)
             }
-            onCompleted(complete)
+            onCompleted(payload.id, complete)
+            sendControl(
+                NearbyProtocol.fileComplete(activeSessionId(),metadata.itemId,item.sizeBytes)
+            )
         }.onFailure {
-            if(!pauseRequested()) onFailure(it)
+            if(!payload.isCanceled && !pauseRequested()) onFailure(it)
         }
     }
 
@@ -114,7 +114,7 @@ internal class NearbyIncomingStreamWriter(
             output.write(buffer,0,read)
             received+=read
             val offset=metadata.offset+received
-            if(offset-acknowledged>=NEARBY_ACK_BYTES || received==metadata.length) {
+            if(offset-acknowledged>=NEARBY_ACK_BYTES && received<metadata.length) {
                 output.flush()
                 checkpoint(item,offset)
                 sendControl(NearbyProtocol.progress(activeSessionId(),metadata.itemId,offset))
@@ -144,3 +144,4 @@ internal class NearbyIncomingStreamWriter(
         onProgress(item,operationBytes,total)
     }
 }
+

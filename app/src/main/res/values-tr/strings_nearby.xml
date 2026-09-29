@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">İki cihazı aynı Wi-Fi ağına veya bir telefonun erişim noktasına bağlayıp Yakındaki Aktarım özelliğini açın. Her iki cihazda WizeFiles uygulamasını güncelleyin. Alıcıda bağlantıyı onaylayıp göndericide alıcının QR kodunu tarayın. Aktarım şifrelidir; internet veya Google Play hizmetleri gerekmez. Dosyalar kopyalanır ve asılları korunur.</string>
+    <string name="nearby_scan_title">Doğrulama QR kodunu tara</string>
+    <string name="nearby_scan_help">Kamerayı alıcı cihazdaki doğrulama QR koduna yöneltin. Tarama çevrimdışı çalışır ve görüntüler kaydedilmez.</string>
+    <string name="nearby_camera_permission">Doğrulama QR kodunu taramak için kamera erişimine izin verin. Android uygulama ayarlarından etkinleştirebilirsiniz.</string>
+    <string name="nearby_camera_unavailable">Kamera kullanılamıyor. Kamerayı kullanan diğer uygulamaları kapatıp tekrar deneyin. Alıcı cihazı doğrulamak için kamera gerekir.</string>
+</resources>

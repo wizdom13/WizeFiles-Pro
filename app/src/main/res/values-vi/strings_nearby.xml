@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">Kết nối hai thiết bị với cùng mạng Wi-Fi hoặc điểm phát sóng điện thoại, rồi mở Truyền lân cận. Cập nhật WizeFiles trên cả hai. Chấp thuận kết nối trên máy nhận và quét mã QR của máy nhận bằng máy gửi. Dữ liệu được mã hóa và không cần internet hay dịch vụ Google Play. Các tệp được sao chép và bản gốc được giữ lại.</string>
+    <string name="nearby_scan_title">Quét QR xác minh</string>
+    <string name="nearby_scan_help">Hướng máy ảnh vào mã QR xác minh trên thiết bị nhận. Việc quét hoạt động ngoại tuyến và không lưu hình ảnh.</string>
+    <string name="nearby_camera_permission">Cho phép truy cập máy ảnh để quét QR xác minh. Bạn có thể bật quyền trong phần cài đặt ứng dụng Android.</string>
+    <string name="nearby_camera_unavailable">Máy ảnh không khả dụng. Đóng các ứng dụng khác đang dùng máy ảnh rồi thử lại. Cần có máy ảnh để xác minh thiết bị nhận.</string>
+</resources>

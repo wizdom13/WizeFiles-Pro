@@ -645,7 +645,7 @@ https://wizesoft.me/WizeFiles</string>
     <string name="faq_question_manage_files">Apa yang dapat saya lakukan dengan WizeFiles?</string>
     <string name="faq_answer_manage_files">WizeFiles dapat menelusuri penyimpanan lokal, berkemampuan root, jaringan, dan cloud; menyalin, memindahkan, mengganti nama, membagikan, dan menghapus item; mengedit teks; mempratinjau konten yang didukung; membuat dan mengedit arsip; serta menjalankan tugas yang lebih lama melalui Pusat Transfer.</string>
     <string name="faq_question_permissions">Mengapa aplikasi meminta akses berkas?</string>
-    <string name="faq_answer_permissions">WizeFiles memerlukan akses penyimpanan agar dapat menampilkan, menyalin, memindahkan, mengganti nama, dan menghapus berkas yang Anda pilih untuk dikelola. Izin Bluetooth, perangkat sekitar, notifikasi, biometrik, dan jaringan hanya diminta saat suatu fitur membutuhkannya.</string>
+    <string name="faq_answer_permissions">WizeFiles memerlukan akses penyimpanan agar dapat menampilkan, menyalin, memindahkan, mengganti nama, dan menghapus berkas yang Anda pilih untuk dikelola. Izin kamera, perangkat sekitar, notifikasi, biometrik, dan jaringan hanya diminta saat suatu fitur membutuhkannya.</string>
     <string name="faq_question_recycle_bin">Bagaimana cara kerja Tong Sampah?</string>
     <string name="faq_answer_recycle_bin">Saat Tong Sampah diaktifkan, item terhapus yang didukung dipindahkan ke sana terlebih dahulu agar dapat dipulihkan nanti. Mengosongkan Tong Sampah, menghapus item secara permanen, atau menonaktifkan fitur ketika masih berisi item tidak dapat dibatalkan.</string>
     <string name="faq_question_network_storage">Dapatkah saya terhubung ke penyimpanan jaringan atau cloud?</string>
@@ -657,7 +657,7 @@ https://wizesoft.me/WizeFiles</string>
     <string name="faq_question_sync_backup">Apa fungsi Sinkronisasi &amp; Pencadangan?</string>
     <string name="faq_answer_sync_backup">Buka Alat &gt; Sinkronisasi &amp; Pencadangan untuk membuat pasangan folder yang dapat digunakan kembali dan mempratinjau perubahan yang direncanakan sebelum memulai. Tinjau mode yang dipilih dan aturan konflik dalam pratinjau agar Anda mengetahui sisi mana yang akan diperbarui.</string>
     <string name="faq_question_nearby_transfer">Bagaimana cara kerja Transfer Sekitar?</string>
-    <string name="faq_answer_nearby_transfer">Buka Alat &gt; Transfer Sekitar untuk menyalin berkas atau folder lengkap secara langsung di antara perangkat WizeFiles terdekat. Bluetooth menemukan dan mengautentikasi perangkat, Wi‑Fi membawa transfer, dan kode QR sekali pakai memverifikasi koneksi. Pengiriman tidak pernah menghapus berkas asli.</string>
+    <string name="faq_answer_nearby_transfer">@string/nearby_network_help</string>
     <string name="faq_question_security">Bagaimana cara melindungi penjelajah berkas?</string>
     <string name="faq_answer_security">Di Setelan Aplikasi &gt; Keamanan, buat kata sandi dan aktifkan Lindungi Penjelajah. Anda dapat menawarkan buka kunci biometrik terlebih dahulu, mempertahankan kata sandi sebagai cadangan, dan memilih seberapa cepat WizeFiles dikunci lagi.</string>
     <string name="faq_question_settings_backup">Dapatkah saya mencadangkan Setelan Aplikasi?</string>
@@ -1338,3 +1338,4 @@ https://wizesoft.me/WizeFiles</string>
     <string name="text_editor_save_failure">Tidak dapat menyimpan file ini. Pastikan lokasi dapat ditulisi.</string>
     <string name="text_editor_load_failure">Tidak dapat membuka file ini. Pastikan file masih ada dan Anda memiliki akses.</string>
 </resources>
+

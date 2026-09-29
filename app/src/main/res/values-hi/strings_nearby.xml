@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">दोनों डिवाइस को एक ही वाई-फ़ाई नेटवर्क या फ़ोन हॉटस्पॉट से जोड़ें, फिर नज़दीकी स्थानांतरण खोलें। दोनों पर WizeFiles अपडेट करें। प्राप्तकर्ता पर कनेक्शन स्वीकार करें और भेजने वाले डिवाइस से उसका QR स्कैन करें। स्थानांतरण एन्क्रिप्टेड है और उसे इंटरनेट या Google Play सेवाओं की ज़रूरत नहीं है। फ़ाइलें कॉपी होती हैं और मूल फ़ाइलें बनी रहती हैं।</string>
+    <string name="nearby_scan_title">सत्यापन QR स्कैन करें</string>
+    <string name="nearby_scan_help">कैमरे को प्राप्तकर्ता डिवाइस पर दिख रहे सत्यापन QR की ओर करें। स्कैन ऑफ़लाइन काम करता है और तस्वीरें सेव नहीं होतीं।</string>
+    <string name="nearby_camera_permission">सत्यापन QR स्कैन करने के लिए कैमरे की अनुमति दें। इसे Android की ऐप सेटिंग में चालू कर सकते हैं।</string>
+    <string name="nearby_camera_unavailable">कैमरा उपलब्ध नहीं है। उसे इस्तेमाल कर रहे अन्य ऐप बंद करके फिर कोशिश करें। प्राप्तकर्ता को सत्यापित करने के लिए कैमरा ज़रूरी है।</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">将两台设备连接到同一 Wi-Fi 网络或手机热点，然后打开附近传输。请在两台设备上更新 WizeFiles。在接收端批准连接，再用发送端扫描接收端的二维码。传输经过加密，无需互联网或 Google Play 服务。发送只会复制文件，保留原件。</string>
+    <string name="nearby_scan_title">扫描验证二维码</string>
+    <string name="nearby_scan_help">将相机对准接收设备上的验证二维码。扫描可离线进行，不会保存图像。</string>
+    <string name="nearby_camera_permission">请允许相机访问以扫描验证二维码。你可以在 Android 应用设置中开启此权限。</string>
+    <string name="nearby_camera_unavailable">相机不可用。请关闭其他正在使用相机的应用，然后重试。验证接收设备需要相机。</string>
+</resources>

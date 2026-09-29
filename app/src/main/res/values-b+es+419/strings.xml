@@ -648,7 +648,7 @@ https://wizesoft.me/WizeFiles</string>
     <string name="faq_question_manage_files">¿Qué puedo hacer con WizeFiles?</string>
     <string name="faq_answer_manage_files">WizeFiles permite explorar almacenamiento local, con acceso raíz, en red y en la nube; copiar, mover, cambiar el nombre, compartir y eliminar elementos; editar texto; previsualizar contenido compatible; crear y editar archivos comprimidos; y ejecutar tareas largas mediante el Centro de transferencias.</string>
     <string name="faq_question_permissions">¿Por qué la app solicita acceso a los archivos?</string>
-    <string name="faq_answer_permissions">WizeFiles necesita acceso al almacenamiento para mostrar, copiar, mover, cambiar el nombre y eliminar los archivos que decidas administrar. Los permisos de Bluetooth, dispositivos cercanos, notificaciones, datos biométricos y red solo se solicitan cuando una función los necesita.</string>
+    <string name="faq_answer_permissions">WizeFiles necesita acceso al almacenamiento para mostrar, copiar, mover, cambiar el nombre y eliminar los archivos que decidas administrar. Los permisos de cámara, dispositivos cercanos, notificaciones, datos biométricos y red solo se solicitan cuando una función los necesita.</string>
     <string name="faq_question_recycle_bin">¿Cómo funciona la papelera?</string>
     <string name="faq_answer_recycle_bin">Cuando la papelera está activada, los elementos compatibles que elimines se mueven allí primero para que puedas restaurarlos. Vaciar la papelera, eliminar un elemento permanentemente o desactivar la función mientras contiene elementos no se puede deshacer.</string>
     <string name="faq_question_network_storage">¿Puedo conectarme a almacenamiento en red o en la nube?</string>
@@ -660,7 +660,7 @@ https://wizesoft.me/WizeFiles</string>
     <string name="faq_question_sync_backup">¿Qué hace Sincronización y copia de seguridad?</string>
     <string name="faq_answer_sync_backup">Abre Herramientas &gt; Sincronización y copia de seguridad para crear pares de carpetas reutilizables y previsualizar los cambios previstos antes de comenzar. Revisa el modo y las reglas de conflicto seleccionados en la vista previa para saber qué lado se actualizará.</string>
     <string name="faq_question_nearby_transfer">¿Cómo funciona Transferencia cercana?</string>
-    <string name="faq_answer_nearby_transfer">Abre Herramientas &gt; Transferencia cercana para copiar archivos o carpetas completas directamente entre dispositivos WizeFiles cercanos. Bluetooth detecta y autentica los dispositivos, Wi‑Fi transporta la transferencia y un código QR de un solo uso verifica la conexión. El envío nunca elimina los originales.</string>
+    <string name="faq_answer_nearby_transfer">@string/nearby_network_help</string>
     <string name="faq_question_security">¿Cómo puedo proteger el explorador de archivos?</string>
     <string name="faq_answer_security">En Configuración de la app &gt; Seguridad, crea una contraseña y activa Proteger explorador. Opcionalmente, puedes ofrecer primero el desbloqueo biométrico, conservar la contraseña como alternativa y elegir cuánto tarda WizeFiles en bloquearse de nuevo.</string>
     <string name="faq_question_settings_backup">¿Puedo crear una copia de seguridad de la configuración de la app?</string>
@@ -1348,3 +1348,4 @@ https://wizesoft.me/WizeFiles</string>
     <string name="text_editor_save_failure">No se puede guardar este archivo. Comprueba que se pueda escribir en la ubicación.</string>
     <string name="text_editor_load_failure">No se puede abrir este archivo. Comprueba que aún exista y que tengas acceso.</string>
 </resources>
+

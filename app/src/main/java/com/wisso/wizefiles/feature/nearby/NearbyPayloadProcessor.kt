@@ -3,11 +3,7 @@
 
 package com.wisso.wizefiles.feature.nearby
 
-import com.google.android.gms.nearby.connection.Payload
-import com.google.android.gms.nearby.connection.PayloadCallback
-import com.google.android.gms.nearby.connection.PayloadTransferUpdate
-
-/** Validates and correlates Google Nearby payload callbacks before they reach service policy. */
+/** Validates and correlates LAN payload callbacks before they reach service policy. */
 internal class NearbyPayloadProcessor(
     private val store: NearbyPayloadStore,
     private val cancelPayload: (Long) -> Unit,
@@ -18,13 +14,21 @@ internal class NearbyPayloadProcessor(
     private val fail: (String, Boolean) -> Unit,
     private val cancel: (String) -> Unit
 ) {
-    val callback: PayloadCallback = object : PayloadCallback() {
-        override fun onPayloadReceived(endpointId: String, payload: Payload) {
+    val callback: NearbyPayloadCallback = object : NearbyPayloadCallback() {
+        override fun onPayloadReceived(endpointId: String, payload: NearbyPayload) {
             when (payload.type) {
-                Payload.Type.BYTES -> runCatching {
+                NearbyPayload.Type.BYTES -> runCatching {
                     handleControl(NearbyProtocol.decode(requireNotNull(payload.asBytes())))
                 }.onFailure { cancel("Invalid control message") }
-                Payload.Type.STREAM -> {
+                NearbyPayload.Type.STREAM -> {
+                    // This transport orders FILE_BEGIN before its stream. A missing entry was
+                    // cleared by pause/cancel; discard its late stream even after a quick resume.
+                    if (!store.hasIncomingMetadata(payload.id)) {
+                        cancelPayload(payload.id)
+                        payload.markCanceled()
+                        runCatching { payload.asStream()?.asInputStream()?.close() }
+                        return
+                    }
                     if (store.acceptIncoming(payload)) {
                         correlationChanged()
                         consumeIncoming(payload.id)
@@ -36,15 +40,18 @@ internal class NearbyPayloadProcessor(
             }
         }
 
-        override fun onPayloadTransferUpdate(endpointId: String, update: PayloadTransferUpdate) {
-            if (update.totalBytes > 0) store.outgoingItem(update.payloadId)?.let(outgoingProgress)
+        override fun onPayloadTransferUpdate(endpointId: String, update: NearbyPayloadUpdate) {
+            // The file writer owns incoming completion, including flush and final rename.
+            // A transport EOF must not release its active correlation early.
+            val item = store.outgoingItem(update.payloadId) ?: return
+            if (update.totalBytes > 0) outgoingProgress(item)
             when (update.status) {
-                PayloadTransferUpdate.Status.SUCCESS,
-                PayloadTransferUpdate.Status.CANCELED -> {
+                NearbyPayloadUpdate.Status.SUCCESS,
+                NearbyPayloadUpdate.Status.CANCELED -> {
                     store.finishOutgoing(update.payloadId)
                     correlationChanged()
                 }
-                PayloadTransferUpdate.Status.FAILURE -> {
+                NearbyPayloadUpdate.Status.FAILURE -> {
                     store.finishOutgoing(update.payloadId)
                     correlationChanged()
                     fail("File stream was interrupted", true)

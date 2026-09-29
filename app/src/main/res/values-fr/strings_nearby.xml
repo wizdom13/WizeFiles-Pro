@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">Connectez les deux appareils au même réseau Wi-Fi ou au point d’accès d’un téléphone, puis ouvrez Transfert à proximité. Mettez WizeFiles à jour sur les deux appareils. Approuvez la connexion sur le destinataire et scannez son QR sur l’expéditeur. Les transferts sont chiffrés et ne nécessitent ni Internet ni les services Google Play. Les fichiers sont copiés et les originaux conservés.</string>
+    <string name="nearby_scan_title">Scanner le QR de vérification</string>
+    <string name="nearby_scan_help">Pointez la caméra vers le QR de vérification affiché sur l’appareil destinataire. Le scan fonctionne hors ligne et ne conserve aucune image.</string>
+    <string name="nearby_camera_permission">Autorisez la caméra pour scanner le QR de vérification. Vous pouvez activer cet accès dans les paramètres Android de l’application.</string>
+    <string name="nearby_camera_unavailable">La caméra est indisponible. Fermez les autres applications qui l’utilisent et réessayez. Une caméra est nécessaire pour vérifier le destinataire.</string>
+</resources>

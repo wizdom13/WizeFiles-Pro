@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">Connect both devices to the same Wi-Fi network or a phone hotspot, then open Nearby Transfer. Update WizeFiles on both devices. Approve the connection on the receiver and scan its QR on the sender. Transfers are encrypted and need no internet or Google Play services. Sending copies files and keeps the originals.</string>
+    <string name="nearby_scan_title">Scan verification QR</string>
+    <string name="nearby_scan_help">Point the camera at the verification QR shown on the receiving device. Scanning works offline; images are not saved.</string>
+    <string name="nearby_camera_permission">Allow camera access to scan the verification QR. You can enable it in Android app settings.</string>
+    <string name="nearby_camera_unavailable">The camera is unavailable. Close other apps using it and try again. A camera is required to verify the receiving device.</string>
+</resources>

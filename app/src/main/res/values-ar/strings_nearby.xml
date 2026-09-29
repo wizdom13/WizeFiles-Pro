@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">وصّل الجهازين بشبكة Wi-Fi نفسها أو بنقطة اتصال هاتف، ثم افتح النقل القريب. حدّث WizeFiles على الجهازين. وافق على الاتصال في الجهاز المستقبِل وامسح رمز QR الخاص به في الجهاز المرسِل. النقل مشفّر ولا يحتاج إلى الإنترنت أو خدمات Google Play. ينسخ الإرسال الملفات ويحافظ على الأصول.</string>
+    <string name="nearby_scan_title">مسح رمز QR للتحقق</string>
+    <string name="nearby_scan_help">وجّه الكاميرا إلى رمز QR للتحقق المعروض على الجهاز المستقبِل. يعمل المسح دون إنترنت ولا تُحفظ الصور.</string>
+    <string name="nearby_camera_permission">اسمح بالوصول إلى الكاميرا لمسح رمز QR للتحقق. يمكنك تفعيل الإذن في إعدادات التطبيق في Android.</string>
+    <string name="nearby_camera_unavailable">الكاميرا غير متاحة. أغلق التطبيقات الأخرى التي تستخدمها وحاول مجددًا. يلزم وجود كاميرا للتحقق من الجهاز المستقبِل.</string>
+</resources>

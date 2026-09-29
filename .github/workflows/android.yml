@@ -93,6 +93,7 @@ jobs:
       run: >-
         ./gradlew
         :app:compileDebugKotlin
+        :app:verifyNoGoogleMobileSdks
         :app:testPureDebugUnitTest
         :core-files-api:test
         :feature-browser-domain:test
@@ -288,6 +289,9 @@ jobs:
     - name: Build minified release and run release lint
       run: ./gradlew assembleRelease lintVitalRelease --warning-mode all
 
+    - name: Verify packaged Google mobile SDK removal
+      run: python3 scripts/verify-no-google-mobile-sdks.py app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/release/app-release-unsigned.apk
+
     - name: Verify pinned apksig dependency
       run: scripts/verify-apksig-dependency.sh
 
@@ -319,3 +323,4 @@ jobs:
         name: WizeFiles_${{ env.FILE_TAG }}
         path: ${{ env.DEBUG_APK }}
         retention-days: 10
+

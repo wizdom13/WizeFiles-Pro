@@ -207,8 +207,6 @@ dependencies {
     implementation 'ch.acra:acra-core:5.13.1'
     compileOnly 'com.google.auto.service:auto-service-annotations:1.1.1'
     annotationProcessor 'com.google.auto.service:auto-service:1.1.1'
-    implementation 'com.google.android.gms:play-services-nearby:19.3.0'
-    implementation 'com.google.android.gms:play-services-code-scanner:16.1.0'
 
     def media3_version = '1.5.1'
     implementation "androidx.media3:media3-common:$media3_version"
@@ -355,4 +353,25 @@ def buildSyncthing = tasks.register('buildSyncthing', Exec) {
 }
 tasks.configureEach {
     if (name.matches('merge.*JniLibFolders')) dependsOn buildSyncthing
+}
+
+
+// Check coordinates before shrinking as well as the namespaces in the packaged APK.
+// FOSS ZXing, Material, Guava and Tink are intentionally allowed.
+tasks.register('verifyNoGoogleMobileSdks') {
+    group = 'verification'
+    description = 'Rejects Google Play services and ML Kit in app runtime dependency graphs.'
+    doLast {
+        ['debugRuntimeClasspath', 'releaseRuntimeClasspath'].each { name ->
+            def forbidden = configurations.getByName(name).resolvedConfiguration.resolvedArtifacts.findAll {
+                def group = it.moduleVersion.id.group
+                group == 'com.google.android.gms' || group.startsWith('com.google.mlkit') ||
+                    group == 'com.google.android.odml'
+            }
+            if (!forbidden.isEmpty()) {
+                throw new GradleException("Forbidden Google mobile SDKs in ${name}: ${forbidden*.moduleVersion*.id}")
+            }
+            logger.lifecycle("${name}: no Google Mobile Services or ML Kit dependencies")
+        }
+    }
 }

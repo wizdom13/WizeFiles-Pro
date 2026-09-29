@@ -8,6 +8,7 @@ import android.app.Application
 import androidx.test.core.app.ApplicationProvider
 import com.wisso.wizefiles.core.app.setGlobalApplicationForTests
 import com.wisso.wizefiles.feature.transfer.TransferDatabase
+import com.wisso.wizefiles.feature.transfer.TransferProgressCheckpoint
 import com.wisso.wizefiles.feature.transfer.TransferOperationSpec
 import com.wisso.wizefiles.feature.transfer.TransferOperationState
 import com.wisso.wizefiles.feature.transfer.TransferOperationType
@@ -62,6 +63,25 @@ class NearbyTransferRecoveryTest {
         assertNull(TransferDatabase.operation("missing"))
     }
 
+    @Test
+    fun `unfinished full-size staging files require finalization and skipped files are omitted`() {
+        insert("offsets")
+        val item = TransferDatabase.beginItem(
+            operationId = "offsets", sourceUri = "nearby://session/file", targetUri = "file:///destination/file",
+            relativePath = "file", isDirectory = false, sizeBytes = 100, modifiedMillis = 1, sourceFingerprint = "f:100:1"
+        )
+        TransferDatabase.checkpoint(TransferProgressCheckpoint("offsets", item.id, 100, 100, "file"))
+        assertEquals(99L, NearbyTransferPlanner.offsets("offsets").values.single())
+        TransferDatabase.completeItem(item.id, "file:///destination/file")
+        assertEquals(100L, NearbyTransferPlanner.offsets("offsets").values.single())
+        val skipped = TransferDatabase.beginItem(
+            operationId = "offsets", sourceUri = "nearby://session/skipped", targetUri = "file:///destination/skipped",
+            relativePath = "skipped", isDirectory = false, sizeBytes = 50, modifiedMillis = 1, sourceFingerprint = "f:50:1"
+        )
+        TransferDatabase.skipItem(skipped.id)
+        assertEquals(listOf(100L), NearbyTransferPlanner.offsets("offsets").values.toList())
+    }
+
     private fun assertRecovery(
         recovery: NearbyTransferRecovery,
         operationId: String,
@@ -97,3 +117,4 @@ class NearbyTransferRecoveryTest {
         updatedAtMillis = 1_000
     )
 }
+

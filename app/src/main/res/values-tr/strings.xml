@@ -594,7 +594,7 @@
     <string name="faq_question_manage_files">WizeFiles ile ne yapabilirim?</string>
     <string name="faq_answer_manage_files">WizeFiles yerel, root özellikli, ağ ve bulut depolamaya göz atabilir; öğeleri kopyalamak, taşımak, yeniden adlandırmak, paylaşmak ve silmek; metni düzenle; desteklenen içeriğin önizlemesini yapın; arşivler oluşturun ve düzenleyin; ve Transfer Merkezi aracılığıyla daha uzun işleri yürütün.</string>
     <string name="faq_question_permissions">Uygulama neden dosya erişimi istiyor?</string>
-    <string name="faq_answer_permissions">WizeFiles, yönetmeyi seçtiğiniz dosyaları görüntüleyebilmesi, kopyalayabilmesi, taşıyabilmesi, yeniden adlandırabilmesi ve silebilmesi için depolama erişimine ihtiyaç duyar. Bluetooth, yakındaki cihaz, bildirim, biyometrik ve ağ izinleri yalnızca bir özellik ihtiyaç duyduğunda istenir.</string>
+    <string name="faq_answer_permissions">WizeFiles, yönetmeyi seçtiğiniz dosyaları görüntüleyebilmesi, kopyalayabilmesi, taşıyabilmesi, yeniden adlandırabilmesi ve silebilmesi için depolama erişimine ihtiyaç duyar. Kamera, yakındaki cihaz, bildirim, biyometrik ve ağ izinleri yalnızca bir özellik ihtiyaç duyduğunda istenir.</string>
     <string name="faq_question_recycle_bin">Geri Dönüşüm Kutusu nasıl çalışır?</string>
     <string name="faq_answer_recycle_bin">Geri Dönüşüm Kutusu etkinleştirildiğinde, desteklenen silinmiş öğeler önce oraya taşınır, böylece bunları daha sonra geri yükleyebilirsiniz. Çöp kutusunun boşaltılması, bir öğenin kalıcı olarak silinmesi veya öğe içeriyorken özelliğin devre dışı bırakılması geri alınamaz.</string>
     <string name="faq_question_network_storage">Ağa veya bulut depolamaya bağlanabilir miyim?</string>
@@ -606,7 +606,7 @@
     <string name="faq_question_sync_backup">Senkronizasyon ve Yedekleme ne işe yarar?</string>
     <string name="faq_answer_sync_backup">Yeniden kullanılabilir klasör çiftleri oluşturmak ve başlamadan önce planlanan değişiklikleri önizlemek için Araçlar &gt; Senkronizasyon ve Yedekleme\'yi açın. Önizlemede seçili modu ve çakışma kurallarını gözden geçirerek hangi tarafın güncelleneceğini öğrenin.</string>
     <string name="faq_question_nearby_transfer">Yakın Transfer nasıl çalışır?</string>
-    <string name="faq_answer_nearby_transfer">Dosyaları doğrudan yakındaki WizeFiles cihazlar arasında kopyalamak veya klasörleri tamamlamak için Araçlar &gt; Yakındaki Aktarım\'ı açın. Bluetooth cihazları keşfeder ve doğrular, Wi‑Fi aktarımı gerçekleştirir ve tek kullanımlık QR kodu bağlantıyı doğrular. Gönderme işlemi hiçbir zaman orijinalleri silmez.</string>
+    <string name="faq_answer_nearby_transfer">@string/nearby_network_help</string>
     <string name="faq_question_security">Dosya tarayıcısını nasıl koruyabilirim?</string>
     <string name="faq_answer_security">Uygulama Ayarları &gt; Güvenlik\'te bir şifre oluşturun ve Tarayıcıyı Koru\'yu etkinleştirin. İsteğe bağlı olarak önce biyometrik kilit açmayı sunabilir, yedek şifreyi koruyabilir ve WizeFiles\'in ne kadar hızlı tekrar kilitleneceğini seçebilirsiniz.</string>
     <string name="faq_question_settings_backup">Uygulama Ayarlarını yedekleyebilir miyim?</string>
@@ -1334,3 +1334,4 @@
     <string name="text_editor_save_failure">Bu dosya kaydedilemiyor. Konumun yazılabilir olduğunu kontrol edin.</string>
     <string name="text_editor_load_failure">Bu dosya açılamıyor. Dosyanın hâlâ mevcut olduğunu ve erişiminiz bulunduğunu kontrol edin.</string>
 </resources>
+

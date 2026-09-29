@@ -294,7 +294,11 @@ internal object NearbyTransferPlanner {
 
     fun offsets(operationId: String): Map<String, Long> = TransferRepository.items(operationId)
         .filterNot { it.isDirectory || it.state == TransferItemState.SKIPPED }
-        .associate { remoteId(it) to it.bytesCompleted.coerceAtLeast(0) }
+        .associate {
+            // A full-size staging file is not complete until it has been finalized.
+            val maximum = if (it.state == TransferItemState.COPIED) it.sizeBytes else (it.sizeBytes - 1).coerceAtLeast(0)
+            remoteId(it) to it.bytesCompleted.coerceIn(0, maximum)
+        }
 
     fun itemForRemoteId(operationId: String, sessionId: String, itemId: String): TransferItemRecord? =
         TransferRepository.items(operationId).firstOrNull {
@@ -429,3 +433,4 @@ internal object NearbyTransferPlanner {
         supportsCrossProviderCopy = true
     )
 }
+

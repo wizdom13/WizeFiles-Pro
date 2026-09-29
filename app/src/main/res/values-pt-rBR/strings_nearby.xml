@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">Conecte os dois dispositivos à mesma rede Wi-Fi ou ao ponto de acesso de um celular e abra Transferência nas proximidades. Atualize o WizeFiles em ambos. Aprove a conexão no receptor e leia o QR dele no remetente. As transferências são criptografadas e não precisam de internet nem dos serviços do Google Play. Os arquivos são copiados e os originais preservados.</string>
+    <string name="nearby_scan_title">Ler QR de verificação</string>
+    <string name="nearby_scan_help">Aponte a câmera para o QR de verificação no dispositivo receptor. A leitura funciona offline e não salva imagens.</string>
+    <string name="nearby_camera_permission">Permita o acesso à câmera para ler o QR de verificação. Você pode ativá-lo nas configurações do app no Android.</string>
+    <string name="nearby_camera_unavailable">A câmera está indisponível. Feche outros apps que a utilizam e tente novamente. É necessária uma câmera para verificar o receptor.</string>
+</resources>

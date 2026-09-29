@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">เชื่อมต่ออุปกรณ์ทั้งสองกับเครือข่าย Wi-Fi เดียวกันหรือฮอตสปอตของโทรศัพท์ แล้วเปิดการถ่ายโอนใกล้เคียง อัปเดต WizeFiles บนอุปกรณ์ทั้งสอง อนุมัติการเชื่อมต่อที่เครื่องรับและสแกน QR ของเครื่องรับจากเครื่องส่ง การถ่ายโอนเข้ารหัสและไม่ต้องใช้อินเทอร์เน็ตหรือบริการ Google Play การส่งจะคัดลอกไฟล์และเก็บต้นฉบับไว้</string>
+    <string name="nearby_scan_title">สแกน QR ยืนยัน</string>
+    <string name="nearby_scan_help">เล็งกล้องไปที่ QR ยืนยันบนอุปกรณ์รับ การสแกนทำงานออฟไลน์และไม่บันทึกภาพ</string>
+    <string name="nearby_camera_permission">อนุญาตให้ใช้กล้องเพื่อสแกน QR ยืนยัน คุณสามารถเปิดสิทธิ์ได้ในการตั้งค่าแอปของ Android</string>
+    <string name="nearby_camera_unavailable">กล้องไม่พร้อมใช้งาน ปิดแอปอื่นที่ใช้กล้องแล้วลองอีกครั้ง ต้องใช้กล้องเพื่อยืนยันอุปกรณ์รับ</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 Wize Soft (Wissam Shehadeh); SPDX-License-Identifier: GPL-3.0-only -->
+<resources>
+    <string name="nearby_network_help">將兩台裝置連接到同一 Wi-Fi 網路或手機熱點，然後開啟附近傳輸。請在兩台裝置上更新 WizeFiles。在接收端核准連線，再用傳送端掃描接收端的 QR 碼。傳輸經過加密，不需要網際網路或 Google Play 服務。傳送只會複製檔案並保留原件。</string>
+    <string name="nearby_scan_title">掃描驗證 QR 碼</string>
+    <string name="nearby_scan_help">將相機對準接收裝置上的驗證 QR 碼。掃描可離線進行，不會儲存影像。</string>
+    <string name="nearby_camera_permission">請允許相機存取以掃描驗證 QR 碼。你可以在 Android 應用程式設定中開啟此權限。</string>
+    <string name="nearby_camera_unavailable">相機無法使用。請關閉其他正在使用相機的應用程式，然後重試。驗證接收裝置需要相機。</string>
+</resources>

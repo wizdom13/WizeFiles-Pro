@@ -601,7 +601,7 @@ https://wizesoft.me/WizeFiles</string>
     <string name="faq_question_manage_files">Que puis-je faire avec WizeFiles ?</string>
     <string name="faq_answer_manage_files">WizeFiles permet de parcourir les stockages locaux, avec accès root, réseau et cloud ; de copier, déplacer, renommer, partager et supprimer des éléments ; de modifier du texte ; de prévisualiser les contenus compatibles ; de créer et modifier des archives ; et d’exécuter les tâches longues dans le Centre de transfert.</string>
     <string name="faq_question_permissions">Pourquoi l’application demande-t-elle l’accès aux fichiers ?</string>
-    <string name="faq_answer_permissions">WizeFiles a besoin d’accéder au stockage pour afficher, copier, déplacer, renommer et supprimer les fichiers que vous choisissez de gérer. Les autorisations Bluetooth, appareils à proximité, notifications, biométrie et réseau ne sont demandées que lorsqu’une fonction en a besoin.</string>
+    <string name="faq_answer_permissions">WizeFiles a besoin d’accéder au stockage pour afficher, copier, déplacer, renommer et supprimer les fichiers que vous choisissez de gérer. Les autorisations caméra, appareils à proximité, notifications, biométrie et réseau ne sont demandées que lorsqu’une fonction en a besoin.</string>
     <string name="faq_question_recycle_bin">Comment fonctionne la corbeille ?</string>
     <string name="faq_answer_recycle_bin">Lorsque la corbeille est activée, les éléments supprimés compatibles y sont d’abord déplacés afin que vous puissiez les restaurer. Vider la corbeille, supprimer définitivement un élément ou désactiver cette fonction lorsqu’elle contient des éléments est irréversible.</string>
     <string name="faq_question_network_storage">Puis-je me connecter à un stockage réseau ou cloud ?</string>
@@ -613,7 +613,7 @@ https://wizesoft.me/WizeFiles</string>
     <string name="faq_question_sync_backup">À quoi sert Synchronisation et sauvegarde ?</string>
     <string name="faq_answer_sync_backup">Ouvrez Outils &gt; Synchronisation et sauvegarde pour créer des paires de dossiers réutilisables et prévisualiser les changements prévus avant de commencer. Vérifiez le mode sélectionné et les règles de conflit dans l’aperçu afin de savoir quel côté sera mis à jour.</string>
     <string name="faq_question_nearby_transfer">Comment fonctionne le transfert à proximité ?</string>
-    <string name="faq_answer_nearby_transfer">Ouvrez Outils &gt; Transfert à proximité pour copier directement des fichiers ou des dossiers complets entre des appareils WizeFiles proches. Le Bluetooth détecte et authentifie les appareils, le Wi‑Fi assure le transfert et un code QR à usage unique vérifie la connexion. L’envoi ne supprime jamais les originaux.</string>
+    <string name="faq_answer_nearby_transfer">@string/nearby_network_help</string>
     <string name="faq_question_security">Comment protéger le navigateur de fichiers ?</string>
     <string name="faq_answer_security">Dans Paramètres de l’application &gt; Sécurité, créez un mot de passe et activez Protéger le navigateur. Vous pouvez proposer d’abord le déverrouillage biométrique, conserver le mot de passe comme solution de secours et choisir après combien de temps WizeFiles se verrouille de nouveau.</string>
     <string name="faq_question_settings_backup">Puis-je sauvegarder les paramètres de l’application ?</string>
@@ -1350,3 +1350,4 @@ https://wizesoft.me/WizeFiles</string>
     <string name="text_editor_save_failure">Impossible d’enregistrer ce fichier. Vérifiez que l’emplacement est accessible en écriture.</string>
     <string name="text_editor_load_failure">Impossible d’ouvrir ce fichier. Vérifiez qu’il existe toujours et que vous y avez accès.</string>
 </resources>
+

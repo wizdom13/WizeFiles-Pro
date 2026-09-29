@@ -199,8 +199,10 @@ WizeFiles keeps long-running file work separate from the browser so operations c
 - Direct nearby-device transfer
 - Files and complete folders
 - QR-authenticated pairing
-- Bluetooth-assisted discovery/authentication
-- Wi-Fi data transfer
+- Local network discovery on the same Wi-Fi network or a phone hotspot
+- TLS-encrypted transfer without internet or Google Play services
+- Offline QR scanning with the device camera
+- Updated WizeFiles required on both devices
 - Durable session state
 - Reconnect-aware transfers
 - Protection against duplicate or late payloads
