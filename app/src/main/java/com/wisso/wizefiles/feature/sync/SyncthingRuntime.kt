@@ -18,17 +18,24 @@ internal fun interface SyncthingControl {
 }
 
 /** One private runtime per app process. No TCP control listener, WebView, shell or downloaded code. */
-internal class SyncthingRuntime private constructor(context: Context) : SyncthingControl {
+internal class SyncthingRuntime private constructor(context: Context,
+    private val directory: File = File(context.noBackupFilesDir, "syncthing")) : SyncthingControl {
     private val app = context.applicationContext
-    private val directory = File(app.noBackupFilesDir, "syncthing")
     private val socketFile = File(directory, "api.sock")
-    private var child: Process? = null
+    @Volatile private var child: Process? = null
     private var apiKey = ""
-    private var ready = false
+    @Volatile private var ready = false
     private var leases = 0
+    @Volatile private var maintenance = false
+    private val requests = java.util.concurrent.ConcurrentHashMap.newKeySet<LocalSocket>()
 
     @Synchronized
     fun acquire(): SyncthingRuntime {
+        check(!maintenance) { "Syncthing configuration maintenance is in progress" }
+        if (directory.name == "syncthing") {
+            check(!SyncthingMigration.applying) { "Syncthing configuration import is in progress" }
+            SyncthingMigration.recover(app)
+        }
         start()
         leases++
         return this
@@ -139,13 +146,28 @@ internal class SyncthingRuntime private constructor(context: Context) : Syncthin
 
     override fun request(method: String, path: String, body: String?): String =
         LocalSocket().use { socket ->
+            requests.add(socket)
+            try {
             socket.connect(LocalSocketAddress(socketFile.absolutePath, LocalSocketAddress.Namespace.FILESYSTEM))
             // LocalSocket creates its file descriptor on connect. Setting options before
             // that throws "socket not created" instead of reaching the private engine.
-            socket.soTimeout = 30_000
+            socket.soTimeout = if (path.startsWith("/rest/db/scan?")) 6 * 60 * 60 * 1000 else 30_000
             SyncthingHttp.write(socket.outputStream, method, path, apiKey, body)
             SyncthingHttp.read(socket.inputStream)
+            } finally { requests.remove(socket) }
         }
+
+    fun isRunning(): Boolean = ready && child?.isAlive == true
+    fun isMaintaining(): Boolean = maintenance
+    @Synchronized fun beginMaintenance() {
+        check(!maintenance && leases == 0 && child == null) { "Another Syncthing management operation is active" }
+        maintenance = true
+    }
+    @Synchronized fun endMaintenance() { maintenance = false }
+
+    fun interruptRequests() {
+        requests.toList().forEach { runCatching { it.close() } }
+    }
 
     /** Fail closed even when another UI operation still holds a lease. */
     @Synchronized
@@ -153,6 +175,7 @@ internal class SyncthingRuntime private constructor(context: Context) : Syncthin
 
     private fun stop() {
         ready = false
+        interruptRequests()
         val process = child ?: return
         runCatching { request("POST", "/rest/system/shutdown", null) }
         if (!process.waitFor(5, TimeUnit.SECONDS)) {
@@ -166,6 +189,10 @@ internal class SyncthingRuntime private constructor(context: Context) : Syncthin
     }
 
     companion object {
+        internal fun staged(context: Context, directory: File): SyncthingRuntime {
+            require(directory.canonicalFile == File(context.noBackupFilesDir, "syncthing-import-stage").canonicalFile)
+            return SyncthingRuntime(context, directory)
+        }
         @Volatile private var instance: SyncthingRuntime? = null
         fun get(context: Context): SyncthingRuntime = instance ?: synchronized(this) {
             instance ?: SyncthingRuntime(context).also { instance = it }

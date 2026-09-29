@@ -85,7 +85,9 @@ internal data class SyncthingFolderRequest(
     val endpoint: SyncthingEndpoint,
     val mode: SyncthingFolderMode,
     val ignorePatterns: List<String> = emptyList(),
-    val keepVersions: Int = 5
+    val keepVersions: Int = 5,
+    val devices: List<SyncthingDevice>? = null,
+    val folderOptions: String = "{}"
 )
 
 internal sealed interface SyncthingEngineResult {

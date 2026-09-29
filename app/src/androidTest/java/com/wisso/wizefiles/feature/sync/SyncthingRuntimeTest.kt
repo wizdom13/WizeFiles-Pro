@@ -14,6 +14,52 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class SyncthingRuntimeTest {
+    @Test fun configurationImportAndEncryptedBackupPreserveIdentityWithoutTouchingPayload() = kotlinx.coroutines.runBlocking {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val runtime = SyncthingRuntime.get(context).acquire()
+        val id = try {
+            assertThrows(IllegalStateException::class.java) { runtime.beginMaintenance() }
+            SyncthingRestEngine(runtime).deviceId()
+        } finally { runtime.release() }
+        runtime.beginMaintenance()
+        try {
+            assertTrue(runtime.isMaintaining())
+            assertThrows(IllegalStateException::class.java) { runtime.acquire() }
+        } finally { runtime.endMaintenance() }
+        assertFalse(runtime.isMaintaining())
+        val home = File(context.noBackupFilesDir, "syncthing")
+        val identity = SyncthingIdentity(File(home, "cert.pem").readBytes(), File(home, "key.pem").readBytes())
+        assertEquals(id, identity.validate()) // Compare the JVM fingerprint/check digits with the actual engine.
+        val previous = SyncthingSettings.configuration.snapshot()
+        val folder = File(requireNotNull(context.getExternalFilesDir(null)), "syncthing-import-test").apply { mkdirs() }
+        val payload = File(folder, "untouched.txt").apply { writeText("unchanged local data") }
+        val peer = SyncthingDevice(SyncthingIdentity.deviceId("test-peer".toByteArray()), "Test peer")
+        val source = SyncthingImportModel(listOf(peer), listOf(SyncthingImportedFolder("import-test", "Import test",
+            folder.path, SyncMode.TWO_WAY, listOf(peer.id), keep = 7, ignores = listOf("*.tmp"))), id, identity)
+        try {
+            SyncthingMigration.apply(context, source, mapOf("import-test" to folder.path), true, false)
+            val profile = SyncRepository.profiles().single { SyncthingEndpointCodec.decode(it.destinationUri)?.folderId == "import-test" }
+            assertTrue(SyncthingSettings.configuration.isPaused(profile.id))
+            assertEquals(peer.id, SyncthingSettings.configuration.peers(profile.id).single().id)
+            assertEquals(7, SyncthingVersionPolicy.keep(profile.protectionJson))
+            assertEquals("unchanged local data", payload.readText())
+            val password = "native backup round trip".toCharArray()
+            val restored = SyncthingImportParser.parse(SyncthingBackup.export(context, password), password)
+            assertEquals(id, restored.identity!!.validate())
+            assertEquals(listOf("*.tmp"), restored.folders.single().ignores)
+            assertFalse(runtime.isRunning())
+        } finally {
+            SyncRepository.profiles().filter { SyncthingEndpointCodec.decode(it.destinationUri)?.folderId == "import-test" }
+                .forEach { SyncRepository.deleteProfile(it.id); SyncScheduler.cancel(context, it.id) }
+            runtime.acquire()
+            try { runtime.request("DELETE", "/rest/config/folders/import-test", null) }
+            finally { runtime.release() }
+            SyncthingSettings.configuration.replace(previous)
+            identity.privateKey.fill(0)
+            folder.deleteRecursively()
+        }
+    }
+
     @Test fun killingSupervisorCannotLeaveAnEngineRunning() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         val runtime = SyncthingRuntime.get(context).acquire()

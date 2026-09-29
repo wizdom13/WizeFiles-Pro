@@ -99,6 +99,14 @@ class SyncProfilesActivity : AppCompatActivity() {
         binding.profileList.layoutManager = LinearLayoutManager(this)
         binding.profileList.adapter = adapter
         binding.addProfile.setOnClickListener { launchSourcePicker() }
+        if (savedInstanceState == null) {
+            intent.getStringExtra(EXTRA_EDIT_PROFILE)?.let { id ->
+                SyncRepository.profile(id)?.let { profile -> binding.root.post { showEditor(profile, null, null) } }
+            }
+            if (intent.getBooleanExtra(EXTRA_ADD_SYNCTHING, false)) {
+                binding.root.post { syncthingSource = true; launchSourcePicker() }
+            }
+        }
         val sourceUri = intent.getStringExtra(EXTRA_SOURCE_URI)
         val destinationUri = intent.getStringExtra(EXTRA_DESTINATION_URI)
         if (savedInstanceState == null && sourceUri != null && destinationUri != null) {
@@ -111,6 +119,10 @@ class SyncProfilesActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menu.add(R.string.syncthing_manage).setOnMenuItemClickListener {
+            startActivity(SyncthingManagerActivity.createIntent(this))
+            true
+        }
         menu.add(R.string.syncthing_setup).setOnMenuItemClickListener {
             syncthingSource = true
             launchSourcePicker()
@@ -305,6 +317,11 @@ class SyncProfilesActivity : AppCompatActivity() {
         val schedule = profile?.let { SyncScheduleCodec.decode(it.scheduleJson) } ?: SyncSchedule()
         val currentFilters = profile?.let { SyncFilterCodec.decode(it.filtersJson) } ?: SyncFilterRules()
         val editor = DialogSyncProfileBinding.inflate(layoutInflater)
+        val sessionEditor = if (isSyncthing) SyncthingSessionEditor(this,
+            SyncthingSessionOptions.decode(profile?.constraintsJson ?: "{}")) else null
+        sessionEditor?.let {
+            (editor.root.getChildAt(0) as android.widget.LinearLayout).addView(it.view)
+        }
 
         editor.endpoints.text = getString(
             R.string.sync_endpoints_format,
@@ -382,8 +399,12 @@ class SyncProfilesActivity : AppCompatActivity() {
             .setView(editor.root)
             .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(R.string.save) { _, _ ->
+                if (isSyncthing && SyncthingRuntime.get(this).isMaintaining()) {
+                    Toast.makeText(this, R.string.loading, Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
                 val enabledProtection = editor.versionProtection.isChecked ||
-                    profile == null &&
+                    !isSyncthing && profile == null &&
                     (selectedMode == SyncMode.MIRROR || selectedMode == SyncMode.TWO_WAY)
                 val newSchedule = SyncSchedule(
                     type = selectedScheduleType,
@@ -409,7 +430,10 @@ class SyncProfilesActivity : AppCompatActivity() {
                     mode = selectedMode,
                     conflictPolicy = selectedConflict,
                     propagateDeletions = isSyncthing || selectedMode == SyncMode.TWO_WAY,
-                    protectionJson = if (enabledProtection) {
+                    protectionJson = if (isSyncthing) {
+                        SyncthingVersionPolicy.encode(profile?.protectionJson ?: "{}", if (enabledProtection)
+                            profile?.let { SyncthingVersionPolicy.keep(it.protectionJson).coerceAtLeast(1) } ?: 5 else 0)
+                    } else if (enabledProtection) {
                         "{\"enabled\":true,\"retentionDays\":30,\"versionsPerFile\":5}"
                     } else {
                         "{\"enabled\":false}"
@@ -422,13 +446,16 @@ class SyncProfilesActivity : AppCompatActivity() {
                                 .split(',').map(String::trim).filter(String::isNotEmpty).toSet()
                         )
                     ),
-                    constraintsJson = if (isSyncthing && profile == null)
-                        org.json.JSONObject().put("syncthingPublicNetwork", publicNetwork).toString()
-                        else profile?.constraintsJson ?: "{}",
+                    constraintsJson = sessionEditor?.value()?.mergeInto(
+                        if (profile == null) org.json.JSONObject()
+                            .put("syncthingPublicNetwork", publicNetwork).toString()
+                        else profile.constraintsJson
+                    ) ?: profile?.constraintsJson ?: "{}",
                     scheduleJson = SyncScheduleCodec.encode(newSchedule),
                     updatedAtMillis = System.currentTimeMillis()
                 )
                 SyncRepository.saveProfile(saved)
+                if (isSyncthing) SyncthingSettings.migrate()
                 SyncScheduler.apply(this, saved.id, newSchedule)
                 refresh()
                 if (profile == null) planAndOpen(saved)
@@ -494,6 +521,7 @@ class SyncProfilesActivity : AppCompatActivity() {
             )
             .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(R.string.delete) { _, _ ->
+                if (maintenanceBusy(profile)) return@setPositiveButton
                 if (SyncRepository.deleteProfile(profile.id)) {
                     SyncScheduler.cancel(this, profile.id)
                     refresh()
@@ -514,7 +542,12 @@ class SyncProfilesActivity : AppCompatActivity() {
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(errorColor)
     }
 
+    private fun maintenanceBusy(profile: SyncProfile): Boolean =
+        (SyncBackendRouter.kind(profile) == SyncBackendKind.SYNCTHING && SyncthingRuntime.get(this).isMaintaining())
+            .also { if (it) Toast.makeText(this, R.string.loading, Toast.LENGTH_SHORT).show() }
+
     private fun toggleSchedule(profile: SyncProfile) {
+        if (maintenanceBusy(profile)) return
         val updated = profile.copy(
             enabled = !profile.enabled,
             updatedAtMillis = System.currentTimeMillis()
@@ -529,6 +562,10 @@ class SyncProfilesActivity : AppCompatActivity() {
     }
 
     private fun openHistory(profile: SyncProfile) {
+        if (SyncBackendRouter.kind(profile) == SyncBackendKind.SYNCTHING) {
+            startActivity(SyncthingStatusActivity.createIntent(this, profile.id))
+            return
+        }
         SyncRepository.runs(profile.id).firstOrNull {
             it.transferOperationId.isNotBlank()
         }?.let { run ->
@@ -576,6 +613,8 @@ class SyncProfilesActivity : AppCompatActivity() {
     }
 
     companion object {
+        internal const val EXTRA_EDIT_PROFILE = "syncthing_edit_profile"
+        internal const val EXTRA_ADD_SYNCTHING = "syncthing_add_folder"
         private const val TAG = "SyncProfiles"
         private const val EXTRA_SOURCE_URI = "sync_source_uri"
         private const val EXTRA_DESTINATION_URI = "sync_destination_uri"
@@ -600,4 +639,3 @@ internal fun shouldLaunchPendingDestinationPicker(
     isResumed: Boolean,
     hasWindowFocus: Boolean
 ): Boolean = hasPendingLaunch && hasPendingSource && isResumed && hasWindowFocus
-

@@ -3,6 +3,8 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Real-engine contract test. All peer traffic stays on loopback; no public discovery."""
 import http.client
+import hashlib
+from datetime import datetime
 import json
 import os
 from pathlib import Path
@@ -38,6 +40,8 @@ def wait_for(predicate, seconds=45):
 
 class Engine:
     def __init__(self, binary, root, supervisor):
+        self.binary = binary
+        self.supervisor = supervisor
         self.root = root
         root.mkdir()
         self.socket = str(root / "api.sock")
@@ -58,18 +62,7 @@ class Engine:
             options.remove(node)
         ET.SubElement(options, "listenAddress").text = "tcp://127.0.0.1:0"
         config.write(root / "config.xml", encoding="utf-8", xml_declaration=True)
-        log = (root / "engine.log").open("wb")
-        self.process = subprocess.Popen([supervisor, str(os.getpid()), binary, "--home", str(root), "serve", "--no-browser",
-            "--no-restart", "--no-upgrade", "--paused", "--gui-address=unix://" + self.socket,
-            "--log-level=WARN"], env={**os.environ, "STGUIAPIKEY": self.key, "STMONITORED": "yes"},
-            stdout=log, stderr=subprocess.STDOUT)
-        log.close()
-        try:
-            wait_for(lambda: self.call("GET", "/system/status"))
-        except BaseException:
-            print((root / "engine.log").read_text()[-4000:], file=sys.stderr)
-            self.stop()
-            raise
+        self.start()
         self.id = self.call("GET", "/system/status")["myID"]
         with socket.socket() as reservation:
             reservation.bind(("127.0.0.1", 0))
@@ -79,6 +72,30 @@ class Engine:
             localAnnounceEnabled=False, relaysEnabled=False, natEnabled=False,
             startBrowser=False, urAccepted=-1, crashReportingEnabled=False)
         self.call("PUT", "/config/options", options)
+
+    def start(self):
+        log = (self.root / "engine.log").open("ab")
+        self.process = subprocess.Popen([self.supervisor, str(os.getpid()), self.binary,
+            "--home", str(self.root), "serve", "--no-browser",
+            "--no-restart", "--no-upgrade", "--paused", "--gui-address=unix://" + self.socket,
+            "--log-level=WARN"], env={**os.environ, "STGUIAPIKEY": self.key, "STMONITORED": "yes"},
+            stdout=log, stderr=subprocess.STDOUT)
+        log.close()
+        try:
+            wait_for(lambda: self.call("GET", "/system/status"))
+        except BaseException:
+            print((self.root / "engine.log").read_text()[-4000:], file=sys.stderr)
+            self.stop()
+            raise
+
+    def restart(self):
+        self.start()
+        assert self.call("GET", "/system/status")["myID"] == self.id
+        self.call("POST", "/system/resume")
+        config = self.call("GET", "/config/folders/wize-test")
+        config["paused"] = False
+        self.call("PUT", "/config/folders/wize-test", config)
+        wait_for(lambda: self.call("GET", "/db/status?folder=wize-test").get("state") != "paused")
 
     def call(self, method, path, data=None, key=None):
         connection = UnixHTTP(self.socket)
@@ -173,8 +190,13 @@ def main():
             (folders[0] / "secret.ignored").write_text("exclude")
             first.share(second, folders[0])
             second.share(first, folders[1])
+            first.call("GET", "/events?since=0&limit=1&timeout=0&events=ItemFinished")
             first.scan()
             wait_for(lambda: (folders[1] / "document.bin").read_bytes() == payload)
+            assert "progress" in first.call("GET", "/db/need?folder=wize-test&page=1&perpage=100")
+            assert "errors" in first.call("GET", "/folder/errors?folder=wize-test&page=1&perpage=100")
+            assert "files" in first.call("GET", "/db/remoteneed?folder=wize-test&device=" + second.id)
+            assert first.call("GET", "/system/connections")["total"]["outBytesTotal"] > 0
             assert not (folders[1] / "secret.ignored").exists()
             # Completion must include the peer's acknowledged index.
             def complete():
@@ -186,9 +208,53 @@ def main():
             wait_for(lambda: (folders[0] / "document.bin").read_bytes() == b"changed by peer")
             wait_for(lambda: any(p.read_bytes() == payload for p in
                 (folders[0] / ".stversions").rglob("document*.bin")))
+            # Native restore requires a running folder, but peers can stay paused to make
+            # recovery local until the next explicit synchronization.
+            first.call("POST", "/system/pause")
+            versions = first.call("GET", "/folder/versions?folder=wize-test")
+            selected_version = versions["document.bin"][0]["versionTime"]
+            # Simple-version archive names have one-second precision. Wait before the
+            # restore archives the current file, so it cannot replace the selected archive.
+            selected_second = int(datetime.fromisoformat(selected_version.replace("Z", "+00:00")).timestamp())
+            wait_for(lambda: int(time.time()) > selected_second, seconds=3)
+            restored = first.call("POST", "/folder/versions?folder=wize-test",
+                {"document.bin": selected_version})
+            assert not restored.get("document.bin"), restored
+            assert (folders[0] / "document.bin").read_bytes() == payload
+            first.call("POST", "/system/resume")
+            first.scan()
+            wait_for(lambda: (folders[1] / "document.bin").read_bytes() == payload)
+            print("PASS: version listing and local restore with paused peers")
             (folders[0] / "document.bin").unlink()
             first.scan()
             wait_for(lambda: not (folders[1] / "document.bin").exists())
+            # Force an incomplete large-file transfer, then recover the existing identity,
+            # index and temporary blocks. Never claim success from local idle alone.
+            options = first.call("GET", "/config/options")
+            options.update(maxSendKbps=256, limitBandwidthInLan=True)
+            first.call("PUT", "/config/options", options)
+            large = os.urandom(16 * 1024 * 1024)
+            expected_hash = hashlib.sha256(large).hexdigest()
+            (folders[0] / "large.bin").write_bytes(large)
+            first.scan()
+            wait_for(lambda: any(folders[1].glob(".syncthing.large.bin*.tmp")))
+            assert not (folders[1] / "large.bin").exists()
+            second.process.kill()
+            second.process.wait(timeout=5)
+            first.stop()
+            (folders[0] / "offline.txt").write_text("created while the engine was stopped")
+            first.restart()
+            options = first.call("GET", "/config/options")
+            options.update(maxSendKbps=0)
+            first.call("PUT", "/config/options", options)
+            second.restart()
+            first.scan()
+            wait_for(lambda: hashlib.sha256((folders[1] / "large.bin").read_bytes()).hexdigest()
+                == expected_hash, seconds=90)
+            wait_for(lambda: (folders[1] / "offline.txt").read_text()
+                == "created while the engine was stopped")
+            wait_for(complete)
+            print("PASS: interrupted transfer resumes intact; identity persists; offline changes are rescanned")
             second.process.kill()
             second.process.wait(timeout=5)
             def control_stopped():

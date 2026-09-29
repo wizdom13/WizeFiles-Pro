@@ -12,7 +12,10 @@ import org.json.JSONObject
 internal class SyncthingRestEngine(
     private val control: SyncthingControl,
     private val profile: (String) -> SyncProfile? = SyncRepository::profile,
-    private val profiles: () -> List<SyncProfile> = SyncRepository::profiles
+    private val profiles: () -> List<SyncProfile> = SyncRepository::profiles,
+    private val peers: (String) -> List<String> = { id ->
+        listOf(SyncthingProfilePolicy.validate(requireNotNull(profile(id))).deviceId)
+    }
 ) : SyncthingEnginePort {
     fun deviceId(): String = get("/rest/system/status").getString("myID")
 
@@ -24,16 +27,22 @@ internal class SyncthingRestEngine(
         val local = SyncthingLocalFolder.resolve(request.localFolderUri)
         SyncthingProfilePolicy.validateUnique(request.profileId, local.toURI().toString(), endpoint,
             profiles())
-        val validated = get("/rest/svc/deviceid?id=${part(endpoint.deviceId)}").getString("id")
-        require(validated == endpoint.deviceId) { "Use the complete Syncthing device ID" }
         val ownId = deviceId()
-        require(ownId != validated) { "Select another device" }
         val devices = JSONArray(control.request("GET", "/rest/config/devices", null))
-        val device = (0 until devices.length()).map(devices::getJSONObject)
-            .firstOrNull { it.optString("deviceID") == validated }
-            ?: get("/rest/config/defaults/device").put("deviceID", validated)
-        device.put("paused", false).put("introducer", false).put("autoAcceptFolders", false)
-        control.request("PUT", "/rest/config/devices/${part(validated)}", device.toString())
+        val selected = request.devices ?: listOf(SyncthingDevice(endpoint.deviceId))
+        require(selected.isNotEmpty()) { "Select at least one shared device" }
+        selected.forEach { saved ->
+            val validated = get("/rest/svc/deviceid?id=${part(saved.id)}").getString("id")
+            require(validated == saved.id && ownId != validated) { "Select another device using its complete ID" }
+            val device = (0 until devices.length()).map(devices::getJSONObject)
+                .firstOrNull { it.optString("deviceID") == validated }
+                ?: get("/rest/config/defaults/device").put("deviceID", validated)
+            device.put("paused", false).put("introducer", false).put("autoAcceptFolders", false)
+            // Legacy callers preserve existing addresses; managed peers use the saved configuration.
+            if (request.devices != null) device.put("name", saved.name)
+                .put("addresses", JSONArray(saved.addresses))
+            control.request("PUT", "/rest/config/devices/${part(validated)}", device.toString())
+        }
 
         val folders = JSONArray(control.request("GET", "/rest/config/folders", null))
         val existing = (0 until folders.length()).map(folders::getJSONObject)
@@ -45,12 +54,16 @@ internal class SyncthingRestEngine(
         folder.put("id", endpoint.folderId).put("label", profile(request.profileId)?.name ?: endpoint.folderId)
             .put("path", local.absolutePath).put("filesystemType", "basic")
             .put("type", if (request.mode == SyncthingFolderMode.SEND_RECEIVE) "sendreceive" else "sendonly")
-            .put("devices", JSONArray().put(JSONObject().put("deviceID", ownId))
-                .put(JSONObject().put("deviceID", validated)))
+            .put("devices", JSONArray((listOf(ownId) + selected.map { it.id }).distinct()
+                .map { JSONObject().put("deviceID", it) }))
             .put("ignorePerms", true).put("fsWatcherEnabled", true)
             .put("rescanIntervalS", 60).put("paused", true)
             .put("versioning", JSONObject().put("type", if (request.keepVersions > 0) "simple" else "")
                 .put("params", JSONObject().put("keep", request.keepVersions.coerceIn(0, 100).toString())))
+        val folderOptions = JSONObject(request.folderOptions)
+        folder.put("rescanIntervalS", folderOptions.optInt("rescanIntervalS", 60).coerceIn(0, 31_536_000))
+            .put("fsWatcherEnabled", folderOptions.optBoolean("fsWatcherEnabled", true))
+            .put("ignorePerms", folderOptions.optBoolean("ignorePerms", true))
         control.request("PUT", "/rest/config/folders/${part(endpoint.folderId)}", folder.toString())
         // Only change ignores while paused. Ignore rules are not a file-by-file WizeFiles plan.
         val ignorePath = "/rest/db/ignores?folder=${part(endpoint.folderId)}"
@@ -68,26 +81,31 @@ internal class SyncthingRestEngine(
         val endpoint = endpoint(profileId)
         val folder = part(endpoint.folderId)
         val local = get("/rest/db/status?folder=$folder")
-        val remote = get("/rest/db/completion?folder=$folder&device=${part(endpoint.deviceId)}")
-        val connection = get("/rest/system/connections").optJSONObject("connections")
-            ?.optJSONObject(endpoint.deviceId)?.optBoolean("connected") == true
+        val selected = peers(profileId)
+        val remote = selected.map { get("/rest/db/completion?folder=$folder&device=${part(it)}") }
+        val connections = get("/rest/system/connections").optJSONObject("connections")
+        val connected = selected.isNotEmpty() && selected.all {
+            connections?.optJSONObject(it)?.optBoolean("connected") == true
+        } && remote.all { it.optString("remoteState") == "valid" }
         val localPending = local.optLong("needTotalItems").coerceAtLeast(0)
-        val remotePending = remote.optLong("needItems").coerceAtLeast(0) +
-            remote.optLong("needDeletes").coerceAtLeast(0)
+        val remotePending = remote.sumOf { it.optLong("needItems").coerceAtLeast(0) +
+            it.optLong("needDeletes").coerceAtLeast(0) }
         val pending = localPending + remotePending
         val errors = local.optInt("pullErrors")
         val state = when {
             errors > 0 || local.optString("error").isNotBlank() -> SyncthingFolderState.ERROR
-            !connection || remote.optString("remoteState") != "valid" -> SyncthingFolderState.DISCONNECTED
+            !connected -> SyncthingFolderState.DISCONNECTED
             local.optString("state").contains("scanning") -> SyncthingFolderState.SCANNING
             local.optString("state") != "idle" || pending > 0 -> SyncthingFolderState.SYNCING
             else -> SyncthingFolderState.IDLE
         }
         return SyncthingFolderStatus(
             state, local.optLong("localBytes").coerceAtLeast(0),
-            remote.optLong("globalBytes").coerceAtLeast(0),
-            local.optLong("needBytes").coerceAtLeast(0) + remote.optLong("needBytes").coerceAtLeast(0),
-            pending, if (errors > 0) "Syncthing reported $errors file errors" else ""
+            remote.maxOfOrNull { it.optLong("globalBytes").coerceAtLeast(0) } ?: 0,
+            local.optLong("needBytes").coerceAtLeast(0) + remote.sumOf { it.optLong("needBytes").coerceAtLeast(0) },
+            pending, local.optString("error").ifBlank {
+                if (errors > 0) "Syncthing reported $errors file errors" else ""
+            }
         )
     }
 
@@ -126,8 +144,8 @@ internal object SyncthingLocalFolder {
             "Select a directly accessible local folder"
         }
         val folder = File(parsed).canonicalFile
-        require(folder.isDirectory && folder.canRead() && folder.canWrite()) {
-            "The local folder is unavailable or read-only"
+        if (!folder.isDirectory || !folder.canRead() || !folder.canWrite()) {
+            throw java.io.IOException("The local folder is unavailable or read-only")
         }
         return folder
     }

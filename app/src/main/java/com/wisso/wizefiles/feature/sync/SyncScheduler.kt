@@ -56,6 +56,12 @@ internal object SyncScheduler {
                         schedule.intervalMinutes,
                         TimeUnit.MINUTES
                     )
+                        .apply {
+                            if (profile != null && SyncBackendRouter.kind(profile) == SyncBackendKind.SYNCTHING) {
+                                setBackoffCriteria(androidx.work.BackoffPolicy.LINEAR,
+                                    SyncthingSessionOptions.decode(profile.constraintsJson).retryMinutes.toLong(), TimeUnit.MINUTES)
+                            }
+                        }
                         .setConstraints(constraints(schedule))
                         .setInputData(input(profileId, schedule))
                         .addTag(PROFILE_TAG_PREFIX + profileId)
@@ -82,6 +88,13 @@ internal object SyncScheduler {
         val delay = SyncScheduleCalculator.nextDelay(schedule, nowMillis)
         val request = OneTimeWorkRequestBuilder<SyncRunWorker>()
             .setInitialDelay(delay.toMillis(), TimeUnit.MILLISECONDS)
+            .apply {
+                val profile = SyncRepository.profile(profileId)
+                if (profile != null && SyncBackendRouter.kind(profile) == SyncBackendKind.SYNCTHING) {
+                    setBackoffCriteria(androidx.work.BackoffPolicy.LINEAR,
+                        SyncthingSessionOptions.decode(profile.constraintsJson).retryMinutes.toLong(), TimeUnit.MINUTES)
+                }
+            }
             .setConstraints(constraints(schedule))
             .setInputData(input(profileId, schedule))
             .addTag(PROFILE_TAG_PREFIX + profileId)
@@ -99,7 +112,14 @@ internal object SyncScheduler {
         updateNextRun(profileId, 0)
     }
 
-    private fun constraints(schedule: SyncSchedule) = Constraints.Builder()
+    internal fun isOnWifi(context: Context): Boolean {
+        val manager = context.getSystemService(ConnectivityManager::class.java)
+        val network = manager.activeNetwork ?: return false
+        return manager.getNetworkCapabilities(network)
+            ?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+    }
+
+    internal fun constraints(schedule: SyncSchedule) = Constraints.Builder()
         .setRequiresCharging(schedule.chargingOnly)
         .setRequiresBatteryNotLow(schedule.batteryNotLow)
         .setRequiresStorageNotLow(schedule.storageNotLow)
@@ -174,9 +194,9 @@ internal object SyncScheduler {
 }
 
 internal object SyncScheduledRunCoordinator {
-    suspend fun run(context: Context, profileId: String): SyncWorkerResult =
+    suspend fun run(context: Context, profileId: String, retryAttempt: Int = 0): SyncWorkerResult =
         if (SyncRepository.profile(profileId)?.let(SyncBackendRouter::kind) == SyncBackendKind.SYNCTHING) {
-            SyncthingSyncRunner.run(context, profileId, SyncRunTrigger.SCHEDULED)
+            SyncthingSyncRunner.run(context, profileId, SyncRunTrigger.SCHEDULED, retryAttempt = retryAttempt)
         } else SyncRunCoordinator().runScheduled(profileId)
 }
 
@@ -198,40 +218,41 @@ internal class SyncRunWorker(
         val schedule = SyncScheduler.decode(inputData)
         val profile = SyncRepository.profile(profileId) ?: return Result.success()
         if (!profile.enabled) return Result.success()
-        if (schedule.wifiOnly && !isOnWifi()) return Result.retry()
-        val paused = SyncRepository.runs(profileId).firstOrNull {
-            it.state == SyncRunState.PAUSED && it.trigger == SyncRunTrigger.SCHEDULED
-        }
-        val recoverable = paused?.takeIf {
-            TransferRepository.operation(it.transferOperationId)?.state ==
-                TransferOperationState.RECOVERABLE
-        }
-        val hasOtherActiveRun = SyncRepository.runs(profileId).any {
-            !it.state.isTerminal && it.id != recoverable?.id
-        }
-        val result = if (recoverable != null) {
-            if (SyncBackendRouter.kind(profile) == SyncBackendKind.SYNCTHING) {
-                SyncthingSyncRunner.run(applicationContext, profileId, SyncRunTrigger.SCHEDULED, recoverable.id)
-            } else {
-            runCatching { SyncRunCoordinator().resume(recoverable.id) }
-                .fold(
-                    onSuccess = { if (it.failed == 0) SyncWorkerResult.SUCCESS else SyncWorkerResult.RETRY },
-                    onFailure = { SyncWorkerResult.RETRY }
-                )
-            }
-        } else if (paused != null) {
-            SyncWorkerResult.SUCCESS
-        } else if (hasOtherActiveRun) {
-            SyncWorkerResult.SUCCESS
+        if (schedule.wifiOnly && !SyncScheduler.isOnWifi(applicationContext)) return Result.retry()
+        val result = if (SyncBackendRouter.kind(profile) == SyncBackendKind.SYNCTHING) {
+            // The Syncthing runner resumes recoverable work regardless of its original trigger,
+            // while keeping an explicit user pause intact. A manual attempt may have exhausted
+            // its retry budget before this independent scheduled session starts.
+            SyncScheduledRunCoordinator.run(applicationContext, profileId, runAttemptCount)
         } else {
-            SyncScheduledRunCoordinator.run(applicationContext, profileId)
+            val paused = SyncRepository.runs(profileId).firstOrNull {
+                it.state == SyncRunState.PAUSED && it.trigger == SyncRunTrigger.SCHEDULED
+            }
+            val recoverable = paused?.takeIf {
+                TransferRepository.operation(it.transferOperationId)?.state == TransferOperationState.RECOVERABLE
+            }
+            val hasOtherActiveRun = SyncRepository.runs(profileId).any {
+                !it.state.isTerminal && it.id != recoverable?.id
+            }
+            if (recoverable != null) {
+                runCatching { SyncRunCoordinator().resume(recoverable.id) }
+                    .fold(
+                        onSuccess = { if (it.failed == 0) SyncWorkerResult.SUCCESS else SyncWorkerResult.RETRY },
+                        onFailure = { SyncWorkerResult.RETRY }
+                    )
+            } else if (paused != null || hasOtherActiveRun) {
+                SyncWorkerResult.SUCCESS
+            } else {
+                SyncScheduledRunCoordinator.run(applicationContext, profileId, runAttemptCount)
+            }
         }
         SyncRepository.runs(profileId).firstOrNull {
             it.state == SyncRunState.PREVIEW_READY ||
                 it.state == SyncRunState.NEEDS_ATTENTION ||
                 it.state == SyncRunState.SAFETY_BLOCKED
         }?.let { notifyAttention(applicationContext, it) }
-        if (schedule.type == SyncScheduleType.DAILY || schedule.type == SyncScheduleType.WEEKLY) {
+        if (result != SyncWorkerResult.RETRY &&
+            (schedule.type == SyncScheduleType.DAILY || schedule.type == SyncScheduleType.WEEKLY)) {
             SyncScheduler.enqueueWallClock(
                 applicationContext,
                 profileId,
@@ -242,15 +263,11 @@ internal class SyncRunWorker(
         return when (result) {
             SyncWorkerResult.SUCCESS -> Result.success()
             SyncWorkerResult.RETRY -> Result.retry()
-            SyncWorkerResult.FAILURE -> Result.failure()
+            // The failed attempt is already in history. Completing this work allows the next
+            // wall-clock schedule to run instead of inheriting a failed prerequisite.
+            SyncWorkerResult.FAILURE -> if (SyncBackendRouter.kind(profile) == SyncBackendKind.SYNCTHING)
+                Result.success() else Result.failure()
         }
-    }
-
-    private fun isOnWifi(): Boolean {
-        val manager = applicationContext.getSystemService(ConnectivityManager::class.java)
-        val network = manager.activeNetwork ?: return false
-        return manager.getNetworkCapabilities(network)
-            ?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
     }
 
 }
@@ -262,11 +279,17 @@ internal class SyncResumeWorker(
     override suspend fun doWork(): Result {
         val runId = inputData.getString(KEY_RUN_ID) ?: return Result.failure()
         val run = SyncRepository.run(runId) ?: return Result.failure()
-        tryEnterSyncForeground(run.profileId)
+        val foreground = tryEnterSyncForeground(run.profileId)
         SyncRecoveryManager.reconcileDetachedRun(run.profileId)
         if (SyncRepository.profile(run.profileId)?.let(SyncBackendRouter::kind) == SyncBackendKind.SYNCTHING) {
-            return if (SyncthingSyncRunner.run(applicationContext, run.profileId, SyncRunTrigger.RETRY, runId) ==
-                SyncWorkerResult.SUCCESS) Result.success() else Result.retry()
+            val schedule = SyncScheduleCodec.decode(SyncRepository.profile(run.profileId)?.scheduleJson ?: "{}")
+            if (schedule.wifiOnly && !SyncScheduler.isOnWifi(applicationContext)) return Result.retry()
+            return when (SyncthingSyncRunner.run(applicationContext, run.profileId, SyncRunTrigger.RETRY, runId,
+                    foreground, runAttemptCount)) {
+                SyncWorkerResult.SUCCESS -> Result.success()
+                SyncWorkerResult.RETRY -> Result.retry()
+                SyncWorkerResult.FAILURE -> Result.failure()
+            }
         }
         return runCatching {
             val coordinator = SyncRunCoordinator()
@@ -296,6 +319,14 @@ internal class SyncResumeWorker(
                 "folder-sync-resume-$runId",
                 ExistingWorkPolicy.REPLACE,
                 OneTimeWorkRequestBuilder<SyncResumeWorker>()
+                    .apply {
+                        val profile = SyncRepository.run(runId)?.let { SyncRepository.profile(it.profileId) }
+                        if (profile != null && SyncBackendRouter.kind(profile) == SyncBackendKind.SYNCTHING) {
+                            setConstraints(SyncScheduler.constraints(SyncScheduleCodec.decode(profile.scheduleJson)))
+                            setBackoffCriteria(androidx.work.BackoffPolicy.LINEAR,
+                                SyncthingSessionOptions.decode(profile.constraintsJson).retryMinutes.toLong(), TimeUnit.MINUTES)
+                        }
+                    }
                     .setInputData(Data.Builder().putString(KEY_RUN_ID, runId).build())
                     .build()
             )
@@ -303,9 +334,10 @@ internal class SyncResumeWorker(
     }
 }
 
-internal suspend fun CoroutineWorker.tryEnterSyncForeground(profileId: String) {
+internal suspend fun CoroutineWorker.tryEnterSyncForeground(profileId: String): Boolean {
     try {
         setForeground(syncForegroundInfo(applicationContext, profileId))
+        return true
     } catch (exception: Exception) {
         if (!exception.isRecoverableSyncForegroundFailure()) throw exception
         AppLog.w(
@@ -313,6 +345,7 @@ internal suspend fun CoroutineWorker.tryEnterSyncForeground(profileId: String) {
             "Foreground start was denied; continuing as WorkManager background work",
             exception
         )
+        return false
     }
 }
 
@@ -353,6 +386,17 @@ private fun syncForegroundInfo(context: Context, profileId: String): ForegroundI
         .setOngoing(true)
         .setOnlyAlertOnce(true)
         .build()
+    if (SyncRepository.profile(profileId)?.let(SyncBackendRouter::kind) == SyncBackendKind.SYNCTHING) {
+        // A user stop has different recovery semantics from Android interrupting the worker.
+        listOf(SyncthingControlReceiver.ACTION_PAUSE to R.string.transfer_pause,
+            SyncthingControlReceiver.ACTION_CANCEL to android.R.string.cancel).forEach { (action, label) ->
+            val pending = PendingIntent.getBroadcast(context, profileId.hashCode(),
+                Intent(context, SyncthingControlReceiver::class.java).setAction(action).putExtra("profile", profileId),
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+            notification.actions = (notification.actions.orEmpty().toList() +
+                android.app.Notification.Action.Builder(null, context.getString(label), pending).build()).toTypedArray()
+        }
+    }
     val id = SYNC_NOTIFICATION_BASE_ID + (profileId.hashCode() and 0x0FFF)
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         ForegroundInfo(id, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)

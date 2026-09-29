@@ -9,6 +9,7 @@ import com.wisso.wizefiles.feature.transfer.TransferRepository
 
 internal object SyncRecoveryManager {
     fun reconcileDetachedRun(profileId: String? = null): Int {
+        SyncthingMigration.recover(com.wisso.wizefiles.core.app.application)
         val profiles = if (profileId == null) SyncRepository.profiles() else {
             listOfNotNull(SyncRepository.profile(profileId))
         }
@@ -28,6 +29,9 @@ internal object SyncRecoveryManager {
                             reason = "SYNC_WORKER_TERMINATED"
                         )
                     }
+                }
+                if (SyncBackendRouter.kind(profile) == SyncBackendKind.SYNCTHING) {
+                    SyncthingSessionHistory.record(profile.id, run.id, SyncthingSessionOutcome.INTERRUPTED)
                 }
                 recovered++
             }

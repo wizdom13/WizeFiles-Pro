@@ -513,6 +513,34 @@
             android:theme="@style/Theme.WizeFiles" />
 
         <activity
+            android:name="com.wisso.wizefiles.feature.sync.SyncthingManagerActivity"
+            android:exported="false"
+            android:label="@string/syncthing_manage"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <receiver
+            android:name="com.wisso.wizefiles.feature.sync.SyncthingControlReceiver"
+            android:exported="false" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.sync.SyncthingStatusActivity"
+            android:exported="false"
+            android:label="@string/syncthing_status"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.sync.SyncthingVersionsActivity"
+            android:exported="false"
+            android:label="@string/syncthing_recovery"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
+            android:name="com.wisso.wizefiles.feature.sync.SyncthingBackupActivity"
+            android:exported="false"
+            android:label="@string/syncthing_backup_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
             android:name="com.wisso.wizefiles.feature.sync.SyncPreviewActivity"
             android:exported="false"
             android:label="@string/sync_preview_title"

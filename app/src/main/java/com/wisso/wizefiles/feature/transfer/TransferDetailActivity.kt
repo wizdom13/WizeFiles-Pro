@@ -91,6 +91,15 @@ class TransferDetailActivity : AppCompatActivity() {
             finish()
             return
         }
+        SyncRepository.runForTransfer(operationId)?.let { run ->
+            if (SyncRepository.profile(run.profileId)?.let {
+                    com.wisso.wizefiles.feature.sync.SyncthingEndpointCodec.isSyncthingUri(it.destinationUri)
+                } == true) {
+                startActivity(com.wisso.wizefiles.feature.sync.SyncthingStatusActivity.createIntent(this, run.profileId))
+                finish()
+                return
+            }
+        }
         title = getString(R.string.transfer_details)
         binding.summaryText.text = getString(
             R.string.transfer_detail_summary,
