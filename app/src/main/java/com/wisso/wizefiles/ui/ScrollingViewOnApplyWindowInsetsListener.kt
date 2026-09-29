@@ -5,7 +5,6 @@ package com.wisso.wizefiles.ui
 
 import android.graphics.Rect
 import android.view.View
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class ScrollingViewOnApplyWindowInsetsListener(
@@ -28,6 +27,8 @@ class ScrollingViewOnApplyWindowInsetsListener(
             initialPadding.bottom + systemBarsInsets.bottom
         )
         onInsetsApplied?.invoke(systemBarsInsets.bottom)
-        return ViewCompat.onApplyWindowInsets(view, insetsCompat).toWindowInsets() ?: insets
+        // We own the padding policy. The default fitsSystemWindows handler would
+        // replace it with only the system insets, losing the space for floating bars.
+        return insets
     }
 }

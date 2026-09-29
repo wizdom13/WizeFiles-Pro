@@ -52,6 +52,7 @@ import com.wisso.wizefiles.util.startActivitySafe
 import com.wisso.wizefiles.util.valueCompat
 import com.wisso.wizefiles.storage.path.AppPath
 import com.wisso.wizefiles.storage.path.toAppPath
+import com.wisso.wizefiles.provider.os.isLinuxPath
 import java.nio.file.Path
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
@@ -78,6 +79,18 @@ class FileListActivity : BaseThemedActivity() {
     private var hadExistingBrowserBeforeLaunch = false
     private val tabHoverHandler = Handler(Looper.getMainLooper())
     private var pendingTabHover: Runnable? = null
+    private var persistentSessionEnabled = false
+    private var browserContentInitialized = false
+    private val sessionPreferences by lazy {
+        getSharedPreferences("browser_tab_session", Context.MODE_PRIVATE)
+    }
+    private val tabSessionStore by lazy {
+        BrowserTabSessionStore(
+            read = { sessionPreferences.getString("session", null) },
+            write = { sessionPreferences.edit().putString("session", it).apply() }
+        )
+    }
+    private val saveTabSession = Runnable { persistTabSession() }
 
     internal val areTabsEnabled: Boolean
         get() = tabsEnabled
@@ -143,7 +156,12 @@ class FileListActivity : BaseThemedActivity() {
         // Calls ensureSubDecor().
         findViewById<View>(android.R.id.content)
         tabsEnabled = intentRouter.supportsTabs(intent)
-        if (!restoreTabs(savedInstanceState)) {
+        // Explicit folder/archive intents and picker windows must not replace the launcher session.
+        persistentSessionEnabled = tabsEnabled &&
+            intent.action in listOf(null, Intent.ACTION_MAIN, Intent.ACTION_VIEW) &&
+            intent.extraPath == null && intent.data == null && intent.clipData == null
+        if (!restoreTabs(savedInstanceState) &&
+            !(savedInstanceState == null && restorePersistentTabs())) {
             val tab = tabsController.initialize(getString(R.string.file_list_tab_default_title))
             fragment = FileListFragment().putArgs(FileListFragment.Args(intent))
             supportFragmentManager.commitNow {
@@ -151,9 +169,85 @@ class FileListActivity : BaseThemedActivity() {
                 add(android.R.id.content, fragment, tab.primaryPaneTag)
             }
         }
+        browserContentInitialized = true
+        scheduleTabSessionSave()
         observeWindowLayout()
         onBackPressedDispatcher.addCallback(this, exitOnBackPressedCallback)
         CrashReportPrompt.showIfPending(this)
+    }
+
+    private fun restorePersistentTabs(): Boolean {
+        if (!persistentSessionEnabled) return false
+        val session = tabSessionStore.load() ?: return false
+        val roots = configuredSessionRoots()
+        tabsController.restore(
+            ids = session.tabs.indices.map { it.toLong() },
+            titles = session.tabs.map { it.title },
+            requestedActiveId = session.activeIndex.toLong(),
+            requestedNextId = session.tabs.size.toLong(),
+            dualPaneEnabled = session.tabs.map { it.dualPaneEnabled },
+            activePanes = session.tabs.map { it.activePane },
+            dividerFractions = session.tabs.map { it.dividerFraction }
+        )
+        supportFragmentManager.commitNow {
+            setReorderingAllowed(true)
+            session.tabs.zip(tabsController.tabs).forEach { (saved, tab) ->
+                val path = saved.primaryLocation?.resolve(roots)
+                    ?: Settings.FILE_LIST_DEFAULT_DIRECTORY.valueCompat
+                val candidate = FileListFragment().putArgs(
+                    FileListFragment.Args(
+                        createViewIntent(path.toAppPath()),
+                        secondaryPath = saved.secondaryLocation?.resolve(roots)?.toAppPath(),
+                        restoredDirectory = true
+                    )
+                )
+                if (tab.id == tabsController.activeId) fragment = candidate
+                add(android.R.id.content, candidate, tab.primaryPaneTag)
+                if (tab.id != tabsController.activeId) detach(candidate)
+            }
+        }
+        return true
+    }
+
+    private fun configuredSessionRoots(): List<Pair<Long, Path>> =
+        Settings.STORAGES.valueCompat.mapNotNull { storage ->
+            runCatching { storage.path?.let { storage.id to it } }.getOrNull()
+        }
+
+    internal fun scheduleTabSessionSave() {
+        if (!persistentSessionEnabled || !browserContentInitialized) return
+        // Run after the current fragment transaction and coalesce path/title/layout callbacks.
+        tabHoverHandler.removeCallbacks(saveTabSession)
+        tabHoverHandler.post(saveTabSession)
+    }
+
+    private fun persistTabSession() {
+        if (!persistentSessionEnabled || !browserContentInitialized) return
+        val roots = configuredSessionRoots()
+        fun location(path: Path?): BrowserTabLocation? = path?.let {
+            BrowserTabLocation.capture(it, it.isLinuxPath, roots)
+        }
+        val tabs = tabsController.tabs.map { tab ->
+            val pane = supportFragmentManager.findFragmentByTag(tab.primaryPaneTag)
+                as? FileListFragment ?: return
+            BrowserTabSnapshot(
+                title = tab.title,
+                primaryLocation = location(pane.sessionPrimaryPath),
+                secondaryLocation = location(pane.sessionSecondaryPath),
+                dualPaneEnabled = tab.dualPaneEnabled,
+                activePane = tab.activePane,
+                dividerFraction = tab.dividerFraction
+            )
+        }
+        tabSessionStore.save(BrowserTabSession(
+            tabs, tabsController.tabs.indexOfFirst { it.id == tabsController.activeId }
+        ))
+    }
+
+    override fun onStop() {
+        tabHoverHandler.removeCallbacks(saveTabSession)
+        persistTabSession()
+        super.onStop()
     }
 
     private fun restoreTabs(savedInstanceState: Bundle?): Boolean {
@@ -278,6 +372,7 @@ class FileListActivity : BaseThemedActivity() {
                 windowStateController.widthDp
             )
         )
+        scheduleTabSessionSave()
     }
 
     internal fun toggleDualPane() {
@@ -326,11 +421,13 @@ class FileListActivity : BaseThemedActivity() {
         if (root === activeBrowserFragmentOrNull()) {
             root.updateWorkspaceActivePane(pane)
         }
+        scheduleTabSessionSave()
     }
 
     internal fun onDividerFractionChanged(owner: FileListFragment, fraction: Float) {
         val tabId = tabIdFor(rootFragmentFor(owner)) ?: return
         tabsController.updateWorkspace(tabId, dividerFraction = fraction)
+        scheduleTabSessionSave()
     }
 
     internal fun workspaceState(owner: FileListFragment): BrowserTabState? =
@@ -480,6 +577,7 @@ class FileListActivity : BaseThemedActivity() {
     }
 
     private fun renderTabs() {
+        scheduleTabSessionSave()
         val tabLayout = boundTabLayout ?: return
         tabLayout.isVisible = tabsEnabled && tabsController.tabs.size > 1
         if (!tabLayout.isVisible) {
@@ -640,6 +738,7 @@ class FileListActivity : BaseThemedActivity() {
     }
 
     override fun onDestroy() {
+        tabHoverHandler.removeCallbacks(saveTabSession)
         cancelPendingTabHover()
         dragCoordinator.cancel()
         if (browserSessionRegistered) {

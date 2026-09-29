@@ -136,6 +136,16 @@ class FileListFragment : FileListPermissionFragment(), BreadcrumbLayout.Listener
     private val isEmbeddedPane: Boolean
         get() = args.embeddedPane
 
+    @Suppress("DEPRECATION")
+    internal val sessionPrimaryPath: Path?
+        get() = (arguments?.getParcelable<AppPath>(STATE_CURRENT_PATH) ?: argsPath)
+            ?.toLegacyPathOrNull()
+
+    internal val sessionSecondaryPath: Path?
+        get() = childFragmentManager.fragments.filterIsInstance<FileListFragment>()
+            .firstOrNull { it.isEmbeddedPane }?.sessionPrimaryPath
+            ?: args.secondaryPath?.toLegacyPathOrNull()
+
     private val viewModel by viewModels<FileListViewModel>()
     override val permissionViewModel:FileListViewModel
         get()=viewModel
@@ -614,7 +624,9 @@ class FileListFragment : FileListPermissionFragment(), BreadcrumbLayout.Listener
                 argumentPath = argsPath,
                 stateKey = STATE_CURRENT_PATH,
                 downloadsAction = ACTION_VIEW_DOWNLOADS,
-                shouldOpenArchive = ::shouldOpenAsArchiveView
+                shouldOpenArchive = { action, path, mimeType ->
+                    !args.restoredDirectory && shouldOpenAsArchiveView(action, path, mimeType)
+                }
             )
             if (restored.unavailable) {
                 showToast(R.string.file_list_location_unavailable)
@@ -730,8 +742,10 @@ class FileListFragment : FileListPermissionFragment(), BreadcrumbLayout.Listener
         val existing = childFragmentManager.findFragmentByTag(tag) as? FileListFragment
         val pane = existing ?: FileListFragment().putArgs(
             Args(
-                FileListActivity::class.createIntent().setAction(Intent.ACTION_VIEW),
-                embeddedPane = true
+                args.secondaryPath?.let(FileListActivity::createViewIntent)
+                    ?: FileListActivity::class.createIntent().setAction(Intent.ACTION_VIEW),
+                embeddedPane = true,
+                restoredDirectory = args.restoredDirectory
             )
         )
         workspaceController.paneLayout?.secondaryVisible = true
@@ -889,6 +903,7 @@ class FileListFragment : FileListPermissionFragment(), BreadcrumbLayout.Listener
     private fun onCurrentPathChanged(path: Path) {
         requireArguments().putParcelable(STATE_CURRENT_PATH, path.toAppPath())
         (activity as? FileListActivity)?.updateTabTitle(this, path)
+        (activity as? FileListActivity)?.scheduleTabSessionSave()
         (requireActivity() as MenuHost).invalidateMenu()
         updateOverlayToolbar()
         updateBottomToolbar()
@@ -1925,7 +1940,13 @@ class FileListFragment : FileListPermissionFragment(), BreadcrumbLayout.Listener
     }
 
     @Parcelize
-    class Args(val intent: Intent, val embeddedPane: Boolean = false) : ParcelableArgs
+    class Args(
+        val intent: Intent,
+        val embeddedPane: Boolean = false,
+        val secondaryPath: AppPath? = null,
+        // Persisted locations are known folders, including folders whose names end in .zip.
+        val restoredDirectory: Boolean = false
+    ) : ParcelableArgs
 
 }
 
