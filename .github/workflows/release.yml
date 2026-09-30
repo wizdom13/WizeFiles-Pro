@@ -54,6 +54,11 @@ jobs:
             FILE_TAG="v$APP_VERSION_NAME"
           fi
 
+          if [[ "$FILE_TAG" != "v$APP_VERSION_NAME" ]]; then
+            echo "Release tag must match Android version v$APP_VERSION_NAME" >&2
+            exit 1
+          fi
+
           echo "APP_VERSION_CODE=$APP_VERSION_CODE" >> "$GITHUB_ENV"
           echo "APP_VERSION_NAME=$APP_VERSION_NAME" >> "$GITHUB_ENV"
           echo "FILE_TAG=$FILE_TAG" >> "$GITHUB_ENV"
@@ -86,40 +91,32 @@ jobs:
         run: scripts/verify-release-risk-gates.sh
 
 
-      - name: Build Release APK
-        run: ./gradlew assembleRelease --warning-mode all
+      - name: Free disk space for native builds
+        run: sudo rm -rf /opt/hostedtoolcache/CodeQL /usr/share/dotnet /usr/local/share/powershell
 
-      - name: Sign Release APK
+      - name: Build and verify all three Release APKs
+        run: bash scripts/build-release-apks.sh
+
+      - name: Sign all three Release APKs
         uses: r0adkll/sign-android-release@v1
-        id: sign_app
         env:
           BUILD_TOOLS_VERSION: "36.0.0"
         with:
-          releaseDirectory: app/build/outputs/apk/release
+          releaseDirectory: app/build/outputs/release-apks/unsigned
           signingKeyBase64: ${{ secrets.APP_KEYSTORE }}
           alias: ${{ secrets.KEY_ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
-      - name: Rename Signed APK
-        id: rename_apk
-        run: |
-          set -euo pipefail
-
-          RENAMED_APK="app/build/outputs/apk/release/WizeFiles_${FILE_TAG}.apk"
-
-          cp "${{ steps.sign_app.outputs.signedReleaseFile }}" "$RENAMED_APK"
-
-          echo "renamed_apk=$RENAMED_APK" >> "$GITHUB_OUTPUT"
-          echo "SIGNED_RELEASE_FILE=$RENAMED_APK" >> "$GITHUB_ENV"
-
-          ls -lh "$RENAMED_APK"    
+      - name: Collect and verify signed Release APKs
+        run: bash scripts/collect-signed-release-apks.sh
 
       - name: Upload Signed Artifact
         uses: actions/upload-artifact@v5
         with:
           name: WizeFiles_${{ env.FILE_TAG }}
-          path: ${{ steps.rename_apk.outputs.renamed_apk }}
+          path: app/build/outputs/release-apks/signed/
+          if-no-files-found: error
           retention-days: 30
 
       - name: Create GitHub Release
@@ -128,7 +125,10 @@ jobs:
         with:
           name: WizeFiles_${{ env.FILE_TAG }}
           tag_name: ${{ env.FILE_TAG }}
-          files: ${{ steps.rename_apk.outputs.renamed_apk }}
+          files: |
+            app/build/outputs/release-apks/signed/*.apk
+            app/build/outputs/release-apks/signed/SHA256SUMS
+            app/build/outputs/release-apks/signed/apk-sizes.json
+          fail_on_unmatched_files: true
+          body_path: app/build/outputs/release-apks/signed/apk-sizes.md
           generate_release_notes: true
-
-
