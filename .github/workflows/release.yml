@@ -99,7 +99,6 @@ jobs:
 
       - name: Sign all three Release APKs
         uses: r0adkll/sign-android-release@v1
-        id: sign_app
         env:
           BUILD_TOOLS_VERSION: "36.0.0"
         with:
@@ -110,8 +109,6 @@ jobs:
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
       - name: Collect and verify signed Release APKs
-        env:
-          SIGNED_RELEASE_FILES: ${{ steps.sign_app.outputs.signedReleaseFiles }}
         run: bash scripts/collect-signed-release-apks.sh
 
       - name: Upload Signed Artifact
@@ -135,4 +132,3 @@ jobs:
           fail_on_unmatched_files: true
           body_path: app/build/outputs/release-apks/signed/apk-sizes.md
           generate_release_notes: true
-

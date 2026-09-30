@@ -4,10 +4,13 @@
 set -euo pipefail
 cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.."
 : "${FILE_TAG:?FILE_TAG is required}"
-: "${SIGNED_RELEASE_FILES:?SIGNED_RELEASE_FILES is required}"
 [[ "$FILE_TAG" =~ ^v[0-9][0-9A-Za-z._-]*$ ]] || exit 1
 
-IFS=: read -r -a SIGNED_FILES <<< "$SIGNED_RELEASE_FILES"
+# The v1 action signs every APK, but its bundled runtime only exports the last
+# signedReleaseFile. Collect its on-disk outputs from the freshly built staging
+# directory; unsigned/aligned APKs and the signing key must never be published.
+shopt -s nullglob
+SIGNED_FILES=(app/build/outputs/release-apks/unsigned/*-signed.apk)
 if [[ ${#SIGNED_FILES[@]} -ne 3 ]]; then
   echo 'Expected exactly three signed release APKs' >&2
   exit 1

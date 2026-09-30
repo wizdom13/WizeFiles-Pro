@@ -3,7 +3,11 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Regression checks for malformed native payloads at the release publication gate."""
 import importlib.util
+import json
+import os
 from pathlib import Path
+import shutil
+import subprocess
 import tempfile
 import unittest
 import warnings
@@ -72,6 +76,75 @@ class ReleasePayloadTest(unittest.TestCase):
                 archive.writestr('classes.dex', b'overwritten-code')
         with self.assertRaisesRegex(ValueError, 'duplicate ZIP entries'):
             RELEASE.inspect_payload(self.apk, ('arm64-v8a',))
+
+
+class SignedReleaseCollectionTest(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        scripts = self.root / 'scripts'
+        scripts.mkdir()
+        self.collector = scripts / 'collect-signed-release-apks.sh'
+        shutil.copyfile(Path(__file__).resolve().parents[1] / self.collector.name, self.collector)
+        # Exercise the real shell collector without requiring Android SDK tools.
+        # The full APK and signature verifier still runs on real APKs in CI.
+        (scripts / 'verify-release-apks.py').write_text(
+            'import json, os, sys\nfrom pathlib import Path\n'
+            'Path("verification.json").write_text(json.dumps(sys.argv[1:]))\n'
+            'sys.exit(int(os.environ.get("TEST_VERIFIER_EXIT", "0")))\n')
+        self.input = self.root / 'app/build/outputs/release-apks/unsigned'
+        self.input.mkdir(parents=True)
+        self.output = self.input.parent / 'signed'
+        self.names = ('WizeFiles_v1.2.0', 'WizeFiles_v1.2.0_arm64-v8a',
+                      'WizeFiles_v1.2.0_armeabi-v7a')
+        self.env = dict(os.environ, FILE_TAG='v1.2.0')
+        self.env.pop('SIGNED_RELEASE_FILES', None)
+        self.env.pop('SIGNED_RELEASE_FILE', None)
+        for name in self.names:
+            (self.input / f'{name}-signed.apk').write_bytes(name.encode())
+
+    def collect(self):
+        return subprocess.run(['bash', str(self.collector)], env=self.env,
+                              text=True, capture_output=True)
+
+    def test_collects_three_apks_without_action_outputs_and_excludes_signing_material(self):
+        for name in self.names:
+            (self.input / f'{name}.apk').write_bytes(b'unsigned')
+            (self.input / f'{name}-aligned.apk').write_bytes(b'aligned')
+        (self.input / 'signingKey.jks').write_bytes(b'test key placeholder')
+        result = self.collect()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual({p.name for p in self.output.iterdir()}, {f'{n}.apk' for n in self.names})
+        for name in self.names:
+            self.assertEqual((self.output / f'{name}.apk').read_bytes(), name.encode())
+        self.assertEqual(json.loads((self.root / 'verification.json').read_text()),
+                         ['app/build/outputs/release-apks/signed', '--file-tag', 'v1.2.0', '--signed'])
+
+    def test_rejects_missing_signed_apk(self):
+        (self.input / f'{self.names[1]}-signed.apk').unlink()
+        result = self.collect()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Expected exactly three', result.stderr)
+
+    def test_rejects_no_signed_apks(self):
+        for apk in self.input.iterdir():
+            apk.unlink()
+        self.assertNotEqual(self.collect().returncode, 0)
+
+    def test_rejects_unexpected_signed_apk(self):
+        (self.input / f'{self.names[1]}-signed.apk').rename(self.input / 'wrong-signed.apk')
+        result = self.collect()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Unexpected signed APK', result.stderr)
+
+    def test_rejects_extra_stale_signed_apk(self):
+        (self.input / 'WizeFiles_v1.1.0-signed.apk').write_bytes(b'stale')
+        self.assertNotEqual(self.collect().returncode, 0)
+
+    def test_propagates_signature_verification_failure(self):
+        self.env['TEST_VERIFIER_EXIT'] = '29'
+        self.assertEqual(self.collect().returncode, 29)
 
 
 if __name__ == '__main__':

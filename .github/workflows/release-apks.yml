@@ -56,7 +56,6 @@ jobs:
           echo "FILE_TAG=v$VERSION" >> "$GITHUB_ENV"
       - name: Exercise production multi-APK signing with CI key
         uses: r0adkll/sign-android-release@v1
-        id: sign_app
         env:
           BUILD_TOOLS_VERSION: '36.0.0'
         with:
@@ -66,8 +65,6 @@ jobs:
           keyStorePassword: ci-testing
           keyPassword: ci-testing
       - name: Collect and verify signed APKs
-        env:
-          SIGNED_RELEASE_FILES: ${{ steps.sign_app.outputs.signedReleaseFiles }}
         run: bash scripts/collect-signed-release-apks.sh
       - uses: actions/upload-artifact@v5
         with:
