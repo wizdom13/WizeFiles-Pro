@@ -16,7 +16,12 @@ OUTPUT=app/build/outputs/release-apks/unsigned
 rm -rf -- "$OUTPUT"
 mkdir -p -- "$OUTPUT"
 for ABI in universal arm64-v8a armeabi-v7a; do
-  ./gradlew :app:assembleRelease --warning-mode all "-PwizefilesReleaseAbi=$ABI"
+  # R8 and native debug metadata exceed the normal 2 GiB heap when the next ABI
+  # reuses the same daemon. Give each build a fresh JVM and limit worker pressure;
+  # Gradle still reuses compiled outputs on disk between architectures.
+  ./gradlew :app:assembleRelease --warning-mode all --no-daemon --max-workers=2 \
+    '-Dorg.gradle.jvmargs=-Xmx6g -Dfile.encoding=UTF-8' \
+    "-PwizefilesReleaseAbi=$ABI"
   SUFFIX="_$ABI"
   [[ "$ABI" != universal ]] || SUFFIX=''
   cp app/build/outputs/apk/release/app-release-unsigned.apk \
