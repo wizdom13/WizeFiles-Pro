@@ -73,6 +73,16 @@ jobs:
           arch: x86_64
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          # API 24+ enforces at least 6 GiB userdata plus 20% free-space overhead,
+          # even with disk-size: 2048M. Reclaim caches after SDK/AVD installation.
+          # Packaged engines/APKs and Gradle task outputs remain available.
+          pre-emulator-launch-script: >-
+            go clean -cache -modcache &&
+            df -h "$ANDROID_AVD_HOME" &&
+            python3 -c 'import os, shutil, sys;
+            free = shutil.disk_usage(os.environ["ANDROID_AVD_HOME"]).free;
+            print("Free space before emulator startup: %.2f GiB" % (free / 1024**3));
+            sys.exit(0 if free >= 8 * 1024**3 else "Insufficient emulator disk space: require 8 GiB after cache cleanup")'
           script: ./gradlew -PwizefilesEmulatorAbi=x86_64 :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.wisso.wizefiles.feature.sync.SyncthingRuntimeTest || { adb logcat -d -b crash; exit 1; }
       - uses: actions/upload-artifact@v5
         if: always()

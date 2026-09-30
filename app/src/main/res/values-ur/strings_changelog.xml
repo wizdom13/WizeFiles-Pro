@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_title">تبدیلیوں کی فہرست</string>
+    <string name="changelog_whats_new">WizeFiles %1$s میں نیا کیا ہے</string>
+    <string name="changelog_view_full">تبدیلیوں کی مکمل فہرست</string>
+    <string name="changelog_load_failed">تبدیلیوں کی فہرست لوڈ نہیں ہو سکی۔</string>
+</resources>

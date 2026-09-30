@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_title">บันทึกการเปลี่ยนแปลง</string>
+    <string name="changelog_whats_new">มีอะไรใหม่ใน WizeFiles %1$s</string>
+    <string name="changelog_view_full">บันทึกการเปลี่ยนแปลงทั้งหมด</string>
+    <string name="changelog_load_failed">โหลดบันทึกการเปลี่ยนแปลงไม่ได้</string>
+</resources>

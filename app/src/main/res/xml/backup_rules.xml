@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <full-backup-content>
+    <exclude domain="sharedpref" path="changelog.xml" />
     <exclude domain="sharedpref" path="secret_store.xml" />
     <exclude domain="sharedpref" path="browser_tab_session.xml" />
     <exclude domain="sharedpref" path="com.wisso.wizefiles_preferences.xml" />

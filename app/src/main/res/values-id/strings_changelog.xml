@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_title">Catatan perubahan</string>
+    <string name="changelog_whats_new">Yang baru di WizeFiles %1$s</string>
+    <string name="changelog_view_full">Catatan perubahan lengkap</string>
+    <string name="changelog_load_failed">Tidak dapat memuat catatan perubahan.</string>
+</resources>
