@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_title">Changelog</string>
+    <string name="changelog_whats_new">What’s new in WizeFiles %1$s</string>
+    <string name="changelog_view_full">Full changelog</string>
+    <string name="changelog_load_failed">Could not load the changelog.</string>
+</resources>

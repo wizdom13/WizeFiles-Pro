@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_title">Değişiklik günlüğü</string>
+    <string name="changelog_whats_new">WizeFiles %1$s sürümündeki yenilikler</string>
+    <string name="changelog_view_full">Tüm değişiklikler</string>
+    <string name="changelog_load_failed">Değişiklik günlüğü yüklenemedi.</string>
+</resources>

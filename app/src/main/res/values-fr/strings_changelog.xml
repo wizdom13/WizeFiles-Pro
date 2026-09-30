@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_title">Journal des modifications</string>
+    <string name="changelog_whats_new">Nouveautés de WizeFiles %1$s</string>
+    <string name="changelog_view_full">Historique complet</string>
+    <string name="changelog_load_failed">Impossible de charger le journal des modifications.</string>
+</resources>

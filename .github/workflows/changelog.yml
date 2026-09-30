@@ -1,0 +1,32 @@
+name: Offline changelog
+
+on:
+  pull_request:
+    paths:
+      - 'changelogs.md'
+      - 'app/src/main/assets/changelogs.html'
+      - 'scripts/generate-changelogs.py'
+      - 'app/build.gradle'
+      - '.github/workflows/changelog.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'changelogs.md'
+      - 'app/src/main/assets/changelogs.html'
+      - 'scripts/generate-changelogs.py'
+      - 'app/build.gradle'
+      - '.github/workflows/changelog.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Verify bundled history and current version
+        run: python3 scripts/generate-changelogs.py --check

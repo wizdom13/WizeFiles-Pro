@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_title">更新日志</string>
+    <string name="changelog_whats_new">WizeFiles %1$s 的新变化</string>
+    <string name="changelog_view_full">完整更新日志</string>
+    <string name="changelog_load_failed">无法加载更新日志。</string>
+</resources>

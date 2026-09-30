@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_title">बदलावों का विवरण</string>
+    <string name="changelog_whats_new">WizeFiles %1$s में नया क्या है</string>
+    <string name="changelog_view_full">बदलावों का पूरा विवरण</string>
+    <string name="changelog_load_failed">बदलावों का विवरण लोड नहीं हो सका।</string>
+</resources>

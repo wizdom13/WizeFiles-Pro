@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_title">История изменений</string>
+    <string name="changelog_whats_new">Что нового в WizeFiles %1$s</string>
+    <string name="changelog_view_full">Полная история изменений</string>
+    <string name="changelog_load_failed">Не удалось загрузить историю изменений.</string>
+</resources>
