@@ -1,0 +1,77 @@
+name: Release APK packaging
+on:
+  pull_request:
+    paths:
+      - 'build.gradle'
+      - 'app/build.gradle'
+      - 'scripts/build-release-apks.sh'
+      - 'scripts/collect-signed-release-apks.sh'
+      - 'scripts/verify-release-apks.py'
+      - 'scripts/tests/test-release-apks.py'
+      - '.github/workflows/release.yml'
+      - '.github/workflows/release-apks.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: release-apks-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: true
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.26.5'
+          cache: false
+      - uses: actions/cache@v4
+        with:
+          path: app/libs/rclone-gomobile.aar
+          key: ${{ runner.os }}-rclone-${{ hashFiles('scripts/build-rclone-aar.sh', 'rclone-mobile/**') }}
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Free disk space for native builds
+        run: sudo rm -rf /opt/hostedtoolcache/CodeQL /usr/share/dotnet /usr/local/share/powershell
+      - name: Test release validation failures
+        run: python3 scripts/tests/test-release-apks.py
+      - name: Build and verify all three minified APKs
+        run: bash scripts/build-release-apks.sh
+      - name: Generate disposable CI signing key
+        id: ci_key
+        shell: bash
+        run: |
+          set -euo pipefail
+          keytool -genkeypair -keystore "$RUNNER_TEMP/ci-release.jks" \
+            -storepass ci-testing -keypass ci-testing -alias ci \
+            -keyalg RSA -keysize 2048 -validity 1 -dname 'CN=WizeFiles CI TEST ONLY'
+          echo "key=$(base64 -w0 "$RUNNER_TEMP/ci-release.jks")" >> "$GITHUB_OUTPUT"
+          VERSION=$(sed -n "s/^def appVersionName = '\([^']*\)'$/\1/p" app/build.gradle)
+          echo "FILE_TAG=v$VERSION" >> "$GITHUB_ENV"
+      - name: Exercise production multi-APK signing with CI key
+        uses: r0adkll/sign-android-release@v1
+        id: sign_app
+        env:
+          BUILD_TOOLS_VERSION: '36.0.0'
+        with:
+          releaseDirectory: app/build/outputs/release-apks/unsigned
+          signingKeyBase64: ${{ steps.ci_key.outputs.key }}
+          alias: ci
+          keyStorePassword: ci-testing
+          keyPassword: ci-testing
+      - name: Collect and verify signed APKs
+        env:
+          SIGNED_RELEASE_FILES: ${{ steps.sign_app.outputs.signedReleaseFiles }}
+        run: bash scripts/collect-signed-release-apks.sh
+      - uses: actions/upload-artifact@v5
+        with:
+          name: release-apks-CI-TEST-KEY-NOT-FOR-DISTRIBUTION
+          path: app/build/outputs/release-apks/signed/
+          if-no-files-found: error
+          retention-days: 7

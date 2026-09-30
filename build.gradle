@@ -65,11 +65,21 @@ if (findProject(':app') != null) project(':app') {
         if (emulatorAbi != null && emulatorAbi != 'x86_64') {
             throw new GradleException('wizefilesEmulatorAbi must be x86_64')
         }
+        def releaseAbi = providers.gradleProperty('wizefilesReleaseAbi').getOrElse('universal')
+        if (!(releaseAbi in ['universal', 'arm64-v8a', 'armeabi-v7a'])) {
+            throw new GradleException('wizefilesReleaseAbi must be universal, arm64-v8a or armeabi-v7a')
+        }
         android.buildTypes.configureEach { buildType ->
             // Native executable tests must not run ARM binaries through a native bridge.
-            // Release packages keep the supported ARM ABIs regardless of this debug option.
-            buildType.ndk.abiFilters.addAll(buildType.name == 'debug' && emulatorAbi != null
-                ? [emulatorAbi] : ['armeabi-v7a', 'arm64-v8a'])
+            // APK release packaging can select one ARM ABI; ordinary builds and AABs
+            // still include both. The emulator option remains debug-only.
+            def abis = ['armeabi-v7a', 'arm64-v8a']
+            if (buildType.name == 'debug' && emulatorAbi != null) {
+                abis = [emulatorAbi]
+            } else if (buildType.name == 'release' && releaseAbi != 'universal') {
+                abis = [releaseAbi]
+            }
+            buildType.ndk.abiFilters.addAll(abis)
         }
         dependencies.add('implementation', files(rcloneAar))
         tasks.matching { it.name == 'preBuild' }.configureEach {
