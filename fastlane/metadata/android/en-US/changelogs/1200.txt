@@ -1,0 +1,8 @@
+WizeFiles 1.2.0
+
+- Added an offline Changelog screen and first-launch/update release notes.
+- Nearby transfers now use encrypted local Wi-Fi or hotspot connections without Google Play services. Both devices must update.
+- Replaced Google/ML Kit QR scanning with an offline scanner.
+- Improved Syncthing session controls and recovery.
+- Restored browser tabs and pane layouts after restart.
+- Fixed selection-panel overlap and improved Nearby transfer recovery.

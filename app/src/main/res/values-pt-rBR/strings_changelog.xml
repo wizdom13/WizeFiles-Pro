@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_title">Registro de alterações</string>
+    <string name="changelog_whats_new">Novidades do WizeFiles %1$s</string>
+    <string name="changelog_view_full">Registro completo</string>
+    <string name="changelog_load_failed">Não foi possível carregar o registro de alterações.</string>
+</resources>

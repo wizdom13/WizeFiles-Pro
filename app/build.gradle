@@ -7,8 +7,8 @@ apply plugin: 'jacoco'
 
 apply from: '../signing.gradle'
 
-def appVersionCode = 1100
-def appVersionName = '1.1.0'
+def appVersionCode = 1200
+def appVersionName = '1.2.0'
 android {
     namespace = 'com.wisso.wizefiles'
     buildToolsVersion = '36.0.0'

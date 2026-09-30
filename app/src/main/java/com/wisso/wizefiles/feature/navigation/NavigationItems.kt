@@ -15,6 +15,7 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import com.wisso.wizefiles.R
 import com.wisso.wizefiles.feature.about.AboutActivity
+import com.wisso.wizefiles.feature.about.changelog.ChangelogActivity
 import com.wisso.wizefiles.feature.appmanager.AppManagerActivity
 import com.wisso.wizefiles.core.android.compat.EnvironmentCompat2
 import com.wisso.wizefiles.core.android.compat.getDescriptionCompat
@@ -498,11 +499,15 @@ private val toolMenuItems: List<NavigationItem>
     )
 
 private val settingsMenuItems: List<NavigationItem>
-    @Size(2)
+    @Size(3)
     get() = listOf(
         IntentMenuItem(
             R.drawable.ic_settings_white_24dp, R.string.navigation_settings,
             SettingsActivity::class.createIntent()
+        ),
+        IntentMenuItem(
+            R.drawable.ic_changelog_24dp, R.string.changelog_title,
+            ChangelogActivity::class.createIntent()
         ),
         IntentMenuItem(
             R.drawable.ic_about_white_24dp, R.string.navigation_about,

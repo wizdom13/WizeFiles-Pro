@@ -37,6 +37,7 @@ import com.wisso.wizefiles.core.entitlement.ProFeature
 import com.wisso.wizefiles.core.entitlement.ProFeatureAccess
 import com.wisso.wizefiles.feature.pro.ensureProAccess
 import com.wisso.wizefiles.feature.crashreport.CrashReportPrompt
+import com.wisso.wizefiles.feature.about.changelog.ChangelogPromptController
 import com.wisso.wizefiles.settings.Settings
 import com.wisso.wizefiles.settings.SettingsActivity
 import com.wisso.wizefiles.navigation.findNavigationRoot
@@ -174,6 +175,7 @@ class FileListActivity : BaseThemedActivity() {
         observeWindowLayout()
         onBackPressedDispatcher.addCallback(this, exitOnBackPressedCallback)
         CrashReportPrompt.showIfPending(this)
+        ChangelogPromptController(this)
     }
 
     private fun restorePersistentTabs(): Boolean {

@@ -84,6 +84,7 @@ jobs:
 
     - name: Run fast repository policy checks
       run: |
+        python3 scripts/generate-changelogs.py --check
         python3 scripts/validate_android_translations.py
         python3 scripts/validate_engineering_debt.py
         scripts/verify-source-test-budget.sh
@@ -100,6 +101,9 @@ jobs:
         :feature-transfer-domain:test
         :feature-vault-domain:test
         --warning-mode all
+
+    - name: Verify changelog dialog and acknowledgement behavior
+      run: ./gradlew :app:testRobolectricDebugUnitTest --tests 'com.wisso.wizefiles.feature.about.changelog.ChangelogPresentationTest'
 
   dependency-audit:
     if: github.event_name != 'pull_request'
@@ -231,6 +235,7 @@ jobs:
 
     - name: Audit Android translations
       run: |
+        python3 scripts/generate-changelogs.py --check
         python3 scripts/validate_android_translations.py
         python3 scripts/validate_android_translations.py --locale values-ar --require-complete
         python3 scripts/validate_android_translations.py --locale values-b+es+419 --require-complete
@@ -323,4 +328,3 @@ jobs:
         name: WizeFiles_${{ env.FILE_TAG }}
         path: ${{ env.DEBUG_APK }}
         retention-days: 10
-

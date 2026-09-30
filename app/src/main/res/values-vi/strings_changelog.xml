@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="changelog_title">Nhật ký thay đổi</string>
+    <string name="changelog_whats_new">Có gì mới trong WizeFiles %1$s</string>
+    <string name="changelog_view_full">Nhật ký thay đổi đầy đủ</string>
+    <string name="changelog_load_failed">Không thể tải nhật ký thay đổi.</string>
+</resources>

@@ -581,6 +581,12 @@
 
 
         <activity
+            android:name="com.wisso.wizefiles.feature.about.changelog.ChangelogActivity"
+            android:exported="false"
+            android:label="@string/changelog_title"
+            android:theme="@style/Theme.WizeFiles" />
+
+        <activity
             android:name="com.wisso.wizefiles.feature.about.AboutActivity"
             android:label="@string/about_title"
             android:launchMode="singleTop"
@@ -709,4 +715,3 @@
 
     </application>
 </manifest>
-
